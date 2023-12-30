@@ -45,6 +45,7 @@ import WFRPTableConfig from "./modules/apps/table-config.js";
 import ItemDialog from "./modules/apps/item-dialog.js";
 import { WFRPJournalTextPageSheet } from "./modules/system/journal-sheet.js";
 import { ChargenStage } from "./modules/apps/chargen/stage.js";
+import ArrantCharacterSheet from "./modules/actor/sheet/arrant-character-sheet";
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -59,7 +60,8 @@ Hooks.once("init", async function () {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("wfrp4e", ActorSheetWfrp4eCharacter, { types: ["character"], makeDefault: true });
+  Actors.registerSheet("wfrp4e", ActorSheetWfrp4eCharacter, { types: ["character"], makeDefault: false });
+  Actors.registerSheet("wfrp4e", ArrantCharacterSheet, { types: ["character"], makedefault: true});
   Actors.registerSheet("wfrp4e", ActorSheetWfrp4eNPC, { types: ["npc"], makeDefault: true });
   Actors.registerSheet("wfrp4e", ActorSheetWfrp4eCreature, { types: ["creature"], makeDefault: true });
   Actors.registerSheet("wfrp4e", ActorSheetWfrp4eVehicle, { types: ["vehicle"], makeDefault: true });
