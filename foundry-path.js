@@ -14,7 +14,7 @@ function foundryConfig(systemId) {
   {
     foundryPath = "./build"
   }
-  else
+  else if (config?.path)
   {
     foundryPath = path.join(config.path, "systems", systemId)
   }

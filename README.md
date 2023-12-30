@@ -98,7 +98,7 @@ This will build the project into the location specified by the path property in 
 
 #### Pack the Compendium
 
-Though the Basic compendium is rarely used, it is not packed and provided to the system automatically with the `build` command. To do so, run the following:
+Though the Basic compendium is rarely used, it is not packed and provided to the system automatically with the `build` command. Do not forget to shut down FoundryVTT before running this script. To do so, run the following:
 ```
 npm run pack
 ```
