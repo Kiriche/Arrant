@@ -1,14 +1,14 @@
-import WFRP_Utility from "./utility-wfrp4e.js";
+import WFRP_Utility from "./utility-arrant.js";
 
 
 export default class WFRP_Audio {
   static PlayContextAudio(context) {
     this.MatchContextAudio(context).then(sound => {
       if (!sound || !sound.file) {
-        console.warn("wfrp4e | Sound file not found for context: %o", context)
+        console.warn("arrant | Sound file not found for context: %o", context)
         return
       }
-      game.wfrp4e.utility.log(`wfrp4e | Playing Sound: ${sound.file}`)
+      game.arrant.utility.log(`arrant | Playing Sound: ${sound.file}`)
       AudioHelper.play({ src: sound.file }, sound.global)
     })
     
@@ -83,12 +83,12 @@ export default class WFRP_Audio {
    */
 
   static async MatchContextAudio(context) {
-    if (!game.settings.get("wfrp4e", "soundPath") || !context)
+    if (!game.settings.get("arrant", "soundPath") || !context)
       return {}
 
     try {
       let files, file, group;
-      await FilePicker.browse("user", game.settings.get("wfrp4e", "soundPath")).then(resp => {
+      await FilePicker.browse("user", game.settings.get("arrant", "soundPath")).then(resp => {
         files = resp.files
       })
       if (context.action == "hit")

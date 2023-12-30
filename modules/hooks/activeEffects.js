@@ -6,7 +6,7 @@ export default function () {
     Hooks.on("deleteActiveEffect", (effect, options, id) => {
         if (effect.parent.documentName == "Actor")
         {
-            let items = effect.parent.items.filter(i => i.getFlag("wfrp4e", "fromEffect") == effect.id);
+            let items = effect.parent.items.filter(i => i.getFlag("arrant", "fromEffect") == effect.id);
             if (items.length)
             {
                 ui.notifications.notify(game.i18n.format("EFFECT.DeletingItems", {items : items.map(i => i.name).join(", ")}))
@@ -18,7 +18,7 @@ export default function () {
 
     Hooks.on("preCreateActiveEffect", (effect, data, options, id) => {
 
-        if (getProperty(effect, "flags.wfrp4e.preventDuplicateEffects"))
+        if (getProperty(effect, "flags.arrant.preventDuplicateEffects"))
         {
             if (effect.parent?.documentName == "Actor" && effect.parent.effects.find(e => e.name == effect.name))
             {
@@ -29,7 +29,7 @@ export default function () {
 
         if (effect.parent?.documentName == "Actor" && effect.trigger == "addItems")
         {
-            game.wfrp4e.utility.applyOneTimeEffect(effect, effect.parent);
+            game.arrant.utility.applyOneTimeEffect(effect, effect.parent);
             options.keepId = true;
         }
         
@@ -43,13 +43,13 @@ export default function () {
 
         if (effect.parent?.documentName == "Actor" && effect.application == "apply")
         {
-            effect.updateSource({"flags.wfrp4e.effectApplication" : "actor"})
+            effect.updateSource({"flags.arrant.effectApplication" : "actor"})
         }
 
         if (effect.parent?.documentName == "Actor" && effect.trigger == "oneTime")
         {
             ui.notifications.notify(`${game.i18n.format("EFFECT.Applying", { name: effect.name })}`)
-            game.wfrp4e.utility.applyOneTimeEffect(effect, effect.parent);
+            game.arrant.utility.applyOneTimeEffect(effect, effect.parent);
             return false
         }
     })

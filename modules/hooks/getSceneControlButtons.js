@@ -1,4 +1,4 @@
-import WFRP_Utility from "../system/utility-wfrp4e.js";
+import WFRP_Utility from "../system/utility-arrant.js";
 import canvas from "./canvas.js";
 
 export default function() {
@@ -13,7 +13,7 @@ export default function() {
       button: true,
       icon: "fas fa-circle",
       name: "morrslieb",
-      title: game.canvas.scene.getFlag("wfrp4e", "morrslieb") ? "Morrslieb - Currently On " : "Morrslieb - Currently Off",
+      title: game.canvas.scene.getFlag("arrant", "morrslieb") ? "Morrslieb - Currently On " : "Morrslieb - Currently Off",
       onClick: WFRP_Utility.toggleMorrslieb
     })
   })

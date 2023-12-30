@@ -146,8 +146,8 @@
     <section class="tab" data-tab="wfrp">
         <div class="form-group">
             <label class="label-text">{{localize "EFFECT.EffectType"}}</label>
-            <select class="effect-type" name="flags.wfrp4e.effectTrigger" {{#if disableTrigger}} disabled {{/if}}>
-              {{#select effect.flags.wfrp4e.effectTrigger}}
+            <select class="effect-type" name="flags.arrant.effectTrigger" {{#if disableTrigger}} disabled {{/if}}>
+              {{#select effect.flags.arrant.effectTrigger}}
               <option value=""></option>
               {{#each effectTriggers as |label key|}}
               <option value="{{key}}">{{label}}</option>
@@ -160,7 +160,7 @@
         {{#if aceActive}}
         <div class="ace-editor"><input></div>
         {{else}}
-        <textarea name="flags.wfrp4e.script" placeholder="{{placeholder}}">{{effect.flags.wfrp4e.script}}</textarea>
+        <textarea name="flags.arrant.script" placeholder="{{placeholder}}">{{effect.flags.arrant.script}}</textarea>
         {{/if}}
         {{/if}}
 
@@ -171,39 +171,39 @@
         {{/if}}
         
         {{#if showExtra}}
-        <textarea class="extra" name="flags.wfrp4e.extra" placeholder="{{extraPlaceholder}}">{{effect.flags.wfrp4e.extra}}</textarea>
+        <textarea class="extra" name="flags.arrant.extra" placeholder="{{extraPlaceholder}}">{{effect.flags.arrant.extra}}</textarea>
         {{/if}}
 
-        {{#if (eq effect.flags.wfrp4e.effectTrigger "dialogChoice")}}
+        {{#if (eq effect.flags.arrant.effectTrigger "dialogChoice")}}
             <div class="form-group">
                 <label class="label-text">{{localize "Description"}}</label>
-                <input name="flags.wfrp4e.effectData.description" value="{{effect.flags.wfrp4e.effectData.description}}" data-dtype="String"/>
+                <input name="flags.arrant.effectData.description" value="{{effect.flags.arrant.effectData.description}}" data-dtype="String"/>
             </div>
 
             <div class="form-group">
                 <label class="label-text">{{localize "Modifier"}}</label>
-                <input name="flags.wfrp4e.effectData.modifier" value="{{effect.flags.wfrp4e.effectData.modifier}}"data-dtype="Number"/>
+                <input name="flags.arrant.effectData.modifier" value="{{effect.flags.arrant.effectData.modifier}}"data-dtype="Number"/>
             </div>
 
             <div class="form-group">
                 <label class="label-text">{{localize "DIALOG.SLBonus"}}</label>
-                <input name="flags.wfrp4e.effectData.slBonus" value="{{effect.flags.wfrp4e.effectData.slBonus}}"data-dtype="Number"/>
+                <input name="flags.arrant.effectData.slBonus" value="{{effect.flags.arrant.effectData.slBonus}}"data-dtype="Number"/>
             </div>
 
             <div class="form-group">
                 <label class="label-text">{{localize "DIALOG.SuccessBonus"}}</label>
-                <input name="flags.wfrp4e.effectData.successBonus" value="{{effect.flags.wfrp4e.effectData.successBonus}}"data-dtype="Number"/>
+                <input name="flags.arrant.effectData.successBonus" value="{{effect.flags.arrant.effectData.successBonus}}"data-dtype="Number"/>
             </div>
 
             <div class="form-group">
                 <label class="label-text">{{localize "DIALOG.DifficultyStep"}}</label>
-                <input name="flags.wfrp4e.effectData.difficultyStep" value="{{effect.flags.wfrp4e.effectData.difficultyStep}}"data-dtype="Number"/>
+                <input name="flags.arrant.effectData.difficultyStep" value="{{effect.flags.arrant.effectData.difficultyStep}}"data-dtype="Number"/>
             </div>
         {{/if}}
         <div class="form-group">
             <label class="label-text">{{localize "EFFECT.EffectApplication"}}</label>
-            <select class="effect-application" name="flags.wfrp4e.effectApplication">
-              {{#select effect.flags.wfrp4e.effectApplication}}
+            <select class="effect-application" name="flags.arrant.effectApplication">
+              {{#select effect.flags.arrant.effectApplication}}
               {{#each effectApplication as |label key|}}
               <option value="{{key}}">{{label}}</option>
               {{/each}}
@@ -215,7 +215,7 @@
         <div class="form-group">
             <label>{{ localize "EFFECT.ReduceQuantityOption" }}</label>
             <div class="form-fields">
-                <input type="checkbox" name="flags.wfrp4e.reduceQuantity" {{checked effect.flags.wfrp4e.reduceQuantity}}/>
+                <input type="checkbox" name="flags.arrant.reduceQuantity" {{checked effect.flags.arrant.reduceQuantity}}/>
             </div>
         </div>
         {{/if}}
@@ -224,7 +224,7 @@
         <div class="form-group">
             <label>{{ localize "EFFECT.NotSelf" }}</label>
             <div class="form-fields">
-                <input type="checkbox" name="flags.wfrp4e.notSelf" {{checked effect.flags.wfrp4e.notSelf}}/>
+                <input type="checkbox" name="flags.arrant.notSelf" {{checked effect.flags.arrant.notSelf}}/>
             </div>
         </div>
         {{/if}}
@@ -233,16 +233,16 @@
         <div class="form-group">
             <label>{{ localize "EFFECT.PromptItem" }}</label>
             <div class="form-fields">
-                <input type="checkbox" name="flags.wfrp4e.promptItem" {{checked effect.flags.wfrp4e.promptItem}}/>
+                <input type="checkbox" name="flags.arrant.promptItem" {{checked effect.flags.arrant.promptItem}}/>
             </div>
         </div>
         {{/if}}
 
-        {{#if effect.flags.wfrp4e.itemChoice}}
+        {{#if effect.flags.arrant.itemChoice}}
         <div class="form-group">
             <label>{{ localize "EFFECT.ItemChoice" }}</label>
             <div class="form-fields">
-                <input type="text" name="flags.wfrp4e.itemChoice" value="{{effect.flags.wfrp4e.itemChoice}}"/>
+                <input type="text" name="flags.arrant.itemChoice" value="{{effect.flags.arrant.itemChoice}}"/>
             </div>
         </div>
         {{/if}}
@@ -250,14 +250,14 @@
         <div class="form-group">
             <label>{{ localize "EFFECT.HideEffect" }}</label>
             <div class="form-fields">
-                <input type="checkbox" name="flags.wfrp4e.hide" {{checked effect.flags.wfrp4e.hide}}/>
+                <input type="checkbox" name="flags.arrant.hide" {{checked effect.flags.arrant.hide}}/>
             </div>
         </div>
 
         <div class="form-group">
             <label>{{ localize "EFFECT.PreventDuplicate" }}</label>
             <div class="form-fields">
-                <input type="checkbox" name="flags.wfrp4e.preventDuplicateEffects" {{checked effect.flags.wfrp4e.preventDuplicateEffects}}/>
+                <input type="checkbox" name="flags.arrant.preventDuplicateEffects" {{checked effect.flags.arrant.preventDuplicateEffects}}/>
             </div>
         </div>
     </section>

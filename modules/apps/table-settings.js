@@ -2,7 +2,7 @@ export default class TableSettings extends FormApplication {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.id = "table-settings";
-        options.template = "systems/wfrp4e/templates/apps/table-settings.hbs";
+        options.template = "systems/arrant/templates/apps/table-settings.hbs";
         options.width = 600;
         options.minimizable = true;
         options.resizable = true;
@@ -12,7 +12,7 @@ export default class TableSettings extends FormApplication {
 
     getData() {
         let data = super.getData()
-        let settings = game.settings.get("wfrp4e", "tableSettings")
+        let settings = game.settings.get("arrant", "tableSettings")
         data.settings = {}
 
         for (let setting in settings)
@@ -30,16 +30,16 @@ export default class TableSettings extends FormApplication {
     getTableChoices(key)
     {
         let choices = {}
-        let tables = game.tables.filter(i => i.getFlag("wfrp4e", "key") == key);
+        let tables = game.tables.filter(i => i.getFlag("arrant", "key") == key);
 
 
         // Add tables without a column 
-        for(let t of tables.filter(i => !i.getFlag("wfrp4e", "column")))
+        for(let t of tables.filter(i => !i.getFlag("arrant", "column")))
         {
             choices[t.id] = t.name
         }
 
-        let columns = tables.filter(i => i.getFlag("wfrp4e", "column"))
+        let columns = tables.filter(i => i.getFlag("arrant", "column"))
         if (columns.length)
         {
             choices[columns.map(i => i.id).join(",")] = columns[0].name.split("-")[0];
@@ -49,7 +49,7 @@ export default class TableSettings extends FormApplication {
 
 
     async _updateObject(event, formData) {
-        return game.settings.set("wfrp4e", "tableSettings", formData)
+        return game.settings.set("arrant", "tableSettings", formData)
     }
 
   

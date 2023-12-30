@@ -1,15 +1,15 @@
-import ActorSheetWfrp4e from "./actor-sheet.js";
+import ActorSheetArrant from "./actor-sheet.js";
 
 /**
  * Provides the specific interaction handlers for Vehicle Sheets.
  * 
  */
-export default class ActorSheetWfrp4eVehicle extends ActorSheetWfrp4e {
+export default class ActorSheetArrantVehicle extends ActorSheetArrant {
   static get defaultOptions() {
     const options = super.defaultOptions;
     mergeObject(options,
       {
-        classes: options.classes.concat(["wfrp4e", "actor", "vehicle-sheet"]),
+        classes: options.classes.concat(["arrant", "actor", "vehicle-sheet"]),
         width: 610,
         height: 740,
         dragDrop: [{ dragSelector: ".item-list .item", dropSelector: null }, { dragSelector: ".actor-list .actor", dropSelector: null }]
@@ -35,8 +35,8 @@ export default class ActorSheetWfrp4eVehicle extends ActorSheetWfrp4e {
    * @type {String}
    */
   get template() {
-    if (!game.user.isGM && this.actor.limited) return "systems/wfrp4e/templates/actors/actor-limited.hbs";
-    return "systems/wfrp4e/templates/actors/vehicle/vehicle-sheet.hbs";
+    if (!game.user.isGM && this.actor.limited) return "systems/arrant/templates/actors/actor-limited.hbs";
+    return "systems/arrant/templates/actors/vehicle/vehicle-sheet.hbs";
   }
   
 
@@ -84,7 +84,7 @@ export default class ActorSheetWfrp4eVehicle extends ActorSheetWfrp4e {
 
   async passengerSelect(dialogMessage = game.i18n.localize("DIALOG.ActorSelection")) {
     return new Promise((resolve, reject) => {
-      renderTemplate("systems/wfrp4e/templates/dialog/vehicle-weapon.hbs", { dialogMessage, actors: this.actor.passengers.map(p => p.actor) }).then(dlg => {
+      renderTemplate("systems/arrant/templates/dialog/vehicle-weapon.hbs", { dialogMessage, actors: this.actor.passengers.map(p => p.actor) }).then(dlg => {
         new Dialog({
           content: dlg,
           title: game.i18n.localize("DIALOG.ActorSelection"),
@@ -158,7 +158,7 @@ export default class ActorSheetWfrp4eVehicle extends ActorSheetWfrp4e {
       if (testLabel) testLabel + " - " + test;
 
       if (!skill) {
-        let char = game.wfrp4e.utility.findKey(test, game.wfrp4e.config.characteristics)
+        let char = game.arrant.utility.findKey(test, game.arrant.config.characteristics)
         if (!char)
           return ui.notifications.error(game.i18n.localize("VEHICLE.TestNotFound"))
 
@@ -340,7 +340,7 @@ export default class ActorSheetWfrp4eVehicle extends ActorSheetWfrp4e {
 }
 
 // Register NPC Sheet
-Actors.registerSheet("wfrp4e", ActorSheetWfrp4eVehicle,
+Actors.registerSheet("arrant", ActorSheetArrantVehicle,
   {
     types: ["vehicle"],
     makeDefault: true

@@ -1,8 +1,8 @@
-import WFRP_Utility from "../system/utility-wfrp4e.js";
+import WFRP_Utility from "../system/utility-arrant.js";
 import FoundryOverrides from "../system/overrides.js";
 import SocketHandlers from "../system/socket-handlers.js";
 import MooHouseRules from "../system/moo-house.js"
-import OpposedWFRP from "../system/opposed-wfrp4e.js";
+import OpposedWFRP from "../system/opposed-arrant.js";
 import OpposedTest from "../system/opposed-test.js";
 
 export default function () {
@@ -15,27 +15,27 @@ export default function () {
 
     CONFIG.ChatMessage.documentClass.prototype.getTest = function () {
       if (hasProperty(this, "flags.testData"))
-        return game.wfrp4e.rolls.TestWFRP.recreate(this.flags.testData)   
+        return game.arrant.rolls.TestWFRP.recreate(this.flags.testData)
     }
     CONFIG.ChatMessage.documentClass.prototype.getOppose = function () {
-      if (hasProperty(this, "flags.wfrp4e.opposeData"))
-        return new OpposedWFRP(getProperty(this, "flags.wfrp4e.opposeData"))
+      if (hasProperty(this, "flags.arrant.opposeData"))
+        return new OpposedWFRP(getProperty(this, "flags.arrant.opposeData"))
     }
 
     CONFIG.ChatMessage.documentClass.prototype.getOpposedTest = function () {
-      if (hasProperty(this, "flags.wfrp4e.opposeTestData"))
-        return OpposedTest.recreate(getProperty(this, "flags.wfrp4e.opposeTestData"))
+      if (hasProperty(this, "flags.arrant.opposeTestData"))
+        return OpposedTest.recreate(getProperty(this, "flags.arrant.opposeTestData"))
     }
 
     //***** Change cursor styles if the setting is enabled *****
 
-    if (game.settings.get('wfrp4e', 'customCursor')) {
+    if (game.settings.get('arrant', 'customCursor')) {
       WFRP_Utility.log('Using custom cursor', true)
-      if (await srcExists("systems/wfrp4e/ui/cursors/pointer.png")) {
+      if (await srcExists("systems/arrant/ui/cursors/pointer.png")) {
         let link = document.createElement('link');
         link.setAttribute('rel', 'stylesheet')
         link.type = 'text/css'
-        link.href = '/systems/wfrp4e/css/cursor.css'
+        link.href = '/systems/arrant/css/cursor.css'
 
         document.head.appendChild(link);
       }
@@ -45,15 +45,15 @@ export default function () {
     }
 
     // Automatically disable Auto Fill Advantage if group advantage is enabled
-    if (game.settings.get("wfrp4e", "useGroupAdvantage", true) && 
+    if (game.settings.get("arrant", "useGroupAdvantage", true) &&
       game.user.isGM && 
-      game.settings.get("wfrp4e", "autoFillAdvantage", true))
+      game.settings.get("arrant", "autoFillAdvantage", true))
     {
       ui.notifications.notify(game.i18n.localize("AutoFillAdvantageDisabled"), {permanent : true})
-      game.settings.set("wfrp4e", "autoFillAdvantage", false)
+      game.settings.set("arrant", "autoFillAdvantage", false)
     }
 
-    game.socket.on("system.wfrp4e", data => {
+    game.socket.on("system.arrant", data => {
       SocketHandlers[data.type](data)
     })
 
@@ -73,27 +73,27 @@ export default function () {
 
 
     const MIGRATION_VERSION = 8;
-    let needMigration = isNewerVersion(MIGRATION_VERSION, game.settings.get("wfrp4e", "systemMigrationVersion"))
+    let needMigration = isNewerVersion(MIGRATION_VERSION, game.settings.get("arrant", "systemMigrationVersion"))
     if (needMigration && game.user.isGM) {
-      game.wfrp4e.migration.migrateWorld()
+      game.arrant.migration.migrateWorld()
     }
-    game.settings.set("wfrp4e", "systemMigrationVersion", MIGRATION_VERSION)
+    game.settings.set("arrant", "systemMigrationVersion", MIGRATION_VERSION)
 
 
 
 
     // Some entities require other entities to be loaded to prepare correctly (vehicles and mounts)
-    for (let e of game.wfrp4e.postReadyPrepare)
+    for (let e of game.arrant.postReadyPrepare)
       e.prepareData();
 
-    game.wfrp4e.config.PrepareSystemItems();
-    CONFIG.statusEffects = game.wfrp4e.config.statusEffects;
+    game.arrant.config.PrepareSystemItems();
+    CONFIG.statusEffects = game.arrant.config.statusEffects;
 
     FoundryOverrides();
     MooHouseRules();
     canvas.tokens.placeables.forEach(t => t.drawEffects())
 
-    game.wfrp4e.tags.createTags()
+    game.arrant.tags.createTags()
 
   })
 

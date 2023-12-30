@@ -1,12 +1,12 @@
-const WFRP4E = {}
-CONFIG.ChatMessage.template = "systems/wfrp4e/templates/chat/chat-message.hbs"
+const arrant = {}
+CONFIG.ChatMessage.template = "systems/arrant/templates/chat/chat-message.hbs"
 
-WFRP4E.creditOptions = {
+arrant.creditOptions = {
     SPLIT: "split",
     EACH: "each",
 }
 
-WFRP4E.toTranslate = [
+arrant.toTranslate = [
 "statusTiers",
 "characteristics",
 "characteristicsAbbrev",
@@ -57,78 +57,78 @@ WFRP4E.toTranslate = [
 ]
 
 // "Trappings" are more than "trapping" type items
-WFRP4E.trappingItems = ["trapping", "armour", "weapon", "container", "ammunition", "money"]
+arrant.trappingItems = ["trapping", "armour", "weapon", "container", "ammunition", "money"]
 
-CONFIG.controlIcons.defeated = "systems/wfrp4e/icons/defeated.png";
+CONFIG.controlIcons.defeated = "systems/arrant/icons/defeated.png";
 
 CONFIG.JournalEntry.noteIcons = {
-    "Marker": "systems/wfrp4e/icons/buildings/point_of_interest.png",
-    "Apothecary": "systems/wfrp4e/icons/buildings/apothecary.png",
-    "Beastmen Herd 1": "systems/wfrp4e/icons/buildings/beastmen_camp1.png",
-    "Beastmen Herd 2": "systems/wfrp4e/icons/buildings/beastmen_camp2.png",
-    "Blacksmith": "systems/wfrp4e/icons/buildings/blacksmith.png",
-    "Bretonnian City 1": "systems/wfrp4e/icons/buildings/bret_city1.png",
-    "Bretonnian City 2": "systems/wfrp4e/icons/buildings/bret_city2.png",
-    "Bretonnian City 3": "systems/wfrp4e/icons/buildings/bret_city3.png",
-    "Bretonnian Worship": "systems/wfrp4e/icons/buildings/bretonnia_worship.png",
-    "Caste Hill 1": "systems/wfrp4e/icons/buildings/castle_hill1.png",
-    "Caste Hill 2": "systems/wfrp4e/icons/buildings/castle_hill2.png",
-    "Caste Hill 3": "systems/wfrp4e/icons/buildings/castle_hill3.png",
-    "Castle Wall": "systems/wfrp4e/icons/buildings/castle_wall.png",
-    "Cave 1": "systems/wfrp4e/icons/buildings/cave1.png",
-    "Cave 2": "systems/wfrp4e/icons/buildings/cave2.png",
-    "Cave 3": "systems/wfrp4e/icons/buildings/cave3.png",
-    "Cemetery": "systems/wfrp4e/icons/buildings/cemetery.png",
-    "Chaos Portal": "systems/wfrp4e/icons/buildings/chaos_portal.png",
-    "Chaos Worship": "systems/wfrp4e/icons/buildings/chaos_worship.png",
-    "Court": "systems/wfrp4e/icons/buildings/court.png",
-    "Dwarf Beer": "systems/wfrp4e/icons/buildings/dwarf_beer.png",
-    "Dwarf Hold 1": "systems/wfrp4e/icons/buildings/dwarf_hold1.png",
-    "Dwarf Hold 2": "systems/wfrp4e/icons/buildings/dwarf_hold2.png",
-    "Dwarf Hold 3": "systems/wfrp4e/icons/buildings/dwarf_hold3.png",
-    "Empire Barracks": "systems/wfrp4e/icons/buildings/empire_barracks.png",
-    "Empire City 1": "systems/wfrp4e/icons/buildings/empire_city1.png",
-    "Empire City 2": "systems/wfrp4e/icons/buildings/empire_city2.png",
-    "Empire City 3": "systems/wfrp4e/icons/buildings/empire_city3.png",
-    "Farm": "systems/wfrp4e/icons/buildings/farms.png",
-    "Food 1": "systems/wfrp4e/icons/buildings/food.png",
-    "Food 2": "systems/wfrp4e/icons/buildings/food2.png",
-    "Guard Post": "systems/wfrp4e/icons/buildings/guards.png",
-    "Haunted Hill": "systems/wfrp4e/icons/buildings/haunted_hill.png",
-    "Haunted Wood": "systems/wfrp4e/icons/buildings/haunted_wood.png",
-    "Inn 1": "systems/wfrp4e/icons/buildings/inn1.png",
-    "Inn 2": "systems/wfrp4e/icons/buildings/inn2.png",
-    "Kislev City 1": "systems/wfrp4e/icons/buildings/kislev_city1.png",
-    "Kislev City 2": "systems/wfrp4e/icons/buildings/kislev_city2.png",
-    "Kislev City 3": "systems/wfrp4e/icons/buildings/kislev_city3.png",
-    "Lumber": "systems/wfrp4e/icons/buildings/lumber.png",
-    "Magic": "systems/wfrp4e/icons/buildings/magic.png",
-    "Metal": "systems/wfrp4e/icons/buildings/metal.png",
-    "Mountain 1": "systems/wfrp4e/icons/buildings/mountains1.png",
-    "Mountain 2": "systems/wfrp4e/icons/buildings/mountains2.png",
-    "Orcs": "systems/wfrp4e/icons/buildings/orcs.png",
-    "Orc Camp": "systems/wfrp4e/icons/buildings/orc_city.png",
-    "Port": "systems/wfrp4e/icons/buildings/port.png",
-    "Road": "systems/wfrp4e/icons/buildings/roads.png",
-    "Ruins": "systems/wfrp4e/icons/buildings/ruins.png",
-    "Scroll": "systems/wfrp4e/icons/buildings/scroll.png",
-    "Sigmar": "systems/wfrp4e/icons/buildings/sigmar_worship.png",
-    "Stables": "systems/wfrp4e/icons/buildings/stables.png",
-    "Standing Stones": "systems/wfrp4e/icons/buildings/standing_stones.png",
-    "Swamp": "systems/wfrp4e/icons/buildings/swamp.png",
-    "Temple": "systems/wfrp4e/icons/buildings/temple.png",
-    "Textile": "systems/wfrp4e/icons/buildings/textile.png",
-    "Tower 1": "systems/wfrp4e/icons/buildings/tower1.png",
-    "Tower 2": "systems/wfrp4e/icons/buildings/tower2.png",
-    "Tower Hill": "systems/wfrp4e/icons/buildings/tower_hill.png",
-    "Wizard Tower": "systems/wfrp4e/icons/buildings/wizard_tower.png",
-    "Ulric": "systems/wfrp4e/icons/buildings/ulric_worship.png",
-    "Village 1": "systems/wfrp4e/icons/buildings/village1.png",
-    "Village 2": "systems/wfrp4e/icons/buildings/village2.png",
-    "Village 3": "systems/wfrp4e/icons/buildings/village3.png",
-    "Wood Elves 1": "systems/wfrp4e/icons/buildings/welves1.png",
-    "Wood Elves 2": "systems/wfrp4e/icons/buildings/welves2.png",
-    "Wood Elves 3": "systems/wfrp4e/icons/buildings/welves3.png"
+    "Marker": "systems/arrant/icons/buildings/point_of_interest.png",
+    "Apothecary": "systems/arrant/icons/buildings/apothecary.png",
+    "Beastmen Herd 1": "systems/arrant/icons/buildings/beastmen_camp1.png",
+    "Beastmen Herd 2": "systems/arrant/icons/buildings/beastmen_camp2.png",
+    "Blacksmith": "systems/arrant/icons/buildings/blacksmith.png",
+    "Bretonnian City 1": "systems/arrant/icons/buildings/bret_city1.png",
+    "Bretonnian City 2": "systems/arrant/icons/buildings/bret_city2.png",
+    "Bretonnian City 3": "systems/arrant/icons/buildings/bret_city3.png",
+    "Bretonnian Worship": "systems/arrant/icons/buildings/bretonnia_worship.png",
+    "Caste Hill 1": "systems/arrant/icons/buildings/castle_hill1.png",
+    "Caste Hill 2": "systems/arrant/icons/buildings/castle_hill2.png",
+    "Caste Hill 3": "systems/arrant/icons/buildings/castle_hill3.png",
+    "Castle Wall": "systems/arrant/icons/buildings/castle_wall.png",
+    "Cave 1": "systems/arrant/icons/buildings/cave1.png",
+    "Cave 2": "systems/arrant/icons/buildings/cave2.png",
+    "Cave 3": "systems/arrant/icons/buildings/cave3.png",
+    "Cemetery": "systems/arrant/icons/buildings/cemetery.png",
+    "Chaos Portal": "systems/arrant/icons/buildings/chaos_portal.png",
+    "Chaos Worship": "systems/arrant/icons/buildings/chaos_worship.png",
+    "Court": "systems/arrant/icons/buildings/court.png",
+    "Dwarf Beer": "systems/arrant/icons/buildings/dwarf_beer.png",
+    "Dwarf Hold 1": "systems/arrant/icons/buildings/dwarf_hold1.png",
+    "Dwarf Hold 2": "systems/arrant/icons/buildings/dwarf_hold2.png",
+    "Dwarf Hold 3": "systems/arrant/icons/buildings/dwarf_hold3.png",
+    "Empire Barracks": "systems/arrant/icons/buildings/empire_barracks.png",
+    "Empire City 1": "systems/arrant/icons/buildings/empire_city1.png",
+    "Empire City 2": "systems/arrant/icons/buildings/empire_city2.png",
+    "Empire City 3": "systems/arrant/icons/buildings/empire_city3.png",
+    "Farm": "systems/arrant/icons/buildings/farms.png",
+    "Food 1": "systems/arrant/icons/buildings/food.png",
+    "Food 2": "systems/arrant/icons/buildings/food2.png",
+    "Guard Post": "systems/arrant/icons/buildings/guards.png",
+    "Haunted Hill": "systems/arrant/icons/buildings/haunted_hill.png",
+    "Haunted Wood": "systems/arrant/icons/buildings/haunted_wood.png",
+    "Inn 1": "systems/arrant/icons/buildings/inn1.png",
+    "Inn 2": "systems/arrant/icons/buildings/inn2.png",
+    "Kislev City 1": "systems/arrant/icons/buildings/kislev_city1.png",
+    "Kislev City 2": "systems/arrant/icons/buildings/kislev_city2.png",
+    "Kislev City 3": "systems/arrant/icons/buildings/kislev_city3.png",
+    "Lumber": "systems/arrant/icons/buildings/lumber.png",
+    "Magic": "systems/arrant/icons/buildings/magic.png",
+    "Metal": "systems/arrant/icons/buildings/metal.png",
+    "Mountain 1": "systems/arrant/icons/buildings/mountains1.png",
+    "Mountain 2": "systems/arrant/icons/buildings/mountains2.png",
+    "Orcs": "systems/arrant/icons/buildings/orcs.png",
+    "Orc Camp": "systems/arrant/icons/buildings/orc_city.png",
+    "Port": "systems/arrant/icons/buildings/port.png",
+    "Road": "systems/arrant/icons/buildings/roads.png",
+    "Ruins": "systems/arrant/icons/buildings/ruins.png",
+    "Scroll": "systems/arrant/icons/buildings/scroll.png",
+    "Sigmar": "systems/arrant/icons/buildings/sigmar_worship.png",
+    "Stables": "systems/arrant/icons/buildings/stables.png",
+    "Standing Stones": "systems/arrant/icons/buildings/standing_stones.png",
+    "Swamp": "systems/arrant/icons/buildings/swamp.png",
+    "Temple": "systems/arrant/icons/buildings/temple.png",
+    "Textile": "systems/arrant/icons/buildings/textile.png",
+    "Tower 1": "systems/arrant/icons/buildings/tower1.png",
+    "Tower 2": "systems/arrant/icons/buildings/tower2.png",
+    "Tower Hill": "systems/arrant/icons/buildings/tower_hill.png",
+    "Wizard Tower": "systems/arrant/icons/buildings/wizard_tower.png",
+    "Ulric": "systems/arrant/icons/buildings/ulric_worship.png",
+    "Village 1": "systems/arrant/icons/buildings/village1.png",
+    "Village 2": "systems/arrant/icons/buildings/village2.png",
+    "Village 3": "systems/arrant/icons/buildings/village3.png",
+    "Wood Elves 1": "systems/arrant/icons/buildings/welves1.png",
+    "Wood Elves 2": "systems/arrant/icons/buildings/welves2.png",
+    "Wood Elves 3": "systems/arrant/icons/buildings/welves3.png"
 }
 
 
@@ -139,7 +139,7 @@ CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat([
             const a = document.createElement("a")
             a.classList.add("table-click")
             a.dataset.table = match[1]
-            a.innerHTML = `<i class="fas fa-list"></i>${(game.wfrp4e.tables.findTable(match[1])?.name && !match[2]) ? game.wfrp4e.tables.findTable(match[1])?.name : match[2]}`
+            a.innerHTML = `<i class="fas fa-list"></i>${(game.arrant.tables.findTable(match[1])?.name && !match[2]) ? game.arrant.tables.findTable(match[1])?.name : match[2]}`
             return a
         }
     },
@@ -211,7 +211,7 @@ CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat([
             a.dataset.strength = match[1]
             let id = match[1]
             let label = match[2]
-            a.innerHTML = `<img src="systems/wfrp4e/ui/chaos.svg" height=15px width=15px style="border:none">${label ? label : id}`
+            a.innerHTML = `<img src="systems/arrant/ui/chaos.svg" height=15px width=15px style="border:none">${label ? label : id}`
             return a
         }
     },
@@ -223,7 +223,7 @@ CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat([
             a.classList.add("fear-link")
             a.dataset.value = values[0]
             a.dataset.name = values[1] || ""
-            a.innerHTML = `<img src="systems/wfrp4e/ui/fear.svg" height=15px width=15px style="border:none"> ${game.i18n.localize("WFRP4E.ConditionName.Fear")} ${values[0]}`
+            a.innerHTML = `<img src="systems/arrant/ui/fear.svg" height=15px width=15px style="border:none"> ${game.i18n.localize("arrant.ConditionName.Fear")} ${values[0]}`
             return a
         }
     },
@@ -235,7 +235,7 @@ CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat([
             a.classList.add("terror-link")
             a.dataset.value = values[0]
             a.dataset.name = values[1] || ""
-            a.innerHTML = `<img src="systems/wfrp4e/ui/terror.svg" height=15px width=15px style="border:none"> ${game.i18n.localize("NAME.Terror")} ${values[0]}`
+            a.innerHTML = `<img src="systems/arrant/ui/terror.svg" height=15px width=15px style="border:none"> ${game.i18n.localize("NAME.Terror")} ${values[0]}`
             return a
         }
     },
@@ -255,14 +255,14 @@ CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat([
 ])
 
 // Status Tiers
-WFRP4E.statusTiers = {
+arrant.statusTiers = {
     "g": "TIER.Gold",
     "s": "TIER.Silver",
     "b": "TIER.Brass"
 };
 
 // Characteristic Names
-WFRP4E.characteristics = {
+arrant.characteristics = {
     "ws": "CHAR.WS",
     "bs": "CHAR.BS",
     "s": "CHAR.S",
@@ -276,7 +276,7 @@ WFRP4E.characteristics = {
 };
 
 // Characteristic Abbreviations
-WFRP4E.characteristicsAbbrev = {
+arrant.characteristicsAbbrev = {
     "ws": "CHARAbbrev.WS",
     "bs": "CHARAbbrev.BS",
     "s": "CHARAbbrev.S",
@@ -290,7 +290,7 @@ WFRP4E.characteristicsAbbrev = {
 };
 
 // Characteristic Abbreviations
-WFRP4E.characteristicsBonus = {
+arrant.characteristicsBonus = {
     "ws": "CHARBonus.WS",
     "bs": "CHARBonus.BS",
     "s": "CHARBonus.S",
@@ -303,22 +303,22 @@ WFRP4E.characteristicsBonus = {
     "fel": "CHARBonus.Fel"
 };
 
-WFRP4E.skillTypes = {
+arrant.skillTypes = {
     "bsc": "Basic",
     "adv": "Advanced"
 };
 
-WFRP4E.xpCost = {
+arrant.xpCost = {
     "characteristic": [25, 30, 40, 50, 70, 90, 120, 150, 190, 230, 280, 330, 390, 450, 520],
     "skill": [10, 15, 20, 30, 40, 60, 80, 110, 140, 180, 220, 270, 320, 380, 440]
 }
 
-WFRP4E.skillGroup = {
+arrant.skillGroup = {
     "isSpec": "ITEM.IsSpec",
     "noSpec": "ITEM.NoSpec"
 };
 
-WFRP4E.talentMax = {
+arrant.talentMax = {
     "1": "1",
     "2": "2",
     "3": "3",
@@ -338,7 +338,7 @@ WFRP4E.talentMax = {
 
 
 // Weapon Groups
-WFRP4E.weaponGroups = {
+arrant.weaponGroups = {
     "basic": "SPEC.Basic",
     "cavalry": "SPEC.Cavalry",
     "fencing": "SPEC.Fencing",
@@ -359,7 +359,7 @@ WFRP4E.weaponGroups = {
 };
 
 // Given a group, what's the primary type, melee or ranged
-WFRP4E.groupToType = {
+arrant.groupToType = {
     "basic": "melee",
     "cavalry": "melee",
     "fencing": "melee",
@@ -379,35 +379,35 @@ WFRP4E.groupToType = {
     "vehicle" : "ranged"
 };
 
-WFRP4E.weaponTypes = {
+arrant.weaponTypes = {
     "melee": "Melee",
     "ranged": "Ranged"
 }
 
 // Weapon Reach
-WFRP4E.weaponReaches = {
-    "personal": "WFRP4E.Reach.Personal",
-    "vshort": "WFRP4E.Reach.VShort",
-    "short": "WFRP4E.Reach.Short",
-    "average": "WFRP4E.Reach.Average",
-    "long": "WFRP4E.Reach.Long",
-    "vLong": "WFRP4E.Reach.VLong",
-    "massive": "WFRP4E.Reach.Massive",
+arrant.weaponReaches = {
+    "personal": "arrant.Reach.Personal",
+    "vshort": "arrant.Reach.VShort",
+    "short": "arrant.Reach.Short",
+    "average": "arrant.Reach.Average",
+    "long": "arrant.Reach.Long",
+    "vLong": "arrant.Reach.VLong",
+    "massive": "arrant.Reach.Massive",
 }
 
 // Ammo Groups
-WFRP4E.ammunitionGroups = {
-    "BPandEng": "WFRP4E.BPandEng",
-    "bow": "WFRP4E.Bow",
-    "crossbow": "WFRP4E.Crossbow",
-    "sling": "WFRP4E.Sling",
-    "vehicle": "WFRP4E.Vehicle",
+arrant.ammunitionGroups = {
+    "BPandEng": "arrant.BPandEng",
+    "bow": "arrant.Bow",
+    "crossbow": "arrant.Crossbow",
+    "sling": "arrant.Sling",
+    "vehicle": "arrant.Vehicle",
     "throwing": "SPEC.Throwing",
     "entangling": "SPEC.Entangling",
 };
 
 // Item Qualities
-WFRP4E.itemQualities = {
+arrant.itemQualities = {
     "durable": "PROPERTY.Durable",
     "fine": "PROPERTY.Fine",
     "lightweight": "PROPERTY.Lightweight",
@@ -415,7 +415,7 @@ WFRP4E.itemQualities = {
 };
 
 // Item Flaws
-WFRP4E.itemFlaws = {
+arrant.itemFlaws = {
     "ugly": "PROPERTY.Ugly",
     "shoddy": "PROPERTY.Shoddy",
     "unreliable": "PROPERTY.Unreliable",
@@ -424,7 +424,7 @@ WFRP4E.itemFlaws = {
 
 
 // Weapon Qualities
-WFRP4E.weaponQualities = {
+arrant.weaponQualities = {
     "accurate": "PROPERTY.Accurate",
     "blackpowder": "PROPERTY.Blackpowder",
     "blast": "PROPERTY.Blast",
@@ -448,7 +448,7 @@ WFRP4E.weaponQualities = {
 };
 
 // Weapon Flaws
-WFRP4E.weaponFlaws = {
+arrant.weaponFlaws = {
     "dangerous": "PROPERTY.Dangerous",
     "imprecise": "PROPERTY.Imprecise",
     "reload": "PROPERTY.Reload",
@@ -458,18 +458,18 @@ WFRP4E.weaponFlaws = {
 };
 
 // Armor Qualities
-WFRP4E.armorQualities = {
+arrant.armorQualities = {
     "flexible": "PROPERTY.Flexible",
     "impenetrable": "PROPERTY.Impenetrable",
 };
 
 // Armor Flaws
-WFRP4E.armorFlaws = {
+arrant.armorFlaws = {
     "partial": "PROPERTY.Partial",
     "weakpoints": "PROPERTY.Weakpoints",
 };
 
-WFRP4E.propertyHasValue = {
+arrant.propertyHasValue = {
     "durable": true,
     "fine": true,
     "lightweight": false,
@@ -511,16 +511,16 @@ WFRP4E.propertyHasValue = {
 }
 
 // Equipment Types
-WFRP4E.armorTypes = {
-    "softLeather": "WFRP4E.ArmourType.SLeather",
-    "boiledLeather": "WFRP4E.ArmourType.BLeather",
-    "mail": "WFRP4E.ArmourType.Mail",
-    "plate": "WFRP4E.ArmourType.Plate",
-    "other": "WFRP4E.ArmourType.Other"
+arrant.armorTypes = {
+    "softLeather": "arrant.ArmourType.SLeather",
+    "boiledLeather": "arrant.ArmourType.BLeather",
+    "mail": "arrant.ArmourType.Mail",
+    "plate": "arrant.ArmourType.Plate",
+    "other": "arrant.ArmourType.Other"
 };
 
 // Range Test Modifiers
-WFRP4E.rangeModifiers = {
+arrant.rangeModifiers = {
     "Point Blank": "easy",
     "Short Range": "average",
     "Normal": "challenging",
@@ -529,7 +529,7 @@ WFRP4E.rangeModifiers = {
 }
 
 // Ranges
-WFRP4E.rangeBands = {
+arrant.rangeBands = {
     "pb": "Point Blank",
     "short": "Short Range",
     "normal": "Normal",
@@ -538,7 +538,7 @@ WFRP4E.rangeBands = {
 }
 
 // Difficulty Modifiers
-WFRP4E.difficultyModifiers = {
+arrant.difficultyModifiers = {
     "veasy": 60,
     "easy": 40,
     "average": 20,
@@ -549,7 +549,7 @@ WFRP4E.difficultyModifiers = {
 }
 
 // Difficulty Labels
-WFRP4E.difficultyLabels = {
+arrant.difficultyLabels = {
 
     "veasy": "DIFFICULTY.VEasy",
     "easy": "DIFFICULTY.Easy",
@@ -560,57 +560,57 @@ WFRP4E.difficultyLabels = {
     "vhard": "DIFFICULTY.VHard"
 }
 
-WFRP4E.locations = {
-    "head": "WFRP4E.Locations.head",
-    "body": "WFRP4E.Locations.body",
-    "rArm": "WFRP4E.Locations.rArm",
-    "lArm": "WFRP4E.Locations.lArm",
-    "rLeg": "WFRP4E.Locations.rLeg",
-    "lLeg": "WFRP4E.Locations.lLeg",
+arrant.locations = {
+    "head": "arrant.Locations.head",
+    "body": "arrant.Locations.body",
+    "rArm": "arrant.Locations.rArm",
+    "lArm": "arrant.Locations.lArm",
+    "rLeg": "arrant.Locations.rLeg",
+    "lLeg": "arrant.Locations.lLeg",
 }
 
 // Trapping Availability
-WFRP4E.availability = {
+arrant.availability = {
     "None": "-",
-    "common": "WFRP4E.Availability.Common",
-    "scarce": "WFRP4E.Availability.Scarce",
-    "rare": "WFRP4E.Availability.Rare",
-    "exotic": "WFRP4E.Availability.Exotic",
-    "special": "WFRP4E.Availability.Special",
+    "common": "arrant.Availability.Common",
+    "scarce": "arrant.Availability.Scarce",
+    "rare": "arrant.Availability.Rare",
+    "exotic": "arrant.Availability.Exotic",
+    "special": "arrant.Availability.Special",
 }
 
 
 // Trapping Types
-WFRP4E.trappingTypes = {
-    "clothingAccessories": "WFRP4E.TrappingType.ClothingAccessories",
-    "foodAndDrink": "WFRP4E.TrappingType.FoodDrink",
-    "toolsAndKits": "WFRP4E.TrappingType.ToolsKits",
-    "booksAndDocuments": "WFRP4E.TrappingType.BooksDocuments",
-    "tradeTools": "WFRP4E.TrappingType.TradeTools", // Unused - combined with tools and kits
-    "drugsPoisonsHerbsDraughts": "WFRP4E.TrappingType.DrugsPoisonsHerbsDraughts",
-    "ingredient": "WFRP4E.TrappingType.Ingredient",
-    "misc": "WFRP4E.TrappingType.Misc",
+arrant.trappingTypes = {
+    "clothingAccessories": "arrant.TrappingType.ClothingAccessories",
+    "foodAndDrink": "arrant.TrappingType.FoodDrink",
+    "toolsAndKits": "arrant.TrappingType.ToolsKits",
+    "booksAndDocuments": "arrant.TrappingType.BooksDocuments",
+    "tradeTools": "arrant.TrappingType.TradeTools", // Unused - combined with tools and kits
+    "drugsPoisonsHerbsDraughts": "arrant.TrappingType.DrugsPoisonsHerbsDraughts",
+    "ingredient": "arrant.TrappingType.Ingredient",
+    "misc": "arrant.TrappingType.Misc",
 };
 
 // These categories are used to label items in containers (Trapping tab)
-WFRP4E.trappingCategories = {
-    "weapon": "WFRP4E.TrappingType.Weapon",
-    "armour": "WFRP4E.TrappingType.Armour",
-    "money": "WFRP4E.TrappingType.Money",
-    "ammunition": "WFRP4E.TrappingType.Ammunition",
-    "container": "WFRP4E.TrappingType.Container",
-    "clothingAccessories": "WFRP4E.TrappingType.ClothingAccessories",
-    "foodAndDrink": "WFRP4E.TrappingType.FoodDrink",
-    "toolsAndKits": "WFRP4E.TrappingType.ToolsKits",
-    "booksAndDocuments": "WFRP4E.TrappingType.BooksDocuments",
-    "tradeTools": "WFRP4E.TrappingType.TradeTools",
-    "drugsPoisonsHerbsDraughts": "WFRP4E.TrappingType.DrugsPoisonsHerbsDraughts",
-    "ingredient": "WFRP4E.TrappingType.Ingredient",
-    "misc": "WFRP4E.TrappingType.Misc",
+arrant.trappingCategories = {
+    "weapon": "arrant.TrappingType.Weapon",
+    "armour": "arrant.TrappingType.Armour",
+    "money": "arrant.TrappingType.Money",
+    "ammunition": "arrant.TrappingType.Ammunition",
+    "container": "arrant.TrappingType.Container",
+    "clothingAccessories": "arrant.TrappingType.ClothingAccessories",
+    "foodAndDrink": "arrant.TrappingType.FoodDrink",
+    "toolsAndKits": "arrant.TrappingType.ToolsKits",
+    "booksAndDocuments": "arrant.TrappingType.BooksDocuments",
+    "tradeTools": "arrant.TrappingType.TradeTools",
+    "drugsPoisonsHerbsDraughts": "arrant.TrappingType.DrugsPoisonsHerbsDraughts",
+    "ingredient": "arrant.TrappingType.Ingredient",
+    "misc": "arrant.TrappingType.Misc",
 };
 
 // Creature Sizes
-WFRP4E.actorSizes = {
+arrant.actorSizes = {
     "tiny": "SPEC.Tiny",
     "ltl": "SPEC.Little",
     "sml": "SPEC.Small",
@@ -619,7 +619,7 @@ WFRP4E.actorSizes = {
     "enor": "SPEC.Enormous",
     "mnst": "SPEC.Monstrous"
 };
-WFRP4E.actorSizeNums = {
+arrant.actorSizeNums = {
     "tiny": 0,
     "ltl": 1,
     "sml": 2,
@@ -629,7 +629,7 @@ WFRP4E.actorSizeNums = {
     "mnst": 6
 };
 
-WFRP4E.tokenSizes = {
+arrant.tokenSizes = {
     "tiny": 0.3,
     "ltl": 0.5,
     "sml": 0.8,
@@ -640,88 +640,88 @@ WFRP4E.tokenSizes = {
 };
 
 // Condition Types
-WFRP4E.magicLores = {
-    "petty": "WFRP4E.MagicLores.petty",
-    "beasts": "WFRP4E.MagicLores.beasts",
-    "death": "WFRP4E.MagicLores.death",
-    "fire": "WFRP4E.MagicLores.fire",
-    "heavens": "WFRP4E.MagicLores.heavens",
-    "metal": "WFRP4E.MagicLores.metal",
-    "life": "WFRP4E.MagicLores.life",
-    "light": "WFRP4E.MagicLores.light",
-    "shadow": "WFRP4E.MagicLores.shadow",
-    "hedgecraft": "WFRP4E.MagicLores.hedgecraft",
-    "witchcraft": "WFRP4E.MagicLores.witchcraft",
-    "daemonology": "WFRP4E.MagicLores.daemonology",
-    "necromancy": "WFRP4E.MagicLores.necromancy",
-    "undivided" : "WFRP4E.MagicLores.undivided",
-    "nurgle": "WFRP4E.MagicLores.nurgle",
-    "slaanesh": "WFRP4E.MagicLores.slaanesh",
-    "tzeentch": "WFRP4E.MagicLores.tzeentch",
+arrant.magicLores = {
+    "petty": "arrant.MagicLores.petty",
+    "beasts": "arrant.MagicLores.beasts",
+    "death": "arrant.MagicLores.death",
+    "fire": "arrant.MagicLores.fire",
+    "heavens": "arrant.MagicLores.heavens",
+    "metal": "arrant.MagicLores.metal",
+    "life": "arrant.MagicLores.life",
+    "light": "arrant.MagicLores.light",
+    "shadow": "arrant.MagicLores.shadow",
+    "hedgecraft": "arrant.MagicLores.hedgecraft",
+    "witchcraft": "arrant.MagicLores.witchcraft",
+    "daemonology": "arrant.MagicLores.daemonology",
+    "necromancy": "arrant.MagicLores.necromancy",
+    "undivided" : "arrant.MagicLores.undivided",
+    "nurgle": "arrant.MagicLores.nurgle",
+    "slaanesh": "arrant.MagicLores.slaanesh",
+    "tzeentch": "arrant.MagicLores.tzeentch",
 };
 
 // Given a Lore, what is the Wind
-WFRP4E.magicWind = {
-    "petty": "WFRP4E.MagicWind.petty",
-    "beasts": "WFRP4E.MagicWind.beasts",
-    "death": "WFRP4E.MagicWind.death",
-    "fire": "WFRP4E.MagicWind.fire",
-    "heavens": "WFRP4E.MagicWind.heavens",
-    "metal": "WFRP4E.MagicWind.metal",
-    "life": "WFRP4E.MagicWind.life",
-    "light": "WFRP4E.MagicWind.light",
-    "shadow": "WFRP4E.MagicWind.shadow",
-    "hedgecraft": "WFRP4E.MagicWind.hedgecraft",
-    "witchcraft": "WFRP4E.MagicWind.witchcraft",
-    "daemonology": "WFRP4E.MagicWind.daemonology",
-    "necromancy": "WFRP4E.MagicWind.necromancy",
-    "undivided": "WFRP4E.MagicWind.undivided",
-    "nurgle": "WFRP4E.MagicWind.nurgle",
-    "slaanesh": "WFRP4E.MagicWind.slaanesh",
-    "tzeentch": "WFRP4E.MagicWind.tzeentch",
+arrant.magicWind = {
+    "petty": "arrant.MagicWind.petty",
+    "beasts": "arrant.MagicWind.beasts",
+    "death": "arrant.MagicWind.death",
+    "fire": "arrant.MagicWind.fire",
+    "heavens": "arrant.MagicWind.heavens",
+    "metal": "arrant.MagicWind.metal",
+    "life": "arrant.MagicWind.life",
+    "light": "arrant.MagicWind.light",
+    "shadow": "arrant.MagicWind.shadow",
+    "hedgecraft": "arrant.MagicWind.hedgecraft",
+    "witchcraft": "arrant.MagicWind.witchcraft",
+    "daemonology": "arrant.MagicWind.daemonology",
+    "necromancy": "arrant.MagicWind.necromancy",
+    "undivided": "arrant.MagicWind.undivided",
+    "nurgle": "arrant.MagicWind.nurgle",
+    "slaanesh": "arrant.MagicWind.slaanesh",
+    "tzeentch": "arrant.MagicWind.tzeentch",
 };
 
 
 
 // Types of prayers
-WFRP4E.prayerTypes = {
-    "blessing": "WFRP4E.prayerTypes.blessing",
-    "miracle": "WFRP4E.prayerTypes.miracle"
+arrant.prayerTypes = {
+    "blessing": "arrant.prayerTypes.blessing",
+    "miracle": "arrant.prayerTypes.miracle"
 }
 
-WFRP4E.mutationTypes = {
-    "physical": "WFRP4E.mutationTypes.physical",
-    "mental": "WFRP4E.mutationTypes.mental"
-}
-
-
-WFRP4E.conditions = {
-    "ablaze": "WFRP4E.ConditionName.Ablaze",
-    "bleeding": "WFRP4E.ConditionName.Bleeding",
-    "blinded": "WFRP4E.ConditionName.Blinded",
-    "broken": "WFRP4E.ConditionName.Broken",
-    "deafened": "WFRP4E.ConditionName.Deafened",
-    "entangled": "WFRP4E.ConditionName.Entangled",
-    "fatigued": "WFRP4E.ConditionName.Fatigued",
-    "poisoned": "WFRP4E.ConditionName.Poisoned",
-    "prone": "WFRP4E.ConditionName.Prone",
-    "stunned": "WFRP4E.ConditionName.Stunned",
-    "surprised": "WFRP4E.ConditionName.Surprised",
-    "unconscious": "WFRP4E.ConditionName.Unconscious",
-    "grappling": "WFRP4E.ConditionName.Grappling",
-    "fear": "WFRP4E.ConditionName.Fear",
-    "engaged": "WFRP4E.ConditionName.Engaged",
-    "defeated": "WFRP4E.ConditionName.Defeated"
+arrant.mutationTypes = {
+    "physical": "arrant.mutationTypes.physical",
+    "mental": "arrant.mutationTypes.mental"
 }
 
 
-WFRP4E.earningValues = {
+arrant.conditions = {
+    "ablaze": "arrant.ConditionName.Ablaze",
+    "bleeding": "arrant.ConditionName.Bleeding",
+    "blinded": "arrant.ConditionName.Blinded",
+    "broken": "arrant.ConditionName.Broken",
+    "deafened": "arrant.ConditionName.Deafened",
+    "entangled": "arrant.ConditionName.Entangled",
+    "fatigued": "arrant.ConditionName.Fatigued",
+    "poisoned": "arrant.ConditionName.Poisoned",
+    "prone": "arrant.ConditionName.Prone",
+    "stunned": "arrant.ConditionName.Stunned",
+    "surprised": "arrant.ConditionName.Surprised",
+    "unconscious": "arrant.ConditionName.Unconscious",
+    "grappling": "arrant.ConditionName.Grappling",
+    "fear": "arrant.ConditionName.Fear",
+    "engaged": "arrant.ConditionName.Engaged",
+    "defeated": "arrant.ConditionName.Defeated"
+}
+
+
+arrant.earningValues = {
     "b": "2d10",
     "s": "1d10",
     "g": "1",
 }
 
-WFRP4E.randomExp = {
+arrant.randomExp = {
     speciesRand: 20,
     careerRand: 50,
     careerReroll: 25,
@@ -729,7 +729,7 @@ WFRP4E.randomExp = {
     statsReorder: 25
 }
 
-WFRP4E.reachNum = {
+arrant.reachNum = {
     "personal": 1,
     "vshort": 2,
     "short": 3,
@@ -739,7 +739,7 @@ WFRP4E.reachNum = {
     "massive": 7,
 }
 
-WFRP4E.traitBonuses = {
+arrant.traitBonuses = {
     "big": {
         "s": 10,
         "t": 10,
@@ -782,7 +782,7 @@ WFRP4E.traitBonuses = {
     }
 }
 
-WFRP4E.talentBonuses = {
+arrant.talentBonuses = {
     "savvy": "int",
     "suave": "fel",
     "marksman": "bs",
@@ -795,16 +795,16 @@ WFRP4E.talentBonuses = {
     "warrior born": "ws"
 }
 
-WFRP4E.corruptionTables = ["mutatephys", "mutatemental"]
+arrant.corruptionTables = ["mutatephys", "mutatemental"]
 
-WFRP4E.DAMAGE_TYPE = {
+arrant.DAMAGE_TYPE = {
     NORMAL: 0,
     IGNORE_AP: 1,
     IGNORE_TB: 2,
     IGNORE_ALL: 3
 }
 
-WFRP4E.PSEUDO_ENTITIES = [
+arrant.PSEUDO_ENTITIES = [
     "Table",
     "Condition",
     "Symptom",
@@ -817,64 +817,64 @@ WFRP4E.PSEUDO_ENTITIES = [
     "Exp"
 ]
 
-WFRP4E.availabilityTable = {
+arrant.availabilityTable = {
     "MARKET.Village": {
-        "WFRP4E.Availability.Common": {
+        "arrant.Availability.Common": {
             test: 100,
             stock: '2'
         },
-        "WFRP4E.Availability.Scarce": {
+        "arrant.Availability.Scarce": {
             test: 30,
             stock: '1'
         },
-        "WFRP4E.Availability.Rare": {
+        "arrant.Availability.Rare": {
             test: 15,
             stock: '1'
         },
-        "WFRP4E.Availability.Exotic": {
+        "arrant.Availability.Exotic": {
             test: 0,
             stock: '0'
         }
     },
     "MARKET.Town": {
-        "WFRP4E.Availability.Common": {
+        "arrant.Availability.Common": {
             test: 100,
             stock: '2d10'
         },
-        "WFRP4E.Availability.Scarce": {
+        "arrant.Availability.Scarce": {
             test: 60,
             stock: '1d10'
         },
-        "WFRP4E.Availability.Rare": {
+        "arrant.Availability.Rare": {
             test: 30,
             stock: '1d5'
         },
-        "WFRP4E.Availability.Exotic": {
+        "arrant.Availability.Exotic": {
             test: 0,
             stock: '0'
         }
     },
     "MARKET.City": {
-        "WFRP4E.Availability.Common": {
+        "arrant.Availability.Common": {
             test: 100,
             stock: '∞'
         },
-        "WFRP4E.Availability.Scarce": {
+        "arrant.Availability.Scarce": {
             test: 90,
             stock: '∞'
         },
-        "WFRP4E.Availability.Rare": {
+        "arrant.Availability.Rare": {
             test: 45,
             stock: '∞'
         },
-        "WFRP4E.Availability.Exotic": {
+        "arrant.Availability.Exotic": {
             test: 0,
             stock: '0'
         }
     }
 }
 
-WFRP4E.overCastTable = {
+arrant.overCastTable = {
   range: [
     {cost: 1, value: 2},
     {cost: 4, value: 3},
@@ -899,56 +899,56 @@ WFRP4E.overCastTable = {
     {cost: 8, value: 7}]
 }
 
-WFRP4E.species = {};
-WFRP4E.subspecies = {};
-WFRP4E.speciesCharacteristics = {}
-WFRP4E.speciesSkills = {}
-WFRP4E.speciesTalents = {}
-WFRP4E.speciesMovement = {}
-WFRP4E.speciesFate = {}
-WFRP4E.speciesRes = {}
-WFRP4E.speciesExtra = {}
-WFRP4E.speciesAge = {}
-WFRP4E.speciesHeight = {}
-WFRP4E.speciesCareerReplacements = {}
-WFRP4E.classTrappings = {}
-WFRP4E.weaponGroupDescriptions = {};
-WFRP4E.reachDescription = {}
-WFRP4E.qualityDescriptions = {};
-WFRP4E.flawDescriptions = {};
-WFRP4E.loreEffectDescriptions = {};
-WFRP4E.loreEffects = {};
-WFRP4E.conditionDescriptions = {}
-WFRP4E.symptoms = {}
-WFRP4E.symptomDescriptions = {}
-WFRP4E.symptomTreatment = {}
-WFRP4E.modTypes = {}
-WFRP4E.symptomEffects = {}
+arrant.species = {};
+arrant.subspecies = {};
+arrant.speciesCharacteristics = {}
+arrant.speciesSkills = {}
+arrant.speciesTalents = {}
+arrant.speciesMovement = {}
+arrant.speciesFate = {}
+arrant.speciesRes = {}
+arrant.speciesExtra = {}
+arrant.speciesAge = {}
+arrant.speciesHeight = {}
+arrant.speciesCareerReplacements = {}
+arrant.classTrappings = {}
+arrant.weaponGroupDescriptions = {};
+arrant.reachDescription = {}
+arrant.qualityDescriptions = {};
+arrant.flawDescriptions = {};
+arrant.loreEffectDescriptions = {};
+arrant.loreEffects = {};
+arrant.conditionDescriptions = {}
+arrant.symptoms = {}
+arrant.symptomDescriptions = {}
+arrant.symptomTreatment = {}
+arrant.modTypes = {}
+arrant.symptomEffects = {}
 
-WFRP4E.premiumModules = {
-    "wfrp4e" : "WFRP4e System",
-    "wfrp4e-core" : "Core Rulebook",
-    "wfrp4e-starter-set" : "Starter Set",
-    "wfrp4e-rnhd" : "Rough Nights & Hard Days",
-    "wfrp4e-eis" : "Enemy In Shadows",
-    "wfrp4e-ua1" : "Ubersreik Adventures I",
-    "wfrp4e-dotr" : "Death on the Reik",
-    "wfrp4e-middenheim" : "Middenheim: City of the White Wolf",
-    "wfrp4e-archives1" : "Archives of the Empire: Vol 1.",
-    "wfrp4e-pbtt" : "Power Behind the Throne",
-    "wfrp4e-altdorf" : "Altdorf: Crown of the Empire",
-    "wfrp4e-ua2" : "Ubersreik Adventures II",
-    "wfrp4e-owb1" : "Old World Bundle I",
-    "wfrp4e-horned-rat" : "The Horned Rat",
-    "wfrp4e-empire-ruins" : "Empire in Ruins",
-    "wfrp4e-archives2" : "Archives of the Empire: Vol 2.",
-    "wfrp4e-up-in-arms" : "Up In Arms",
-    "wfrp4e-wom" : "Winds of Magic",
-    "wfrp4e-zoo" : "Imperial Zoo",
-    "wfrp4e-salzenmund" : "Salzenmund: City of Salt and Silver"
+arrant.premiumModules = {
+    "arrant" : "arrant System",
+    "arrant-core" : "Core Rulebook",
+    "arrant-starter-set" : "Starter Set",
+    "arrant-rnhd" : "Rough Nights & Hard Days",
+    "arrant-eis" : "Enemy In Shadows",
+    "arrant-ua1" : "Ubersreik Adventures I",
+    "arrant-dotr" : "Death on the Reik",
+    "arrant-middenheim" : "Middenheim: City of the White Wolf",
+    "arrant-archives1" : "Archives of the Empire: Vol 1.",
+    "arrant-pbtt" : "Power Behind the Throne",
+    "arrant-altdorf" : "Altdorf: Crown of the Empire",
+    "arrant-ua2" : "Ubersreik Adventures II",
+    "arrant-owb1" : "Old World Bundle I",
+    "arrant-horned-rat" : "The Horned Rat",
+    "arrant-empire-ruins" : "Empire in Ruins",
+    "arrant-archives2" : "Archives of the Empire: Vol 2.",
+    "arrant-up-in-arms" : "Up In Arms",
+    "arrant-wom" : "Winds of Magic",
+    "arrant-zoo" : "Imperial Zoo",
+    "arrant-salzenmund" : "Salzenmund: City of Salt and Silver"
 }
 
-WFRP4E.trade = { 
+arrant.trade = {
     gazetteer : [],
     settlementRating : {
         "hamlet": { popmax: 200,
@@ -995,31 +995,31 @@ WFRP4E.trade = {
 // "moneyNames" is what currency name to look for when creating a character 
 // The money keys are used for parsing input (like commands)
 // Override these values if you wish to have a campaign in a different setting
-WFRP4E.moneyNames = {
+arrant.moneyNames = {
     "gc" : "NAME.GC",
     "ss" : "NAME.SS",
     "bp" : "NAME.BP"
 }
 
-WFRP4E.moneyValues = {
+arrant.moneyValues = {
     "gc" : 240,
     "ss" : 20,
     "bp" : 1
 }
 
-WFRP4E.hitLocationTables = {
-    "hitloc": "WFRP4E.hitLocationTables.hitloc",
-    "snake": "WFRP4E.hitLocationTables.snake",
-    "spider": "WFRP4E.hitLocationTables.spider"
+arrant.hitLocationTables = {
+    "hitloc": "arrant.hitLocationTables.hitloc",
+    "snake": "arrant.hitLocationTables.snake",
+    "spider": "arrant.hitLocationTables.spider"
 }
 
-WFRP4E.extendedTestCompletion = {
+arrant.extendedTestCompletion = {
     none: "ExtendedTest.None",
     reset: "ExtendedTest.Reset",
     remove: "ExtendedTest.Remove"
 }
 
-WFRP4E.actorSizeEncumbrance = {
+arrant.actorSizeEncumbrance = {
     "tiny": 0,
     "ltl": 2,
     "sml": 5,
@@ -1030,11 +1030,11 @@ WFRP4E.actorSizeEncumbrance = {
 }
 
 // For modules to add to these, they need to be merged
-WFRP4E.systemItems = {};
-WFRP4E.systemEffects = {}
-WFRP4E.groupAdvantageActions = [];
+arrant.systemItems = {};
+arrant.systemEffects = {}
+arrant.groupAdvantageActions = [];
 
-WFRP4E.PrepareSystemItems = function() {
+arrant.PrepareSystemItems = function() {
 
     this.systemItems = mergeObject(this.systemItems, {
         reload : {
@@ -1051,7 +1051,7 @@ WFRP4E.PrepareSystemItems = function() {
                 }
             },
             flags: {
-                wfrp4e: {
+                arrant: {
                     reloading: ""
                 }
             }
@@ -1116,21 +1116,21 @@ WFRP4E.PrepareSystemItems = function() {
             effects:
                 [{
                     name: game.i18n.localize("NAME.Fear"),
-                    icon: "systems/wfrp4e/icons/conditions/fear.png",
+                    icon: "systems/arrant/icons/conditions/fear.png",
                     transfer: true,
                     statuses : ["fear"],
                     flags: {
-                        wfrp4e: {
+                        arrant: {
                             "effectTrigger": "dialogChoice",
                             "effectData": {
                                 "description": game.i18n.localize("EFFECT.TestsToAffect"),
                                 "slBonus": "-1"
                             },
                             "script": `
-                                if (this.flags.wfrp4e.fearName)
-                                    this.flags.wfrp4e.effectData.description += " " + this.flags.wfrp4e.fearName
+                                if (this.flags.arrant.fearName)
+                                    this.flags.arrant.effectData.description += " " + this.flags.arrant.fearName
                                 else
-                                    this.flags.wfrp4e.effectData.description += " " + game.i18n.localize("EFFECT.TheSourceOfFear")
+                                    this.flags.arrant.effectData.description += " " + game.i18n.localize("EFFECT.TheSourceOfFear")
                             `}
                     }
                 }
@@ -1141,10 +1141,10 @@ WFRP4E.PrepareSystemItems = function() {
         terror: {
 
             name: game.i18n.localize("NAME.Terror"),
-            icon: "systems/wfrp4e/icons/conditions/terror.png",
+            icon: "systems/arrant/icons/conditions/terror.png",
             transfer: true,
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "oneTime",
                     "effectApplication": "actor",
                     "terrorValue": 1,
@@ -1152,7 +1152,7 @@ WFRP4E.PrepareSystemItems = function() {
                         let skillName = game.i18n.localize("NAME.Cool");
                         let test = await args.actor.setupSkill(skillName, {terror: true, appendTitle : " - Terror"});
                         await test.roll();
-                        let terror = this.effect.flags.wfrp4e.terrorValue;   
+                        let terror = this.effect.flags.arrant.terrorValue;   
                         await args.actor.applyFear(terror, name)
                         if (test.result.outcome == "failure")
                         {            
@@ -1170,10 +1170,10 @@ WFRP4E.PrepareSystemItems = function() {
     this.systemEffects = mergeObject(this.systemEffects, {
         "enc1" : {
             name: game.i18n.localize("EFFECT.Encumbrance") + " 1",
-            icon: "systems/wfrp4e/icons/effects/enc1.png",
+            icon: "systems/arrant/icons/effects/enc1.png",
             statuses : ["enc1"],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "prePrepareData",
                     "effectApplication": "actor",
                     "script": `
@@ -1191,10 +1191,10 @@ WFRP4E.PrepareSystemItems = function() {
         },
         "enc2" : {
             name: game.i18n.localize("EFFECT.Encumbrance") + " 2",
-            icon: "systems/wfrp4e/icons/effects/enc2.png",
+            icon: "systems/arrant/icons/effects/enc2.png",
             statuses : ["enc2"],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "prePrepareData",
                     "effectApplication": "actor",
                     "script": `
@@ -1211,10 +1211,10 @@ WFRP4E.PrepareSystemItems = function() {
         },
         "enc3" : {
             name: game.i18n.localize("EFFECT.Encumbrance") + " 3",
-            icon: "systems/wfrp4e/icons/effects/enc3.png",
+            icon: "systems/arrant/icons/effects/enc3.png",
             statuses : ["enc3"],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "prePrepareData",
                     "effectApplication": "actor",
                     "script": `
@@ -1232,7 +1232,7 @@ WFRP4E.PrepareSystemItems = function() {
                 {key : "system.characteristics.dex.modifier", mode: 2, value: -10},
             ],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "",
                     "effectApplication": "actor",
                     "script": ``
@@ -1259,7 +1259,7 @@ WFRP4E.PrepareSystemItems = function() {
                 {key : "system.characteristics.wp.calculationBonusModifier", mode: 2, value: 1},
             ],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "",
                     "effectApplication": "actor",
                     "script": ``
@@ -1271,7 +1271,7 @@ WFRP4E.PrepareSystemItems = function() {
             icon: "",
             statuses : ["cold3"],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "invoke",
                     "effectApplication": "actor",
                     "script": `
@@ -1298,7 +1298,7 @@ WFRP4E.PrepareSystemItems = function() {
                 {key : "system.characteristics.wp.calculationBonusModifier", mode: 2, value: 1},
             ],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "",
                     "effectApplication": "actor",
                     "script": ``
@@ -1325,7 +1325,7 @@ WFRP4E.PrepareSystemItems = function() {
                 {key : "system.characteristics.wp.calculationBonusModifier", mode: 2, value: 1},
             ],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "",
                     "effectApplication": "actor",
                     "script": ``
@@ -1337,7 +1337,7 @@ WFRP4E.PrepareSystemItems = function() {
             icon: "",
             statuses : ["heat3"],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "invoke",
                     "effectApplication": "actor",
                     "script": `
@@ -1364,7 +1364,7 @@ WFRP4E.PrepareSystemItems = function() {
                 {key : "system.characteristics.wp.calculationBonusModifier", mode: 2, value: 1},
             ],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "",
                     "effectApplication": "actor",
                     "script": ``
@@ -1391,7 +1391,7 @@ WFRP4E.PrepareSystemItems = function() {
                 {key : "system.characteristics.wp.calculationBonusModifier", mode: 2, value: 1},
             ],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "invoke",
                     "effectApplication": "actor",
                     "script": `
@@ -1418,7 +1418,7 @@ WFRP4E.PrepareSystemItems = function() {
                 {key : "system.characteristics.s.calculationBonusModifier", mode: 2, value: 1},
             ],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "",
                     "effectApplication": "actor",
                     "script": ``
@@ -1445,7 +1445,7 @@ WFRP4E.PrepareSystemItems = function() {
                 {key : "system.characteristics.wp.calculationBonusModifier", mode: 2, value: 1},
             ],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "invoke",
                     "effectApplication": "actor",
                     "script": `
@@ -1463,10 +1463,10 @@ WFRP4E.PrepareSystemItems = function() {
         },
         "infighting" : {
             name: game.i18n.localize("EFFECT.Infighting"),
-            icon: "modules/wfrp4e-core/icons/talents/in-fighter.png",
+            icon: "modules/arrant-core/icons/talents/in-fighter.png",
             statuses : ["infighting"],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "prePrepareItem",
                     "effectApplication": "actor",
                     "script": `
@@ -1475,7 +1475,7 @@ WFRP4E.PrepareSystemItems = function() {
                             let weaponLength = args.item.reachNum
                             if (weaponLength > 3)
                             {
-                                let improv = duplicate(game.wfrp4e.config.systemItems.improv)
+                                let improv = duplicate(game.arrant.config.systemItems.improv)
                                 improv.system.twohanded.value = args.item.twohanded.value
                                 improv.system.offhand.value = args.item.offhand.value
                                 improv.name = args.item.name + " (" + game.i18n.localize("EFFECT.Infighting") + ")"
@@ -1495,7 +1495,7 @@ WFRP4E.PrepareSystemItems = function() {
             icon: "",
             statuses : ["defensive"],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "prefillDialog",
                     "effectApplication": "actor",
                     "script": `
@@ -1513,10 +1513,10 @@ WFRP4E.PrepareSystemItems = function() {
         },
         "dualwielder" : {
             name: game.i18n.localize("EFFECT.DualWielder"),
-            icon: "modules/wfrp4e-core/icons/talents/dual-wielder.png",
+            icon: "modules/arrant-core/icons/talents/dual-wielder.png",
             statuses : ["dualwielder"],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "prefillDialog",
                     "effectApplication": "actor",
                     "script": `
@@ -1566,7 +1566,7 @@ WFRP4E.PrepareSystemItems = function() {
             icon: "",
             statuses : ["stinkingdrunk1"],
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "prefillDialog",
                     "effectApplication": "actor",
                     "script": `
@@ -1580,24 +1580,24 @@ WFRP4E.PrepareSystemItems = function() {
 
     this.statusEffects = [
         {
-            icon: "systems/wfrp4e/icons/conditions/bleeding.png",
+            icon: "systems/arrant/icons/conditions/bleeding.png",
             id: "bleeding",
             statuses: ["bleeding"],
-            name: "WFRP4E.ConditionName.Bleeding",
+            name: "arrant.ConditionName.Bleeding",
             flags: {
-                wfrp4e: {
+                arrant: {
                     "trigger": "endRound",
                     "value": 1
                 }
             }
         },
         {
-            icon: "systems/wfrp4e/icons/conditions/poisoned.png",
+            icon: "systems/arrant/icons/conditions/poisoned.png",
             id: "poisoned",
             statuses: ["poisoned"],
-            name: "WFRP4E.ConditionName.Poisoned",
+            name: "arrant.ConditionName.Poisoned",
             flags: {
-                wfrp4e: {
+                arrant: {
                     "trigger": "endRound",
                     "effectTrigger": "prefillDialog",
                     "script": "args.prefillModifiers.modifier -= 10 * this.effect.conditionValue",
@@ -1607,41 +1607,41 @@ WFRP4E.PrepareSystemItems = function() {
             
         },
         {
-            icon: "systems/wfrp4e/icons/conditions/ablaze.png",
+            icon: "systems/arrant/icons/conditions/ablaze.png",
             id: "ablaze",
             statuses: ["ablaze"],
-            name: "WFRP4E.ConditionName.Ablaze",
+            name: "arrant.ConditionName.Ablaze",
             flags: {
-                wfrp4e: {
+                arrant: {
                     "trigger": "endRound",
                     "value": 1
                 }
             }
         },
         {
-            icon: "systems/wfrp4e/icons/conditions/deafened.png",
+            icon: "systems/arrant/icons/conditions/deafened.png",
             id: "deafened",
             statuses: ["deafened"],
-            name: "WFRP4E.ConditionName.Deafened",
+            name: "arrant.ConditionName.Deafened",
             flags: {
-                wfrp4e: {
+                arrant: {
                     "trigger": "endRound",
                     "effectTrigger": "dialogChoice",
                     "effectData" : {
                         "description" : game.i18n.localize("EFFECT.TestsRelatedToHearing"),
-                        "modifier" : "-10 * this.flags.wfrp4e.value"
+                        "modifier" : "-10 * this.flags.arrant.value"
                     },
                     "value": 1
                 }
             }
         },
         {
-            icon: "systems/wfrp4e/icons/conditions/stunned.png",
+            icon: "systems/arrant/icons/conditions/stunned.png",
             id: "stunned",
             statuses: ["stunned"],
-            name: "WFRP4E.ConditionName.Stunned",
+            name: "arrant.ConditionName.Stunned",
             flags: {
-                wfrp4e: {
+                arrant: {
                     "trigger": "endRound",
                     "effectTrigger": "prefillDialog",
                     "script": "args.prefillModifiers.modifier -= 10 * this.effect.conditionValue",
@@ -1654,29 +1654,29 @@ WFRP4E.PrepareSystemItems = function() {
             }
         },
         {
-            icon: "systems/wfrp4e/icons/conditions/entangled.png",
+            icon: "systems/arrant/icons/conditions/entangled.png",
             id: "entangled",
             statuses: ["entangled"],
-            name: "WFRP4E.ConditionName.Entangled",
+            name: "arrant.ConditionName.Entangled",
             flags: {
-                wfrp4e: {
+                arrant: {
                     "trigger": "endRound",
                     "effectTrigger": "dialogChoice",
                     "effectData" : {
                         "description" : game.i18n.localize("EFFECT.TestsRelatedToMovementOfAnyKind"),
-                        "modifier" : "-10 * this.flags.wfrp4e.value"
+                        "modifier" : "-10 * this.flags.arrant.value"
                     },
                     "value": 1
                 }
             }
         },
         {
-            icon: "systems/wfrp4e/icons/conditions/fatigued.png",
+            icon: "systems/arrant/icons/conditions/fatigued.png",
             id: "fatigued",
             statuses: ["fatigued"],
-            name: "WFRP4E.ConditionName.Fatigued",
+            name: "arrant.ConditionName.Fatigued",
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "prefillDialog",
                     "script": "args.prefillModifiers.modifier -= 10 * this.effect.conditionValue",
                     "value" : 1
@@ -1684,17 +1684,17 @@ WFRP4E.PrepareSystemItems = function() {
             }
         },
         {
-            icon: "systems/wfrp4e/icons/conditions/blinded.png",
+            icon: "systems/arrant/icons/conditions/blinded.png",
             id: "blinded",
             statuses: ["blinded"],
-            name: "WFRP4E.ConditionName.Blinded",
+            name: "arrant.ConditionName.Blinded",
             flags: {
-                wfrp4e: {
+                arrant: {
                     "trigger": "endRound",
                     "effectTrigger": "dialogChoice",
                     "effectData" : {
                         "description" : game.i18n.localize("EFFECT.TestsRelatedToSight"),
-                        "modifier" : "-10 * this.flags.wfrp4e.value"
+                        "modifier" : "-10 * this.flags.arrant.value"
                     },
                     "value": 1,
                     "secondaryEffect" :{
@@ -1705,12 +1705,12 @@ WFRP4E.PrepareSystemItems = function() {
             }
         },
         {
-            icon: "systems/wfrp4e/icons/conditions/broken.png",
+            icon: "systems/arrant/icons/conditions/broken.png",
             id: "broken",
             statuses: ["broken"],
-            name: "WFRP4E.ConditionName.Broken",
+            name: "arrant.ConditionName.Broken",
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "prefillDialog",
                     "script": "if (args.item.type != 'skill' || !(args.item.name.includes(game.i18n.localize('NAME.Stealth')) || args.item.name == game.i18n.localize('NAME.Athletics'))) args.prefillModifiers.modifier -= 10 * this.effect.conditionValue",
                     "value": 1
@@ -1718,12 +1718,12 @@ WFRP4E.PrepareSystemItems = function() {
             }
         },
         {
-            icon: "systems/wfrp4e/icons/conditions/prone.png",
+            icon: "systems/arrant/icons/conditions/prone.png",
             id: "prone",
             statuses: ["prone"],
-            name: "WFRP4E.ConditionName.Prone",
+            name: "arrant.ConditionName.Prone",
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "dialogChoice",
                     "effectData" : {
                         "description" : game.i18n.localize("EFFECT.TestsRelatedToMovementOfAnyKind"),
@@ -1738,34 +1738,34 @@ WFRP4E.PrepareSystemItems = function() {
             }
         },
         {
-            icon: "systems/wfrp4e/icons/conditions/fear.png",
+            icon: "systems/arrant/icons/conditions/fear.png",
             id: "fear",
             statuses: ["fear"],
-            name: "WFRP4E.ConditionName.Fear",
+            name: "arrant.ConditionName.Fear",
             flags: {
-                wfrp4e: {
+                arrant: {
                     "effectTrigger": "dialogChoice",
                     "effectData" : {
                         "description" : game.i18n.localize("EFFECT.TestsToAffect"),
                         "slBonus" : "-1"
                     },
                     "script" : `
-                        if (this.flags.wfrp4e.fearName)
-                            this.flags.wfrp4e.effectData.description += " " + this.flags.wfrp4e.fearName
+                        if (this.flags.arrant.fearName)
+                            this.flags.arrant.effectData.description += " " + this.flags.arrant.fearName
                         else
-                            this.flags.wfrp4e.effectData.description += " " + game.i18n.localize("EFFECT.TheSourceOfFear")
+                            this.flags.arrant.effectData.description += " " + game.i18n.localize("EFFECT.TheSourceOfFear")
                     `,
                     "value": null
                 }
             }
         },
         {
-            icon: "systems/wfrp4e/icons/conditions/surprised.png",
+            icon: "systems/arrant/icons/conditions/surprised.png",
             id: "surprised",
             statuses: ["surprised"],
-            name: "WFRP4E.ConditionName.Surprised",
+            name: "arrant.ConditionName.Surprised",
             flags: {
-                wfrp4e: {
+                arrant: {
                     "value": null,
                     "secondaryEffect" :{
                         "effectTrigger": "targetPrefillDialog",
@@ -1775,46 +1775,46 @@ WFRP4E.PrepareSystemItems = function() {
             }
         },
         {
-            icon: "systems/wfrp4e/icons/conditions/unconscious.png",
+            icon: "systems/arrant/icons/conditions/unconscious.png",
             id: "unconscious",
             statuses: ["unconscious"],
-            name: "WFRP4E.ConditionName.Unconscious",
+            name: "arrant.ConditionName.Unconscious",
             flags: {
-                wfrp4e: {
+                arrant: {
                     "value": null
                 }
             }
         },
         {
-            icon: "systems/wfrp4e/icons/conditions/grappling.png",
+            icon: "systems/arrant/icons/conditions/grappling.png",
             id: "grappling",
             statuses: ["grappling"],
-            name: "WFRP4E.ConditionName.Grappling",
+            name: "arrant.ConditionName.Grappling",
             flags: {
-                wfrp4e: {
+                arrant: {
                     "value": null
                 }
             }
             
         },
         {
-            icon: "systems/wfrp4e/icons/conditions/engaged.png",
+            icon: "systems/arrant/icons/conditions/engaged.png",
             id: "engaged",
             statuses: ["engaged"],
-            name: "WFRP4E.ConditionName.Engaged",
+            name: "arrant.ConditionName.Engaged",
             flags: {
-                wfrp4e: {
+                arrant: {
                     "value": null
                 }
             }
         },
         {
-            icon: "systems/wfrp4e/icons/defeated.png",
+            icon: "systems/arrant/icons/defeated.png",
             id: "dead",
             statuses: ["dead"],
-            name: "WFRP4E.ConditionName.Dead",
+            name: "arrant.ConditionName.Dead",
             flags: {
-                wfrp4e: {
+                arrant: {
                     "value": null
                 }
             }
@@ -1823,7 +1823,7 @@ WFRP4E.PrepareSystemItems = function() {
     ]
 }
 
-WFRP4E.conditionScripts = {
+arrant.conditionScripts = {
     "ablaze" : async function (actor) {
         let effect = actor.hasCondition("ablaze")
         let value = effect.conditionValue;
@@ -1839,7 +1839,7 @@ WFRP4E.conditionScripts = {
             }
         }
         let formula = `1d10 + ${value - 1}`
-        let msg = `<h2>${game.i18n.localize("WFRP4E.ConditionName.Ablaze")}</h2><b>${game.i18n.localize("Formula")}</b>: @FORMULA<br><b>${game.i18n.localize("Roll")}</b>: @ROLLTERMS` 
+        let msg = `<h2>${game.i18n.localize("arrant.ConditionName.Ablaze")}</h2><b>${game.i18n.localize("Formula")}</b>: @FORMULA<br><b>${game.i18n.localize("Roll")}</b>: @ROLLTERMS`
         
         let args = {msg, formula}
         await actor.runEffects("preApplyCondition", {effect, data : args});
@@ -1853,22 +1853,22 @@ WFRP4E.conditionScripts = {
         value = effect.conditionValue;
         let damageMsg = (`<br>` + await actor.applyBasicDamage(roll.total, {loc: leastProtectedLoc, suppressMsg : true})).split("")
         msg += damageMsg.join("");
-        let messageData = game.wfrp4e.utility.chatDataSetup(msg);
+        let messageData = game.arrant.utility.chatDataSetup(msg);
         messageData.speaker = {alias: actor.prototypeToken.name}
         await actor.runEffects("applyCondition", {effect, data : {messageData}})
         return messageData
     },
     "poisoned" : async function (actor) {
         let effect = actor.hasCondition("poisoned")
-        let msg = `<h2>${game.i18n.localize("WFRP4E.ConditionName.Poisoned")}</h2>`
+        let msg = `<h2>${game.i18n.localize("arrant.ConditionName.Poisoned")}</h2>`
 
         let damage = effect.conditionValue;
         let args = {msg, damage};
         await actor.runEffects("preApplyCondition", {effect, data : args})
         msg = args.msg;
         damage = args.damage;
-        msg += await actor.applyBasicDamage(damage, {damageType : game.wfrp4e.config.DAMAGE_TYPE.IGNORE_ALL, suppressMsg : true})
-        let messageData = game.wfrp4e.utility.chatDataSetup(msg);
+        msg += await actor.applyBasicDamage(damage, {damageType : game.arrant.config.DAMAGE_TYPE.IGNORE_ALL, suppressMsg : true})
+        let messageData = game.arrant.utility.chatDataSetup(msg);
         messageData.speaker = {alias: actor.prototypeToken.name}
         await actor.runEffects("applyCondition", {effect, data : {messageData}})
         return messageData
@@ -1877,14 +1877,14 @@ WFRP4E.conditionScripts = {
         let effect = actor.hasCondition("bleeding")
         let bleedingAmt;
         let bleedingRoll;
-        let msg = `<h2>${game.i18n.localize("WFRP4E.ConditionName.Bleeding")}</h2>`
+        let msg = `<h2>${game.i18n.localize("arrant.ConditionName.Bleeding")}</h2>`
 
         let damage = effect.conditionValue;
         let args = {msg, damage};
         await actor.runEffects("preApplyCondition", {effect, data : args})
         msg = args.msg;
         damage = args.damage;
-        msg += await actor.applyBasicDamage(damage, {damageType : game.wfrp4e.config.DAMAGE_TYPE.IGNORE_ALL, minimumOne : false, suppressMsg : true})
+        msg += await actor.applyBasicDamage(damage, {damageType : game.arrant.config.DAMAGE_TYPE.IGNORE_ALL, minimumOne : false, suppressMsg : true})
 
         if (actor.status.wounds.value == 0 && !actor.hasCondition("unconscious"))
         {
@@ -1909,32 +1909,32 @@ WFRP4E.conditionScripts = {
             }
         }
 
-        let messageData = game.wfrp4e.utility.chatDataSetup(msg);
+        let messageData = game.arrant.utility.chatDataSetup(msg);
         messageData.speaker = {alias: actor.prototypeToken.name}
         await actor.runEffects("applyCondition", {effect, data : {messageData, bleedingRoll}})
         return messageData
     }
 }
 
-WFRP4E.effectTextStyle = CONFIG.canvasTextStyle.clone();
-WFRP4E.effectTextStyle.fontSize = "30";
-WFRP4E.effectTextStyle.fontFamily="CaslonAntique"
+arrant.effectTextStyle = CONFIG.canvasTextStyle.clone();
+arrant.effectTextStyle.fontSize = "30";
+arrant.effectTextStyle.fontFamily="CaslonAntique"
 
 
-WFRP4E.effectApplication = {
-    "actor" : "WFRP4E.effectApplication.actor",
-    "equipped" : "WFRP4E.effectApplication.equipped",
-    "apply" : "WFRP4E.effectApplication.apply",
-    "damage" : "WFRP4E.effectApplication.damage",
-    "item" : "WFRP4E.effectApplication.item",
+arrant.effectApplication = {
+    "actor" : "arrant.effectApplication.actor",
+    "equipped" : "arrant.effectApplication.equipped",
+    "apply" : "arrant.effectApplication.apply",
+    "damage" : "arrant.effectApplication.damage",
+    "item" : "arrant.effectApplication.item",
 }
 
-WFRP4E.applyScope = {
-    "actor" : "WFRP4E.applyScope.actor",
-    "item" : "WFRP4E.applyScope.item"
+arrant.applyScope = {
+    "actor" : "arrant.applyScope.actor",
+    "item" : "arrant.applyScope.item"
 }
 
-WFRP4E.effectTriggers = {
+arrant.effectTriggers = {
     "invoke" : "Manually Invoked",
     "oneTime" : "Immediate",
     "addItems" : "Add Items",
@@ -1983,7 +1983,7 @@ WFRP4E.effectTriggers = {
     "endCombat" : "End Combat"
 }
 
-WFRP4E.syncEffectTriggers = [
+arrant.syncEffectTriggers = [
     "prePrepareData",
     "prePrepareItems",
     "prepareData",
@@ -1999,7 +1999,7 @@ WFRP4E.syncEffectTriggers = [
     "getInitiativeFormula"
 ];
 
-WFRP4E.effectPlaceholder = {
+arrant.effectPlaceholder = {
 
     "invoke" : 
     `This effect is only applied when the Invoke button is pressed. Can be async.
@@ -2445,4 +2445,4 @@ WFRP4E.effectPlaceholder = {
 
 }
 
-export default WFRP4E
+export default arrant

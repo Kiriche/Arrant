@@ -1,5 +1,5 @@
 import AbilityTemplate from "../aoe.js";
-import TestWFRP from "./test-wfrp4e.js"
+import TestWFRP from "./test-arrant.js"
 
 export default class CastTest extends TestWFRP {
 
@@ -50,7 +50,7 @@ export default class CastTest extends TestWFRP {
     await this.actor.runEffects("preRollCastTest", { test: this, cardOptions: this.context.cardOptions })
     //@HOUSE
     if (this.preData.unofficialGrimoire && this.preData.unofficialGrimoire.ingredientMode == 'power' && this.hasIngredient) { 
-      game.wfrp4e.utility.logHomebrew("unofficialgrimoire");
+      game.arrant.utility.logHomebrew("unofficialgrimoire");
       this.preData.canReverse = true;
     }
     //@HOUSE
@@ -59,7 +59,7 @@ export default class CastTest extends TestWFRP {
   async runPostEffects() {
     await super.runPostEffects();
     await this.actor.runEffects("rollCastTest", { test: this, cardOptions: this.context.cardOptions }, {item : this.item})
-    Hooks.call("wfrp4e:rollCastTest", this, this.context.cardOptions)
+    Hooks.call("arrant:rollCastTest", this, this.context.cardOptions)
   }
 
   async computeResult() {
@@ -73,7 +73,7 @@ export default class CastTest extends TestWFRP {
     //@HOUSE
     if (this.preData.unofficialGrimoire && this.result.other.indexOf(game.i18n.localize("ROLL.Reverse")) != -1) {
       if (this.data.result.roll.toString()[this.data.result.roll.toString().length -1] == '8') {
-        game.wfrp4e.utility.logHomebrew("unofficialgrimoire");
+        game.arrant.utility.logHomebrew("unofficialgrimoire");
         miscastCounter++;
         this.result.tooltips.miscast.push(game.i18n.localize("CHAT.PowerIngredientMiscast"));
       }
@@ -81,7 +81,7 @@ export default class CastTest extends TestWFRP {
     //@HOUSE
 
     // Partial channelling - reduce CN by SL so far
-    if (game.settings.get("wfrp4e", "partialChannelling") || game.settings.get("wfrp4e", "useWoMChannelling")) {
+    if (game.settings.get("arrant", "partialChannelling") || game.settings.get("arrant", "useWoMChannelling")) {
       CNtoUse -= this.preData.itemData.system.cn.SL;
       if (CNtoUse < 0)
       {
@@ -118,21 +118,21 @@ export default class CastTest extends TestWFRP {
       if (this.result.roll % 11 == 0 || this.result.roll == 100) {
         this.result.color_red = true;
         this.result.tooltips.miscast.push(game.i18n.localize("CHAT.FumbleMiscast"))
-        if (!this.item.system.memorized.value && game.wfrp4e.tables.findTable("grimoire-miscast"))
+        if (!this.item.system.memorized.value && game.arrant.tables.findTable("grimoire-miscast"))
         {
           this.result.grimoiremiscast = game.i18n.localize("CHAT.GrimoireMiscast")
         }
         miscastCounter++;
         //@HOUSE
-        if (this.result.roll == 100 && game.settings.get("wfrp4e", "mooCatastrophicMiscasts")) {
-          game.wfrp4e.utility.logHomebrew("mooCatastrophicMiscasts")
+        if (this.result.roll == 100 && game.settings.get("arrant", "mooCatastrophicMiscasts")) {
+          game.arrant.utility.logHomebrew("mooCatastrophicMiscasts")
           miscastCounter++
         }
         //@/HOUSE
       }
       //@/HOUSE
       if (this.preData.unofficialGrimoire && this.preData.unofficialGrimoire.overchannelling > 0) { 
-        game.wfrp4e.utility.logHomebrew("overchannelling");
+        game.arrant.utility.logHomebrew("overchannelling");
         this.result.tooltips.miscast.push(game.i18n.localize("CHAT.OverchannellingMiscast"))
         miscastCounter++;
       }
@@ -144,7 +144,7 @@ export default class CastTest extends TestWFRP {
       this.result.description = game.i18n.localize("ROLL.CastingFailed")
       //@/HOUSE
       if (this.preData.unofficialGrimoire && this.preData.unofficialGrimoire.overchannelling > 0) { 
-        game.wfrp4e.utility.logHomebrew("overchannelling");
+        game.arrant.utility.logHomebrew("overchannelling");
         this.result.tooltips.miscast.push(game.i18n.localize("CHAT.OverchannellingMiscast"))
         miscastCounter++;
       }
@@ -166,7 +166,7 @@ export default class CastTest extends TestWFRP {
       this.result.description = game.i18n.localize("ROLL.CastingSuccess");
       //@/HOUSE
       if (this.preData.unofficialGrimoire && this.preData.unofficialGrimoire.overchannelling > 0) {
-        game.wfrp4e.utility.logHomebrew("overchannelling");
+        game.arrant.utility.logHomebrew("overchannelling");
         slOver += this.preData.unofficialGrimoire.overchannelling;
       }
       //@/HOUSE
@@ -179,8 +179,8 @@ export default class CastTest extends TestWFRP {
       }
 
       //@HOUSE
-      if (game.settings.get("wfrp4e", "mooCriticalChannelling")) {
-        game.wfrp4e.utility.logHomebrew("mooCriticalChannelling")
+      if (game.settings.get("arrant", "mooCriticalChannelling")) {
+        game.arrant.utility.logHomebrew("mooCriticalChannelling")
         if (this.spell.flags.criticalchannell && CNtoUse == 0) {
           this.result.SL = "+" + Number(this.result.SL) + this.item._source.system.cn.value
           this.result.other.push(game.i18n.localize("MOO.CriticalChanelling"))
@@ -190,7 +190,7 @@ export default class CastTest extends TestWFRP {
     }
     //@HOUSE
     if (this.preData.unofficialGrimoire && this.preData.unofficialGrimoire.quickcasting && miscastCounter > 0) { 
-      game.wfrp4e.utility.logHomebrew("quickcasting");
+      game.arrant.utility.logHomebrew("quickcasting");
       this.result.other.push(game.i18n.localize("CHAT.Quickcasting"))
       miscastCounter++;
     }
@@ -217,8 +217,8 @@ export default class CastTest extends TestWFRP {
 
     // If malignant influence AND roll has an 8 in the ones digit, miscast
     if (
-      (Number(this.result.roll.toString().split('').pop()) == 8 && !game.settings.get("wfrp4e", "useWoMInfluences")) || 
-      (this.result.outcome == "failure" && game.settings.get("wfrp4e", "useWoMInfluences"))) 
+      (Number(this.result.roll.toString().split('').pop()) == 8 && !game.settings.get("arrant", "useWoMInfluences")) ||
+      (this.result.outcome == "failure" && game.settings.get("arrant", "useWoMInfluences")))
     {
       this.result.tooltips.miscast.push(game.i18n.localize("CHAT.MalignantInfluence"))
       return 1;
@@ -258,7 +258,7 @@ export default class CastTest extends TestWFRP {
     for(let id of this.context.templates)
     {
       let template = canvas.scene.templates.get(id);
-      let tableRoll = (await game.wfrp4e.tables.rollTable("vortex", {}, "map"))
+      let tableRoll = (await game.arrant.tables.rollTable("vortex", {}, "map"))
       let dist = (await new Roll("2d10").roll({async: true})).total
       let pixelsPerYard = canvas.scene.grid.size / canvas.scene.grid.distance
       let straightDelta = dist * pixelsPerYard;
@@ -330,7 +330,7 @@ export default class CastTest extends TestWFRP {
   async postTest() {
     //@/HOUSE
     if (this.preData.unofficialGrimoire) {
-      game.wfrp4e.utility.logHomebrew("unofficialgrimoire");
+      game.arrant.utility.logHomebrew("unofficialgrimoire");
       if (this.preData.unofficialGrimoire.ingredientMode != 'none' && this.hasIngredient && this.item.ingredient.quantity.value > 0 && !this.context.edited && !this.context.reroll) {
         await this.item.ingredient.update({ "system.quantity.value": this.item.ingredient.quantity.value - 1 })
         ChatMessage.create({ speaker: this.context.speaker, content: game.i18n.localize("ConsumedIngredient") })
@@ -362,12 +362,12 @@ export default class CastTest extends TestWFRP {
     //@HOUSE
     if (this.item.cn.SL > 0) {
 
-      if (this.result.castOutcome == "success" || !game.settings.get("wfrp4e", "mooCastAfterChannelling"))
+      if (this.result.castOutcome == "success" || !game.settings.get("arrant", "mooCastAfterChannelling"))
       {
         let items = [this.item]
 
         // If WoM Channelling, SL of spells are shared, so remove all channelled SL of spells with the same lore
-        if (game.settings.get("wfrp4e", "useWoMChannelling"))
+        if (game.settings.get("arrant", "useWoMChannelling"))
         {
           items = this.actor.items.filter(s => s.type == "spell" && s.system.lore.value == this.spell.system.lore.value).map(i => i.toObject())
           items.forEach(i => i.system.cn.SL = 0)
@@ -379,8 +379,8 @@ export default class CastTest extends TestWFRP {
         }
       }
 
-      else if (game.settings.get("wfrp4e", "mooCastAfterChannelling")) {
-        game.wfrp4e.utility.logHomebrew("mooCastAfterChannelling")
+      else if (game.settings.get("arrant", "mooCastAfterChannelling")) {
+        game.arrant.utility.logHomebrew("mooCastAfterChannelling")
         if (this.item.cn.SL > 0 && this.result.castOutcome == "failure")
           this.result.other.push(game.i18n.localize("MOO.FailedCast"))
       }

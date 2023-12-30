@@ -1,11 +1,11 @@
-import WFRP_Utility from "../system/utility-wfrp4e";
+import WFRP_Utility from "../system/utility-arrant";
 
 export default class RollDialog extends Dialog {
 
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.resizable = true;
-        options.classes.push("wfrp4e-dialog");
+        options.classes.push("arrant-dialog");
         return options;
     }
 
@@ -54,12 +54,12 @@ export default class RollDialog extends Dialog {
         (this.userEntry.calledShot || 0)
 
 
-        if (!game.settings.get("wfrp4e", "mooAdvantage") && game.settings.get("wfrp4e", "autoFillAdvantage"))
-            modifier.value = Number(modifier.value) + (game.settings.get("wfrp4e", "advantageBonus") * this.advantage || 0) || 0
+        if (!game.settings.get("arrant", "mooAdvantage") && game.settings.get("arrant", "autoFillAdvantage"))
+            modifier.value = Number(modifier.value) + (game.settings.get("arrant", "advantageBonus") * this.advantage || 0) || 0
 
         successBonus.value = (this.userEntry.successBonus || 0) + (this.cumulativeBonuses.successBonus || 0)
         //@HOUSE
-        if (game.settings.get("wfrp4e", "mooAdvantage"))
+        if (game.settings.get("arrant", "mooAdvantage"))
         {
             successBonus.value =  Number(successBonus.value) + Number(this.advantage || 0)
             WFRP_Utility.logHomebrew("mooAdvantage")
@@ -70,7 +70,7 @@ export default class RollDialog extends Dialog {
 
 
         let difficultySelect = html.find('[name="testDifficulty"]')
-        difficultySelect.val(game.wfrp4e.utility.alterDifficulty(this.userEntry.difficulty, this.cumulativeBonuses.difficultyStep || 0))
+        difficultySelect.val(game.arrant.utility.alterDifficulty(this.userEntry.difficulty, this.cumulativeBonuses.difficultyStep || 0))
     }
 
 
@@ -95,11 +95,11 @@ export default class RollDialog extends Dialog {
 
         html.find('[name="charging"]').change(ev => {
 
-            let onlyModifier = game.settings.get("wfrp4e","useGroupAdvantage");
+            let onlyModifier = game.settings.get("arrant","useGroupAdvantage");
             if (ev.target.checked)
             {
                 // If advantage cap, only add modifier if at cap
-                if (!onlyModifier && game.settings.get("wfrp4e", "capAdvantageIB"))
+                if (!onlyModifier && game.settings.get("arrant", "capAdvantageIB"))
                 {
                     onlyModifier = (this.advantage >= this.data.actor.characteristics.i.bonus)
                 }
@@ -140,14 +140,14 @@ export default class RollDialog extends Dialog {
 
         this.userEntry.testModifier = Number(html.find('[name="testModifier"]').change(ev => {
             this.userEntry.testModifier = Number(ev.target.value)
-            if (!game.settings.get("wfrp4e", "mooAdvantage") && game.settings.get("wfrp4e", "autoFillAdvantage"))
-                this.userEntry.testModifier -= (game.settings.get("wfrp4e", "advantageBonus") * this.advantage || 0) || 0
+            if (!game.settings.get("arrant", "mooAdvantage") && game.settings.get("arrant", "autoFillAdvantage"))
+                this.userEntry.testModifier -= (game.settings.get("arrant", "advantageBonus") * this.advantage || 0) || 0
 
             this.updateValues(html)
         }).val())
         this.userEntry.successBonus = Number(html.find('[name="successBonus"]').change(ev => {
             this.userEntry.successBonus = Number(ev.target.value)
-            if (game.settings.get("wfrp4e", "mooAdvantage"))
+            if (game.settings.get("arrant", "mooAdvantage"))
                 this.userEntry.successBonus -= (this.advantage || 0)
             this.updateValues(html)
         }).val())
@@ -178,9 +178,9 @@ export default class RollDialog extends Dialog {
         })[0]
 
 
-        if (!game.settings.get("wfrp4e", "mooAdvantage") && game.settings.get("wfrp4e", "autoFillAdvantage"))
-            this.userEntry.testModifier -= (game.settings.get("wfrp4e", "advantageBonus") * this.advantage || 0)
-        else if (game.settings.get("wfrp4e", "mooAdvantage"))
+        if (!game.settings.get("arrant", "mooAdvantage") && game.settings.get("arrant", "autoFillAdvantage"))
+            this.userEntry.testModifier -= (game.settings.get("arrant", "advantageBonus") * this.advantage || 0)
+        else if (game.settings.get("arrant", "mooAdvantage"))
             this.userEntry.successBonus -= (this.advantage || 0)
     }
 }

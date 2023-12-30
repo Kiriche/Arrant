@@ -1,4 +1,4 @@
-import BugReportFormWfrp4e from "../apps/bug-report.js";
+import BugReportFormArrant from "../apps/bug-report.js";
 
 export default function() {
   Hooks.on("renderSidebarTab", async (app, html) => {
@@ -16,7 +16,7 @@ export default function() {
       let button = $(`<button class='bug-report'>${game.i18n.localize("BUTTON.PostBug")}</button>`)
   
       button.click(ev => {
-        new BugReportFormWfrp4e().render(true);
+        new BugReportFormArrant().render(true);
       })
   
       button.insertAfter(html.find("#game-details"))
@@ -29,14 +29,14 @@ export default function() {
       // Auto-roll tables if table image is clicked
       html.on("click", ".rolltable img", ev => {
         let table = game.tables.get($(ev.currentTarget).parent().attr("data-document-id"))
-        let key = table.getFlag("wfrp4e", "key")
-        let column = table.getFlag("wfrp4e", "column")
+        let key = table.getFlag("arrant", "key")
+        let column = table.getFlag("arrant", "column")
 
         if (!key)
           return
         
-        game.wfrp4e.tables.formatChatRoll(key, {}, column).then(text => {
-          let chatOptions = game.wfrp4e.utility.chatDataSetup(text, game.settings.get("core", "rollMode"), true)
+        game.arrant.tables.formatChatRoll(key, {}, column).then(text => {
+          let chatOptions = game.arrant.utility.chatDataSetup(text, game.settings.get("core", "rollMode"), true)
           chatOptions.speaker = {alias: table.name}
           ChatMessage.create(chatOptions);
           ui.sidebar.activateTab("chat")
@@ -50,7 +50,7 @@ export default function() {
       let button = $(`<button class='character-creation'>${game.i18n.localize("BUTTON.CharacterCreation")}</button>`)
   
       button.click(ev => {
-        new game.wfrp4e.apps.CharGenWfrp4e().render(true)
+        new game.arrant.apps.CharGenArrant().render(true)
       })
   
       button.insertAfter(html.find(".header-actions"))

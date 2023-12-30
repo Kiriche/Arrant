@@ -24,7 +24,7 @@ async function handleMacroCreation(bar, data, slot)
   if (!document)
     return false;
 
-  let command = `game.wfrp4e.utility.rollItemMacro("${document.name}", "${document.type}");`;
+  let command = `game.arrant.utility.rollItemMacro("${document.name}", "${document.type}");`;
   macro = game.macros.contents.find(m => (m.name === document.name) && (m.command === command));
   if (!macro) {
     macro = await Macro.create({

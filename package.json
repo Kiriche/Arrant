@@ -1,8 +1,8 @@
 {
-  "name": "wfrp4e",
+  "name": "arrant",
   "version": "1.0.0",
   "description": "",
-  "main": "wfrp4e.js",
+  "main": "arrant.js",
   "scripts": {
     "build": "cross-env NODE_ENV=development rollup --config rollup.config.js --watch",
     "release": "cross-env NODE_ENV=production rollup --config rollup.config.js&& cross-env NODE_ENV=production node dbpacker.js",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/moo-man/WFRP4e-FoundryVTT.git"
+    "url": "git+https://github.com/moo-man/arrant-FoundryVTT.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/moo-man/WFRP4e-FoundryVTT/issues"
+    "url": "https://github.com/moo-man/arrant-FoundryVTT/issues"
   },
-  "homepage": "https://github.com/moo-man/WFRP4e-FoundryVTT#readme",
+  "homepage": "https://github.com/moo-man/arrant-FoundryVTT#readme",
   "devDependencies": {
     "@foundryvtt/foundryvtt-cli": "^1.0.0-rc.1",
     "cross-env": "^7.0.3",

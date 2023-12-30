@@ -14,15 +14,15 @@
 
 <div class="encumbrance">
   {{#if (gt system.status.encumbrance.state 3)}}
-    <span class="encumbrance-text">{{localize "SHEET.MaxEnc"}}: {{localize "WFRP4E.EncumbrancePenalties.MaxEnc"}}</span>
+    <span class="encumbrance-text">{{localize "SHEET.MaxEnc"}}: {{localize "arrant.EncumbrancePenalties.MaxEnc"}}</span>
     <span class="encumbrance-bar max-encumbrance" style="width:{{system.status.encumbrance.pct}}%"></span>
   {{else if (gt system.status.encumbrance.state 2)}}
     <span class="encumbrance-text">{{localize "SHEET.VeryEnc"}}:
-      {{localize "WFRP4E.EncumbrancePenalties.VeryEnc"}}</span>
+      {{localize "arrant.EncumbrancePenalties.VeryEnc"}}</span>
     <span class="encumbrance-bar high-encumbrance" style="width:{{system.status.encumbrance.pct}}%"></span>
   {{else if (gt system.status.encumbrance.state 1)}}
     <span class="encumbrance-text">{{localize "SHEET.Encumbered"}}:
-      {{localize "WFRP4E.EncumbrancePenalties.Encumbered"}}</span>
+      {{localize "arrant.EncumbrancePenalties.Encumbered"}}</span>
     <span class="encumbrance-bar partial-encumbrance" style="width:{{system.status.encumbrance.pct}}%"></span>
   {{else}}
     <span class="encumbrance-text">{{localize "SHEET.UnEnc"}}</span>
@@ -33,7 +33,7 @@
 <!-- EQUIPMENT -->
 <div id="currency-header" class="inventory-header item currency-header">
   <span id="currency-name" class="name">
-    <span>{{localize "WFRP4E.TrappingType.Money"}} ({{localize "Total"}}:
+    <span>{{localize "arrant.TrappingType.Money"}} ({{localize "Total"}}:
       {{items.inventory.money.total}}{{localize "MARKET.d"}}) 1 {{localize "MARKET.Abbrev.GC"}} <a data-type="gc"
         class="currency-convert-right"><i class="fas fa-caret-right"></i></a> 20 {{localize "MARKET.Abbrev.SS"}} <a
         data-type="ss" class="currency-convert-right"><i class="fas fa-caret-right"></i></a> 240
@@ -174,7 +174,7 @@
 <!-- INGREDIENTS -->
 {{#if items.inventory.ingredients.show}}
   <div class="inventory-header item Ingredients">
-    <span id="ingredient-name" class="name item-name">{{localize "WFRP4E.TrappingType.Ingredients"}}</span>
+    <span id="ingredient-name" class="name item-name">{{localize "arrant.TrappingType.Ingredients"}}</span>
 
     <span id="spell-label" class="spell item-toggle">{{localize "Spell"}}</span>
 
@@ -250,19 +250,19 @@
   {{#each items.inventory.containers.items as |pack p|}}
     <div class="inventory-section container">
 
-      {{> systems/wfrp4e/templates/partials/item-container.hbs level=1 pack=pack root=true owner=../document.isOwner}}
+      {{> systems/arrant/templates/partials/item-container.hbs level=1 pack=pack root=true owner=../document.isOwner}}
 
       {{#each pack.packsInside as |pack p|}}
-        {{> systems/wfrp4e/templates/partials/item-container.hbs level=2 pack=pack root=false owner=../../document.isOwner}}
+        {{> systems/arrant/templates/partials/item-container.hbs level=2 pack=pack root=false owner=../../document.isOwner}}
 
         {{#each pack.packsInside as |pack p|}}
-          {{> systems/wfrp4e/templates/partials/item-container.hbs level=3 pack=pack root=false owner=../../../document.isOwner}}
+          {{> systems/arrant/templates/partials/item-container.hbs level=3 pack=pack root=false owner=../../../document.isOwner}}
 
           {{#each pack.packsInside as |pack p|}}
-            {{> systems/wfrp4e/templates/partials/item-container.hbs level=4 pack=pack root=false owner=../../../../document.isOwner}}
+            {{> systems/arrant/templates/partials/item-container.hbs level=4 pack=pack root=false owner=../../../../document.isOwner}}
 
             {{#each pack.packsInside as |pack p|}}
-              {{> systems/wfrp4e/templates/partials/item-container.hbs level=5 pack=pack root=false owner=../../../../../document.isOwner}}
+              {{> systems/arrant/templates/partials/item-container.hbs level=5 pack=pack root=false owner=../../../../../document.isOwner}}
             {{/each}}
 
           {{/each}}

@@ -1,6 +1,6 @@
-import WFRP_Utility from "../../system/utility-wfrp4e.js";
+import WFRP_Utility from "../../system/utility-arrant.js";
 
-import ActorSheetWfrp4e from "./actor-sheet.js";
+import ActorSheetArrant from "./actor-sheet.js";
 import actor from "../../hooks/actor.js";
 
 /**
@@ -10,12 +10,12 @@ import actor from "../../hooks/actor.js";
  * character type actors need are defined here, specifically for careers and spending exp.
  *
  */
-export default class ArrantCharacterSheet extends ActorSheetWfrp4e {
+export default class ArrantCharacterSheet extends ActorSheetArrant {
     static get defaultOptions() {
         const options = super.defaultOptions;
         mergeObject(options,
             {
-                classes: options.classes.concat(["wfrp4e", "actor", "character-sheet"]),
+                classes: options.classes.concat(["arrant", "actor", "character-sheet"]),
                 width: 610,
                 height: 740,
             });
@@ -28,8 +28,8 @@ export default class ArrantCharacterSheet extends ActorSheetWfrp4e {
      * @type {String}
      */
     get template() {
-        if (!game.user.isGM && this.actor.limited) return "systems/wfrp4e/templates/actors/actor-limited.hbs";
-        return "systems/wfrp4e/templates/actors/character/character-sheet.hbs";
+        if (!game.user.isGM && this.actor.limited) return "systems/arrant/templates/actors/actor-limited.hbs";
+        return "systems/arrant/templates/actors/character/character-sheet.hbs";
 
     }
 
@@ -37,7 +37,7 @@ export default class ArrantCharacterSheet extends ActorSheetWfrp4e {
      * Provides the data to the template when rendering the actor sheet
      *
      * This is called when rendering the sheet, where it calls the base actor class
-     * to organize, process, and prepare all actor data for display. See ActorWfrp4e.prepare()
+     * to organize, process, and prepare all actor data for display. See ActorArrant.prepare()
      *
      * @returns {Object} sheetData    Data given to the template when rendering
      */
@@ -73,7 +73,7 @@ export default class ArrantCharacterSheet extends ActorSheetWfrp4e {
                 sheetData.career.currentCareerGroup = career.careergroup.value;
 
                 if (!sheetData.actor.details.status.value) // backwards compatible with moving this to the career change handler
-                    sheetData.career.status = game.wfrp4e.config.statusTiers[career.status.tier] + " " + career.status.standing;
+                    sheetData.career.status = game.arrant.config.statusTiers[career.status.tier] + " " + career.status.standing;
 
                 // Setup advancement indicators for characteristics
                 let availableCharacteristics = career.characteristics
@@ -111,7 +111,7 @@ export default class ArrantCharacterSheet extends ActorSheetWfrp4e {
         sheetData.system.details.experience.log.forEach((entry, i) => { entry.index = i })
         sheetData.experienceLog = this._condenseXPLog(sheetData);
 
-        sheetData.system.details.experience.canEdit = game.user.isGM || game.settings.get("wfrp4e", "playerExperienceEditing")
+        sheetData.system.details.experience.canEdit = game.user.isGM || game.settings.get("arrant", "playerExperienceEditing")
     }
 
 
@@ -173,7 +173,7 @@ export default class ArrantCharacterSheet extends ActorSheetWfrp4e {
 
         // Career toggle click (current or complete)
         html.find('.career-toggle').click(this._onToggleCareer.bind(this))
-        html.find(".add-career").click(ev => {new game.wfrp4e.apps.CareerSelector(this.actor).render(true)})
+        html.find(".add-career").click(ev => {new game.arrant.apps.CareerSelector(this.actor).render(true)})
         html.find(".untrained-skill").mousedown(this._onUntrainedSkillClick.bind(this))
         html.find(".untrained-talent").mousedown(this._onUntrainedTalentClick.bind(this))
         html.find('.advancement-indicator').mousedown(this._onAdvancementClick.bind(this))
@@ -415,12 +415,12 @@ export default class ArrantCharacterSheet extends ActorSheetWfrp4e {
                 // Calculate the advancement cost based on the current number of advances, subtract that amount, advance by 1
                 let cost = WFRP_Utility._calculateAdvCost(currentChar.advances, "characteristic");
                 try {
-                    WFRP_Utility.checkValidAdvancement(data.details.experience.total, data.details.experience.spent + cost, game.i18n.localize("ACTOR.ErrorImprove"), game.wfrp4e.config.characteristics[characteristic]);
+                    WFRP_Utility.checkValidAdvancement(data.details.experience.total, data.details.experience.spent + cost, game.i18n.localize("ACTOR.ErrorImprove"), game.arrant.config.characteristics[characteristic]);
                     data.characteristics[characteristic].advances++;
                     data.details.experience.spent = Number(data.details.experience.spent) + cost;
 
-                    let expLog = this.actor._addToExpLog(cost, game.wfrp4e.config.characteristics[characteristic], data.details.experience.spent)
-                    ui.notifications.notify(game.i18n.format("ACTOR.SpentExp", {amount : cost, reason : game.wfrp4e.config.characteristics[characteristic]}))
+                    let expLog = this.actor._addToExpLog(cost, game.arrant.config.characteristics[characteristic], data.details.experience.spent)
+                    ui.notifications.notify(game.i18n.format("ACTOR.SpentExp", {amount : cost, reason : game.arrant.config.characteristics[characteristic]}))
                     data.details.experience.log = expLog
 
                     await this.actor.update({"system.characteristics": data.characteristics,"system.details.experience": data.details.experience});
@@ -437,8 +437,8 @@ export default class ArrantCharacterSheet extends ActorSheetWfrp4e {
                 data.characteristics[characteristic].advances--;
                 data.details.experience.spent = Number(data.details.experience.spent) - cost;
 
-                let expLog = this.actor._addToExpLog(-1 * cost, game.wfrp4e.config.characteristics[characteristic], data.details.experience.spent)
-                ui.notifications.notify(game.i18n.format("ACTOR.SpentExp", {amount : -1 * cost, reason : game.wfrp4e.config.characteristics[characteristic]}))
+                let expLog = this.actor._addToExpLog(-1 * cost, game.arrant.config.characteristics[characteristic], data.details.experience.spent)
+                ui.notifications.notify(game.i18n.format("ACTOR.SpentExp", {amount : -1 * cost, reason : game.arrant.config.characteristics[characteristic]}))
                 data.details.experience.log = expLog
 
 

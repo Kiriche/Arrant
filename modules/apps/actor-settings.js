@@ -4,7 +4,7 @@ export default class ActorSettings extends FormApplication {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.id = "actor-settings";
-        options.template = "systems/wfrp4e/templates/apps/actor-settings.hbs";
+        options.template = "systems/arrant/templates/apps/actor-settings.hbs";
         options.height = "auto";
         options.width = 400;
         options.minimizable = true;
@@ -14,7 +14,7 @@ export default class ActorSettings extends FormApplication {
 
     getData() {
         let data = super.getData()
-        data.tables =  game.wfrp4e.config.hitLocationTables
+        data.tables =  game.arrant.config.hitLocationTables
 
         data.displays = {}
 

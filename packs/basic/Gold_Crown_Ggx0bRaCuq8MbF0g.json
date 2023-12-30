@@ -1,12 +1,12 @@
 {
   "name": "Gold Crown",
   "type": "money",
-  "img": "modules/wfrp4e-core/icons/currency/goldcrown.png",
+  "img": "modules/arrant-core/icons/currency/goldcrown.png",
   "effects": [],
   "flags": {
     "_sheetTab": "description",
     "core": {
-      "sourceId": "Compendium.wfrp4e-core.trappings.Ggx0bRaCuq8MbF0g"
+      "sourceId": "Compendium.arrant-core.trappings.Ggx0bRaCuq8MbF0g"
     }
   },
   "system": {
@@ -51,7 +51,7 @@
     }
   },
   "_stats": {
-    "systemId": "wfrp4e",
+    "systemId": "arrant",
     "systemVersion": "6.5.9",
     "coreVersion": "10.303",
     "createdTime": 1663627495181,

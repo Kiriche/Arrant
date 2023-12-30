@@ -1,10 +1,10 @@
 .idea/
 debug.log
-/.vs/wfrp4/v16/.suo
+/.vs/arrant/v16/.suo
 /.vs/slnx.sqlite
 /.vs/VSWorkspaceState.json
 node_modules
-wfrp4e.lock
+arrant.lock
 sounds/*
 foundryconfig.json
 build

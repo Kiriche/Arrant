@@ -1,5 +1,5 @@
-import ActorWfrp4e from "../actor/actor-wfrp4e.js";
-import EffectWfrp4e from "./effect-wfrp4e.js";
+import ActorArrantNew from "../actor/actor-arrant.js";
+import EffectArrant from "./effect-arrant.js";
 
 export default class SocketHandlers  {
 
@@ -9,7 +9,7 @@ export default class SocketHandlers  {
             if (game.user.isGM) {
                 message.delete();
             } else {
-                game.socket.emit("system.wfrp4e", { type: "deleteMsg", payload: { "id": message.id } })
+                game.socket.emit("system.arrant", { type: "deleteMsg", payload: { "id": message.id } })
             }
         }
     }
@@ -47,7 +47,7 @@ export default class SocketHandlers  {
         if (!game.user.isUniqueGM)
             return
         const targets = data.payload.targets.map(t => new TokenDocument(t, {parent: game.scenes.get(data.payload.scene)}));
-        game.wfrp4e.utility.applyEffectToTarget(data.payload.effect, targets)
+        game.arrant.utility.applyEffectToTarget(data.payload.effect, targets)
             .then(() => { SocketHandlers.updateSocketMessageFlag(data) });
     }
 
@@ -56,28 +56,28 @@ export default class SocketHandlers  {
             return
         
         let notification = "Received Apply Effect"
-        if (data.payload.effect.flags?.wfrp4e?.hide !== true) 
+        if (data.payload.effect.flags?.arrant?.hide !== true)
           notification +=  ` for ${data.payload.effect.name}`
         ui.notifications.notify(notification)
 
-        let actor = new ActorWfrp4e(data.payload.actorData)
-        let effect = new EffectWfrp4e(data.payload.effect)
+        let actor = new ActorArrantNew(data.payload.actorData)
+        let effect = new EffectArrant(data.payload.effect)
         
-        game.wfrp4e.utility.runSingleEffect(effect, actor, null, {actor})
+        game.arrant.utility.runSingleEffect(effect, actor, null, {actor})
             .then(() => { SocketHandlers.updateSocketMessageFlag(data) });
     }
 
     static changeGroupAdvantage(data) {
-        if (!game.user.isGM || !game.settings.get("wfrp4e", "useGroupAdvantage")) 
+        if (!game.user.isGM || !game.settings.get("arrant", "useGroupAdvantage"))
             return
 
-        let advantage = game.settings.get("wfrp4e", "groupAdvantageValues")
+        let advantage = game.settings.get("arrant", "groupAdvantageValues")
 
         advantage.players = data.payload.players
 
         // Don't let players update enemy advantage
         
-        game.settings.set("wfrp4e", "groupAdvantageValues", advantage)
+        game.settings.set("arrant", "groupAdvantageValues", advantage)
     }
 
     static async createActor(data) {

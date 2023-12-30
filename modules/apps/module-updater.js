@@ -28,7 +28,7 @@ export default class ModuleUpdater extends Dialog {
 
     static async create(module)
     {
-        let html = await renderTemplate("systems/wfrp4e/templates/apps/module-updater.hbs", module)
+        let html = await renderTemplate("systems/arrant/templates/apps/module-updater.hbs", module)
 
         return new this(module, html)
     }
@@ -86,7 +86,7 @@ export default class ModuleUpdater extends Dialog {
                     newDoc.folder = folder;
                     newDoc.ownership = ownership
                     toCreate.push(newDoc)
-                    game.wfrp4e.utility.log(`Updated Document ${document.name}`)
+                    game.arrant.utility.log(`Updated Document ${document.name}`)
                     this.count.updated++;
                 }
             }
@@ -98,7 +98,7 @@ export default class ModuleUpdater extends Dialog {
                 if (folder)
                     newDoc.folder = folder.id
                 toCreate.push(newDoc)
-                game.wfrp4e.utility.log(`Imported Document ${document.name}`)
+                game.arrant.utility.log(`Imported Document ${document.name}`)
                 this.count.created++;
             }
         }

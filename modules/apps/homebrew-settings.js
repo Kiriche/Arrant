@@ -4,7 +4,7 @@ export default class HomebrewSettings extends FormApplication {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.id = "homebrew-settings";
-        options.template = "systems/wfrp4e/templates/apps/homebrew-settings.hbs";
+        options.template = "systems/arrant/templates/apps/homebrew-settings.hbs";
         options.width = 600;
         options.minimizable = true;
         options.resizable = true;
@@ -30,7 +30,7 @@ export default class HomebrewSettings extends FormApplication {
 
     async _updateObject(event, formData) {
         for(let setting in formData)
-            game.settings.set("wfrp4e", setting, formData[setting])
+            game.settings.set("arrant", setting, formData[setting])
     }
 
   

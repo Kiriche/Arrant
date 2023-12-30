@@ -2,7 +2,7 @@ import { ChargenStage } from "./stage";
 
 export class SpeciesStage extends ChargenStage {
 
-  journalId = "Compendium.wfrp4e-core.journal-entries.IQ0PgoJihQltCBUU.JournalEntryPage.l0f11ypRjH9sR48Q"
+  journalId = "Compendium.arrant-core.journal-entries.IQ0PgoJihQltCBUU.JournalEntryPage.l0f11ypRjH9sR48Q"
 
   static get defaultOptions() {
     const options = super.defaultOptions;
@@ -19,7 +19,7 @@ export class SpeciesStage extends ChargenStage {
 
 
   get template() {
-    return "systems/wfrp4e/templates/apps/chargen/species.hbs";
+    return "systems/arrant/templates/apps/chargen/species.hbs";
   }
 
 
@@ -35,7 +35,7 @@ export class SpeciesStage extends ChargenStage {
 
     data.context = this.context;
 
-    let speciesTable = game.wfrp4e.tables.findTable("species");
+    let speciesTable = game.arrant.tables.findTable("species");
 
     if (!speciesTable)
     {
@@ -47,21 +47,21 @@ export class SpeciesStage extends ChargenStage {
 
     for (let result of speciesTable.results)
     {
-      let speciesKey = game.wfrp4e.utility.findKey(result.text, game.wfrp4e.config.species)
+      let speciesKey = game.arrant.utility.findKey(result.text, game.arrant.config.species)
       if (speciesKey)
       {
         data.species[speciesKey] = result.text
       }
     }
 
-    data.speciesDisplay = game.wfrp4e.config.species[this.context.species];
+    data.speciesDisplay = game.arrant.config.species[this.context.species];
 
-    if (this.context.species && game.wfrp4e.config.subspecies[this.context.species]) {
-      data.subspeciesChoices = game.wfrp4e.config.subspecies[this.context.species];
+    if (this.context.species && game.arrant.config.subspecies[this.context.species]) {
+      data.subspeciesChoices = game.arrant.config.subspecies[this.context.species];
     }
 
     if (this.context.subspecies) {
-      data.speciesDisplay += ` (${game.wfrp4e.config.subspecies[this.context.species][this.context.subspecies]?.name})`;
+      data.speciesDisplay += ` (${game.arrant.config.subspecies[this.context.species][this.context.subspecies]?.name})`;
     }
 
     return data;
@@ -94,7 +94,7 @@ export class SpeciesStage extends ChargenStage {
   async onRollSpecies(event) {
     event.stopPropagation();
     this.context.exp = 20;
-    this.context.roll = await game.wfrp4e.tables.rollTable("species");
+    this.context.roll = await game.arrant.tables.rollTable("species");
     this.context.choose = false;
     this.updateMessage("Rolled", {rolled : this.context.roll.result})
     this.setSpecies(this.context.roll.species);
@@ -104,7 +104,7 @@ export class SpeciesStage extends ChargenStage {
   onSelectSpecies(event) {
     this.context.exp = 0;
     this.context.choose = event.currentTarget.dataset.species;
-    this.updateMessage("Chosen", {chosen : game.wfrp4e.config.species[this.context.choose]})
+    this.updateMessage("Chosen", {chosen : game.arrant.config.species[this.context.choose]})
     this.setSpecies(this.context.choose);
   }
 
@@ -128,8 +128,8 @@ export class SpeciesStage extends ChargenStage {
     if (subspecies) {
       this.context.subspecies = subspecies;
     }
-    else if (Object.keys(game.wfrp4e.config.subspecies[species] || {})?.length == 1) {
-      this.context.subspecies = Object.keys(game.wfrp4e.config.subspecies[species])[0];
+    else if (Object.keys(game.arrant.config.subspecies[species] || {})?.length == 1) {
+      this.context.subspecies = Object.keys(game.arrant.config.subspecies[species])[0];
     }
     else {
       this.context.subspecies = "";

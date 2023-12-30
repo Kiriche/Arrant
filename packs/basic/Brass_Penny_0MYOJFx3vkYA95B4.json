@@ -1,12 +1,12 @@
 {
   "name": "Brass Penny",
   "type": "money",
-  "img": "modules/wfrp4e-core/icons/currency/brasspenny.png",
+  "img": "modules/arrant-core/icons/currency/brasspenny.png",
   "effects": [],
   "flags": {
     "_sheetTab": "description",
     "core": {
-      "sourceId": "Compendium.wfrp4e-core.trappings.0MYOJFx3vkYA95B4"
+      "sourceId": "Compendium.arrant-core.trappings.0MYOJFx3vkYA95B4"
     }
   },
   "system": {
@@ -51,7 +51,7 @@
     }
   },
   "_stats": {
-    "systemId": "wfrp4e",
+    "systemId": "arrant",
     "systemVersion": "6.5.9",
     "coreVersion": "10.303",
     "createdTime": 1663627495169,

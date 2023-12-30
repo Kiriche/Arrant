@@ -1,4 +1,4 @@
-import WFRP_Utility from "../utility-wfrp4e.js";
+import WFRP_Utility from "../utility-arrant.js";
 import AttackTest from "./attack-test.js";
 
 export default class WeaponTest extends AttackTest {
@@ -53,7 +53,7 @@ export default class WeaponTest extends AttackTest {
   async runPostEffects() {
     await super.runPostEffects();
     await this.actor.runEffects("rollWeaponTest", { test: this, cardOptions: this.context.cardOptions }, {item : this.item})
-    Hooks.call("wfrp4e:rollWeaponTest", this, this.context.cardOptions)
+    Hooks.call("arrant:rollWeaponTest", this, this.context.cardOptions)
   }
 
 
@@ -85,9 +85,9 @@ export default class WeaponTest extends AttackTest {
     }
 
     //@HOUSE
-    if (game.settings.get("wfrp4e", "mooRangedDamage"))
+    if (game.settings.get("arrant", "mooRangedDamage"))
     {
-      game.wfrp4e.utility.logHomebrew("mooRangedDamage")
+      game.arrant.utility.logHomebrew("mooRangedDamage")
       if (weapon.attackType == "ranged")
       {
         this.result.damage -= (Math.floor(this.targetModifiers / 10) || 0)

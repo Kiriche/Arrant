@@ -1,5 +1,5 @@
 import NameGenWfrp from "../apps/name-gen.js";
-import TravelDistanceWfrp4e from "../apps/travel-distance-wfrp4e.js";
+import TravelDistanceArrant from "../apps/travel-distance-arrant.js";
 import HomebrewSettings from "../apps/homebrew-settings.js";
 import TableSettings from "../apps/table-settings.js";
 
@@ -13,9 +13,9 @@ export default function() {
    */
   Hooks.once("init", () => {
 
-    TravelDistanceWfrp4e.loadTravelData();
+    TravelDistanceArrant.loadTravelData();
 
-    game.settings.register("wfrp4e", "systemMigrationVersion", {
+    game.settings.register("arrant", "systemMigrationVersion", {
       name: "System Migration Version",
       scope: "world",
       config: false,
@@ -23,24 +23,24 @@ export default function() {
       default: 0
     });
 
-    game.settings.registerMenu("wfrp4e", "homebrew", {
-      name: "WFRP4e House Rules",
-      label: "WFRP4e Homebrew",
+    game.settings.registerMenu("arrant", "homebrew", {
+      name: "arrant House Rules",
+      label: "arrant Homebrew",
       hint: "Settings for common homebrew/house rules",
       type: HomebrewSettings,
       restricted: true
   })
 
-  game.settings.registerMenu("wfrp4e", "tableSettings", {
-    name: "WFRP4e Table Settings",
-    label: "WFRP4e Table Settings",
+  game.settings.registerMenu("arrant", "tableSettings", {
+    name: "arrant Table Settings",
+    label: "arrant Table Settings",
     hint: "Configure which tables to roll on when multiple of the same key exist.",
     type: TableSettings,
     restricted: true
 })
 
     // Register initiative rule
-    game.settings.register("wfrp4e", "initiativeRule", {
+    game.settings.register("arrant", "initiativeRule", {
       name: "SETTINGS.InitRule",
       hint: "SETTINGS.InitHint",
       scope: "world",
@@ -53,12 +53,12 @@ export default function() {
         "d10Init": "SETTINGS.InitD10",
         "d10InitAgi": "SETTINGS.InitD10Agi"
       },
-      onChange: rule => _setWfrp4eInitiative(rule)
+      onChange: rule => _setArrantInitiative(rule)
     });
-    _setWfrp4eInitiative(game.settings.get("wfrp4e", "initiativeRule"));
+    _setArrantInitiative(game.settings.get("arrant", "initiativeRule"));
 
 
-    function _setWfrp4eInitiative(initMethod) {
+    function _setArrantInitiative(initMethod) {
       let formula;
       switch (initMethod) {
         case "default":
@@ -87,7 +87,7 @@ export default function() {
 
 
     // Register Advantage cap
-    game.settings.register("wfrp4e", "capAdvantageIB", {
+    game.settings.register("arrant", "capAdvantageIB", {
       name: "SETTINGS.CapAdvIB",
       hint: "SETTINGS.CapAdvIBHint",
       scope: "world",
@@ -97,7 +97,7 @@ export default function() {
     });
 
     // Register Automatic Success threshold
-    game.settings.register("wfrp4e", "automaticSuccess", {
+    game.settings.register("arrant", "automaticSuccess", {
       name: "SETTINGS.AutomaticSuccess",
       hint: "SETTINGS.AutomaticSuccessHint",
       scope: "world",
@@ -107,7 +107,7 @@ export default function() {
     });
 
     // Register Automatic Success threshold
-    game.settings.register("wfrp4e", "automaticFailure", {
+    game.settings.register("arrant", "automaticFailure", {
       name: "SETTINGS.AutomaticFailure",
       hint: "SETTINGS.AutomaticFailureHint",
       scope: "world",
@@ -117,7 +117,7 @@ export default function() {
     });
 
     // Register Fast SL rule
-    game.settings.register("wfrp4e", "fastSL", {
+    game.settings.register("arrant", "fastSL", {
       name: "SETTINGS.FastSL",
       hint: "SETTINGS.FastSLHint",
       scope: "world",
@@ -127,7 +127,7 @@ export default function() {
     });
 
     // Register Tests above 100% Rule
-    game.settings.register("wfrp4e", "testAbove100", {
+    game.settings.register("arrant", "testAbove100", {
       name: "SETTINGS.TestsAbove100",
       hint: "SETTINGS.TestsAbove100Hint",
       scope: "world",
@@ -137,7 +137,7 @@ export default function() {
     });
 
     // Register Criticals/Fumbles on all tests
-    game.settings.register("wfrp4e", "criticalsFumblesOnAllTests", {
+    game.settings.register("arrant", "criticalsFumblesOnAllTests", {
       name: "SETTINGS.CriticalsFumblesAllTests",
       hint: "SETTINGS.CriticalsFumblesAllTestsHint",
       scope: "world",
@@ -148,7 +148,7 @@ export default function() {
 
 
     // Register Extended Tests
-    game.settings.register("wfrp4e", "extendedTests", {
+    game.settings.register("arrant", "extendedTests", {
       name: "SETTINGS.ExtendedTests",
       hint: "SETTINGS.ExtendedTestsHint",
       scope: "world",
@@ -157,7 +157,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "channelingNegativeSLTests", {
+    game.settings.register("arrant", "channelingNegativeSLTests", {
       name: "SETTINGS.ChannelingNegativeSL",
       hint: "SETTINGS.ChannelingNegativeSLHint",
       scope: "world",
@@ -168,7 +168,7 @@ export default function() {
     });
 
     // Limit Equipped Items
-    game.settings.register("wfrp4e", "limitEquippedWeapons", {
+    game.settings.register("arrant", "limitEquippedWeapons", {
       name: "SETTINGS.LimitEquippedWeapons",
       hint: "SETTINGS.LimitEquippedWeaponsHint",
       scope: "world",
@@ -178,7 +178,7 @@ export default function() {
     });
 
     // Register Test auto-fill
-    game.settings.register("wfrp4e", "autoFillAdvantage", {
+    game.settings.register("arrant", "autoFillAdvantage", {
       name: "SETTINGS.AutoFillAdv",
       hint: "SETTINGS.AutoFillAdvHint",
       scope: "world",
@@ -188,7 +188,7 @@ export default function() {
     });
 
     // Register default test difficulty
-    game.settings.register("wfrp4e", "testDefaultDifficulty", {
+    game.settings.register("arrant", "testDefaultDifficulty", {
       name: "SETTINGS.TestDialogDefaultDifficulty",
       hint: "SETTINGS.TestDialogDefaultDifficultyHint",
       scope: "world",
@@ -198,7 +198,7 @@ export default function() {
     });
 
     // Register Round Summary
-    game.settings.register("wfrp4e", "displayRoundSummary", {
+    game.settings.register("arrant", "displayRoundSummary", {
       name: "SETTINGS.RoundSummary",
       hint: "SETTINGS.RoundSummaryHint",
       scope: "world",
@@ -208,7 +208,7 @@ export default function() {
     });
 
     // Register Status on Turn Start
-    game.settings.register("wfrp4e", "statusOnTurnStart", {
+    game.settings.register("arrant", "statusOnTurnStart", {
       name: "SETTINGS.StatusTurnStart",
       hint: "SETTINGS.StatusTurnStartHint",
       scope: "world",
@@ -219,7 +219,7 @@ export default function() {
 
 
     // Register Focus on Turn Start
-    game.settings.register("wfrp4e", "focusOnTurnStart", {
+    game.settings.register("arrant", "focusOnTurnStart", {
       name: "SETTINGS.FocusTurnStart",
       hint: "SETTINGS.FocusTurnStartHint",
       scope: "world",
@@ -229,7 +229,7 @@ export default function() {
     });
 
     // Register Hiding Test Data
-    game.settings.register("wfrp4e", "hideTestData", {
+    game.settings.register("arrant", "hideTestData", {
       name: "SETTINGS.HideTestData",
       hint: "SETTINGS.HideTestDataHint",
       scope: "world",
@@ -239,7 +239,7 @@ export default function() {
     });
 
     // Register Manual Chat Cards
-    game.settings.register("wfrp4e", "manualChatCards", {
+    game.settings.register("arrant", "manualChatCards", {
       name: "SETTINGS.ManualChatCards",
       hint: "SETTINGS.ManualChatCardsHint",
       scope: "client",
@@ -248,7 +248,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "weaponLength", {
+    game.settings.register("arrant", "weaponLength", {
       name: "SETTINGS.WeaponLength",
       hint: "SETTINGS.WeaponLengthHint",
       scope: "world",
@@ -257,7 +257,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "rangeAutoCalculation", {
+    game.settings.register("arrant", "rangeAutoCalculation", {
       name: "SETTINGS.RangeAutoCalculation",
       hint: "SETTINGS.RangeAutoCalculationHint",
       scope: "world",
@@ -267,7 +267,7 @@ export default function() {
     });
 
 
-    game.settings.register("wfrp4e", "playerBrowser", {
+    game.settings.register("arrant", "playerBrowser", {
       name: "SETTINGS.PlayerBrowser",
       hint: "SETTINGS.PlayerBrowserHint",
       scope: "world",
@@ -276,7 +276,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "playerExperienceEditing", {
+    game.settings.register("arrant", "playerExperienceEditing", {
       name: "SETTINGS.PlayerExperienceEditing",
       hint: "SETTINGS.PlayerExperienceEditingHint",
       scope: "world",
@@ -287,16 +287,16 @@ export default function() {
 
 
     // Register Advantage cap
-    game.settings.register("wfrp4e", "soundPath", {
+    game.settings.register("arrant", "soundPath", {
       name: "SETTINGS.SoundEffects",
       hint: "SETTINGS.SoundEffectsHint",
       scope: "world",
       config: true,
-      default: "systems/wfrp4e/sounds/",
+      default: "systems/arrant/sounds/",
       type: String
     });
 
-    game.settings.register("wfrp4e", "customCursor", {
+    game.settings.register("arrant", "customCursor", {
       name: "SETTINGS.CustomCursor",
       hint: "SETTINGS.CustomCursorHint",
       scope: "world",
@@ -306,7 +306,7 @@ export default function() {
     });
 
 
-    game.settings.register("wfrp4e", "throwMoney", {
+    game.settings.register("arrant", "throwMoney", {
       name: "SETTINGS.ThrowMoney",
       hint: "SETTINGS.ThrowMoneyHint",
       scope: "world",
@@ -315,7 +315,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "advantageBonus", {
+    game.settings.register("arrant", "advantageBonus", {
       name: "SETTINGS.AdvantageBonus",
       hint: "SETTINGS.AdvantageBonusHint",
       scope: "world",
@@ -325,7 +325,7 @@ export default function() {
       type: Number
     });
 
-    game.settings.register("wfrp4e", "uiaCrits", {
+    game.settings.register("arrant", "uiaCrits", {
       name: "SETTINGS.UIACrits",
       hint: "SETTINGS.UIACritsHint",
       scope: "world",
@@ -334,7 +334,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "uiaCritsMod", {
+    game.settings.register("arrant", "uiaCritsMod", {
       name: "SETTINGS.UIACritsMod",
       hint: "SETTINGS.UIACritsModHint",
       scope: "world",
@@ -344,7 +344,7 @@ export default function() {
       type: Number
     });
 
-    game.settings.register("wfrp4e", "uiaShields", {
+    game.settings.register("arrant", "uiaShields", {
       name: "SETTINGS.UIAShields",
       hint: "SETTINGS.UIAShieldsHint",
       scope: "world",
@@ -353,21 +353,21 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "tables", {
+    game.settings.register("arrant", "tables", {
       scope: "world",
       config: false,
       default: {},
       type: Object
     });
 
-    game.settings.register("wfrp4e", "bugReportName", {
+    game.settings.register("arrant", "bugReportName", {
       scope: "world",
       config: false,
       default: "",
       type: String
     });
 
-    game.settings.register("wfrp4e", "tableVisibility", {
+    game.settings.register("arrant", "tableVisibility", {
       scope: "world",
       config: false,
       default: {},
@@ -375,14 +375,14 @@ export default function() {
     });
 
     
-    game.settings.register("wfrp4e", "tableRollMode", {
+    game.settings.register("arrant", "tableRollMode", {
       scope: "client",
       config: false,
       default: {},
       type: Object
     });
 
-    game.settings.register("wfrp4e", "useGroupAdvantage", {
+    game.settings.register("arrant", "useGroupAdvantage", {
       name: "SETTINGS.UseGroupAdvantage",
       hint: "SETTINGS.UseGroupAdvantageHint",
       scope: "world",
@@ -392,14 +392,14 @@ export default function() {
       onChange: debouncedReload,
     });
 
-    game.settings.register("wfrp4e", "groupAdvantageValues", {
+    game.settings.register("arrant", "groupAdvantageValues", {
       scope: "world",
       config: false,
       default: {players: 0, enemies : 0},
       type: Object
     });
 
-    game.settings.register("wfrp4e", "mooAdvantage", {
+    game.settings.register("arrant", "mooAdvantage", {
       name: "SETTINGS.MooAdvantage",
       hint: "SETTINGS.MooAdvantageHint",
       scope: "world",
@@ -411,7 +411,7 @@ export default function() {
 
 
 
-    game.settings.register("wfrp4e", "mooDifficulty", {
+    game.settings.register("arrant", "mooDifficulty", {
       name: "SETTINGS.MooDifficulty",
       hint: "SETTINGS.MooDifficultyHint",
       scope: "world",
@@ -423,7 +423,7 @@ export default function() {
 
 
     
-    // game.settings.register("wfrp4e", "mooCritsFumbles", {
+    // game.settings.register("arrant", "mooCritsFumbles", {
     //   name: "SETTINGS.MooCritsFumbles",
     //   hint: "SETTINGS.MooCritsFumblesHint",
     //   scope: "world",
@@ -434,7 +434,7 @@ export default function() {
     // });
 
 
-    game.settings.register("wfrp4e", "mooConditions", {
+    game.settings.register("arrant", "mooConditions", {
       name: "SETTINGS.MooConditions",
       hint: "SETTINGS.MooConditionsHint",
       scope: "world",
@@ -444,7 +444,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "mooConditionTriggers", {
+    game.settings.register("arrant", "mooConditionTriggers", {
       name: "SETTINGS.MooConditionTriggers",
       hint: "SETTINGS.MooConditionTriggersHint",
       scope: "world",
@@ -454,7 +454,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "mooCritModifiers", {
+    game.settings.register("arrant", "mooCritModifiers", {
       name: "SETTINGS.MooCritModifiers",
       hint: "SETTINGS.MooCritMOdifiersHint",
       scope: "world",
@@ -465,7 +465,7 @@ export default function() {
     });
 
 
-    game.settings.register("wfrp4e", "mooSLDamage", {
+    game.settings.register("arrant", "mooSLDamage", {
       name: "SETTINGS.MooSLDamage",
       hint: "SETTINGS.MooSLDamageHint",
       scope: "world",
@@ -475,7 +475,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "mooRangedDamage", {
+    game.settings.register("arrant", "mooRangedDamage", {
       name: "SETTINGS.MooRangedDamage",
       hint: "SETTINGS.MooRangedDamageHint",
       scope: "world",
@@ -486,7 +486,7 @@ export default function() {
     });
 
 
-    game.settings.register("wfrp4e", "mooMagicAdvantage", {
+    game.settings.register("arrant", "mooMagicAdvantage", {
       name: "SETTINGS.MooMagicAdvantage",
       hint: "SETTINGS.MooMagicAdvantageHint",
       scope: "world",
@@ -496,7 +496,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "mooOvercasting", {
+    game.settings.register("arrant", "mooOvercasting", {
       name: "SETTINGS.MooOvercasting",
       hint: "SETTINGS.MooOvercastingHint",
       scope: "world",
@@ -506,7 +506,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "mooCatastrophicMiscasts", {
+    game.settings.register("arrant", "mooCatastrophicMiscasts", {
       name: "SETTINGS.MooCatastrophicMiscasts",
       hint: "SETTINGS.MooCatastrophicMiscastsHint",
       scope: "world",
@@ -517,7 +517,7 @@ export default function() {
     });
 
       
-    game.settings.register("wfrp4e", "partialChannelling", {
+    game.settings.register("arrant", "partialChannelling", {
       name: "SETTINGS.PartialChannelling",
       hint: "SETTINGS.PartialChannellingHint",
       scope: "world",
@@ -527,7 +527,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "channellingIngredients", {
+    game.settings.register("arrant", "channellingIngredients", {
       name: "SETTINGS.ChannellingIngredients",
       hint: "SETTINGS.ChannellingIngredientsHint",
       scope: "world",
@@ -537,7 +537,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "mooCriticalChannelling", {
+    game.settings.register("arrant", "mooCriticalChannelling", {
       name: "SETTINGS.MooCriticalChannelling",
       hint: "SETTINGS.MooCriticalChannellingHint",
       scope: "world",
@@ -547,7 +547,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "mooCastAfterChannelling", {
+    game.settings.register("arrant", "mooCastAfterChannelling", {
       name: "SETTINGS.MooCastAfterChannelling",
       hint: "SETTINGS.MooCastAfterChannellingHint",
       scope: "world",
@@ -557,7 +557,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "mooPenetrating", {
+    game.settings.register("arrant", "mooPenetrating", {
       name: "SETTINGS.MooPenetrating",
       hint: "SETTINGS.MooPenetratingHint",
       scope: "world",
@@ -567,7 +567,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "mooQualities", {
+    game.settings.register("arrant", "mooQualities", {
       name: "SETTINGS.MooQualities",
       hint: "SETTINGS.MooQualitiesHint",
       scope: "world",
@@ -577,7 +577,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "mooShieldAP", {
+    game.settings.register("arrant", "mooShieldAP", {
       name: "SETTINGS.MooShieldAP",
       hint: "SETTINGS.MooShieldAPHint",
       scope: "world",
@@ -587,7 +587,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "mooCriticalMitigation", {
+    game.settings.register("arrant", "mooCriticalMitigation", {
       name: "SETTINGS.MooCriticalMitigation",
       hint: "SETTINGS.MooCriticalMitigationHint",
       scope: "world",
@@ -598,7 +598,7 @@ export default function() {
     });
 
 
-    game.settings.register("wfrp4e", "mooRangeBands", {
+    game.settings.register("arrant", "mooRangeBands", {
       name: "SETTINGS.MooRangeBands",
       hint: "SETTINGS.MooRangeBandsHint",
       scope: "world",
@@ -608,7 +608,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "mooSizeDamage", {
+    game.settings.register("arrant", "mooSizeDamage", {
       name: "SETTINGS.MooSizeDamage",
       hint: "SETTINGS.MooSizeDamageHint",
       scope: "world",
@@ -619,7 +619,7 @@ export default function() {
     });
 
     
-    game.settings.register("wfrp4e", "mooHomebrewItemChanges", {
+    game.settings.register("arrant", "mooHomebrewItemChanges", {
       name: "SETTINGS.MooHomebrewItems",
       hint: "SETTINGS.MooHomebrewItemHint",
       scope: "world",
@@ -630,7 +630,7 @@ export default function() {
     });
     
     // Register Unofficial Grimoire
-    game.settings.register("wfrp4e", "unofficialgrimoire", {
+    game.settings.register("arrant", "unofficialgrimoire", {
       name: "SETTINGS.UnofficialGrimoire",
       hint: "SETTINGS.UnofficialGrimoireHint",
       scope: "world",
@@ -640,7 +640,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "useWoMOvercast", {
+    game.settings.register("arrant", "useWoMOvercast", {
       name: "SETTINGS.useWoMOvercast",
       hint: "SETTINGS.useWoMOvercastHint",
       scope: "world",
@@ -649,7 +649,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "useWoMChannelling", {
+    game.settings.register("arrant", "useWoMChannelling", {
       name: "SETTINGS.useWoMChannelling",
       hint: "SETTINGS.useWoMChannellingHint",
       scope: "world",
@@ -658,7 +658,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "useWoMInfluences", {
+    game.settings.register("arrant", "useWoMInfluences", {
       name: "SETTINGS.useWoMInfluences",
       hint: "SETTINGS.useWoMInfluencesHint",
       scope: "world",
@@ -667,7 +667,7 @@ export default function() {
       type: Boolean
     });
 
-    game.settings.register("wfrp4e", "grudges", {
+    game.settings.register("arrant", "grudges", {
       name: "Grudges",
       scope: "world",
       config: false,
@@ -675,7 +675,7 @@ export default function() {
       type: Array
     });
 
-    game.settings.register("wfrp4e", "tableSettings", {
+    game.settings.register("arrant", "tableSettings", {
       name: "SETTINGS.TableSettings",
       hint: "SETTINGS.TableSettings",
       scope: "world",
@@ -702,35 +702,35 @@ export default function() {
 
     // Pre-load templates
     loadTemplates([
-      "systems/wfrp4e/templates/actors/character/character-main.hbs",
-      "systems/wfrp4e/templates/actors/actor-combat.hbs",
-      "systems/wfrp4e/templates/actors/actor-effects.hbs",
-      "systems/wfrp4e/templates/actors/actor-biography.hbs",
-      "systems/wfrp4e/templates/actors/actor-inventory.hbs",
-      "systems/wfrp4e/templates/actors/actor-skills.hbs",
-      "systems/wfrp4e/templates/actors/actor-magic.hbs",
-      "systems/wfrp4e/templates/actors/actor-religion.hbs",
-      "systems/wfrp4e/templates/actors/actor-talents.hbs",
-      "systems/wfrp4e/templates/actors/actor-notes.hbs",
-      "systems/wfrp4e/templates/actors/npc/npc-careers.hbs",
-      "systems/wfrp4e/templates/actors/creature/creature-main.hbs",
-      "systems/wfrp4e/templates/actors/creature/creature-notes.hbs",
-      "systems/wfrp4e/templates/actors/creature/creature-main.hbs",
-      "systems/wfrp4e/templates/actors/vehicle/vehicle-main.hbs",
-      "systems/wfrp4e/templates/actors/vehicle/vehicle-cargo.hbs",
-      "systems/wfrp4e/templates/actors/vehicle/vehicle-description.hbs",
-      "systems/wfrp4e/templates/actors/vehicle/vehicle-effects.hbs",
-      "systems/wfrp4e/templates/partials/armour-location.hbs",
-      "systems/wfrp4e/templates/partials/item-container.hbs",
-      "systems/wfrp4e/templates/partials/qualities-flaws.hbs",
-      "systems/wfrp4e/templates/partials/overcasts.hbs",
-      "systems/wfrp4e/templates/partials/wom-overcasts.hbs",
-      "systems/wfrp4e/templates/dialog/dialog-constant.hbs",
-      "systems/wfrp4e/templates/chat/roll/test-card.hbs",
-      "systems/wfrp4e/templates/chat/help/chat-command-display-info.hbs",
-      "systems/wfrp4e/templates/items/item-header.hbs",
-      "systems/wfrp4e/templates/items/item-description.hbs",
-      "systems/wfrp4e/templates/items/item-effects.hbs"
+      "systems/arrant/templates/actors/character/character-main.hbs",
+      "systems/arrant/templates/actors/actor-combat.hbs",
+      "systems/arrant/templates/actors/actor-effects.hbs",
+      "systems/arrant/templates/actors/actor-biography.hbs",
+      "systems/arrant/templates/actors/actor-inventory.hbs",
+      "systems/arrant/templates/actors/actor-skills.hbs",
+      "systems/arrant/templates/actors/actor-magic.hbs",
+      "systems/arrant/templates/actors/actor-religion.hbs",
+      "systems/arrant/templates/actors/actor-talents.hbs",
+      "systems/arrant/templates/actors/actor-notes.hbs",
+      "systems/arrant/templates/actors/npc/npc-careers.hbs",
+      "systems/arrant/templates/actors/creature/creature-main.hbs",
+      "systems/arrant/templates/actors/creature/creature-notes.hbs",
+      "systems/arrant/templates/actors/creature/creature-main.hbs",
+      "systems/arrant/templates/actors/vehicle/vehicle-main.hbs",
+      "systems/arrant/templates/actors/vehicle/vehicle-cargo.hbs",
+      "systems/arrant/templates/actors/vehicle/vehicle-description.hbs",
+      "systems/arrant/templates/actors/vehicle/vehicle-effects.hbs",
+      "systems/arrant/templates/partials/armour-location.hbs",
+      "systems/arrant/templates/partials/item-container.hbs",
+      "systems/arrant/templates/partials/qualities-flaws.hbs",
+      "systems/arrant/templates/partials/overcasts.hbs",
+      "systems/arrant/templates/partials/wom-overcasts.hbs",
+      "systems/arrant/templates/dialog/dialog-constant.hbs",
+      "systems/arrant/templates/chat/roll/test-card.hbs",
+      "systems/arrant/templates/chat/help/chat-command-display-info.hbs",
+      "systems/arrant/templates/items/item-header.hbs",
+      "systems/arrant/templates/items/item-description.hbs",
+      "systems/arrant/templates/items/item-effects.hbs"
     ]);
 
     // Load name construction from files
@@ -763,6 +763,6 @@ export default function() {
     })
 
     // Keep a list of actors that need to prepareData after 'ready' (generally those that rely on other actor data - passengers/mounts)
-    game.wfrp4e.postReadyPrepare = [];
+    game.arrant.postReadyPrepare = [];
   });
 }

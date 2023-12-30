@@ -1,6 +1,6 @@
-import WFRP_Utility from "../system/utility-wfrp4e";
+import WFRP_Utility from "../system/utility-arrant";
 
-export default class BugReportFormWfrp4e extends Application {
+export default class BugReportFormArrant extends Application {
 
     
     static issues = []; // Keep issues in static to avoid API limit
@@ -10,29 +10,29 @@ export default class BugReportFormWfrp4e extends Application {
         super(app)
 
         this.endpoint = "https://aa5qja71ih.execute-api.us-east-2.amazonaws.com/Prod/grievance"
-        this.github = "https://api.github.com/repos/moo-man/WFRP4e-FoundryVTT/"
+        this.github = "https://api.github.com/repos/moo-man/arrant-FoundryVTT/"
 
         this.domainKeysToLabel = {
-            "wfrp4e": "system",
-            "wfrp4e-core": "core",
-            "wfrp4e-starter-set": "starter-set",
-            "wfrp4e-rnhd": "rnhd",
-            "wfrp4e-eis": "eis",
-            "wfrp4e-ua1": "ua1",
-            "wfrp4e-dotr": "dotr",
-            "wfrp4e-middenheim": "middenheim",
-            "wfrp4e-archives1": "archives1",
-            "wfrp4e-pbtt": "pbtt",
-            "wfrp4e-altdorf": "altdorf",
-            "wfrp4e-ua2": "ua2",
-            "wfrp4e-owb1": "owb1",
-            "wfrp4e-horned-rat": "horned-rat",
-            "wfrp4e-empire-ruins": "empire-ruins",
-            "wfrp4e-archives2" : "archives2",
-            "wfrp4e-up-in-arms" : "up-in-arms",
-            "wfrp4e-wom" : "wom",
-            "wfrp4e-zoo" : "zoo",
-            "wfrp4e-salzenmund" : "salzenmund"
+            "arrant": "system",
+            "arrant-core": "core",
+            "arrant-starter-set": "starter-set",
+            "arrant-rnhd": "rnhd",
+            "arrant-eis": "eis",
+            "arrant-ua1": "ua1",
+            "arrant-dotr": "dotr",
+            "arrant-middenheim": "middenheim",
+            "arrant-archives1": "archives1",
+            "arrant-pbtt": "pbtt",
+            "arrant-altdorf": "altdorf",
+            "arrant-ua2": "ua2",
+            "arrant-owb1": "owb1",
+            "arrant-horned-rat": "horned-rat",
+            "arrant-empire-ruins": "empire-ruins",
+            "arrant-archives2" : "archives2",
+            "arrant-up-in-arms" : "up-in-arms",
+            "arrant-wom" : "wom",
+            "arrant-zoo" : "zoo",
+            "arrant-salzenmund" : "salzenmund"
         }
 
         this.loadingIssues = this.loadIssues();
@@ -42,8 +42,8 @@ export default class BugReportFormWfrp4e extends Application {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.id = "bug-report";
-        options.template = "systems/wfrp4e/templates/apps/bug-report.hbs"
-        options.classes.push("wfrp4e", "wfrp-bug-report");
+        options.template = "systems/arrant/templates/apps/bug-report.hbs"
+        options.classes.push("arrant", "arrant-bug-report");
         options.resizable = true;
         options.width = 600;
         options.minimizable = true;
@@ -63,8 +63,8 @@ export default class BugReportFormWfrp4e extends Application {
     async getData() {
         let data = await super.getData();
         await this.loadingIssues;
-        data.domains = game.wfrp4e.config.premiumModules;
-        data.name = game.settings.get("wfrp4e", "bugReportName")
+        data.domains = game.arrant.config.premiumModules;
+        data.name = game.settings.get("arrant", "bugReportName")
         data.record = await this.buildRecord()
         if (this.constructor.apiLimitReached)
         {
@@ -87,7 +87,7 @@ export default class BugReportFormWfrp4e extends Application {
         for (let key in this.latest) {
             if (!this.latest[key]) {
                 allUpdated = false;
-                outdatedList += `<li>${game.wfrp4e.config.premiumModules[key]}</li>`;
+                outdatedList += `<li>${game.arrant.config.premiumModules[key]}</li>`;
             }
         }
 
@@ -143,9 +143,9 @@ export default class BugReportFormWfrp4e extends Application {
 
     recordIssue(number)
     {
-        let grudges = foundry.utils.deepClone(game.settings.get("wfrp4e", "grudges"));
+        let grudges = foundry.utils.deepClone(game.settings.get("arrant", "grudges"));
         grudges.push(number)
-        game.settings.set("wfrp4e", "grudges", grudges).then(() => {
+        game.settings.set("arrant", "grudges", grudges).then(() => {
             this.refreshIssues();
         });
     }
@@ -203,7 +203,7 @@ export default class BugReportFormWfrp4e extends Application {
 
     async buildRecord()
     {
-        let numbersSubmitted = game.settings.get("wfrp4e", "grudges");
+        let numbersSubmitted = game.settings.get("arrant", "grudges");
 
         let issuesSubmitted = this.constructor.issues.filter(i => numbersSubmitted.includes(i.number));
 
@@ -228,7 +228,7 @@ export default class BugReportFormWfrp4e extends Application {
     async checkVersions() {
         let latest = {}
         WFRP_Utility.log("Checking Version Numbers...")
-        for (let key in game.wfrp4e.config.premiumModules) {
+        for (let key in game.arrant.config.premiumModules) {
             if (key == game.system.id) {
                 // Have to use release tag instead of manifest version because CORS doesn't allow downloading release asset for some reason
                 let release = await fetch(this.github + "releases/latest").then(r => r.json()).catch(e => {
@@ -314,7 +314,7 @@ export default class BugReportFormWfrp4e extends Application {
 
         html.find(".issue-label").change(ev => {
             if (ev.currentTarget.value == "bug") {
-                if (game.modules.contents.filter(i => i.active).map(i => i.id).filter(i => !game.wfrp4e.config.premiumModules[i]).length > 0)
+                if (game.modules.contents.filter(i => i.active).map(i => i.id).filter(i => !game.arrant.config.premiumModules[i]).length > 0)
                     modulesWarning.style.display = "block"
                 else
                     modulesWarning.style.display = "none"
@@ -347,7 +347,7 @@ export default class BugReportFormWfrp4e extends Application {
                 return ui.notifications.error(game.i18n.localize("BugReport.ErrorName1"))
 
 
-            data.title = `[${game.wfrp4e.config.premiumModules[data.domain]}] ${data.title}`
+            data.title = `[${game.arrant.config.premiumModules[data.domain]}] ${data.title}`
             data.description = data.description + `<br/>**From**: ${data.issuer}`
 
             data.labels = [this.domainKeysToLabel[data.domain]]
@@ -355,20 +355,20 @@ export default class BugReportFormWfrp4e extends Application {
             if (label)
                 data.labels.push(label);
 
-            game.settings.set("wfrp4e", "bugReportName", data.issuer);
+            game.settings.set("arrant", "bugReportName", data.issuer);
 
-            let wfrp4eModules = Array.from(game.modules).filter(m => game.wfrp4e.config.premiumModules[m.id])
+            let ArrantModules = Array.from(game.modules).filter(m => game.arrant.config.premiumModules[m.id])
 
-            let versions = `<br/>foundry: ${game.version}<br/>wfrp4e: ${game.system.version}`
+            let versions = `<br/>foundry: ${game.version}<br/>arrant: ${game.system.version}`
 
-            for (let mod of wfrp4eModules) {
+            for (let mod of ArrantModules) {
                 let modData = game.modules.get(mod.id);
                 if (modData.active)
                     versions = versions.concat(`<br/>${mod.id}: ${modData.version}`)
             }
 
             data.description = data.description.concat(versions);
-            data.description += `<br/>Active Modules: ${game.modules.contents.filter(i => i.active).map(i => i.id).filter(i => !game.wfrp4e.config.premiumModules[i]).join(", ")}`
+            data.description += `<br/>Active Modules: ${game.modules.contents.filter(i => i.active).map(i => i.id).filter(i => !game.arrant.config.premiumModules[i]).join(", ")}`
 
             this.submit(data)
             this.close()

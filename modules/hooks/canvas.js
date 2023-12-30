@@ -39,7 +39,7 @@ export default function() {
   Hooks.on("canvasReady", (canvas) => {
 
     if (!(game.modules.get("fxmaster") && game.modules.get("fxmaster").active)) {
-      let morrsliebActive = canvas.scene.getFlag("wfrp4e", "morrslieb")
+      let morrsliebActive = canvas.scene.getFlag("arrant", "morrslieb")
       if (morrsliebActive) {
         if (!canvas.primary.filters)
           canvas.primary.filters = [];

@@ -1,6 +1,6 @@
 
 export default function(token) {
-    if (!token.document?.flags.wfrp4e?.hidePassengers && token.actor && token.actor.type == "vehicle")
+    if (!token.document?.flags.arrant?.hidePassengers && token.actor && token.actor.type == "vehicle")
     {
       if (token.passengers)
       {

@@ -47,7 +47,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
         y: 0,
         fillColor: game.user.color,
         flags: {
-          wfrp4e: {
+          arrant: {
             itemuuid: `Actor.${actorId}.Item.${itemId}`,
             messageId: messageId
           }
@@ -169,7 +169,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
     const destination = canvas.grid.getSnappedPosition(this.document.x, this.document.y, 2);
     this.document.updateSource(destination);
     this.#events.resolve(canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [this.document.toObject()]).then(templates => {
-      let test = game.messages.get(templates[0].flags.wfrp4e.messageId)?.getTest();
+      let test = game.messages.get(templates[0].flags.arrant.messageId)?.getTest();
       if (test && test.data.context.templates)
       {
         test.data.context.templates = test.data.context.templates.concat(templates[0].id);

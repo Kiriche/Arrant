@@ -77,9 +77,9 @@ export default function () {
         item.actor.update({ "system.status.wounds.value": newWounds });
 
         if (game.combat && game.user.isGM) {
-          let minorInfections = game.combat.getFlag("wfrp4e", "minorInfections") || []
+          let minorInfections = game.combat.getFlag("arrant", "minorInfections") || []
           minorInfections.push(item.actor.name)
-          game.combat.setFlag("wfrp4e", "minorInfections", null).then(c => game.combat.setFlag("wfrp4e", "minorInfections", minorInfections))
+          game.combat.setFlag("arrant", "minorInfections", null).then(c => game.combat.setFlag("arrant", "minorInfections", minorInfections))
         }
       }
     }

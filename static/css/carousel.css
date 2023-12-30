@@ -22,31 +22,31 @@
     display: none!important;
 }
 
-#combat-carousel.wfrp4e.wrapper.fixed-mode {
+#combat-carousel.arrant.wrapper.fixed-mode {
     top: 0!important;
 }
 
-#combat-carousel.wfrp4e .splide__track {
+#combat-carousel.arrant .splide__track {
     overflow: visible;
 }
 
-#combat-carousel.wfrp4e:hover{
+#combat-carousel.arrant:hover{
     background: none;
     border: none;
 }
 
-#combat-carousel.wfrp4e .carousel-icon {
+#combat-carousel.arrant .carousel-icon {
     display: none;
 }
 
-#combat-carousel.wfrp4e .card {
+#combat-carousel.arrant .card {
     border: none;
     background: none;
     padding: 0;
 }
 
 
-#combat-carousel.wfrp4e .avatar {
+#combat-carousel.arrant .avatar {
     position: relative;
     display: flex;
     justify-content: center;
@@ -55,7 +55,7 @@
     box-shadow: 0 0 20px #000;
 }
 
-#combat-carousel.wfrp4e .avatar::before {
+#combat-carousel.arrant .avatar::before {
     content: "";
     position: absolute;
     left: 0;
@@ -67,7 +67,7 @@
     z-index: -1;
 }
 
-#combat-carousel.wfrp4e.wrapper .container::after {
+#combat-carousel.arrant.wrapper .container::after {
     content: "";
     position: absolute;
     width: 106%;
@@ -80,7 +80,7 @@
     border-radius: 50%;
     box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
 }
-#combat-carousel.wfrp4e .card.is-active .container::after {
+#combat-carousel.arrant .card.is-active .container::after {
     content: "";
     position: absolute;
     width: 106%;
@@ -92,7 +92,7 @@
     z-index: 15;
 }
 
-#combat-carousel.wfrp4e .card.is-active::after {
+#combat-carousel.arrant .card.is-active::after {
     content: "";
     position: absolute;
     background: url(../ui/combat-carousel/frames/extra.webp);
@@ -100,66 +100,66 @@
     z-index: 11;
 }
 
-#combat-carousel.wfrp4e.wrapper.lg .card.is-active::after{
+#combat-carousel.arrant.wrapper.lg .card.is-active::after{
     width: 176px;
     height: 188px;
     left: -37px;
     top: -41px;
 }
-#combat-carousel.wfrp4e.wrapper.med .card.is-active::after{
+#combat-carousel.arrant.wrapper.med .card.is-active::after{
     width: 156px;
     height: 163px;
     left: -39px;
     top: -38px;
 }
-#combat-carousel.wfrp4e.wrapper.sm .card.is-active::after{
+#combat-carousel.arrant.wrapper.sm .card.is-active::after{
     width: 122px;
     height: 123px;
     left: -31px;
     top: -26px;
 }
-#combat-carousel.wfrp4e.wrapper.xs .card.is-active::after{
+#combat-carousel.arrant.wrapper.xs .card.is-active::after{
     width: 75px;
     height: 79px;
     left: -16px;
     top: -18px;
 }
 
-#combat-carousel.wfrp4e.wrapper.lg .container {
+#combat-carousel.arrant.wrapper.lg .container {
     margin: 5px;
 }
-#combat-carousel.wfrp4e.wrapper.med .container {
+#combat-carousel.arrant.wrapper.med .container {
     margin: 4px;
 }
-#combat-carousel.wfrp4e.wrapper.sm .container {
+#combat-carousel.arrant.wrapper.sm .container {
     margin: 4px;
 }
-#combat-carousel.wfrp4e.wrapper.xs .container {
+#combat-carousel.arrant.wrapper.xs .container {
     margin: 2px;
 }
 
-#combat-carousel.wfrp4e.wrapper.lg .avatar,
-#combat-carousel.wfrp4e.wrapper.lg .container{
+#combat-carousel.arrant.wrapper.lg .avatar,
+#combat-carousel.arrant.wrapper.lg .container{
     width: 110px;
     height: 110px;
 }
-#combat-carousel.wfrp4e.wrapper.med .avatar,
-#combat-carousel.wfrp4e.wrapper.med .container{
+#combat-carousel.arrant.wrapper.med .avatar,
+#combat-carousel.arrant.wrapper.med .container{
     width: 92px;
     height: 92px;
 }
-#combat-carousel.wfrp4e.wrapper.sm .avatar,
-#combat-carousel.wfrp4e.wrapper.sm .container{
+#combat-carousel.arrant.wrapper.sm .avatar,
+#combat-carousel.arrant.wrapper.sm .container{
     width: 72px;
     height: 72px;
 }
-#combat-carousel.wfrp4e.wrapper.xs .avatar,
-#combat-carousel.wfrp4e.wrapper.xs .container{
+#combat-carousel.arrant.wrapper.xs .avatar,
+#combat-carousel.arrant.wrapper.xs .container{
     width: 46px;
     height: 46px;
 }
 
-#combat-carousel.wfrp4e .container::before {
+#combat-carousel.arrant .container::before {
     content: "";
     position: absolute;
     width: 120%;
@@ -171,17 +171,17 @@
     z-index: -1;
 }
 
-#combat-carousel.wfrp4e .card.is-active {
+#combat-carousel.arrant .card.is-active {
     margin: 30px 16px 0 16px;
     transform: scale(1.1);
 }
 
-#combat-carousel.wfrp4e .splide__slide:hover:not(.combat-round) {
+#combat-carousel.arrant .splide__slide:hover:not(.combat-round) {
     margin: 30px 16px 0 16px;
     transform: scale(1.1);
 }
 
-#combat-carousel.wfrp4e .initiative {
+#combat-carousel.arrant .initiative {
     position: absolute;
     right: -1px;
     bottom: -7px;
@@ -193,7 +193,7 @@
     z-index: 999;
 }
 
-#combat-carousel.wfrp4e .card.is-active .initiative {
+#combat-carousel.arrant .card.is-active .initiative {
     position: absolute;
     right: -1px;
     bottom: -7px;
@@ -205,11 +205,11 @@
     z-index: 999;
 }
 
-#combat-carousel.wfrp4e .initiative .fa-2x {
+#combat-carousel.arrant .initiative .fa-2x {
     position: relative;
 }
 
-#combat-carousel.wfrp4e .initiative .roll-init{
+#combat-carousel.arrant .initiative .roll-init{
     position: relative;
     display: block;
     overflow: hidden;
@@ -217,33 +217,33 @@
     height: 100%;
 }
 
-#combat-carousel.wfrp4e .initiative input{
+#combat-carousel.arrant .initiative input{
     position: relative;
     top: 3px;
     color: var(--main-text-light-color)!important;
 }
 
-#combat-carousel.wfrp4e .initiative input[type="text"].fa-stack-1x {
+#combat-carousel.arrant .initiative input[type="text"].fa-stack-1x {
     position: absolute;
     color: var(--main-text-light-color)
 }
 
-#combat-carousel.wfrp4e .initiative .roll-init .initiative-icon{
+#combat-carousel.arrant .initiative .roll-init .initiative-icon{
     display: none;
 }
 
-#combat-carousel.wfrp4e .combat-controls a {
+#combat-carousel.arrant .combat-controls a {
     background: none;
     border: none;
 
     color: #98968a;
 }
 
-#combat-carousel.wfrp4e .combat-controls a i{
+#combat-carousel.arrant .combat-controls a i{
     z-index: 2;
 }
 
-#combat-carousel.wfrp4e .combat-controls a::before {
+#combat-carousel.arrant .combat-controls a::before {
     content: "";
     position: absolute;
     width: 120%;
@@ -255,17 +255,17 @@
     z-index: 1;
 }
 
-#combat-carousel.wfrp4e .encounter-info {
+#combat-carousel.arrant .encounter-info {
     background: none;
     border: none;
     color: #98968a;
 }
 
-#combat-carousel.wfrp4e .encounter-info > div {
+#combat-carousel.arrant .encounter-info > div {
     z-index: 3;
 }
 
-#combat-carousel.wfrp4e .encounter-info::before {
+#combat-carousel.arrant .encounter-info::before {
     content: "";
     position: absolute;
     width: 180%;
@@ -277,7 +277,7 @@
     z-index: -1;
 }
 
-#combat-carousel.wfrp4e .encounter-controls {
+#combat-carousel.arrant .encounter-controls {
     background: none;
     border: none;
     color: #98968a;
@@ -287,7 +287,7 @@
     width: 65px;
     height: 50px;
 }
-#combat-carousel.wfrp4e .encounter-controls::before {
+#combat-carousel.arrant .encounter-controls::before {
     content: "";
     position: absolute;
     width: 140%;
@@ -299,16 +299,16 @@
     z-index: -1;
  }
 
-#combat-carousel.wfrp4e .encounter-controls .encounter-control {
+#combat-carousel.arrant .encounter-controls .encounter-control {
     flex: 0 0 25%;
 }
 
-#combat-carousel.wfrp4e .drag-handle {
+#combat-carousel.arrant .drag-handle {
     left: 7px;
     font-size: 1.3rem;
 }
 
-#combat-carousel.wfrp4e .drag-handle::before {
+#combat-carousel.arrant .drag-handle::before {
     content: "";
     position: absolute;
     width: 39px;
@@ -320,13 +320,13 @@
     z-index: -1;
 }
 
-#combat-carousel.wfrp4e meter {
+#combat-carousel.arrant meter {
     width: 86%;
     margin-left: 7%;
     position: relative;
 }
 
-#combat-carousel.wfrp4e .effects {
+#combat-carousel.arrant .effects {
     height: 100%;
     justify-content: center;
 
@@ -337,12 +337,12 @@
     left: -7px;
 }
 
-#combat-carousel.wfrp4e .effect {
+#combat-carousel.arrant .effect {
     position: relative;
     margin: 2px;
     background: none;
 }
-#combat-carousel.wfrp4e .effect::after {
+#combat-carousel.arrant .effect::after {
     position: absolute;
     content: "";
     left: -2px;
@@ -354,12 +354,12 @@
     z-index: -1;
 }
 
-#combat-carousel.wfrp4e .splide__slide:hover .name {
+#combat-carousel.arrant .splide__slide:hover .name {
     background: none;
     border: none;
 }
 
-#combat-carousel.wfrp4e .container .tracker-indicators:has(i.fa-skull) {
+#combat-carousel.arrant .container .tracker-indicators:has(i.fa-skull) {
     display: none;
 }
 

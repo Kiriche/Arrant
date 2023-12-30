@@ -1,14 +1,14 @@
-import EffectWfrp4e from "../system/effect-wfrp4e.js";
-import WFRP_Utility from "../system/utility-wfrp4e.js";
+import EffectArrant from "../system/effect-arrant.js";
+import WFRP_Utility from "../system/utility-arrant.js";
 
 
-export default class ItemWfrp4e extends Item {
+export default class ItemArrant extends Item {
 
   // constructor(source, options)
   // {
   //   super(source, options);
   //   try {
-  //     let newEffects = game.wfrp4e.migration.removeLoreEffects(source)
+  //     let newEffects = game.arrant.migration.removeLoreEffects(source)
   //     if (newEffects.length != source.effects.length && !game.packs.get(this.pack)?.locked)
   //     {
   //       this.update({effects : newEffects}, {recursive : false})
@@ -33,8 +33,8 @@ export default class ItemWfrp4e extends Item {
     if (data._id && !this.isOwned)
       options.keepId = WFRP_Utility._keepID(data._id, this)
 
-    let migration = game.wfrp4e.migration.migrateItemData(this)
-    this.updateSource({effects : game.wfrp4e.migration.removeLoreEffects(data)}, {recursive : false});
+    let migration = game.arrant.migration.migrateItemData(this)
+    this.updateSource({effects : game.arrant.migration.removeLoreEffects(data)}, {recursive : false});
 
     if (!isEmpty(migration))
     {
@@ -46,11 +46,11 @@ export default class ItemWfrp4e extends Item {
 
     if (options.fromEffect)
     {
-      this.updateSource({"flags.wfrp4e.fromEffect" : options.fromEffect});
+      this.updateSource({"flags.arrant.fromEffect" : options.fromEffect});
     }
 
     if (!data.img || data.img == "icons/svg/item-bag.svg")
-      this.updateSource({ img: "systems/wfrp4e/icons/blank.png" });
+      this.updateSource({ img: "systems/arrant/icons/blank.png" });
 
     if (this.isOwned) {
       // If not a character and wearable item, set worn to true
@@ -82,7 +82,7 @@ export default class ItemWfrp4e extends Item {
         })
 
         for (let effect of immediateEffects) {
-          await game.wfrp4e.utility.applyOneTimeEffect(effect, this.actor);
+          await game.arrant.utility.applyOneTimeEffect(effect, this.actor);
           this.effects.delete(effect.id);
         }
         for (let condition of conditions) {
@@ -93,7 +93,7 @@ export default class ItemWfrp4e extends Item {
         }
       }
 
-      if (this.actor.type == "character" && this.type == "spell" && (this.lore.value == "petty" || this.lore.value == game.i18n.localize("WFRP4E.MagicLores.petty"))) {
+      if (this.actor.type == "character" && this.type == "spell" && (this.lore.value == "petty" || this.lore.value == game.i18n.localize("arrant.MagicLores.petty"))) {
         WFRP_Utility.memorizeCostDialog(this, this.actor)
       }
       if (this.actor.type == "character" && this.type == "prayer" && this.prayerType.value == "miracle") {
@@ -166,7 +166,7 @@ export default class ItemWfrp4e extends Item {
         item.system.location.value = "";
       }
 
-      await this.actor.update({[`flags.wfrp4e.sheetCollapsed.-=${this.id}`]: null, items : carrying})
+      await this.actor.update({[`flags.arrant.sheetCollapsed.-=${this.id}`]: null, items : carrying})
     }
   }
 
@@ -213,7 +213,7 @@ export default class ItemWfrp4e extends Item {
       this.actor.runEffects("prepareItem", { item: this })
     }
     catch (e) {
-      game.wfrp4e.utility.log(`Something went wrong when preparing actor item ${this.name}: ${e}`)
+      game.arrant.utility.log(`Something went wrong when preparing actor item ${this.name}: ${e}`)
     }
 
   }
@@ -280,10 +280,10 @@ export default class ItemWfrp4e extends Item {
   }
 
   prepareSpell() {
-    let lore = foundry.utils.deepClone(game.wfrp4e.config.loreEffects[this.system.lore.value])
+    let lore = foundry.utils.deepClone(game.arrant.config.loreEffects[this.system.lore.value])
     if (lore)
     {
-      this.system.lore.effect = new EffectWfrp4e(lore, {parent: this});
+      this.system.lore.effect = new EffectArrant(lore, {parent: this});
     }
     this._addSpellDescription();
   }
@@ -311,12 +311,12 @@ export default class ItemWfrp4e extends Item {
     if (this.weaponGroup.value == "flail" && !this.skillToUse && !this.flaws.value.find(i => i.name == "dangerous"))
       this.flaws.value.push({ name: "dangerous" })
 
-    if (game.settings.get("wfrp4e", "mooQualities")) {
-      game.wfrp4e.utility.logHomebrew("mooQualities")
+    if (game.settings.get("arrant", "mooQualities")) {
+      game.arrant.utility.logHomebrew("mooQualities")
       let momentum = this.qualities.value.find(q => q.name == "momentum" && q.value)
       if (momentum?.value && this.actor.status.advantage.value > 0) {
         let qualityString = momentum.value
-        this._addProperties({ qualities: game.wfrp4e.utility.propertyStringToObject(qualityString, game.wfrp4e.utility.allProperties()), flaws: {} })
+        this._addProperties({ qualities: game.arrant.utility.propertyStringToObject(qualityString, game.arrant.utility.allProperties()), flaws: {} })
         this.qualities.value.splice(this.qualities.value.findIndex(q => q.name == "momentum"), 1)
       }
     }
@@ -528,7 +528,7 @@ export default class ItemWfrp4e extends Item {
   _mutationExpandData() {
     let data = this.toObject().system
     data.properties = [];
-    data.properties.push(game.wfrp4e.config.mutationTypes[this.mutationType.value]);
+    data.properties.push(game.arrant.config.mutationTypes[this.mutationType.value]);
     if (this.modifier.value)
       data.properties.push(this.modifier.value)
     return data;
@@ -567,8 +567,8 @@ export default class ItemWfrp4e extends Item {
     data.properties = [];
     data.properties.push(`<b>${game.i18n.localize("Class")}</b>: ${this.class.value}`);
     data.properties.push(`<b>${game.i18n.localize("Group")}</b>: ${this.careergroup.value}`);
-    data.properties.push(game.wfrp4e.config.statusTiers[this.status.tier] + " " + this.status.standing);
-    data.properties.push(`<b>${game.i18n.localize("Characteristics")}</b>: ${this.characteristics.map(i => i = " " + game.wfrp4e.config.characteristicsAbbrev[i])}`);
+    data.properties.push(game.arrant.config.statusTiers[this.status.tier] + " " + this.status.standing);
+    data.properties.push(`<b>${game.i18n.localize("Characteristics")}</b>: ${this.characteristics.map(i => i = " " + game.arrant.config.characteristicsAbbrev[i])}`);
     data.properties.push(`<b>${game.i18n.localize("Skills")}</b>: ${this.skills.map(i => i = " " + i)}`);
     data.properties.push(`<b>${game.i18n.localize("Talents")}</b>: ${this.talents.map(i => i = " " + i)}`);
     data.properties.push(`<b>${game.i18n.localize("Trappings")}</b>: ${this.trappings.map(i => i = " " + i)}`);
@@ -650,7 +650,7 @@ export default class ItemWfrp4e extends Item {
     if (this.twohanded.value)
       properties.push(game.i18n.localize("ITEM.TwoHanded"));
     if (this.reach.value)
-      properties.push(`${game.i18n.localize("Reach")}: ${game.wfrp4e.config.weaponReaches[this.reach.value] + " - " + game.wfrp4e.config.reachDescription[this.reach.value]}`);
+      properties.push(`${game.i18n.localize("Reach")}: ${game.arrant.config.weaponReaches[this.reach.value] + " - " + game.arrant.config.reachDescription[this.reach.value]}`);
     if (this.damageToItem.value)
       properties.push(`${game.i18n.format("ITEM.WeaponDamaged", {damage: this.damageToItem.value})}`);
     if (this.damageToItem.shield)
@@ -671,7 +671,7 @@ export default class ItemWfrp4e extends Item {
   _armourExpandData() {
     let data = this.toObject().system
     let properties = [];
-    properties.push(game.wfrp4e.config.armorTypes[this.armorType.value]);
+    properties.push(game.arrant.config.armorTypes[this.armorType.value]);
     let itemProperties = this.Qualities.concat(this.Flaws)
     for (let prop of itemProperties)
       properties.push("<a class ='item-property'>" + prop + "</a>")
@@ -685,7 +685,7 @@ export default class ItemWfrp4e extends Item {
   _ammunitionExpandData() {
     let data = this.toObject().system
     let properties = [];
-    properties.push(game.wfrp4e.config.ammunitionGroups[this.ammunitionType.value])
+    properties.push(game.arrant.config.ammunitionGroups[this.ammunitionType.value])
 
     if (this.range.value)
       properties.push(`${game.i18n.localize("Range")}: ${this.range.value}`);
@@ -710,7 +710,7 @@ export default class ItemWfrp4e extends Item {
 
   _vehicleModExpandData() {
     let data = this.toObject().system
-    data.properties = [game.wfrp4e.config.modTypes[this.modType.value]];
+    data.properties = [game.arrant.config.modTypes[this.modType.value]];
     return data;
   }
 
@@ -722,11 +722,11 @@ export default class ItemWfrp4e extends Item {
     if (this.origin.value)
       data.properties.push(`<b>${game.i18n.localize("ITEM.Origin")}</b>: ${this.origin.value}`)
 
-    if (game.wfrp4e.config.trade.cargoTypes)
-      data.properties.push(`<b>${game.i18n.localize("ITEM.CargoType")}</b>: ${game.wfrp4e.config.trade.cargoTypes[this.cargoType.value]}`)
+    if (game.arrant.config.trade.cargoTypes)
+      data.properties.push(`<b>${game.i18n.localize("ITEM.CargoType")}</b>: ${game.arrant.config.trade.cargoTypes[this.cargoType.value]}`)
 
-    if (game.wfrp4e.config.trade.qualities && (this.cargoType.value == "wine" || this.cargoType.value == "brandy"))
-      data.properties.push(`<b>${game.i18n.localize("ITEM.CargoQuality")}</b>: ${game.wfrp4e.config.trade.qualities[this.quality.value]}`)
+    if (game.arrant.config.trade.qualities && (this.cargoType.value == "wine" || this.cargoType.value == "brandy"))
+      data.properties.push(`<b>${game.i18n.localize("ITEM.CargoQuality")}</b>: ${game.arrant.config.trade.qualities[this.quality.value]}`)
 
     return data;
   }
@@ -835,7 +835,7 @@ export default class ItemWfrp4e extends Item {
     if (chatData.img.includes("/blank.png"))
       chatData.img = null;
 
-    renderTemplate('systems/wfrp4e/templates/chat/post-item.hbs', chatData).then(html => {
+    renderTemplate('systems/arrant/templates/chat/post-item.hbs', chatData).then(html => {
       let chatOptions = WFRP_Utility.chatDataSetup(html)
 
       // Setup drag and drop data
@@ -860,10 +860,10 @@ export default class ItemWfrp4e extends Item {
   // Trapping Chat Data
   _trappingChatData() {
     let properties = [
-      `<b>${game.i18n.localize("ITEM.TrappingType")}</b>: ${game.wfrp4e.config.trappingCategories[this.trappingType.value]}`,
+      `<b>${game.i18n.localize("ITEM.TrappingType")}</b>: ${game.arrant.config.trappingCategories[this.trappingType.value]}`,
       `<b>${game.i18n.localize("Price")}</b>: ${this.price.gc || 0} ${game.i18n.localize("MARKET.Abbrev.GC")}, ${this.price.ss || 0} ${game.i18n.localize("MARKET.Abbrev.SS")}, ${this.price.bp || 0} ${game.i18n.localize("MARKET.Abbrev.BP")}`,
       `<b>${game.i18n.localize("Encumbrance")}</b>: ${this.encumbrance.value}`,
-      `<b>${game.i18n.localize("Availability")}</b>: ${game.wfrp4e.config.availability[this.availability.value] || "-"}`
+      `<b>${game.i18n.localize("Availability")}</b>: ${game.arrant.config.availability[this.availability.value] || "-"}`
     ]
 
     // Make qualities and flaws clickable
@@ -900,7 +900,7 @@ export default class ItemWfrp4e extends Item {
   // Mutation Chat Data
   _mutationChatData() {
     let properties = [
-      `<b>${game.i18n.localize("ITEM.MutationType")}</b>: ${game.wfrp4e.config.mutationTypes[this.mutationType.value]}`,
+      `<b>${game.i18n.localize("ITEM.MutationType")}</b>: ${game.arrant.config.mutationTypes[this.mutationType.value]}`,
     ];
     if (this.modifier.value)
       properties.push(`<b>${game.i18n.localize("Modifier")}</b>: ${this.modifier.value}`)
@@ -922,7 +922,7 @@ export default class ItemWfrp4e extends Item {
   // Talent Chat Data
   _talentChatData() {
     let properties = [];
-    properties.push(`<b>${game.i18n.localize("Max")}: </b> ${game.wfrp4e.config.talentMax[this.max.value]}`);
+    properties.push(`<b>${game.i18n.localize("Max")}: </b> ${game.arrant.config.talentMax[this.max.value]}`);
     if (this.tests.value)
       properties.push(`<b>${game.i18n.localize("Tests")}: </b> ${this.tests.value}`);
     return properties;
@@ -941,8 +941,8 @@ export default class ItemWfrp4e extends Item {
     let properties = [];
     properties.push(`<b>${game.i18n.localize("Class")}</b>: ${this.class.value}`);
     properties.push(`<b>${game.i18n.localize("Group")}</b>: ${this.careergroup.value}`);
-    properties.push(`<b>${game.i18n.localize("Status")}</b>: ${game.wfrp4e.config.statusTiers[this.status.tier] + " " + this.status.standing}`);
-    properties.push(`<b>${game.i18n.localize("Characteristics")}</b>: ${this.characteristics.map(i => i = " " + game.wfrp4e.config.characteristicsAbbrev[i])}`);
+    properties.push(`<b>${game.i18n.localize("Status")}</b>: ${game.arrant.config.statusTiers[this.status.tier] + " " + this.status.standing}`);
+    properties.push(`<b>${game.i18n.localize("Characteristics")}</b>: ${this.characteristics.map(i => i = " " + game.arrant.config.characteristicsAbbrev[i])}`);
     properties.push(`<b>${game.i18n.localize("Skills")}</b>: ${this.skills.map(i => i = " " + "<a class = 'skill-lookup'>" + i + "</a>")}`);
     properties.push(`<b>${game.i18n.localize("Talents")}</b>: ${this.talents.map(i => i = " " + "<a class = 'talent-lookup'>" + i + "</a>")}`);
     properties.push(`<b>${game.i18n.localize("Trappings")}</b>: ${this.trappings.map(i => i = " " + i)}`);
@@ -972,8 +972,8 @@ export default class ItemWfrp4e extends Item {
   // Spell Chat Data
   _spellChatData() {
     let properties = [];
-    if (game.wfrp4e.config.magicLores[this.lore.value])
-      properties.push(`<b>${game.i18n.localize("Lore")}</b>: ${game.wfrp4e.config.magicLores[this.lore.value]}`);
+    if (game.arrant.config.magicLores[this.lore.value])
+      properties.push(`<b>${game.i18n.localize("Lore")}</b>: ${game.arrant.config.magicLores[this.lore.value]}`);
     else
       properties.push(`<b>${game.i18n.localize("Lore")}</b>: ${this.lore.value}`);
     properties.push(`<b>${game.i18n.localize("CN")}</b>: ${this.cn.value}`);
@@ -1002,7 +1002,7 @@ export default class ItemWfrp4e extends Item {
     let properties = [
       `<b>${game.i18n.localize("Price")}</b>: ${this.price.gc || 0} GC, ${this.price.ss || 0} SS, ${this.price.bp || 0} BP`,
       `<b>${game.i18n.localize("Encumbrance")}</b>: ${this.encumbrance.value}`,
-      `<b>${game.i18n.localize("Availability")}</b>: ${game.wfrp4e.config.availability[this.availability.value] || "-"}`
+      `<b>${game.i18n.localize("Availability")}</b>: ${game.arrant.config.availability[this.availability.value] || "-"}`
     ]
 
     properties.push(`<b>${game.i18n.localize("Wearable")}</b>: ${(this.wearable.value ? game.i18n.localize("Yes") : game.i18n.localize("No"))}`);
@@ -1015,7 +1015,7 @@ export default class ItemWfrp4e extends Item {
     let properties = [
       `<b>${game.i18n.localize("Price")}</b>: ${this.price.gc || 0} ${game.i18n.localize("MARKET.Abbrev.GC")}, ${this.price.ss || 0} ${game.i18n.localize("MARKET.Abbrev.SS")}, ${this.price.bp || 0} ${game.i18n.localize("MARKET.Abbrev.BP")}`,
       `<b>${game.i18n.localize("Encumbrance")}</b>: ${this.encumbrance.value}`,
-      `<b>${game.i18n.localize("Availability")}</b>: ${game.wfrp4e.config.availability[this.availability.value] || "-"}`
+      `<b>${game.i18n.localize("Availability")}</b>: ${game.arrant.config.availability[this.availability.value] || "-"}`
     ]
 
     if (this.weaponGroup.value)
@@ -1027,7 +1027,7 @@ export default class ItemWfrp4e extends Item {
     if (this.twohanded.value)
       properties.push(`<b>${game.i18n.localize("ITEM.TwoHanded")}</b>`);
     if (this.reach.value)
-      properties.push(`<b>${game.i18n.localize("Reach")}</b>: ${game.wfrp4e.config.weaponReaches[this.reach.value] + " - " + game.wfrp4e.config.reachDescription[this.reach.value]}`);
+      properties.push(`<b>${game.i18n.localize("Reach")}</b>: ${game.arrant.config.weaponReaches[this.reach.value] + " - " + game.arrant.config.reachDescription[this.reach.value]}`);
     if (this.damageToItem.value)
       properties.push(`${game.i18n.format("ITEM.WeaponDamaged", {damage: this.damageToItem.value})}`);
     if (this.damageToItem.shield)
@@ -1054,18 +1054,18 @@ export default class ItemWfrp4e extends Item {
     let properties = [
       `<b>${game.i18n.localize("Price")}</b>: ${this.price.gc || 0} ${game.i18n.localize("MARKET.Abbrev.GC")}, ${this.price.ss || 0} ${game.i18n.localize("MARKET.Abbrev.SS")}, ${this.price.bp || 0} ${game.i18n.localize("MARKET.Abbrev.BP")}`,
       `<b>${game.i18n.localize("Encumbrance")}</b>: ${this.encumbrance.value}`,
-      `<b>${game.i18n.localize("Availability")}</b>: ${game.wfrp4e.config.availability[this.availability.value] || "-"}`
+      `<b>${game.i18n.localize("Availability")}</b>: ${game.arrant.config.availability[this.availability.value] || "-"}`
     ]
 
     if (this.armorType.value)
-      properties.push(`<b>${game.i18n.localize("ITEM.ArmourType")}</b>: ${game.wfrp4e.config.armorTypes[this.armorType.value]}`);
+      properties.push(`<b>${game.i18n.localize("ITEM.ArmourType")}</b>: ${game.arrant.config.armorTypes[this.armorType.value]}`);
     if (this.penalty.value)
       properties.push(`<b>${game.i18n.localize("Penalty")}</b>: ${this.penalty.value}`);
 
 
-    for (let loc in game.wfrp4e.config.locations)
+    for (let loc in game.arrant.config.locations)
       if (this.AP[loc])
-        properties.push(`<b>${game.wfrp4e.config.locations[loc]} AP</b>: ${this.currentAP[loc]}/${this.AP[loc]}`);
+        properties.push(`<b>${game.arrant.config.locations[loc]} AP</b>: ${this.currentAP[loc]}/${this.AP[loc]}`);
 
 
 
@@ -1090,10 +1090,10 @@ export default class ItemWfrp4e extends Item {
     let properties = [
       `<b>${game.i18n.localize("Price")}</b>: ${this.price.gc || 0} ${game.i18n.localize("MARKET.Abbrev.GC")}, ${this.price.ss || 0} ${game.i18n.localize("MARKET.Abbrev.SS")}, ${this.price.bp || 0} ${game.i18n.localize("MARKET.Abbrev.BP")}`,
       `<b>${game.i18n.localize("Encumbrance")}</b>: ${this.encumbrance.value}`,
-      `<b>${game.i18n.localize("Availability")}</b>: ${game.wfrp4e.config.availability[this.availability.value] || "-"}`
+      `<b>${game.i18n.localize("Availability")}</b>: ${game.arrant.config.availability[this.availability.value] || "-"}`
     ]
 
-    properties.push(`<b>${game.i18n.localize("ITEM.AmmunitionType")}:</b> ${game.wfrp4e.config.ammunitionGroups[this.ammunitionType.value]}`)
+    properties.push(`<b>${game.i18n.localize("ITEM.AmmunitionType")}:</b> ${game.arrant.config.ammunitionGroups[this.ammunitionType.value]}`)
 
     if (this.range.value)
       properties.push(`<b>${game.i18n.localize("Range")}</b>: ${this.range.value}`);
@@ -1141,7 +1141,7 @@ export default class ItemWfrp4e extends Item {
 
   _vehicleModChatData() {
     let properties = [
-      `<b>${game.i18n.localize("VEHICLE.ModType")}</b>: ${game.wfrp4e.config.modTypes[this.modType.value]}`,
+      `<b>${game.i18n.localize("VEHICLE.ModType")}</b>: ${game.arrant.config.modTypes[this.modType.value]}`,
       `<b>${game.i18n.localize("Price")}</b>: ${this.price.gc || 0} ${game.i18n.localize("MARKET.Abbrev.GC")}, ${this.price.ss || 0} ${game.i18n.localize("MARKET.Abbrev.SS")}, ${this.price.bp || 0} ${game.i18n.localize("MARKET.Abbrev.BP")}`,
       `<b>${game.i18n.localize("Encumbrance")}</b>: ${this.encumbrance.value}`,
     ]
@@ -1155,11 +1155,11 @@ export default class ItemWfrp4e extends Item {
     if (this.origin.value)
       properties.push(`<b>${game.i18n.localize("ITEM.Origin")}</b>: ${this.origin.value}`)
 
-    if (game.wfrp4e.config.trade.cargoTypes)
-      properties.push(`<b>${game.i18n.localize("ITEM.CargoType")}</b>: ${game.wfrp4e.config.trade.cargoTypes[this.cargoType.value]}`)
+    if (game.arrant.config.trade.cargoTypes)
+      properties.push(`<b>${game.i18n.localize("ITEM.CargoType")}</b>: ${game.arrant.config.trade.cargoTypes[this.cargoType.value]}`)
 
-    if (game.wfrp4e.config.trade.qualities && (this.cargoType.value == "wine" || this.cargoType.value == "brandy"))
-      properties.push(`<b>${game.i18n.localize("ITEM.CargoQuality")}</b>: ${game.wfrp4e.config.trade.qualities[this.quality.value]}`)
+    if (game.arrant.config.trade.qualities && (this.cargoType.value == "wine" || this.cargoType.value == "brandy"))
+      properties.push(`<b>${game.i18n.localize("ITEM.CargoQuality")}</b>: ${game.arrant.config.trade.qualities[this.quality.value]}`)
     return properties;
   }
 
@@ -1246,8 +1246,8 @@ export default class ItemWfrp4e extends Item {
         sortedCharacteristics.forEach(arr => {
           let ch = arr[0];
           // Handle characteristic with bonus first
-          formula = formula.replace(game.wfrp4e.config.characteristicsBonus[ch].toLowerCase(), this.actor.characteristics[ch].bonus);
-          formula = formula.replace(game.wfrp4e.config.characteristics[ch].toLowerCase(), this.actor.characteristics[ch].value);
+          formula = formula.replace(game.arrant.config.characteristicsBonus[ch].toLowerCase(), this.actor.characteristics[ch].bonus);
+          formula = formula.replace(game.arrant.config.characteristics[ch].toLowerCase(), this.actor.characteristics[ch].value);
         });
 
         let total = 0;
@@ -1304,8 +1304,8 @@ export default class ItemWfrp4e extends Item {
         sortedCharacteristics.forEach(arr => {
           let ch = arr[0];
           // Handle characteristic with bonus first
-          formula = formula.replace(game.wfrp4e.config.characteristicsBonus[ch].toLowerCase(), this.actor.characteristics[ch].bonus);
-          formula = formula.replace(game.wfrp4e.config.characteristics[ch].toLowerCase(), this.actor.characteristics[ch].value);
+          formula = formula.replace(game.arrant.config.characteristicsBonus[ch].toLowerCase(), this.actor.characteristics[ch].bonus);
+          formula = formula.replace(game.arrant.config.characteristics[ch].toLowerCase(), this.actor.characteristics[ch].value);
         });
 
         return (0, eval)(formula);
@@ -1365,45 +1365,45 @@ export default class ItemWfrp4e extends Item {
 
     rangeBands[`${game.i18n.localize("Point Blank")}`] = {
       range: [0, Math.ceil(range / 10)],
-      modifier: game.wfrp4e.config.difficultyModifiers[game.wfrp4e.config.rangeModifiers["Point Blank"]],
-      difficulty: game.wfrp4e.config.rangeModifiers["Point Blank"]
+      modifier: game.arrant.config.difficultyModifiers[game.arrant.config.rangeModifiers["Point Blank"]],
+      difficulty: game.arrant.config.rangeModifiers["Point Blank"]
     }
     rangeBands[`${game.i18n.localize("Short Range")}`] = {
       range: [Math.ceil(range / 10) + 1, Math.ceil(range / 2)],
-      modifier: game.wfrp4e.config.difficultyModifiers[game.wfrp4e.config.rangeModifiers["Short Range"]],
-      difficulty: game.wfrp4e.config.rangeModifiers["Short Range"]
+      modifier: game.arrant.config.difficultyModifiers[game.arrant.config.rangeModifiers["Short Range"]],
+      difficulty: game.arrant.config.rangeModifiers["Short Range"]
     }
     rangeBands[`${game.i18n.localize("Normal")}`] = {
       range: [Math.ceil(range / 2) + 1, range],
-      modifier: game.wfrp4e.config.difficultyModifiers[game.wfrp4e.config.rangeModifiers["Normal"]],
-      difficulty: game.wfrp4e.config.rangeModifiers["Normal"]
+      modifier: game.arrant.config.difficultyModifiers[game.arrant.config.rangeModifiers["Normal"]],
+      difficulty: game.arrant.config.rangeModifiers["Normal"]
     }
     rangeBands[`${game.i18n.localize("Long Range")}`] = {
       range: [range + 1, range * 2],
-      modifier: game.wfrp4e.config.difficultyModifiers[game.wfrp4e.config.rangeModifiers["Long Range"]],
-      difficulty: game.wfrp4e.config.rangeModifiers["Long Range"]
+      modifier: game.arrant.config.difficultyModifiers[game.arrant.config.rangeModifiers["Long Range"]],
+      difficulty: game.arrant.config.rangeModifiers["Long Range"]
     }
     rangeBands[`${game.i18n.localize("Extreme")}`] = {
       range: [range * 2 + 1, range * 3],
-      modifier: game.wfrp4e.config.difficultyModifiers[game.wfrp4e.config.rangeModifiers["Extreme"]],
-      difficulty: game.wfrp4e.config.rangeModifiers["Extreme"]
+      modifier: game.arrant.config.difficultyModifiers[game.arrant.config.rangeModifiers["Extreme"]],
+      difficulty: game.arrant.config.rangeModifiers["Extreme"]
     }
 
     //@HOUSE
-    if (game.settings.get("wfrp4e", "mooRangeBands")) {
-      game.wfrp4e.utility.logHomebrew("mooRangeBands")
-      if (!this.getFlag("wfrp4e", "optimalRange"))
-        game.wfrp4e.utility.log("Warning: No Optimal Range set for " + this.name)
+    if (game.settings.get("arrant", "mooRangeBands")) {
+      game.arrant.utility.logHomebrew("mooRangeBands")
+      if (!this.getFlag("arrant", "optimalRange"))
+        game.arrant.utility.log("Warning: No Optimal Range set for " + this.name)
 
-      rangeBands[`${game.i18n.localize("Point Blank")}`].modifier = game.wfrp4e.utility.optimalDifference(this, game.i18n.localize("Point Blank")) * -20 + 20
+      rangeBands[`${game.i18n.localize("Point Blank")}`].modifier = game.arrant.utility.optimalDifference(this, game.i18n.localize("Point Blank")) * -20 + 20
       delete rangeBands[`${game.i18n.localize("Point Blank")}`].difficulty
-      rangeBands[`${game.i18n.localize("Short Range")}`].modifier = game.wfrp4e.utility.optimalDifference(this, game.i18n.localize("Short Range")) * -20 + 20
+      rangeBands[`${game.i18n.localize("Short Range")}`].modifier = game.arrant.utility.optimalDifference(this, game.i18n.localize("Short Range")) * -20 + 20
       delete rangeBands[`${game.i18n.localize("Short Range")}`].difficulty
-      rangeBands[`${game.i18n.localize("Normal")}`].modifier = game.wfrp4e.utility.optimalDifference(this, game.i18n.localize("Normal")) * -20 + 20
+      rangeBands[`${game.i18n.localize("Normal")}`].modifier = game.arrant.utility.optimalDifference(this, game.i18n.localize("Normal")) * -20 + 20
       delete rangeBands[`${game.i18n.localize("Normal")}`].difficulty
-      rangeBands[`${game.i18n.localize("Long Range")}`].modifier = game.wfrp4e.utility.optimalDifference(this, game.i18n.localize("Long Range")) * -20 + 20
+      rangeBands[`${game.i18n.localize("Long Range")}`].modifier = game.arrant.utility.optimalDifference(this, game.i18n.localize("Long Range")) * -20 + 20
       delete rangeBands[`${game.i18n.localize("Long Range")}`].difficulty
-      rangeBands[`${game.i18n.localize("Extreme")}`].modifier = game.wfrp4e.utility.optimalDifference(this, game.i18n.localize("Extreme")) * -20 + 20
+      rangeBands[`${game.i18n.localize("Extreme")}`].modifier = game.arrant.utility.optimalDifference(this, game.i18n.localize("Extreme")) * -20 + 20
       delete rangeBands[`${game.i18n.localize("Extreme")}`].difficulty
     }
     //@/HOUSE
@@ -1543,8 +1543,8 @@ export default class ItemWfrp4e extends Item {
     if (this.lore.effectString)
       description += `<p>\n\n <b>${game.i18n.localize("SPELL.Lore")}</b> ${this.lore.effectString}<p>`;
     // Otherwise, use config value for lore effect
-    else if (game.wfrp4e.config.loreEffectDescriptions && game.wfrp4e.config.loreEffectDescriptions[this.lore.value])
-      description += `<p>\n\n <b>${game.i18n.localize("SPELL.Lore")}</b> ${game.wfrp4e.config.loreEffectDescriptions[this.lore.value]}<p>`;
+    else if (game.arrant.config.loreEffectDescriptions && game.arrant.config.loreEffectDescriptions[this.lore.value])
+      description += `<p>\n\n <b>${game.i18n.localize("SPELL.Lore")}</b> ${game.arrant.config.loreEffectDescriptions[this.lore.value]}<p>`;
 
     this.description.value = description
   }
@@ -1553,7 +1553,7 @@ export default class ItemWfrp4e extends Item {
   //#region Condition Handling
   async addCondition(effect, value = 1) {
     if (typeof (effect) === "string")
-      effect = duplicate(game.wfrp4e.config.statusEffects.find(e => e.id == effect))
+      effect = duplicate(game.arrant.config.statusEffects.find(e => e.id == effect))
     if (!effect)
       return "No Effect Found"
 
@@ -1563,17 +1563,17 @@ export default class ItemWfrp4e extends Item {
 
     let existing = this.hasCondition(effect.id)
 
-    if (existing && existing.flags.wfrp4e.value == null)
+    if (existing && existing.flags.arrant.value == null)
       return existing
     else if (existing) {
       existing = duplicate(existing)
-      existing.flags.wfrp4e.value += value;
+      existing.flags.arrant.value += value;
       return this.updateEmbeddedDocuments("ActiveEffect", [existing])
     }
     else if (!existing) {
       effect.name = game.i18n.localize(effect.name);
-      if (Number.isNumeric(effect.flags.wfrp4e.value))
-        effect.flags.wfrp4e.value = value;
+      if (Number.isNumeric(effect.flags.arrant.value))
+        effect.flags.arrant.value = value;
       delete effect.id
       return this.createEmbeddedDocuments("ActiveEffect", [effect])
     }
@@ -1581,7 +1581,7 @@ export default class ItemWfrp4e extends Item {
 
   async removeCondition(effect, value = 1) {
     if (typeof (effect) === "string")
-      effect = duplicate(game.wfrp4e.config.statusEffects.find(e => e.id == effect))
+      effect = duplicate(game.arrant.config.statusEffects.find(e => e.id == effect))
     if (!effect)
       return "No Effect Found"
 
@@ -1590,13 +1590,13 @@ export default class ItemWfrp4e extends Item {
 
     let existing = this.hasCondition(effect.id)
     
-    if (existing && existing.flags.wfrp4e.value == null) {
+    if (existing && existing.flags.arrant.value == null) {
       return this.deleteEmbeddedDocuments("ActiveEffect", [existing._id])
     }
     else if (existing) {
-      await existing.setFlag("wfrp4e", "value", existing.conditionValue - value);
+      await existing.setFlag("arrant", "value", existing.conditionValue - value);
 
-      if (existing.flags.wfrp4e.value <= 0)
+      if (existing.flags.arrant.value <= 0)
         return this.deleteEmbeddedDocuments("ActiveEffect", [existing._id])
       else
         return this.updateEmbeddedDocuments("ActiveEffect", [existing])
@@ -1659,7 +1659,7 @@ export default class ItemWfrp4e extends Item {
    */
      createConditionalEffect(data)
      {
-       let conditionalEffects = foundry.utils.deepClone(this.flags.wfrp4e?.conditionalEffects || [])
+       let conditionalEffects = foundry.utils.deepClone(this.flags.arrant?.conditionalEffects || [])
    
        if (!data.id)
        {
@@ -1667,7 +1667,7 @@ export default class ItemWfrp4e extends Item {
        }
    
        conditionalEffects.push(data);
-       setProperty(this, "flags.wfrp4e.conditionalEffects", conditionalEffects);
+       setProperty(this, "flags.arrant.conditionalEffects", conditionalEffects);
        this.prepareData()
      }
    
@@ -1675,11 +1675,11 @@ export default class ItemWfrp4e extends Item {
   //#region Getters
   // @@@@@@@ BOOLEAN GETTERS @@@@@@
   get isMelee() {
-    return this.modeOverride?.value == "melee" || (game.wfrp4e.config.groupToType[this.weaponGroup.value] == "melee" && this.modeOverride?.value != "ranged")
+    return this.modeOverride?.value == "melee" || (game.arrant.config.groupToType[this.weaponGroup.value] == "melee" && this.modeOverride?.value != "ranged")
   }
 
   get isRanged() {
-    return this.modeOverride?.value == "ranged" || (game.wfrp4e.config.groupToType[this.weaponGroup.value] == "ranged" && this.modeOverride?.value != "melee")
+    return this.modeOverride?.value == "ranged" || (game.arrant.config.groupToType[this.weaponGroup.value] == "ranged" && this.modeOverride?.value != "melee")
   }
 
   get isEquipped() {
@@ -1693,11 +1693,11 @@ export default class ItemWfrp4e extends Item {
 
   // @@@@@@@ FORMATTED GETTERS @@@@@@
   get WeaponGroup() {
-    return game.wfrp4e.config.weaponGroups[this.weaponGroup.value]
+    return game.arrant.config.weaponGroups[this.weaponGroup.value]
   }
 
   get Reach() {
-    return game.wfrp4e.config.weaponReaches[this.reach.value];
+    return game.arrant.config.weaponReaches[this.reach.value];
   }
 
   get Max() {
@@ -1730,7 +1730,7 @@ export default class ItemWfrp4e extends Item {
   // @@@@@@@ COMPUTED GETTERS @@@@@
   get attackType() {
     if (this.type == "weapon")
-      return this.modeOverride?.value || game.wfrp4e.config.groupToType[this.weaponGroup.value]
+      return this.modeOverride?.value || game.arrant.config.groupToType[this.weaponGroup.value]
     else if (this.type == "trait" && this.rollable.damage)
       return this.rollable.attackType
   }
@@ -1743,8 +1743,8 @@ export default class ItemWfrp4e extends Item {
     {
       itemDamageEffects.push(this.system.lore.effect)
     }
-    if (this.flags.wfrp4e?.conditionalEffects?.length) {
-      itemDamageEffects = itemDamageEffects.concat(this.flags.wfrp4e?.conditionalEffects.map(e => new EffectWfrp4e(e, {parent: this})))
+    if (this.flags.arrant?.conditionalEffects?.length) {
+      itemDamageEffects = itemDamageEffects.concat(this.flags.arrant?.conditionalEffects.map(e => new EffectArrant(e, {parent: this})))
     }
     return itemDamageEffects
   }
@@ -1770,7 +1770,7 @@ export default class ItemWfrp4e extends Item {
 
 
   get reachNum() {
-    return game.wfrp4e.config.reachNum[this.reach.value]
+    return game.arrant.config.reachNum[this.reach.value]
   }
 
   get ammo() {
@@ -1808,7 +1808,7 @@ export default class ItemWfrp4e extends Item {
   }
 
   get reloadingTest() {
-    return this.actor.items.get(getProperty(this.data, "flags.wfrp4e.reloading"))
+    return this.actor.items.get(getProperty(this.data, "flags.arrant.reloading"))
   }
 
   get protects() {
@@ -1830,8 +1830,8 @@ export default class ItemWfrp4e extends Item {
     }
 
     let properties = {
-      qualities: ItemWfrp4e._propertyArrayToObject(this.qualities.value, game.wfrp4e.utility.qualityList()),
-      flaws: ItemWfrp4e._propertyArrayToObject(this.flaws.value, game.wfrp4e.utility.flawList()),
+      qualities: ItemArrant._propertyArrayToObject(this.qualities.value, game.arrant.utility.qualityList()),
+      flaws: ItemArrant._propertyArrayToObject(this.flaws.value, game.arrant.utility.flawList()),
       unusedQualities: {},
       inactiveQualities : {}
     }
@@ -1869,8 +1869,8 @@ export default class ItemWfrp4e extends Item {
   // For Item Sheets - properties before modifications
   get originalProperties() {
     let properties = {
-      qualities: ItemWfrp4e._propertyArrayToObject(this._source.system.qualities.value, game.wfrp4e.utility.qualityList()),
-      flaws: ItemWfrp4e._propertyArrayToObject(this._source.system.flaws.value, game.wfrp4e.utility.flawList()),
+      qualities: ItemArrant._propertyArrayToObject(this._source.system.qualities.value, game.arrant.utility.qualityList()),
+      flaws: ItemArrant._propertyArrayToObject(this._source.system.flaws.value, game.arrant.utility.flawList()),
       unusedQualities: {}
     }
     return properties;
@@ -1972,9 +1972,9 @@ export default class ItemWfrp4e extends Item {
 
 
     //@HOUSE
-    if (game.settings.get("wfrp4e", "mooSizeDamage") && this.actor.sizeNum > 3) {
+    if (game.settings.get("arrant", "mooSizeDamage") && this.actor.sizeNum > 3) {
       if ((this.type == "weapon" && this.damage.value.includes("SB")) || (this.type == "trait" && this.rollable.bonusCharacteristic == "s")) {
-        game.wfrp4e.utility.logHomebrew("mooSizeDamage")
+        game.arrant.utility.logHomebrew("mooSizeDamage")
         let SBsToAdd = this.actor.sizeNum - 3
         damage += (this.actor.characteristics.s.bonus * SBsToAdd)
       }
@@ -2150,9 +2150,9 @@ export default class ItemWfrp4e extends Item {
   // Used for item category display when in a container
   get trappingCategory() {
     if (this.type == "trapping")
-      return game.wfrp4e.config.trappingCategories[this.trappingType.value];
+      return game.arrant.config.trappingCategories[this.trappingType.value];
     else
-      return game.wfrp4e.config.trappingCategories[this.type];
+      return game.arrant.config.trappingCategories[this.type];
   }
   get twohanded() { return this.system.twohanded }
   get prayerType() { return this.system.type }

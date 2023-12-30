@@ -1,11 +1,11 @@
-import ItemWfrp4e from "../item/item-wfrp4e.js";
-import WFRP_Utility from "../system/utility-wfrp4e.js";
+import ItemArrant from "../item/item-arrant.js";
+import WFRP_Utility from "../system/utility-arrant.js";
 
 export default class StatBlockParser extends FormApplication {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.id = "stat-parser";
-        options.template = "systems/wfrp4e/templates/apps/stat-parser.hbs";
+        options.template = "systems/arrant/templates/apps/stat-parser.hbs";
         options.height = 600;
         options.width = 600;
         options.minimizable = true;
@@ -300,9 +300,9 @@ export default class StatBlockParser extends FormApplication {
         {
             for (let trapping of trappingStrings.split(",")) {
     
-                let trappingItem = await WFRP_Utility.findItem(trapping, game.wfrp4e.config.trappingItems)
+                let trappingItem = await WFRP_Utility.findItem(trapping, game.arrant.config.trappingItems)
                 if (!trappingItem) {
-                    trappingItem = new ItemWfrp4e({ img: "systems/wfrp4e/icons/blank.png", name: trapping, type: "trapping", data: game.system.model.Item.trapping })
+                    trappingItem = new ItemArrant({ img: "systems/arrant/icons/blank.png", name: trapping, type: "trapping", data: game.system.model.Item.trapping })
                     trappingItem.updateSource({"trappingType.value" : "misc"})
                 }
                 trappings.push(trappingItem.toObject())

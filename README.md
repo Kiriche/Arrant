@@ -2,9 +2,9 @@
 
 ![](https://user-images.githubusercontent.com/28637157/97379891-e4a1cc00-1893-11eb-9e0c-d93b92844d5b.jpg)
 
-![](https://img.shields.io/github/v/release/moo-man/WFRP4e-FoundryVTT?label=Latest%20Version)
+![](https://img.shields.io/github/v/release/moo-man/arrant-FoundryVTT?label=Latest%20Version)
 
-![](https://img.shields.io/github/downloads/moo-man/WFRP4e-FoundryVTT/latest/wfrp4e.zip?label=Downloads%20%28Latest%20Version%29)
+![](https://img.shields.io/github/downloads/moo-man/arrant-FoundryVTT/latest/arrant.zip?label=Downloads%20%28Latest%20Version%29)
 
 ![](https://img.shields.io/badge/FoundryVTT%20Compatibility-V11-orange)
 
@@ -107,58 +107,58 @@ npm run pack
 
 **Official**
 
-- [Core Module](https://foundryvtt.com/packages/wfrp4e-core/) - Adds the Core Rulebook support, all the compendium packs, tables, and features!
+- [Core Module](https://foundryvtt.com/packages/arrant-core/) - Adds the Core Rulebook support, all the compendium packs, tables, and features!
 
-- [Starter Set](https://foundryvtt.com/packages/wfrp4e-starter-set/) - Adds the Starter Set Adventure and Setting material. Explore Ubersreik in this fully integrated module!
+- [Starter Set](https://foundryvtt.com/packages/arrant-starter-set/) - Adds the Starter Set Adventure and Setting material. Explore Ubersreik in this fully integrated module!
 
-- [Rough Nights & Hard Days](https://foundryvtt.com/packages/wfrp4e-rnhd/) - Adds the 5 new and classic adventures, with fully detailed actors, items, and journal entries. Includes new features like a clock and gnome character generation
+- [Rough Nights & Hard Days](https://foundryvtt.com/packages/arrant-rnhd/) - Adds the 5 new and classic adventures, with fully detailed actors, items, and journal entries. Includes new features like a clock and gnome character generation
 
-- [Enemy In Shadows](https://foundryvtt.com/packages/wfrp4e-eis/) - The entire Enemy In Shadows campaign and companion, including tables, mutations, spells, talents, and so much more to start your players on the incredible Enemy Within campaign.
+- [Enemy In Shadows](https://foundryvtt.com/packages/arrant-eis/) - The entire Enemy In Shadows campaign and companion, including tables, mutations, spells, talents, and so much more to start your players on the incredible Enemy Within campaign.
 
-- [Ubersreik Adventures I](https://foundryvtt.com/packages/wfrp4e-ua1/) - 6 ready to play adventures within the Duchy of Ubersreik, the best resource to expand Starter Set with.
+- [Ubersreik Adventures I](https://foundryvtt.com/packages/arrant-ua1/) - 6 ready to play adventures within the Duchy of Ubersreik, the best resource to expand Starter Set with.
 
-- [Death on the Reik](https://foundryvtt.com/packages/wfrp4e-dotr/) - The entire Death on the Reik campaign and companion, including tables, mutations, spells, talents, as well as integrated trading rules!
+- [Death on the Reik](https://foundryvtt.com/packages/arrant-dotr/) - The entire Death on the Reik campaign and companion, including tables, mutations, spells, talents, as well as integrated trading rules!
 
-- [Middenheim: City of the White Wolf](https://foundryvtt.com/packages/wfrp4e-middenheim/) - Dive into the centre of Ulrican influence and power in the Old World and explore Middenheim, the heart of the Empire's North.
+- [Middenheim: City of the White Wolf](https://foundryvtt.com/packages/arrant-middenheim/) - Dive into the centre of Ulrican influence and power in the Old World and explore Middenheim, the heart of the Empire's North.
 
-- [Archives of the Empire: Vol 1.](https://foundryvtt.com/packages/wfrp4e-archives1/) - A fascinating and diverse collection of articles on topics that cover the length and breath of the Old World.
+- [Archives of the Empire: Vol 1.](https://foundryvtt.com/packages/arrant-archives1/) - A fascinating and diverse collection of articles on topics that cover the length and breath of the Old World.
 
-- [Power Behind the Throne](https://foundryvtt.com/packages/wfrp4e-pbtt/) - Carrying on from where Death of the Reik left off, Power Behind the Throne takes your brave heroes from Altdorf to the city of Middenheim, a towering city-state in the north of the Empire where trouble brews and a play for power is made.
+- [Power Behind the Throne](https://foundryvtt.com/packages/arrant-pbtt/) - Carrying on from where Death of the Reik left off, Power Behind the Throne takes your brave heroes from Altdorf to the city of Middenheim, a towering city-state in the north of the Empire where trouble brews and a play for power is made.
 
-- [Altdorf: Crown of the Empire](https://foundryvtt.com/packages/wfrp4e-altdorf/) - A fascinating and entertaining guide to the capital, the nexus of government, religion, magic and military power in the Empire. Each district is carefully detailed with a wide variety of locations, plot hooks, and NPCs.
+- [Altdorf: Crown of the Empire](https://foundryvtt.com/packages/arrant-altdorf/) - A fascinating and entertaining guide to the capital, the nexus of government, religion, magic and military power in the Empire. Each district is carefully detailed with a wide variety of locations, plot hooks, and NPCs.
 
-- [The Horned Rat](https://foundryvtt.com/packages/wfrp4e-horned-rat/) - The penultimate volume of the five-part series of the Enemy Within campaign. Includes lore, spells, items, and weapons, and enemies centered on the Skaven and their wicked schemes. 
+- [The Horned Rat](https://foundryvtt.com/packages/arrant-horned-rat/) - The penultimate volume of the five-part series of the Enemy Within campaign. Includes lore, spells, items, and weapons, and enemies centered on the Skaven and their wicked schemes. 
 
-- [Empire in Ruins](https://foundryvtt.com/packages/wfrp4e-empire-ruins/) - The final part of the five-part series of grim and perilous Warhammer Fantasy Roleplay adventures.
+- [Empire in Ruins](https://foundryvtt.com/packages/arrant-empire-ruins/) - The final part of the five-part series of grim and perilous Warhammer Fantasy Roleplay adventures.
 
-- [Archives of the Empire: Vol 2.](https://foundryvtt.com/packages/wfrp4e-archives2/) - A varied collection of excellent and entertaining expansions to any gaming table.
+- [Archives of the Empire: Vol 2.](https://foundryvtt.com/packages/arrant-archives2/) - A varied collection of excellent and entertaining expansions to any gaming table.
 
-- [Up In Arms](https://foundryvtt.com/packages/wfrp4e-up-in-arms/) - Provides options and guidance for Warhammer Fantasy Roleplay Characters who follow warrior careers. It focuses on abilities that players and GMs can make use of to add variety and expertise to the fighting folk of the Old World in Warhammer Fantasy Roleplay
+- [Up In Arms](https://foundryvtt.com/packages/arrant-up-in-arms/) - Provides options and guidance for Warhammer Fantasy Roleplay Characters who follow warrior careers. It focuses on abilities that players and GMs can make use of to add variety and expertise to the fighting folk of the Old World in Warhammer Fantasy Roleplay
 
-- [Winds of Magic](https://foundryvtt.com/packages/wfrp4e-wom/) - A comprehensive guide to the practices and traditions taught by the eight Colleges of Magic. As well as providing background to the development of magic in the Empire it includes details of a multitude of magic practices, creatures, and places.
+- [Winds of Magic](https://foundryvtt.com/packages/arrant-wom/) - A comprehensive guide to the practices and traditions taught by the eight Colleges of Magic. As well as providing background to the development of magic in the Empire it includes details of a multitude of magic practices, creatures, and places.
 
-- [The Imperial Zoo](https://foundryvtt.com/packages/wfrp4e-zoo/) - A bestiary and travelogue of three daring expeditions into the Old World, ranging from the heights of Karak Kadrin to the city of Miragliano in the southern land of Tilea, and including dozens of creatures, beasts and monsters.
+- [The Imperial Zoo](https://foundryvtt.com/packages/arrant-zoo/) - A bestiary and travelogue of three daring expeditions into the Old World, ranging from the heights of Karak Kadrin to the city of Miragliano in the southern land of Tilea, and including dozens of creatures, beasts and monsters.
 
-- [Salzenmund: City of Salt and Silver](https://foundryvtt.com/packages/wfrp4e-salzenmund/) - Salzenmund promises opportunity and excitement to adventurous souls, detailing the ambitions and conquests of the new ruling Gausser family, the vicious smuggling and piracy conspiracies, and the growing forbidden cults.
+- [Salzenmund: City of Salt and Silver](https://foundryvtt.com/packages/arrant-salzenmund/) - Salzenmund promises opportunity and excitement to adventurous souls, detailing the ambitions and conquests of the new ruling Gausser family, the vicious smuggling and piracy conspiracies, and the growing forbidden cults.
 
 
 **Unofficial**
 
-- [The GM Toolkit](https://foundryvtt.com/packages/wfrp4e-gm-toolkit) - Adds advantage automation, extends the Token HUD for more information, and adds useful macros!
+- [The GM Toolkit](https://foundryvtt.com/packages/arrant-gm-toolkit) - Adds advantage automation, extends the Token HUD for more information, and adds useful macros!
 
 - [Forien's Armoury](https://foundryvtt.com/packages/forien-armoury) - Forien is back, and he's brought his armoury with him! Includes new features for handling damaged weapons and armour, new careers, new items, and more!
 
-- [NPC Generator](https://foundryvtt.com/packages/wfrp4-wfrp4e-npc-generator) - Adds advanced NPC generation tools
+- [NPC Generator](https://foundryvtt.com/packages/arrant-arrant-npc-generator) - Adds advanced NPC generation tools
 
-- [Unofficial Grimoire](https://foundryvtt.com/packages/wfrp4e-unofficial-grimoire) - Adds new spells and an Elementalist and Druid career
+- [Unofficial Grimoire](https://foundryvtt.com/packages/arrant-unofficial-grimoire) - Adds new spells and an Elementalist and Druid career
 
-- Fan-made Maps for [Ubersreik](https://foundryvtt.com/packages/wfrp4e-ubersreik-maps), [Enemy In Shadows](https://foundryvtt.com/packages/wfrp4e-eis-maps), [Death on the Reik](https://foundryvtt.com/packages/wfrp4e-dotr-maps), and [Power Behind The Throne](https://foundryvtt.com/packages/wfrp4e-pbth-maps)
+- Fan-made Maps for [Ubersreik](https://foundryvtt.com/packages/arrant-ubersreik-maps), [Enemy In Shadows](https://foundryvtt.com/packages/arrant-eis-maps), [Death on the Reik](https://foundryvtt.com/packages/arrant-dotr-maps), and [Power Behind The Throne](https://foundryvtt.com/packages/arrant-pbth-maps)
 
 **Out of Date or Abandoned**
 
 - [Arcane Marks & Careers](https://foundryvtt.com/packages/arcane-marks-careers) - I've made a module out of my [homebrew supplement](https://drive.google.com/file/d/1uTy2r0EDMdcISFqqyxeIOSadtzz-OTAg/view) which can also serve as an example for others to build off of. It includes a compendium pack of all the careers as well as tables to roll for marks. 
 
-- [Character Detail Generator](https://foundryvtt.com/packages/wfrp4e-character-details) - Generates additional information for characters, including birth date and star sign.
+- [Character Detail Generator](https://foundryvtt.com/packages/arrant-character-details) - Generates additional information for characters, including birth date and star sign.
 
 - [Eye for an Eye Adventure](https://github.com/CStuartEKerrigan/WFRP-e4e-4e-FVTT) - Converted 3e adventure complete with tokens, maps, audio, and macros!
 

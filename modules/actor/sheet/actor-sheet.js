@@ -1,26 +1,26 @@
-import MarketWfrp4e from "../../apps/market-wfrp4e.js";
-import WFRP_Utility from "../../system/utility-wfrp4e.js";
-import WFRP_Audio from "../../system/audio-wfrp4e.js"
+import MarketArrant from "../../apps/market-arrant.js";
+import WFRP_Utility from "../../system/utility-arrant.js";
+import WFRP_Audio from "../../system/audio-arrant.js"
 import NameGenWfrp from "../../apps/name-gen.js";
 import CharacteristicTest from "../../system/rolls/characteristic-test.js"
-import EffectWfrp4e from "../../system/effect-wfrp4e.js";
+import EffectArrant from "../../system/effect-arrant.js";
 
 /**
  * Provides the data and general interaction with Actor Sheets - Abstract class.
  *
- * ActorSheetWfrp4e provides the general interaction and data organization shared among all 
+ * ActorSheetArrant provides the general interaction and data organization shared among all
  * actor sheets, as this is an abstract class, inherited by either Character, NPC, or Creature
  * specific actor sheet classes. When rendering an actor sheet, getData() is called, which is
  * a large and key that prepares the actor data for display, processing the raw data
  * and items and compiling them into data to display on the sheet. Additionally, this class
  * contains all the main events that respond to sheet interaction in activateListeners().
  *
- * @see   ActorWfrp4e - Data and main computation model (this.actor)
- * @see   ActorSheetWfrp4eCharacter - Character sheet class
- * @see   ActorSheetWfrp4eNPC - NPC sheet class
- * @see   ActorSheetWfrp4eCreature - Creature sheet class
+ * @see   ActorArrant - Data and main computation model (this.actor)
+ * @see   ActorSheetArrantCharacter - Character sheet class
+ * @see   ActorSheetArrantNPC - NPC sheet class
+ * @see   ActorSheetArrantCreature - Creature sheet class
  */
-export default class ActorSheetWfrp4e extends ActorSheet {
+export default class ActorSheetArrant extends ActorSheet {
 
   static get defaultOptions() {
     const options = super.defaultOptions;
@@ -111,7 +111,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
    * Provides the data to the template when rendering the actor sheet
    * 
    * This is called when rendering the sheet, where it calls the base actor class
-   * to organize, process, and prepare all actor data for display. See ActorWfrp4e.prepare()
+   * to organize, process, and prepare all actor data for display. See ActorArrant.prepare()
    * 
    * @returns {Object} sheetData    Data given to the template when rendering
    */
@@ -130,7 +130,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
     sheetData.attacker = this.actor.attacker;
 
     if (this.actor.type != "vehicle") {
-      sheetData.effects.system = game.wfrp4e.utility.getSystemEffects();
+      sheetData.effects.system = game.arrant.utility.getSystemEffects();
     }
 
     sheetData.enrichment = await this._handleEnrichment()
@@ -169,8 +169,8 @@ export default class ActorSheetWfrp4e extends ActorSheet {
     items.vehicleMods = sheetData.actor.getItemTypes("vehicleMod")
 
     items.grimoire = {
-      petty: sheetData.actor.getItemTypes("spell").filter(i => i.lore.value == "petty" || i.lore.value == game.i18n.localize("WFRP4E.MagicLores.petty")),
-      lore: sheetData.actor.getItemTypes("spell").filter(i => (i.lore.value != "petty" && i.lore.value != game.i18n.localize("WFRP4E.MagicLores.petty")) || !i.lore.value)
+      petty: sheetData.actor.getItemTypes("spell").filter(i => i.lore.value == "petty" || i.lore.value == game.i18n.localize("arrant.MagicLores.petty")),
+      lore: sheetData.actor.getItemTypes("spell").filter(i => (i.lore.value != "petty" && i.lore.value != game.i18n.localize("arrant.MagicLores.petty")) || !i.lore.value)
     }
 
     items.prayers = {
@@ -197,11 +197,11 @@ export default class ActorSheetWfrp4e extends ActorSheet {
 
   constructInventory(sheetData) {
 
-    let collapsed = this.actor.getFlag("wfrp4e", "sheetCollapsed")
+    let collapsed = this.actor.getFlag("arrant", "sheetCollapsed")
     // Inventory object is for the Trappings tab - each sub object is for an individual inventory section
     const categories = {
       weapons: {
-        label: game.i18n.localize("WFRP4E.TrappingType.Weapon"), // Label - what is displayed in the inventory section header
+        label: game.i18n.localize("arrant.TrappingType.Weapon"), // Label - what is displayed in the inventory section header
         items: sheetData.actor.getItemTypes("weapon"), // Array of items in the sectio.filter(i => !i.location.value)n
         toggle: true,                                 // Is there a toggle in the section? (Equipped, worn, etc.)
         toggleName: game.i18n.localize("Equipped"),   // What is the name of the toggle in the header
@@ -210,7 +210,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
         dataType: "weapon"                            // What type of FVTT Item is in this section (used by the + button to add an item of this type)
       },
       armor: {
-        label: game.i18n.localize("WFRP4E.TrappingType.Armour"),
+        label: game.i18n.localize("arrant.TrappingType.Armour"),
         items: sheetData.actor.getItemTypes("armour"),
         toggle: true,
         toggleName: game.i18n.localize("Worn"),
@@ -219,14 +219,14 @@ export default class ActorSheetWfrp4e extends ActorSheet {
         dataType: "armour"
       },
       ammunition: {
-        label: game.i18n.localize("WFRP4E.TrappingType.Ammunition"),
+        label: game.i18n.localize("arrant.TrappingType.Ammunition"),
         items: sheetData.actor.getItemTypes("ammunition"),
         show: false,
         collapsed : collapsed?.ammunition,
         dataType: "ammunition"
       },
       clothingAccessories: {
-        label: game.i18n.localize("WFRP4E.TrappingType.ClothingAccessories"),
+        label: game.i18n.localize("arrant.TrappingType.ClothingAccessories"),
         items: sheetData.actor.getItemTypes("trapping").filter(i => i.trappingType.value == "clothingAccessories"),
         toggle: true,
         toggleName: game.i18n.localize("Worn"),
@@ -235,42 +235,42 @@ export default class ActorSheetWfrp4e extends ActorSheet {
         dataType: "trapping"
       },
       booksAndDocuments: {
-        label: game.i18n.localize("WFRP4E.TrappingType.BooksDocuments"),
+        label: game.i18n.localize("arrant.TrappingType.BooksDocuments"),
         items: sheetData.actor.getItemTypes("trapping").filter(i => i.trappingType.value == "booksAndDocuments"),
         show: false,
         collapsed : collapsed?.booksAndDocuments,
         dataType: "trapping"
       },
       toolsAndKits: {
-        label: game.i18n.localize("WFRP4E.TrappingType.ToolsKits"),
+        label: game.i18n.localize("arrant.TrappingType.ToolsKits"),
         items: sheetData.actor.getItemTypes("trapping").filter(i => i.trappingType.value == "toolsAndKits" || i.trappingType.value == "tradeTools"),
         show: false,
         collapsed : collapsed?.toolsAndKits,
         dataType: "trapping"
       },
       foodAndDrink: {
-        label: game.i18n.localize("WFRP4E.TrappingType.FoodDrink"),
+        label: game.i18n.localize("arrant.TrappingType.FoodDrink"),
         items: sheetData.actor.getItemTypes("trapping").filter(i => i.trappingType.value == "foodAndDrink"),
         show: false,
         collapsed : collapsed?.foodAndDrink,
         dataType: "trapping"
       },
       drugsPoisonsHerbsDraughts: {
-        label: game.i18n.localize("WFRP4E.TrappingType.DrugsPoisonsHerbsDraughts"),
+        label: game.i18n.localize("arrant.TrappingType.DrugsPoisonsHerbsDraughts"),
         items: sheetData.actor.getItemTypes("trapping").filter(i => i.trappingType.value == "drugsPoisonsHerbsDraughts"),
         show: false,
         collapsed : collapsed?.drugsPoisonsHerbsDraughts,
         dataType: "trapping"
       },
       misc: {
-        label: game.i18n.localize("WFRP4E.TrappingType.Misc"),
+        label: game.i18n.localize("arrant.TrappingType.Misc"),
         items: sheetData.actor.getItemTypes("trapping").filter(i => i.trappingType.value == "misc" || !i.trappingType.value),
         show: true,
         collapsed : collapsed?.misc,
         dataType: "trapping"
       },
       cargo: {
-        label: game.i18n.localize("WFRP4E.TrappingType.Cargo"),
+        label: game.i18n.localize("arrant.TrappingType.Cargo"),
         items: sheetData.actor.getItemTypes("cargo"),
         show: false,
         collapsed : collapsed?.cargo,
@@ -280,7 +280,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
 
     // Money and ingredients are not in inventory object because they need more customization - note in actor-inventory.html that they do not exist in the main inventory loop
     const ingredients = {
-      label: game.i18n.localize("WFRP4E.TrappingType.Ingredient"),
+      label: game.i18n.localize("arrant.TrappingType.Ingredient"),
       items: sheetData.actor.getItemTypes("trapping").filter(i => i.trappingType.value == "ingredient"),
       show: false,
       collapsed : collapsed?.ingredients,
@@ -335,7 +335,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
         return Number(prev) + Number(cur.encumbrance.value);
       }, 0);
       cont.carries.current = Math.floor(cont.carries.current * 10) / 10;
-      cont.collapsed=this.actor.getFlag("wfrp4e", "sheetCollapsed")?.[cont.id];
+      cont.collapsed=this.actor.getFlag("arrant", "sheetCollapsed")?.[cont.id];
     }
 
     return {
@@ -356,7 +356,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
 
   addConditionData(sheetData) {
     try {
-      let conditions = duplicate(game.wfrp4e.config.statusEffects).map(e => new EffectWfrp4e(e));
+      let conditions = duplicate(game.arrant.config.statusEffects).map(e => new EffectArrant(e));
       let currentConditions = this.actor.conditions
       delete conditions.splice(conditions.length - 1, 1)
       
@@ -364,10 +364,10 @@ export default class ActorSheetWfrp4e extends ActorSheet {
         let owned = currentConditions.find(e => e.conditionId == condition.conditionId)
         if (owned) {
           condition.existing = true
-          condition.flags.wfrp4e.value = owned.conditionValue;
+          condition.flags.arrant.value = owned.conditionValue;
         }
         else if (condition.isNumberedCondition) {
-          condition.flags.wfrp4e.value = 0
+          condition.flags.arrant.value = 0
         }
       }
       sheetData.effects.conditions = conditions
@@ -440,14 +440,14 @@ export default class ActorSheetWfrp4e extends ActorSheet {
     let AP = sheetData.system.status.armour
 
     // Change out hit locations if using custom table
-    let table = game.wfrp4e.tables.findTable(sheetData.system.details.hitLocationTable.value)
+    let table = game.arrant.tables.findTable(sheetData.system.details.hitLocationTable.value)
     for (let loc in AP) {
       if (loc == "shield" || loc == "shieldDamage")
         continue
       if (table)
       {
         try {
-          let result  = table.results.find(r => r.getFlag("wfrp4e", "loc") == loc)
+          let result  = table.results.find(r => r.getFlag("arrant", "loc") == loc)
           if (result)
           AP[loc].label = game.i18n.localize(result.text)
           else
@@ -457,12 +457,12 @@ export default class ActorSheetWfrp4e extends ActorSheet {
         {
           ui.notifications.error("Error formatting armour section using Hit Location Table, using fallback implementation")
           WFRP_Utility.log("Hit Location Format Error: " + e, true)
-          AP[loc].label = game.i18n.localize(game.wfrp4e.config.locations[loc])
+          AP[loc].label = game.i18n.localize(game.arrant.config.locations[loc])
         }
       }
-      else if (game.wfrp4e.config.locations[loc]) // fallback implementation
+      else if (game.arrant.config.locations[loc]) // fallback implementation
       {
-        AP[loc].label = game.i18n.localize(game.wfrp4e.config.locations[loc])
+        AP[loc].label = game.i18n.localize(game.arrant.config.locations[loc])
       }
     }
   }
@@ -516,12 +516,12 @@ export default class ActorSheetWfrp4e extends ActorSheet {
  */
   spellDialog(spell, options = {}) {
     // Do not show the dialog for Petty spells, just cast it.
-    if (spell.lore.value == "petty" || spell.lore.value == game.i18n.localize("WFRP4E.MagicLores.petty"))
+    if (spell.lore.value == "petty" || spell.lore.value == game.i18n.localize("arrant.MagicLores.petty"))
       this.actor.setupCast(spell, options).then(setupData => {
         this.actor.castTest(setupData)
       });
     else {
-      renderTemplate("systems/wfrp4e/templates/dialog/cast-channel-dialog.hbs").then(dlg => {
+      renderTemplate("systems/arrant/templates/dialog/cast-channel-dialog.hbs").then(dlg => {
         new Dialog({
           title: game.i18n.localize("DIALOG.CastOrChannel"),
           content: dlg,
@@ -607,7 +607,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
     if (!this.options.editable) return;
 
     html.find("#configure-actor").click(ev => {
-      new game.wfrp4e.apps.ActorSettings(this.actor).render(true);
+      new game.arrant.apps.ActorSettings(this.actor).render(true);
     })
 
 
@@ -701,7 +701,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
       let dragData = JSON.parse(ev.originalEvent.dataTransfer.getData("text/plain"))
 
       let mount = await Actor.implementation.fromDropData(dragData)
-      if (game.wfrp4e.config.actorSizeNums[mount.details.size.value] < game.wfrp4e.config.actorSizeNums[this.actor.details.size.value])
+      if (game.arrant.config.actorSizeNums[mount.details.size.value] < game.arrant.config.actorSizeNums[this.actor.details.size.value])
         return ui.notifications.error(game.i18n.localize("MountError"))
 
       let mountData = {
@@ -787,7 +787,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
   }
   async _onUnarmedClick(ev) {
     ev.preventDefault();
-    let unarmed = game.wfrp4e.config.systemItems.unarmed
+    let unarmed = game.arrant.config.systemItems.unarmed
     this.actor.setupWeapon(unarmed).then(setupData => {
       this.actor.weaponTest(setupData)
     })
@@ -799,7 +799,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
   }
   async _onImprovisedClick(ev) {
     ev.preventDefault();
-    let improv = game.wfrp4e.config.systemItems.improv;
+    let improv = game.arrant.config.systemItems.improv;
     this.actor.setupWeapon(improv).then(setupData => {
       this.actor.weaponTest(setupData)
     })
@@ -807,7 +807,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
 
   async _onStompClick(ev) {
     ev.preventDefault();
-    let stomp = game.wfrp4e.config.systemItems.stomp;
+    let stomp = game.arrant.config.systemItems.stomp;
     this.actor.setupTrait(stomp).then(setupData => {
       this.actor.traitTest(setupData)
     })
@@ -940,7 +940,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
   }
 
   _onSkillSwitch(ev) {
-    this.actor.setFlag("wfrp4e", "showExtendedTests", !getProperty(this.actor, "flags.wfrp4e.showExtendedTests"))
+    this.actor.setFlag("arrant", "showExtendedTests", !getProperty(this.actor, "flags.arrant.showExtendedTests"))
     this.render(true)
   }
 
@@ -1014,20 +1014,20 @@ export default class ActorSheetWfrp4e extends ActorSheet {
     // Damage traits first
     for (let armourTrait of armourTraits) {
       // If APDamage flag doesn't exist
-      if (armourTrait && !getProperty(armourTrait, "flags.wfrp4e.APdamage")) setProperty(armourTrait, "flags.wfrp4e.APdamage", { head: 0, body: 0, lArm: 0, rArm: 0, lLeg: 0, rLeg: 0 })
+      if (armourTrait && !getProperty(armourTrait, "flags.arrant.APdamage")) setProperty(armourTrait, "flags.arrant.APdamage", { head: 0, body: 0, lArm: 0, rArm: 0, lLeg: 0, rLeg: 0 })
       if (armourTrait) {
         if (ev.button == 0) {
-          if (armourTrait.flags.wfrp4e.APdamage[location] != 0) {
-            armourTrait.flags.wfrp4e.APdamage[location]--;
+          if (armourTrait.flags.arrant.APdamage[location] != 0) {
+            armourTrait.flags.arrant.APdamage[location]--;
             usedTrait = true
           }
         }
         if (ev.button == 2) {
           // If AP Damage at location is maxed, go to the next iteration
-          if (armourTrait.flags.wfrp4e.APdamage[location] == Number(armourTrait.system.specification.value)) { continue }
+          if (armourTrait.flags.arrant.APdamage[location] == Number(armourTrait.system.specification.value)) { continue }
           // Else, damage that location
-          if (armourTrait.flags.wfrp4e.APdamage[location] != Number(armourTrait.system.specification.value)) {
-            armourTrait.flags.wfrp4e.APdamage[location]++;
+          if (armourTrait.flags.arrant.APdamage[location] != Number(armourTrait.system.specification.value)) {
+            armourTrait.flags.arrant.APdamage[location]++;
             usedTrait = true
           }
         }
@@ -1248,9 +1248,9 @@ export default class ActorSheetWfrp4e extends ActorSheet {
     
     let effect = this.actor.populateEffect(id);
     if (effect.trigger == "apply")
-      game.wfrp4e.utility.applyEffectToTarget(effect)
+      game.arrant.utility.applyEffectToTarget(effect)
     else {
-      game.wfrp4e.utility.runSingleEffect(effect, this.actor, effect.item, {actor : this.actor, effect, item : effect.item});
+      game.arrant.utility.runSingleEffect(effect, this.actor, effect.item, {actor : this.actor, effect, item : effect.item});
     }
   }
 
@@ -1261,10 +1261,10 @@ export default class ActorSheetWfrp4e extends ActorSheet {
   _onItemDelete(ev) {
     let li = $(ev.currentTarget).parents(".item"), itemId = li.attr("data-item-id");
     if (this.actor.items.get(itemId).name == "Boo") {
-      AudioHelper.play({ src: `${game.settings.get("wfrp4e", "soundPath")}squeek.wav` }, false)
+      AudioHelper.play({ src: `${game.settings.get("arrant", "soundPath")}squeek.wav` }, false)
       return
     }
-    renderTemplate('systems/wfrp4e/templates/dialog/delete-item-dialog.hbs').then(html => {
+    renderTemplate('systems/arrant/templates/dialog/delete-item-dialog.hbs').then(html => {
       new Dialog({
         title: game.i18n.localize("Delete Confirmation"), content: html, buttons: {
           Yes: {
@@ -1302,9 +1302,9 @@ export default class ActorSheetWfrp4e extends ActorSheet {
       item.system.equipped = !item.system.equipped;
       equippedState = item.system.equipped
       let newEqpPoints = item.system.twohanded.value ? 2 : 1
-      if (game.settings.get("wfrp4e", "limitEquippedWeapons") && this.actor.type != "vehicle")
+      if (game.settings.get("arrant", "limitEquippedWeapons") && this.actor.type != "vehicle")
         if (this.actor.equipPointsUsed + newEqpPoints > this.actor.equipPointsAvailable && equippedState) {
-          AudioHelper.play({ src: `${game.settings.get("wfrp4e", "soundPath")}/no.wav` }, false)
+          AudioHelper.play({ src: `${game.settings.get("arrant", "soundPath")}/no.wav` }, false)
           return ui.notifications.error(game.i18n.localize("ErrorLimitedWeapons"))
         }
       setProperty(item, "system.offhand.value", false)
@@ -1418,7 +1418,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
   }
   async _onConditionToggle(ev) {
     let condKey = $(ev.currentTarget).parents(".sheet-condition").attr("data-cond-id")
-    if (game.wfrp4e.config.statusEffects.find(e => e.id == condKey).flags.wfrp4e.value == null) {
+    if (game.arrant.config.statusEffects.find(e => e.id == condKey).flags.arrant.value == null) {
       if (this.actor.hasCondition(condKey))
         await this.actor.removeCondition(condKey)
       else 
@@ -1437,11 +1437,11 @@ export default class ActorSheetWfrp4e extends ActorSheet {
     let subspecies
     if (split.length > 1)
       subspecies = split[1].replace(")", "").trim()
-    let speciesKey = WFRP_Utility.findKey(species, game.wfrp4e.config.species) || species
+    let speciesKey = WFRP_Utility.findKey(species, game.arrant.config.species) || species
     let subspeciesKey = ""
     if (subspecies) {
-      for (let sub in game.wfrp4e.config.subspecies[speciesKey]) {
-        if (game.wfrp4e.config.subspecies[speciesKey][sub].name == subspecies) subspeciesKey = sub
+      for (let sub in game.arrant.config.subspecies[speciesKey]) {
+        if (game.arrant.config.subspecies[speciesKey][sub].name == subspecies) subspeciesKey = sub
       }
       if (!subspeciesKey)
         subspeciesKey = subspecies
@@ -1526,7 +1526,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
     ev.preventDefault();
     let li = $(ev.currentTarget).parents(".sheet-condition"),
       elementToAddTo = $(ev.currentTarget).parents(".condition-list"),
-      condkey = li.attr("data-cond-id"), expandData = await TextEditor.enrichHTML(`<h2>${game.wfrp4e.config.conditions[condkey]}</h2>` + game.wfrp4e.config.conditionDescriptions[condkey], {async: true})
+      condkey = li.attr("data-cond-id"), expandData = await TextEditor.enrichHTML(`<h2>${game.arrant.config.conditions[condkey]}</h2>` + game.arrant.config.conditionDescriptions[condkey], {async: true})
 
     if (elementToAddTo.hasClass("expanded")) {
       let summary = elementToAddTo.parents(".effects").children(".item-summary");
@@ -1534,15 +1534,15 @@ export default class ActorSheetWfrp4e extends ActorSheet {
     }
     else {
       let div = $(`<div class="item-summary">${expandData}</div>`);
-      if (game.wfrp4e.config.conditionScripts[condkey] && this.actor.hasCondition(condkey)) {
-        let button = $(`<br><br><a class="condition-script">${game.i18n.format("CONDITION.Apply", { condition: game.wfrp4e.config.conditions[condkey] })}</a>`)
+      if (game.arrant.config.conditionScripts[condkey] && this.actor.hasCondition(condkey)) {
+        let button = $(`<br><br><a class="condition-script">${game.i18n.format("CONDITION.Apply", { condition: game.arrant.config.conditions[condkey] })}</a>`)
         div.append(button)
       }
       elementToAddTo.after(div.hide());
       div.slideDown(200);
       div.on("click", ".condition-script", async ev => {
         ui.sidebar.activateTab("chat")
-        ChatMessage.create(await game.wfrp4e.config.conditionScripts[condkey](this.actor))
+        ChatMessage.create(await game.arrant.config.conditionScripts[condkey](this.actor))
       })
     }
     elementToAddTo.toggleClass("expanded")
@@ -1584,7 +1584,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
   _onMoneyIconClicked(ev) {
     ev.preventDefault();
     let money = this.actor.getItemTypes("money");
-    let newMoney = MarketWfrp4e.consolidateMoney(money.map(i => i.toObject()));
+    let newMoney = MarketArrant.consolidateMoney(money.map(i => i.toObject()));
     return this.actor.updateEmbeddedDocuments("Item", newMoney)
   }
 
@@ -1648,7 +1648,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
           });
       }
     }
-    data["img"] = "systems/wfrp4e/icons/blank.png";
+    data["img"] = "systems/arrant/icons/blank.png";
     data["name"] = `${game.i18n.localize("New")} ${data.type.capitalize()}`;
     this.actor.createEmbeddedDocuments("Item", [data]);
   }
@@ -1660,7 +1660,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
       effectData["duration.rounds"] = 1;
     }
     if (type == "applied") {
-      effectData["flags.wfrp4e.effectApplication"] = "apply"
+      effectData["flags.arrant.effectApplication"] = "apply"
     }
     this.actor.createEmbeddedDocuments("ActiveEffect", [effectData])
   }
@@ -1668,7 +1668,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
 
   _onInvokeClick(ev) {
     let id = $(ev.currentTarget).parents(".item").attr("data-item-id");
-    game.wfrp4e.utility.invokeEffect(this.actor, id)
+    game.arrant.utility.invokeEffect(this.actor, id)
   }
 
   //#endregion
@@ -1803,7 +1803,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
         data.details.experience.total += dragData.payload.exp;
         data.details.experience.log = this.actor._addToExpLog(dragData.payload.exp, "Character Creation", undefined, data.details.experience.total)
       }
-      for (let c in game.wfrp4e.config.characteristics) {
+      for (let c in game.arrant.config.characteristics) {
         data.characteristics[c].initial = dragData.payload.characteristics[c].value
       }
       return this.actor.update({ "data": data })
@@ -2002,9 +2002,9 @@ export default class ActorSheetWfrp4e extends ActorSheet {
       ev.currentTarget.children[0].classList.replace("fa-chevron-down", "fa-chevron-up")
       let html = ``
 
-      if (game.wfrp4e.config.groupAdvantageActions.length > 0)      
+      if (game.arrant.config.groupAdvantageActions.length > 0)
       {
-        game.wfrp4e.config.groupAdvantageActions.forEach((action, i) => {
+        game.arrant.config.groupAdvantageActions.forEach((action, i) => {
           html += `<div class="action">
           <a class="use-grp-adv" data-index="${i}">${action.name}</a>
           <p>${action.description}</p>
@@ -2035,7 +2035,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
   async _onUseGrpAdvAction(ev) {
       let index = ev.currentTarget.dataset.index;
 
-      let action = game.wfrp4e.config.groupAdvantageActions[index];
+      let action = game.arrant.config.groupAdvantageActions[index];
 
       if (action.cost > this.actor.status.advantage.value)
       {
@@ -2071,9 +2071,9 @@ export default class ActorSheetWfrp4e extends ActorSheet {
   _toggleSectionCollapse(ev)
   {
     let section = ev.currentTarget.dataset.section;
-    let collapsed = this.actor.getFlag("wfrp4e", "sheetCollapsed")?.[section]
+    let collapsed = this.actor.getFlag("arrant", "sheetCollapsed")?.[section]
 
-    this.actor.setFlag("wfrp4e", `sheetCollapsed.${section}`, !collapsed);
+    this.actor.setFlag("arrant", `sheetCollapsed.${section}`, !collapsed);
   }
 
   _toggleWeaponProperty(ev)
@@ -2138,7 +2138,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
       let effect = this.actor.populateEffect(effectId, itemId)
       let item = this.actor.items.get(itemId)
 
-      if (effect.flags.wfrp4e?.reduceQuantity && game.user.targets.size > 0) // Check targets as we don't want to decrease when we know it won't get applied
+      if (effect.flags.arrant?.reduceQuantity && game.user.targets.size > 0) // Check targets as we don't want to decrease when we know it won't get applied
       {
         if (item.quantity.value > 0)
           await item.update({"system.quantity.value" : item.quantity.value - 1})
@@ -2147,9 +2147,9 @@ export default class ActorSheetWfrp4e extends ActorSheet {
       }
 
       if ((item.range && item.range.value.toLowerCase() == game.i18n.localize("You").toLowerCase()) && (item.target && item.target.value.toLowerCase() == game.i18n.localize("You").toLowerCase()))
-        game.wfrp4e.utility.applyEffectToTarget(effect, [{ actor: this.actor }]) // Apply to caster (self) 
+        game.arrant.utility.applyEffectToTarget(effect, [{ actor: this.actor }]) // Apply to caster (self)
       else
-        game.wfrp4e.utility.applyEffectToTarget(effect)
+        game.arrant.utility.applyEffectToTarget(effect)
     })
 
     html.on("click", ".invoke-effect", async ev => {
@@ -2157,7 +2157,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
       let effectId = ev.target.dataset["effectId"]
       let itemId = ev.target.dataset["itemId"]
 
-      game.wfrp4e.utility.invokeEffect(this.actor, effectId, itemId)
+      game.arrant.utility.invokeEffect(this.actor, effectId, itemId)
     })
     // Respond to template button clicks
     html.on("mousedown", '.aoe-template', ev => {
@@ -2185,7 +2185,7 @@ export default class ActorSheetWfrp4e extends ActorSheet {
     let li = $(ev.currentTarget).parents(".item"),
       property = ev.target.text, // Proprety clicked on
       properties = mergeObject(WFRP_Utility.qualityList(), WFRP_Utility.flawList()), // Property names
-      propertyDescr = Object.assign(duplicate(game.wfrp4e.config.qualityDescriptions), game.wfrp4e.config.flawDescriptions); // Property descriptions
+      propertyDescr = Object.assign(duplicate(game.arrant.config.qualityDescriptions), game.arrant.config.flawDescriptions); // Property descriptions
     
     let item = this.actor.items.get(li.attr("data-item-id")).toObject()
 
@@ -2281,18 +2281,18 @@ export default class ActorSheetWfrp4e extends ActorSheet {
     let item = this.actor.items.get(li.attr("data-item-id"))
     // Breakdown weapon range bands for easy reference (clickable, see below)
     if (classes.hasClass("weapon-range")) {
-      if (!game.settings.get("wfrp4e", "mooRangeBands"))
+      if (!game.settings.get("arrant", "mooRangeBands"))
       expansionText =
-        `<a class="range-click" data-range="${item.range.bands[`${game.i18n.localize("Point Blank")}`].modifier}">${item.range.bands[`${game.i18n.localize("Point Blank")}`].range[0]} ${game.i18n.localize("yds")} - ${item.range.bands[`${game.i18n.localize("Point Blank")}`].range[1]} ${game.i18n.localize("yds")}: ${game.wfrp4e.config.difficultyLabels[game.wfrp4e.config.rangeModifiers["Point Blank"]]}</a><br>
-          <a class="range-click" data-range="${item.range.bands[`${game.i18n.localize("Short Range")}`].modifier}">${item.range.bands[`${game.i18n.localize("Short Range")}`].range[0]} ${game.i18n.localize("yds")} - ${item.range.bands[`${game.i18n.localize("Short Range")}`].range[1]} ${game.i18n.localize("yds")}: ${game.wfrp4e.config.difficultyLabels[game.wfrp4e.config.rangeModifiers["Short Range"]]}</a><br>
-          <a class="range-click" data-range="${item.range.bands[`${game.i18n.localize("Normal")}`].modifier}">${item.range.bands[`${game.i18n.localize("Normal")}`].range[0]} ${game.i18n.localize("yds")} - ${item.range.bands[`${game.i18n.localize("Normal")}`].range[1]} ${game.i18n.localize("yds")}: ${game.wfrp4e.config.difficultyLabels[game.wfrp4e.config.rangeModifiers["Normal"]]}</a><br>
-          <a class="range-click" data-range="${item.range.bands[`${game.i18n.localize("Long Range")}`].modifier}">${item.range.bands[`${game.i18n.localize("Long Range")}`].range[0]} ${game.i18n.localize("yds")} - ${item.range.bands[`${game.i18n.localize("Long Range")}`].range[1]} ${game.i18n.localize("yds")}: ${game.wfrp4e.config.difficultyLabels[game.wfrp4e.config.rangeModifiers["Long Range"]]}</a><br>
-          <a class="range-click" data-range="${item.range.bands[`${game.i18n.localize("Extreme")}`].modifier}">${item.range.bands[`${game.i18n.localize("Extreme")}`].range[0]} ${game.i18n.localize("yds")} - ${item.range.bands[`${game.i18n.localize("Extreme")}`].range[1]} ${game.i18n.localize("yds")}: ${game.wfrp4e.config.difficultyLabels[game.wfrp4e.config.rangeModifiers["Extreme"]]}</a><br>
+        `<a class="range-click" data-range="${item.range.bands[`${game.i18n.localize("Point Blank")}`].modifier}">${item.range.bands[`${game.i18n.localize("Point Blank")}`].range[0]} ${game.i18n.localize("yds")} - ${item.range.bands[`${game.i18n.localize("Point Blank")}`].range[1]} ${game.i18n.localize("yds")}: ${game.arrant.config.difficultyLabels[game.arrant.config.rangeModifiers["Point Blank"]]}</a><br>
+          <a class="range-click" data-range="${item.range.bands[`${game.i18n.localize("Short Range")}`].modifier}">${item.range.bands[`${game.i18n.localize("Short Range")}`].range[0]} ${game.i18n.localize("yds")} - ${item.range.bands[`${game.i18n.localize("Short Range")}`].range[1]} ${game.i18n.localize("yds")}: ${game.arrant.config.difficultyLabels[game.arrant.config.rangeModifiers["Short Range"]]}</a><br>
+          <a class="range-click" data-range="${item.range.bands[`${game.i18n.localize("Normal")}`].modifier}">${item.range.bands[`${game.i18n.localize("Normal")}`].range[0]} ${game.i18n.localize("yds")} - ${item.range.bands[`${game.i18n.localize("Normal")}`].range[1]} ${game.i18n.localize("yds")}: ${game.arrant.config.difficultyLabels[game.arrant.config.rangeModifiers["Normal"]]}</a><br>
+          <a class="range-click" data-range="${item.range.bands[`${game.i18n.localize("Long Range")}`].modifier}">${item.range.bands[`${game.i18n.localize("Long Range")}`].range[0]} ${game.i18n.localize("yds")} - ${item.range.bands[`${game.i18n.localize("Long Range")}`].range[1]} ${game.i18n.localize("yds")}: ${game.arrant.config.difficultyLabels[game.arrant.config.rangeModifiers["Long Range"]]}</a><br>
+          <a class="range-click" data-range="${item.range.bands[`${game.i18n.localize("Extreme")}`].modifier}">${item.range.bands[`${game.i18n.localize("Extreme")}`].range[0]} ${game.i18n.localize("yds")} - ${item.range.bands[`${game.i18n.localize("Extreme")}`].range[1]} ${game.i18n.localize("yds")}: ${game.arrant.config.difficultyLabels[game.arrant.config.rangeModifiers["Extreme"]]}</a><br>
           `
 
       //@HOUSE
       else {
-        game.wfrp4e.utility.logHomebrew("mooRangeBands")
+        game.arrant.utility.logHomebrew("mooRangeBands")
         expansionText =
         `<a class="range-click" data-range="${item.range.bands[`${game.i18n.localize("Point Blank")}`].modifier}">${item.range.bands[`${game.i18n.localize("Point Blank")}`].range[0]} ${game.i18n.localize("yds")} - ${item.range.bands[`${game.i18n.localize("Point Blank")}`].range[1]} ${game.i18n.localize("yds")}: ${item.range.bands[`${game.i18n.localize("Point Blank")}`].modifier}</a><br>
           <a class="range-click" data-range="${item.range.bands[`${game.i18n.localize("Short Range")}`].modifier}">${item.range.bands[`${game.i18n.localize("Short Range")}`].range[0]} ${game.i18n.localize("yds")} - ${item.range.bands[`${game.i18n.localize("Short Range")}`].range[1]} ${game.i18n.localize("yds")}: ${item.range.bands[`${game.i18n.localize("Short Range")}`].modifier}</a><br>
@@ -2308,15 +2308,15 @@ export default class ActorSheetWfrp4e extends ActorSheet {
     else if (classes.hasClass("weapon-group")) {
       let weaponGroup = ev.target.text;
       let weaponGroupKey = "";
-      weaponGroupKey = WFRP_Utility.findKey(weaponGroup, game.wfrp4e.config.weaponGroups);
-      expansionText = game.wfrp4e.config.weaponGroupDescriptions[weaponGroupKey];
+      weaponGroupKey = WFRP_Utility.findKey(weaponGroup, game.arrant.config.weaponGroups);
+      expansionText = game.arrant.config.weaponGroupDescriptions[weaponGroupKey];
     }
     // Expand the weapon's reach description
     else if (classes.hasClass("weapon-reach")) {
       let reach = ev.target.text;
       let reachKey;
-      reachKey = WFRP_Utility.findKey(reach, game.wfrp4e.config.weaponReaches);
-      expansionText = game.wfrp4e.config.reachDescription[reachKey];
+      reachKey = WFRP_Utility.findKey(reach, game.arrant.config.weaponReaches);
+      expansionText = game.arrant.config.reachDescription[reachKey];
     }
 
     // Toggle expansion 

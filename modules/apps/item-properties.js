@@ -1,10 +1,10 @@
-import WFRP_Utility from "../system/utility-wfrp4e";
+import WFRP_Utility from "../system/utility-arrant";
 
 export default class ItemProperties extends FormApplication {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.id = "item-properties";
-        options.template = "systems/wfrp4e/templates/apps/item-properties.hbs";
+        options.template = "systems/arrant/templates/apps/item-properties.hbs";
         options.height = "auto";
         options.width = 400;
         options.minimizable = true;
@@ -15,20 +15,20 @@ export default class ItemProperties extends FormApplication {
     constructor(...args) {
         super(...args)
         if (this.object.type == "weapon" || this.object.type == "ammunition"  || (this.object.type == "trait" && this.object.system.rollable.value)) {
-            this.qualities = foundry.utils.deepClone(game.wfrp4e.config.weaponQualities)
-            this.flaws = foundry.utils.deepClone(game.wfrp4e.config.weaponFlaws)
+            this.qualities = foundry.utils.deepClone(game.arrant.config.weaponQualities)
+            this.flaws = foundry.utils.deepClone(game.arrant.config.weaponFlaws)
         }
         else if (this.object.type == "armour" || (this.object.type == "trait" && !this.object.system.rollable.value)) {
-            this.qualities = foundry.utils.deepClone(game.wfrp4e.config.armorQualities)
-            this.flaws = foundry.utils.deepClone(game.wfrp4e.config.armorFlaws)
+            this.qualities = foundry.utils.deepClone(game.arrant.config.armorQualities)
+            this.flaws = foundry.utils.deepClone(game.arrant.config.armorFlaws)
         }
         else if (this.object.type == "trapping")
         {
             this.qualities = {}
             this.flaws = {}
         }
-        mergeObject(this.qualities, game.wfrp4e.config.itemQualities)
-        mergeObject(this.flaws, game.wfrp4e.config.itemFlaws)
+        mergeObject(this.qualities, game.arrant.config.itemQualities)
+        mergeObject(this.flaws, game.arrant.config.itemFlaws)
         if (this.object.type == "trait")
         {
             ui.notifications.warn(game.i18n.localize("PROPERTIES.TraitWarning"))
@@ -41,7 +41,7 @@ export default class ItemProperties extends FormApplication {
         data.qualities = Object.keys(this.qualities).map(i => {
             return {
                 name: this.qualities[i],
-                hasValue: game.wfrp4e.config.propertyHasValue[i],
+                hasValue: game.arrant.config.propertyHasValue[i],
                 key: i,
                 existing: this.object.originalProperties.qualities[i],
             }
@@ -50,7 +50,7 @@ export default class ItemProperties extends FormApplication {
         data.flaws = Object.keys(this.flaws).map(i => {
             return {
                 name: this.flaws[i],
-                hasValue: game.wfrp4e.config.propertyHasValue[i],
+                hasValue: game.arrant.config.propertyHasValue[i],
                 key: i,
                 existing: this.object.originalProperties.flaws[i],
             }

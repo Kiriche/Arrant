@@ -2,19 +2,19 @@
   "_id": "DRO5DLF6UcfkvNSh",
   "name": "Lore ()",
   "type": "skill",
-  "img": "modules/wfrp4e-core/icons/skills/adv-skill-int.png",
+  "img": "modules/arrant-core/icons/skills/adv-skill-int.png",
   "effects": [],
   "sort": 0,
   "flags": {
     "core": {
-      "sourceId": "Compendium.wfrp4e-core.skills.DRO5DLF6UcfkvNSh"
+      "sourceId": "Compendium.arrant-core.skills.DRO5DLF6UcfkvNSh"
     }
   },
   "system": {
     "description": {
       "type": "String",
       "label": "Description",
-      "value": "<p>@UUID[Compendium.wfrp4e-core.journal-entries.6zOdTLv3YeYeJ4hR.JournalEntryPage.F0RPpWALOBy2zdyc]{Lore}</p>"
+      "value": "<p>@UUID[Compendium.arrant-core.journal-entries.6zOdTLv3YeYeJ4hR.JournalEntryPage.F0RPpWALOBy2zdyc]{Lore}</p>"
     },
     "gmdescription": {
       "type": "String",
@@ -59,7 +59,7 @@
     "v5mZIet2Ld0KcxRD": 3
   },
   "_stats": {
-    "systemId": "wfrp4e",
+    "systemId": "arrant",
     "systemVersion": "6.5.9",
     "coreVersion": "10.303",
     "createdTime": 1689878646669,

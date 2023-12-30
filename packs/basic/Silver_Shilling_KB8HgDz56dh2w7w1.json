@@ -1,12 +1,12 @@
 {
   "name": "Silver Shilling",
   "type": "money",
-  "img": "modules/wfrp4e-core/icons/currency/silvershilling.png",
+  "img": "modules/arrant-core/icons/currency/silvershilling.png",
   "effects": [],
   "flags": {
     "_sheetTab": "description",
     "core": {
-      "sourceId": "Compendium.wfrp4e-core.trappings.KB8HgDz56dh2w7w1"
+      "sourceId": "Compendium.arrant-core.trappings.KB8HgDz56dh2w7w1"
     }
   },
   "system": {
@@ -51,7 +51,7 @@
     }
   },
   "_stats": {
-    "systemId": "wfrp4e",
+    "systemId": "arrant",
     "systemVersion": "6.5.9",
     "coreVersion": "10.303",
     "createdTime": 1663627495184,

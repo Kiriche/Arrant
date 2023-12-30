@@ -20,19 +20,19 @@ If applicable, add screenshots to help explain your problem.
 PLEASE PROVIDE YOUR FOUNDRY, SYSTEM, and MODULE VERSIONS (where applicable) 
 
 Foundry:
-wfrp4e:
-wfrp4e-core:
-wfrp4e-starter-set:
-wfrp4e-rnhd:
-wfrp4e-eis:
-wfrp4e-ua1:
-wfrp4e-dotr:
-wfrp4e-archives1:
-wfrp4e-middenheim:
-wfrp4e-archives1:
-wfrp4e-pbtt:
-wfrp4e-altdorf:
-wfrp4e-ua2:
-wfrp4e-owb1:
-wfrp4e-horned-rat:
-wfrp4e-empire-ruins:
+arrant:
+arrant-core:
+arrant-starter-set:
+arrant-rnhd:
+arrant-eis:
+arrant-ua1:
+arrant-dotr:
+arrant-archives1:
+arrant-middenheim:
+arrant-archives1:
+arrant-pbtt:
+arrant-altdorf:
+arrant-ua2:
+arrant-owb1:
+arrant-horned-rat:
+arrant-empire-ruins:

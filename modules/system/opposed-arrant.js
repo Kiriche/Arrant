@@ -1,7 +1,7 @@
-import WFRP_Audio from "./audio-wfrp4e.js";
-import WFRP_Utility from "./utility-wfrp4e.js";
+import WFRP_Audio from "./audio-arrant.js";
+import WFRP_Utility from "./utility-arrant.js";
 
-import ChatWFRP from "./chat-wfrp4e.js";
+import ChatWFRP from "./chat-arrant.js";
 import OpposedTest from "./opposed-test.js";
 
 /**
@@ -50,7 +50,7 @@ export default class OpposedWFRP {
 
   get defenderTest() {
     if (this.unopposed) {
-      return new game.wfrp4e.rolls.CharacteristicTest({
+      return new game.arrant.rolls.CharacteristicTest({
         item: "ws",
         SL: 0,
         target: 0,
@@ -130,7 +130,7 @@ export default class OpposedWFRP {
             ${game.i18n.format("ROLL.Targeting", {attacker: ((attacker.hidden) ? "???" : attacker.name), defender: defender ? defender.name : "???"})}
           </div>
           <div class = "opposed-tokens">
-          <a class = "attacker"><img src="${((attacker.hidden) ? "systems/wfrp4e/tokens/unknown.png" : attacker.texture.src)}" width="50" height="50"/></a>
+          <a class = "attacker"><img src="${((attacker.hidden) ? "systems/arrant/tokens/unknown.png" : attacker.texture.src)}" width="50" height="50"/></a>
           ${defenderImg}
           </div>
           <div class="unopposed-button" data-target="true" title="${game.i18n.localize("Unopposed")}"><a><i class="fas fa-arrow-down"></i></a></div>`
@@ -146,7 +146,7 @@ export default class OpposedWFRP {
         speaker: { alias: game.i18n.localize("CHAT.OpposedTest") },
         whisper: this.options.whisper,
         blind: this.options.blind,
-        "flags.wfrp4e.opposeData": this.data
+        "flags.arrant.opposeData": this.data
     }
 
     if (this.message) {
@@ -163,7 +163,7 @@ export default class OpposedWFRP {
   }
 
   async updateMessageFlags() {
-    let updateData = { "flags.wfrp4e.opposeData": this.data }
+    let updateData = { "flags.arrant.opposeData": this.data }
     if (this.message && game.user.isGM) {
       await this.message.update(updateData)
     }
@@ -179,12 +179,12 @@ export default class OpposedWFRP {
     let opposeResult = this.opposedTest.result
     let options = this.options;
     opposeResult.hideData = true;
-    let html = await renderTemplate("systems/wfrp4e/templates/chat/roll/opposed-result.hbs", opposeResult)
+    let html = await renderTemplate("systems/arrant/templates/chat/roll/opposed-result.hbs", opposeResult)
     let chatOptions = {
       user: game.user.id,
       content: html,
-      "flags.wfrp4e.opposeTestData": opposeData,
-      "flags.wfrp4e.opposeId": this.message.id,
+      "flags.arrant.opposeTestData": opposeData,
+      "flags.arrant.opposeId": this.message.id,
       whisper: options.whisper,
       blind: options.blind,
     }
@@ -271,22 +271,22 @@ export default class OpposedWFRP {
       messageId = button.parents('.message').attr("data-message-id"),
       message = game.messages.get(messageId);
 
-    if (game.wfrp4e.oppose && !game.wfrp4e.oppose.attackerMessage) {
-      delete game.wfrp4e.oppose;
+    if (game.arrant.oppose && !game.arrant.oppose.attackerMessage) {
+      delete game.arrant.oppose;
     }
 
     // Opposition already exists - click was defender
-    if (game.wfrp4e.oppose) {
-      await game.wfrp4e.oppose.setDefender(message);
-      await game.wfrp4e.oppose.renderOpposedStart() // Rerender opposed start with new message
-      await game.wfrp4e.oppose.computeOpposeResult();
-      delete game.wfrp4e.oppose;
+    if (game.arrant.oppose) {
+      await game.arrant.oppose.setDefender(message);
+      await game.arrant.oppose.renderOpposedStart() // Rerender opposed start with new message
+      await game.arrant.oppose.computeOpposeResult();
+      delete game.arrant.oppose;
     }
     // No opposition - click was attacker
     else {
-      game.wfrp4e.oppose = new OpposedWFRP()
-      await game.wfrp4e.oppose.setAttacker(message);
-      await game.wfrp4e.oppose.renderOpposedStart()
+      game.arrant.oppose = new OpposedWFRP()
+      await game.arrant.oppose.setAttacker(message);
+      await game.arrant.oppose.renderOpposedStart()
     }
   }
 

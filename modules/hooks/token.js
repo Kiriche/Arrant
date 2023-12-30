@@ -1,11 +1,11 @@
-import WFRP_Utility from "../system/utility-wfrp4e.js";
+import WFRP_Utility from "../system/utility-arrant.js";
 import passengerRender from "../system/passengerRender.js"
 
 export default function() {
   // Adds tooltips to conditions in the condition menu
   Hooks.on("renderTokenHUD", async (obj, html) => {
     for (let condition of html.find("img.effect-control")) {
-      condition.title = game.wfrp4e.config.conditions[condition.dataset["statusId"]]
+      condition.title = game.arrant.config.conditions[condition.dataset["statusId"]]
       if (condition.dataset["statusId"] == "dead")
         condition.title = "Dead"
     }
@@ -34,7 +34,7 @@ export default function() {
           })
         }
         mountToken = (await scene.createEmbeddedDocuments("Token", [mountToken]))[0]
-        await token.update({"flags.wfrp4e.mount" : mountToken.id }) // place mount id in token so when it moves, the mount moves (see updateToken)
+        await token.update({"flags.arrant.mount" : mountToken.id }) // place mount id in token so when it moves, the mount moves (see updateToken)
         token.zIndex = 1 // Ensure rider is on top
 
         if (!mountToken.actorLink)
@@ -54,11 +54,11 @@ export default function() {
       let scene = token.parent
       if (game.user.isUniqueGM)
       {
-        if (hasProperty(token, "flags.wfrp4e.mount") && (updateData.x || updateData.y) && scene.id == canvas.scene.id)
+        if (hasProperty(token, "flags.arrant.mount") && (updateData.x || updateData.y) && scene.id == canvas.scene.id)
         {
           if (canvas.tokens.get(token.id).actor.isMounted)
           {
-            let mountId = token.getFlag("wfrp4e", "mount")
+            let mountId = token.getFlag("arrant", "mount")
             let tokenUpdate = {_id : mountId, x : token.x, y: token.y }
             if (token.actor.details.size.value == token.actor.mount.details.size.value)
             {
@@ -78,7 +78,7 @@ export default function() {
   })
 
   Hooks.on("refreshToken", token => {
-    if (token.document?.getFlag("wfrp4e", "hidePassengers"))
+    if (token.document?.getFlag("arrant", "hidePassengers"))
       token.passengers?.destroy();
     else
       passengerRender(token);
@@ -108,7 +108,7 @@ export default function() {
 
         let mountee = hud.object.document;
         let mounter = hud.object.document.id == token1.id ? token2 : token1
-        if (game.wfrp4e.config.actorSizeNums[mounter.actor.details.size.value] > game.wfrp4e.config.actorSizeNums[mountee.actor.details.size.value])
+        if (game.arrant.config.actorSizeNums[mounter.actor.details.size.value] > game.arrant.config.actorSizeNums[mountee.actor.details.size.value])
         {
           let temp = mountee;
           mountee = mounter
@@ -125,7 +125,7 @@ export default function() {
             ui.notifications.warn(game.i18n.localize("WarnUnlinkedMount"))
         }
         mounter.actor.update({ "system.status.mount.id": mountee.actorId, "system.status.mount.mounted": true, "system.status.mount.isToken": !mountee.actorLink, "system.status.mount.tokenData": tokenData })
-        canvas.scene.updateEmbeddedDocuments("Token", [{ "flags.wfrp4e.mount": mountee.id, _id: mounter.id }, { _id: mounter.id, x: mountee.x, y: mountee.y }])
+        canvas.scene.updateEmbeddedDocuments("Token", [{ "flags.arrant.mount": mountee.id, _id: mounter.id }, { _id: mounter.id, x: mountee.x, y: mountee.y }])
         mounter.zIndex = 1 // Ensure rider is on top
 
 
@@ -142,18 +142,18 @@ export default function() {
       }
 
       const button = $(
-        `<div class='control-icon ${hud.object.document.getFlag("wfrp4e", "hidePassengers") ? "active" : ""}'><i class="fa-solid fa-user-slash"></i></div>`
+        `<div class='control-icon ${hud.object.document.getFlag("arrant", "hidePassengers") ? "active" : ""}'><i class="fa-solid fa-user-slash"></i></div>`
       );
       button.attr(
         'title',
-        game.i18n.localize("WFRP4E.TogglePassengers")
+        game.i18n.localize("arrant.TogglePassengers")
       );
 
       button.mousedown(event => {
-        let newState = !hud.object.document.getFlag("wfrp4e", "hidePassengers")
+        let newState = !hud.object.document.getFlag("arrant", "hidePassengers")
         event.currentTarget.classList.toggle("active", newState)
         
-        hud.object.document.setFlag("wfrp4e", "hidePassengers", newState).then(() => {
+        hud.object.document.setFlag("arrant", "hidePassengers", newState).then(() => {
           // newState ? hud.object.passengers?.destroy() : passengerRender(hud.object);
         })
       })

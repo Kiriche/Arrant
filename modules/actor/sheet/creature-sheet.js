@@ -1,16 +1,16 @@
 
-import ActorSheetWfrp4e from "./actor-sheet.js";
+import ActorSheetArrant from "./actor-sheet.js";
 
 /**
  * Provides the specific interaction handlers for Creature Sheets.
  *
- * ActorSheetWfrp4eCreature is assigned to Creature type actors, which have a very 
+ * ActorSheetArrantCreature is assigned to Creature type actors, which have a very
  * different layout in their sheet compared to the others, requiring different 
  * functionality in the main tab (creature overview), as well as the notes tab, 
  * where the user excludes traits.
  * 
  */
-export default class ActorSheetWfrp4eCreature extends ActorSheetWfrp4e {
+export default class ActorSheetArrantCreature extends ActorSheetArrant {
 
 
   // V10 - Dialogs need focus for default button to work with the Enter key. Hovering over traits in the overview focuses on them (required for delete key to work)
@@ -21,7 +21,7 @@ export default class ActorSheetWfrp4eCreature extends ActorSheetWfrp4e {
     const options = super.defaultOptions;
     mergeObject(options,
       {
-        classes: options.classes.concat(["wfrp4e", "actor", "creature-sheet"]),
+        classes: options.classes.concat(["arrant", "actor", "creature-sheet"]),
         width: 610,
         height: 740,
       });
@@ -34,8 +34,8 @@ export default class ActorSheetWfrp4eCreature extends ActorSheetWfrp4e {
    * @type {String}
    */
   get template() {
-    if (!game.user.isGM && this.actor.limited) return "systems/wfrp4e/templates/actors/actor-limited.hbs";
-    return "systems/wfrp4e/templates/actors/creature/creature-sheet.hbs";
+    if (!game.user.isGM && this.actor.limited) return "systems/arrant/templates/actors/actor-limited.hbs";
+    return "systems/arrant/templates/actors/creature/creature-sheet.hbs";
   }
 
 

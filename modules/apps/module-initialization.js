@@ -20,7 +20,7 @@ export default class ModuleInitializer extends Dialog {
                     label: "Update",
                     condition : game.settings.get(module, "initialized"),
                     callback: async () => {
-                        let updater = await game.wfrp4e.apps.ModuleUpdater.create(game.modules.get(module), this)
+                        let updater = await game.arrant.apps.ModuleUpdater.create(game.modules.get(module), this)
                         updater.render(true)
                     }
                 },
@@ -108,9 +108,9 @@ export default class ModuleInitializer extends Dialog {
         await collection.documentClass.create(this._addFolder(newDocuments))
         if (existingDocuments.length)
         {
-            game.wfrp4e.utility.log("Pre Existing Documents: ", null, {args : existingDocuments})
+            game.arrant.utility.log("Pre Existing Documents: ", null, {args : existingDocuments})
             existingDocuments = await new Promise(resolve => new ModuleDocumentResolver(existingDocuments, {resolve}).render(true));
-            game.wfrp4e.utility.log("Post Existing Documents: ", null, {args : existingDocuments})
+            game.arrant.utility.log("Post Existing Documents: ", null, {args : existingDocuments})
         }
         this._addFolder(existingDocuments)
         for (let doc of existingDocuments)
@@ -188,7 +188,7 @@ class ModuleDocumentResolver extends FormApplication
         options.resizable = true;
         options.height = 600
         options.width = 400
-        options.template = "systems/wfrp4e/templates/apps/document-resolver.hbs";
+        options.template = "systems/arrant/templates/apps/document-resolver.hbs";
         options.classes.push("document-resolver");
         options.title = game.i18n.localize("INIT.ResolveDuplicates");
         return options;

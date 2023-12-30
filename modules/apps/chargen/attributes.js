@@ -4,7 +4,7 @@ const Step = {NOT_STARTED : 0, FIRST_ROLL : 1, SWAPPING : 2, REROLL : 3, ALLOCAT
 
 export class AttributesStage extends ChargenStage {
 
-  journalId = "Compendium.wfrp4e-core.journal-entries.IQ0PgoJihQltCBUU.JournalEntryPage.GaZa9sU4KjKDswMr"
+  journalId = "Compendium.arrant-core.journal-entries.IQ0PgoJihQltCBUU.JournalEntryPage.GaZa9sU4KjKDswMr"
   static get defaultOptions() {
   const options = super.defaultOptions;
     options.resizable = true;
@@ -17,7 +17,7 @@ export class AttributesStage extends ChargenStage {
   }
 
   static get title() { return game.i18n.localize("CHARGEN.StageAttributes"); }
-  get template() { return "systems/wfrp4e/templates/apps/chargen/attributes.hbs"; }
+  get template() { return "systems/arrant/templates/apps/chargen/attributes.hbs"; }
 
 
 
@@ -87,9 +87,9 @@ export class AttributesStage extends ChargenStage {
     let species = this.data.species;
     let subspecies = this.data.subspecies;
 
-    let characteristicFormulae = game.wfrp4e.config.speciesCharacteristics[species];
-    if (subspecies && game.wfrp4e.config.subspecies[species][subspecies].characteristics)
-      characteristicFormulae = game.wfrp4e.config.subspecies[species][subspecies].characteristics;
+    let characteristicFormulae = game.arrant.config.speciesCharacteristics[species];
+    if (subspecies && game.arrant.config.subspecies[species][subspecies].characteristics)
+      characteristicFormulae = game.arrant.config.subspecies[species][subspecies].characteristics;
 
     for (let ch in this.context.characteristics) {
       let [roll, bonus] = characteristicFormulae[ch].split("+").map(i => i.trim());
@@ -103,10 +103,10 @@ export class AttributesStage extends ChargenStage {
 
     this.context.rolledCharacteristics = duplicate(this.context.characteristics) // Used to restore roll if user goes back a step
 
-    this.context.movement = game.wfrp4e.config.speciesMovement[species],
-      this.context.meta.fate.base = game.wfrp4e.config.speciesFate[species],
-      this.context.meta.resilience.base = game.wfrp4e.config.speciesRes[species],
-      this.context.meta.extra = game.wfrp4e.config.speciesExtra[species];
+    this.context.movement = game.arrant.config.speciesMovement[species],
+      this.context.meta.fate.base = game.arrant.config.speciesFate[species],
+      this.context.meta.resilience.base = game.arrant.config.speciesRes[species],
+      this.context.meta.extra = game.arrant.config.speciesExtra[species];
 
 
     this.calculateTotals();
@@ -116,7 +116,7 @@ export class AttributesStage extends ChargenStage {
       <div class="flexrow">
         <div>
           ${Object.keys(this.context.characteristics)
-            .map(i => game.wfrp4e.config.characteristicsAbbrev[i])
+            .map(i => game.arrant.config.characteristicsAbbrev[i])
             .join("</div><div>")
           }
         </div>
@@ -207,7 +207,7 @@ export class AttributesStage extends ChargenStage {
     this.context.characteristics[ch1].roll = ch2Roll;
     this.context.characteristics[ch2].roll = ch1Roll;
 
-    this.updateMessage("SwappedCharacteristics", {ch1 : game.wfrp4e.config.characteristics[ch1], ch2: game.wfrp4e.config.characteristics[ch2]})
+    this.updateMessage("SwappedCharacteristics", {ch1 : game.arrant.config.characteristics[ch1], ch2: game.arrant.config.characteristics[ch2]})
 
     this.render(true);
   }
@@ -290,7 +290,7 @@ export class AttributesStage extends ChargenStage {
     this.data.fate.allotted = this.context.meta.fate.allotted;
     this.data.resilience.base = this.context.meta.resilience.base;
     this.data.resilience.allotted = this.context.meta.resilience.allotted;
-    this.data.move = game.wfrp4e.config.speciesMovement[this.data.species];
+    this.data.move = game.arrant.config.speciesMovement[this.data.species];
     this.data.exp.characteristics = this.context.exp;
     super._updateObject(ev, formData)
   }

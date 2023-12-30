@@ -1,15 +1,15 @@
 
-import WFRP_Utility from "../system/utility-wfrp4e.js";
+import WFRP_Utility from "../system/utility-arrant.js";
 
 
 
-/** Class for the WFRP4e Item Browser that collects all items in the world and compendia and
+/** Class for the arrant Item Browser that collects all items in the world and compendia and
  *  offers functionality to filter through them to search easily. By default, you can filter
  *  through the name and description, as well as item type. If an item type is selected, more
  *  filters are shown that only apply to those types (mostly). If you select Weapon - you can
  *  then select which weapon group, reach, etc. 
 */
-export default class BrowserWfrp4e extends Application {
+export default class BrowserArrant extends Application {
   constructor(app) {
     super(app)
 
@@ -95,16 +95,16 @@ export default class BrowserWfrp4e extends Application {
     this.gods = [];
     this.careerTiers = [1, 2, 3, 4]
     this.statusTiers = ["Gold", "Silver", "Brass"]
-    this.lores = foundry.utils.deepClone(game.wfrp4e.config.magicLores)
+    this.lores = foundry.utils.deepClone(game.arrant.config.magicLores)
     this.lores["arcane"] = game.i18n.localize("NAME.Arcane");
 
   }
 
   static get defaultOptions() {
     const options = super.defaultOptions;
-    options.id = "wfrp4e-browser";
-    options.template = "systems/wfrp4e/templates/browser/browser.hbs"
-    options.classes.push("wfrp4e", "wfrp-browser");
+    options.id = "arrant-browser";
+    options.template = "systems/arrant/templates/browser/browser.hbs"
+    options.classes.push("arrant", "arrant-browser");
     options.resizable = true;
     options.height = 900;
     options.width = 600;
@@ -142,21 +142,21 @@ export default class BrowserWfrp4e extends Application {
     let data = super.getData();
     data.filters = this.filters;
     data.relations = ["<", "<=", "==", ">=", ">"]
-    data.availability =  game.wfrp4e.config.availability;
-    data.ammunitionGroups =  game.wfrp4e.config.ammunitionGroups;
-    data.locations = ["WFRP4E.Locations.head", "WFRP4E.Locations.body", "WFRP4E.Locations.arm", "WFRP4E.Locations.leg"].map(game.i18n.localize.bind(game.i18n))
-    data.mutationTypes =  game.wfrp4e.config.mutationTypes;
-    data.armorTypes =  game.wfrp4e.config.armorTypes;
+    data.availability =  game.arrant.config.availability;
+    data.ammunitionGroups =  game.arrant.config.ammunitionGroups;
+    data.locations = ["arrant.Locations.head", "arrant.Locations.body", "arrant.Locations.arm", "arrant.Locations.leg"].map(game.i18n.localize.bind(game.i18n))
+    data.mutationTypes =  game.arrant.config.mutationTypes;
+    data.armorTypes =  game.arrant.config.armorTypes;
     data.gods = this.gods;
-    data.weaponGroups =  game.wfrp4e.config.weaponGroups
-    data.weaponReaches =  game.wfrp4e.config.weaponReaches;
-    data.talentMax =  game.wfrp4e.config.talentMax;
-    data.trappingTypes =  game.wfrp4e.config.trappingTypes;
+    data.weaponGroups =  game.arrant.config.weaponGroups
+    data.weaponReaches =  game.arrant.config.weaponReaches;
+    data.talentMax =  game.arrant.config.talentMax;
+    data.trappingTypes =  game.arrant.config.trappingTypes;
     data.lores = this.lores;
-    data.characteristics =  game.wfrp4e.config.characteristicsAbbrev;
-    data.skillTypes =  game.wfrp4e.config.skillTypes
-    data.skillGroup =  game.wfrp4e.config.skillGroup
-    data.prayerTypes =  game.wfrp4e.config.prayerTypes;
+    data.characteristics =  game.arrant.config.characteristicsAbbrev;
+    data.skillTypes =  game.arrant.config.skillTypes
+    data.skillGroup =  game.arrant.config.skillGroup
+    data.prayerTypes =  game.arrant.config.prayerTypes;
     data.careerGroups = this.careerGroups;
     data.careerClasses = this.careerClasses
     data.careerTiers = this.careerTiers;
@@ -179,16 +179,16 @@ export default class BrowserWfrp4e extends Application {
     let packCount = game.packs.size;
     let packCounter = 0;
 
-    game.wfrp4e.DocumentCache = game.wfrp4e.DocumentCache || {};
+    game.arrant.DocumentCache = game.arrant.DocumentCache || {};
   
     async function cacheDocuments(pack, documents) {
-      game.wfrp4e.DocumentCache[pack.collection] = documents;
+      game.arrant.DocumentCache[pack.collection] = documents;
     }
     
   
     async function getCachedDocuments(pack) {
-      if (game.wfrp4e.DocumentCache.hasOwnProperty(pack.collection)) {
-        return game.wfrp4e.DocumentCache[pack.collection];
+      if (game.arrant.DocumentCache.hasOwnProperty(pack.collection)) {
+        return game.arrant.DocumentCache[pack.collection];
       }
     
       const documents = await pack.getDocuments();
@@ -342,7 +342,7 @@ export default class BrowserWfrp4e extends Application {
 
           case "melee":
           case "ranged":
-            filteredItems = filteredItems.filter(i => i.type != "weapon" || filter ==  game.wfrp4e.config.groupToType[i.system.weaponGroup.value])
+            filteredItems = filteredItems.filter(i => i.type != "weapon" || filter ==  game.arrant.config.groupToType[i.system.weaponGroup.value])
             break;
           case "weaponRange":
             filteredItems = filteredItems.filter(i => !i.system.range || (i.system.range.value && !isNaN(i.system.range.value) && this.filters.dynamic[filter].relation && (0, eval)(`${i.system.range.value}${this.filters.dynamic[filter].relation}${this.filters.dynamic[filter].value}`)))
@@ -545,12 +545,12 @@ export default class BrowserWfrp4e extends Application {
 }
 
 Hooks.on("renderCompendiumDirectory", (app, html, data) => {
-  if (game.user.isGM || game.settings.get("wfrp4e", "playerBrowser")) {
+  if (game.user.isGM || game.settings.get("arrant", "playerBrowser")) {
     const button = $(`<button class="browser-btn" data-tooltip="${game.i18n.localize("BROWSER.Button")}"><i class="fa-solid fa-filter"></i></button>`);
     html.find(".header-actions").append(button);
 
     button.click(ev => {
-      new BrowserWfrp4e().render(true)
+      new BrowserArrant().render(true)
     })
   }
 })

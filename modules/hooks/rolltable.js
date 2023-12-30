@@ -6,6 +6,6 @@ export default function() {
 
     Hooks.on("preCreateRollTable", (table, data) => {
         if (!data.img)
-            table.updateSource({"img" : "systems/wfrp4e/ui/buttons/d10.webp"})
+            table.updateSource({"img" : "systems/arrant/ui/buttons/d10.webp"})
     })
 }

@@ -1,9 +1,9 @@
-import WFRP_Utility from "./utility-wfrp4e";
+import WFRP_Utility from "./utility-arrant";
 
 export default class Migration {
 
   static async migrateWorld() {
-    ui.notifications.info(`Applying WFRP4e System Migration for version ${game.system.version}. Please be patient and do not close your game or shut down your server.`, { permanent: true });
+    ui.notifications.info(`Applying arrant System Migration for version ${game.system.version}. Please be patient and do not close your game or shut down your server.`, { permanent: true });
 
 
       let updates = [];
@@ -16,7 +16,7 @@ export default class Migration {
             console.log(`Migrating Journal document ${i.name}`);
           }
         } catch (err) {
-          err.message = `Failed wfrp4e system migration for Journal ${i.name}: ${err.message}`;
+          err.message = `Failed arrant system migration for Journal ${i.name}: ${err.message}`;
           console.error(err);
         }
       }
@@ -32,7 +32,7 @@ export default class Migration {
             console.log(`Migrating Table document ${i.name}`);
           }
         } catch (err) {
-          err.message = `Failed wfrp4e system migration for RollTable ${i.name}: ${err.message}`;
+          err.message = `Failed arrant system migration for RollTable ${i.name}: ${err.message}`;
           console.error(err);
         }
       }
@@ -54,7 +54,7 @@ export default class Migration {
           await i.deleteEmbeddedDocuments("ActiveEffect", loreIds);
         }
       } catch (err) {
-        err.message = `Failed wfrp4e system migration for Item ${i.name}: ${err.message}`;
+        err.message = `Failed arrant system migration for Item ${i.name}: ${err.message}`;
         console.error(err);
       }
     }
@@ -86,7 +86,7 @@ export default class Migration {
           await a.deleteEmbeddedDocuments("ActiveEffect", loreIds);
         }
       } catch (err) {
-        err.message = `Failed wfrp4e system migration for Actor ${a.name}: ${err.message}`;
+        err.message = `Failed arrant system migration for Actor ${a.name}: ${err.message}`;
         console.error(err);
       }
     }
@@ -103,13 +103,13 @@ export default class Migration {
     //       s.tokens.contents.forEach(t => t._actor = null);
     //     }
     //   } catch (err) {
-    //     err.message = `Failed wfrp4e system migration for Scene ${s.name}: ${err.message}`;
+    //     err.message = `Failed arrant system migration for Scene ${s.name}: ${err.message}`;
     //     console.error(err);
     //   }
     // }
 
     // // Set the migration as complete
-    ui.notifications.info(`wfrp4e System Migration to version ${game.system.version} completed!`, { permanent: true });
+    ui.notifications.info(`arrant System Migration to version ${game.system.version} completed!`, { permanent: true });
   };
 
   /* -------------------------------------------- */
@@ -155,7 +155,7 @@ export default class Migration {
 
       // Handle migration failures
       catch (err) {
-        err.message = `Failed wfrp4e system migration for document ${doc.name} in pack ${pack.collection}: ${err.message}`;
+        err.message = `Failed arrant system migration for document ${doc.name} in pack ${pack.collection}: ${err.message}`;
         console.error(err);
       }
     }
@@ -335,12 +335,12 @@ export default class Migration {
     actorData.data = filterObject(actorData.data, model);
 
     // Scrub system flags
-    const allowedFlags = CONFIG.wfrp4e.allowedActorFlags.reduce((obj, f) => {
+    const allowedFlags = CONFIG.arrant.allowedActorFlags.reduce((obj, f) => {
       obj[f] = null;
       return obj;
     }, {});
-    if (actorData.flags.wfrp4e) {
-      actorData.flags.wfrp4e = filterObject(actorData.flags.wfrp4e, allowedFlags);
+    if (actorData.flags.arrant) {
+      actorData.flags.arrant = filterObject(actorData.flags.arrant, allowedFlags);
     }
 
     // Return the scrubbed data
@@ -480,7 +480,7 @@ export default class Migration {
 
   static removeLoreEffects(docData)
   {
-    let loreEffects = (docData.effects || []).filter(i => i.flags.wfrp4e?.lore)
+    let loreEffects = (docData.effects || []).filter(i => i.flags.arrant?.lore)
     if (loreEffects.length)
     {
       WFRP_Utility.log("Removing lore effects for " + docData.name, true, loreEffects);
@@ -550,11 +550,11 @@ export default class Migration {
 
   static _loreEffectIds(document)
   {
-    return document.effects.filter(e => e.flags.wfrp4e?.lore).map(i => i.id)
+    return document.effects.filter(e => e.flags.arrant?.lore).map(i => i.id)
   }
 
   static _migrateEffectScript(effect, updateData) {
-    let script = effect.flags?.wfrp4e?.script
+    let script = effect.flags?.arrant?.script
 
     if (!script)
       return updateData
@@ -566,8 +566,8 @@ export default class Migration {
     script = this._migrateV10Links(script);
 
 
-    if (script != effect.flags.wfrp4e.script)
-      updateData["flags.wfrp4e.script"] = script
+    if (script != effect.flags.arrant.script)
+      updateData["flags.arrant.script"] = script
 
     return updateData
   }
@@ -596,22 +596,22 @@ export default class Migration {
   }
 
   static v10Conversions = {
-    "wfrp4e-core.journal-entries" : "wfrp4e-core.journals",
-    "wfrp4e-core.maps" : "wfrp4e-core.scenes",
-    "wfrp4e-core.bestiary" : "wfrp4e-core.actors",
-    "wfrp4e-core.careers" : "wfrp4e-core.items",
-    "wfrp4e-core.criticals" : "wfrp4e-core.items",
-    "wfrp4e-core.skills" : "wfrp4e-core.items",
-    "wfrp4e-core.talents" : "wfrp4e-core.items",
-    "wfrp4e-core.traits" : "wfrp4e-core.items",
-    "wfrp4e-core.psychologies" : "wfrp4e-core.items",
-    "wfrp4e-core.mutations" : "wfrp4e-core.items",
-    "wfrp4e-core.injuries" : "wfrp4e-core.items",
-    "wfrp4e-core.diseases" : "wfrp4e-core.items",
-    "wfrp4e-core.spells" : "wfrp4e-core.items",
-    "wfrp4e-core.prayers" : "wfrp4e-core.items",
-    "wfrp4e-core.trappings" : "wfrp4e-core.items",
-    "wfrp4e-eis.mutations" : "wfrp4e-eis.items",
-    "wfrp4e-eis.spells" : "wfrp4e-eis.items",
+    "arrant-core.journal-entries" : "arrant-core.journals",
+    "arrant-core.maps" : "arrant-core.scenes",
+    "arrant-core.bestiary" : "arrant-core.actors",
+    "arrant-core.careers" : "arrant-core.items",
+    "arrant-core.criticals" : "arrant-core.items",
+    "arrant-core.skills" : "arrant-core.items",
+    "arrant-core.talents" : "arrant-core.items",
+    "arrant-core.traits" : "arrant-core.items",
+    "arrant-core.psychologies" : "arrant-core.items",
+    "arrant-core.mutations" : "arrant-core.items",
+    "arrant-core.injuries" : "arrant-core.items",
+    "arrant-core.diseases" : "arrant-core.items",
+    "arrant-core.spells" : "arrant-core.items",
+    "arrant-core.prayers" : "arrant-core.items",
+    "arrant-core.trappings" : "arrant-core.items",
+    "arrant-eis.mutations" : "arrant-eis.items",
+    "arrant-eis.spells" : "arrant-eis.items",
   }
 }

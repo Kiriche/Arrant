@@ -1,4 +1,4 @@
-import WFRP_Utility from "../../system/utility-wfrp4e.js";
+import WFRP_Utility from "../../system/utility-arrant.js";
 
 
 
@@ -13,7 +13,7 @@ export class ChargenStage extends FormApplication {
     const options = super.defaultOptions;
     options.resizable = true;
     options.id = "chargen-stage";
-    options.classes = options.classes.concat("wfrp4e", "chargen");
+    options.classes = options.classes.concat("arrant", "chargen");
     options.width = 1000;
     options.height = 600;
     options.minimizable = true;

@@ -1,25 +1,25 @@
 
 // Import Modules
-import ActorSheetWfrp4e from "./modules/actor/sheet/actor-sheet.js"
-import ActorSheetWfrp4eCharacter from "./modules/actor/sheet/character-sheet.js";
-import ActorSheetWfrp4eNPC from "./modules/actor/sheet/npc-sheet.js";
-import ActorSheetWfrp4eCreature from "./modules/actor/sheet/creature-sheet.js";
-import ActorSheetWfrp4eVehicle from "./modules/actor/sheet/vehicle-sheet.js";
-import ItemSheetWfrp4e from "./modules/item/item-sheet.js";
-import ActorWfrp4e from "./modules/actor/actor-wfrp4e.js";
-import ItemWfrp4e from "./modules/item/item-wfrp4e.js";
+import ActorSheetArrant from "./modules/actor/sheet/actor-sheet.js"
+import ActorSheetArrantCharacter from "./modules/actor/sheet/character-sheet.js";
+import ActorSheetArrantNPC from "./modules/actor/sheet/npc-sheet.js";
+import ActorSheetArrantCreature from "./modules/actor/sheet/creature-sheet.js";
+import ActorSheetArrantVehicle from "./modules/actor/sheet/vehicle-sheet.js";
+import ItemSheetArrant from "./modules/item/item-sheet.js";
+import ActorArrantNew from "./modules/actor/actor-arrant.js";
+import ItemArrant from "./modules/item/item-arrant.js";
 import registerHooks from "./modules/system/hooks.js"
-import CharGenWfrp4e from "./modules/apps/chargen/char-gen.js"
-import MarketWfrp4e from "./modules/apps/market-wfrp4e.js";
+import CharGenArrant from "./modules/apps/chargen/char-gen.js"
+import MarketArrant from "./modules/apps/market-arrant.js";
 import NameGenWfrp from "./modules/apps/name-gen.js";
 import StatBlockParser from "./modules/apps/stat-parser.js";
-import BrowserWfrp4e from "./modules/apps/wfrp-browser.js";
-import WFRP_Audio from "./modules/system/audio-wfrp4e.js";
-import WFRP4E from "./modules/system/config-wfrp4e.js"
-import ChatWFRP from "./modules/system/chat-wfrp4e.js";
-import OpposedWFRP from "./modules/system/opposed-wfrp4e.js";
-import WFRP_Tables from "./modules/system/tables-wfrp4e.js";
-import WFRP_Utility from "./modules/system/utility-wfrp4e.js";
+import BrowserArrant from "./modules/apps/arrant-browser.js";
+import WFRP_Audio from "./modules/system/audio-arrant.js";
+import arrant from "./modules/system/config-arrant.js"
+import ChatWFRP from "./modules/system/chat-arrant.js";
+import OpposedWFRP from "./modules/system/opposed-arrant.js";
+import WFRP_Tables from "./modules/system/tables-arrant.js";
+import WFRP_Utility from "./modules/system/utility-arrant.js";
 import AOETemplate from "./modules/system/aoe.js"
 import ActorSettings from "./modules/apps/actor-settings.js";
 import WFRPActiveEffectConfig from "./modules/apps/active-effect.js";
@@ -27,10 +27,10 @@ import Migration from "./modules/system/migrations.js";
 import HomebrewSettings from "./modules/apps/homebrew-settings.js"
 import CareerSelector from "./modules/apps/career-selector.js"
 import CombatHelpers from "./modules/system/combat.js"
-import ActiveEffectWfrp4e from "./modules/system/effect-wfrp4e.js"
+import ActiveEffectArrant from "./modules/system/effect-arrant.js"
 import TagManager from "./modules/system/tag-manager.js";
 import ItemProperties from "./modules/apps/item-properties.js"
-import TestWFRP from "./modules/system/rolls/test-wfrp4e.js";
+import TestWFRP from "./modules/system/rolls/test-arrant.js";
 import CharacteristicTest from "./modules/system/rolls/characteristic-test.js";
 import SkillTest from "./modules/system/rolls/skill-test.js";
 import WeaponTest from "./modules/system/rolls/weapon-test.js";
@@ -54,35 +54,35 @@ import ArrantCharacterSheet from "./modules/actor/sheet/arrant-character-sheet";
 Hooks.once("init", async function () {
 
   // #if _ENV === "development"
-  CONFIG.debug.wfrp4e = true;
+  CONFIG.debug.arrant = true;
   WFRP_Utility.log("Development Mode: Logs on")
   //#endif
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("wfrp4e", ActorSheetWfrp4eCharacter, { types: ["character"], makeDefault: false });
-  Actors.registerSheet("wfrp4e", ArrantCharacterSheet, { types: ["character"], makedefault: true});
-  Actors.registerSheet("wfrp4e", ActorSheetWfrp4eNPC, { types: ["npc"], makeDefault: true });
-  Actors.registerSheet("wfrp4e", ActorSheetWfrp4eCreature, { types: ["creature"], makeDefault: true });
-  Actors.registerSheet("wfrp4e", ActorSheetWfrp4eVehicle, { types: ["vehicle"], makeDefault: true });
+  Actors.registerSheet("arrant", ActorSheetArrantCharacter, { types: ["character"], makeDefault: false });
+  Actors.registerSheet("arrant", ArrantCharacterSheet, { types: ["character"], makeDefault: true});
+  Actors.registerSheet("arrant", ActorSheetArrantNPC, { types: ["npc"], makeDefault: true });
+  Actors.registerSheet("arrant", ActorSheetArrantCreature, { types: ["creature"], makeDefault: true });
+  Actors.registerSheet("arrant", ActorSheetArrantVehicle, { types: ["vehicle"], makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("wfrp4e", ItemSheetWfrp4e, { makeDefault: true });
-  DocumentSheetConfig.registerSheet(RollTable, "wfrp4e", WFRPTableConfig, {makeDefault: true})
-  DocumentSheetConfig.registerSheet(ActiveEffect, "wfrp4e", WFRPActiveEffectConfig, {makeDefault :true})
-  // DocumentSheetConfig.registerSheet(JournalEntry, "wfrp4e", WFRPJournalSheet, {makeDefault :true})
-  DocumentSheetConfig.registerSheet(JournalEntryPage, "wfrp4e", WFRPJournalTextPageSheet, {types: ["text"], makeDefault: true, label : "WFRP Journal Sheet (ProseMirror)"})
+  Items.registerSheet("arrant", ItemSheetArrant, { makeDefault: true });
+  DocumentSheetConfig.registerSheet(RollTable, "arrant", WFRPTableConfig, {makeDefault: true})
+  DocumentSheetConfig.registerSheet(ActiveEffect, "arrant", WFRPActiveEffectConfig, {makeDefault :true})
+  // DocumentSheetConfig.registerSheet(JournalEntry, "arrant", WFRPJournalSheet, {makeDefault :true})
+  DocumentSheetConfig.registerSheet(JournalEntryPage, "arrant", WFRPJournalTextPageSheet, {types: ["text"], makeDefault: true, label : "WFRP Journal Sheet (ProseMirror)"})
 
-  game.wfrp4e = {
+  game.arrant = {
     apps: {
-      ActorSheetWfrp4e,
-      ActorSheetWfrp4eCharacter,
-      ActorSheetWfrp4eCreature,
-      ActorSheetWfrp4eNPC,
-      ActorSheetWfrp4eVehicle,
-      ItemSheetWfrp4e,
-      CharGenWfrp4e,
+      ActorSheetArrant,
+      ActorSheetArrantCharacter,
+      ActorSheetArrantCreature,
+      ActorSheetArrantNPC,
+      ActorSheetArrantVehicle,
+      ItemSheetArrant,
+      CharGenArrant,
       StatBlockParser,
-      BrowserWfrp4e,
+      BrowserArrant,
       ActorSettings,
       WFRPActiveEffectConfig,
       HomebrewSettings,
@@ -94,8 +94,8 @@ Hooks.once("init", async function () {
       ChargenStage
     },
     entities: {
-      ActorWfrp4e,
-      ItemWfrp4e
+      ActorArrant: ActorArrantNew,
+      ItemArrant
     },
     rolls : {
       TestWFRP,
@@ -110,9 +110,9 @@ Hooks.once("init", async function () {
     },
     utility: WFRP_Utility,
     tables: WFRP_Tables,
-    config: WFRP4E,
+    config: arrant,
     chat: ChatWFRP,
-    market: MarketWfrp4e,
+    market: MarketArrant,
     audio: WFRP_Audio,
     opposed: OpposedWFRP,
     names: NameGenWfrp,
@@ -123,9 +123,9 @@ Hooks.once("init", async function () {
   }
 
   // Assign the actor class to the CONFIG
-  CONFIG.Actor.documentClass = ActorWfrp4e;
-  CONFIG.Item.documentClass = ItemWfrp4e;
-  CONFIG.ActiveEffect.documentClass = ActiveEffectWfrp4e
+  CONFIG.Actor.documentClass = ActorArrantNew;
+  CONFIG.Item.documentClass = ItemArrant;
+  CONFIG.ActiveEffect.documentClass = ActiveEffectArrant
 });
 
 registerHooks()

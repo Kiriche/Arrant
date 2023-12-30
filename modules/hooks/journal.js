@@ -1,4 +1,4 @@
-import WFRP_Utility from "../system/utility-wfrp4e.js";
+import WFRP_Utility from "../system/utility-arrant.js";
 
 export default function() {
 

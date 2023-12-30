@@ -2,20 +2,20 @@
   "_id": "CcNJsS4jSwB6Ug1J",
   "name": "Endurance",
   "type": "skill",
-  "img": "modules/wfrp4e-core/icons/skills/basic-skill-t.png",
+  "img": "modules/arrant-core/icons/skills/basic-skill-t.png",
   "effects": [],
   "sort": 0,
   "flags": {
     "_sheetTab": "details",
     "core": {
-      "sourceId": "Compendium.wfrp4e-core.skills.CcNJsS4jSwB6Ug1J"
+      "sourceId": "Compendium.arrant-core.skills.CcNJsS4jSwB6Ug1J"
     }
   },
   "system": {
     "description": {
       "type": "String",
       "label": "Description",
-      "value": "<p>@UUID[Compendium.wfrp4e-core.journal-entries.6zOdTLv3YeYeJ4hR.JournalEntryPage.E9UyI8AMrBqgCX4a]{Endurance}</p>"
+      "value": "<p>@UUID[Compendium.arrant-core.journal-entries.6zOdTLv3YeYeJ4hR.JournalEntryPage.E9UyI8AMrBqgCX4a]{Endurance}</p>"
     },
     "gmdescription": {
       "type": "String",
@@ -60,7 +60,7 @@
     "v5mZIet2Ld0KcxRD": 3
   },
   "_stats": {
-    "systemId": "wfrp4e",
+    "systemId": "arrant",
     "systemVersion": "6.5.9",
     "coreVersion": "10.303",
     "createdTime": 1689878646668,

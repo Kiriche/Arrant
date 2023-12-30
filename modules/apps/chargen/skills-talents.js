@@ -1,8 +1,8 @@
-import WFRP_Utility from "../../system/utility-wfrp4e.js";
+import WFRP_Utility from "../../system/utility-arrant.js";
 import { ChargenStage } from "./stage";
 
 export class SkillsTalentsStage extends ChargenStage {
-  journalId = "Compendium.wfrp4e-core.journal-entries.IQ0PgoJihQltCBUU.JournalEntryPage.f5Y4XenZVtDU2GUo"
+  journalId = "Compendium.arrant-core.journal-entries.IQ0PgoJihQltCBUU.JournalEntryPage.f5Y4XenZVtDU2GUo"
   static get defaultOptions() {
     const options = super.defaultOptions;
     options.resizable = true;
@@ -56,7 +56,7 @@ export class SkillsTalentsStage extends ChargenStage {
 
 
   get template() {
-    return "systems/wfrp4e/templates/apps/chargen/skills-talents.hbs";
+    return "systems/arrant/templates/apps/chargen/skills-talents.hbs";
   }
 
 
@@ -271,7 +271,7 @@ export class SkillsTalentsStage extends ChargenStage {
     html.find(".reroll-duplicate").click(async ev => {
       ev.stopPropagation();
       let index = Number(ev.currentTarget.dataset.index);
-      let talent = await game.wfrp4e.tables.rollTable("talents");
+      let talent = await game.arrant.tables.rollTable("talents");
       this.context.speciesTalents.random[index] = talent.text
       this.updateMessage("RerolledDuplicateTalent", { rolled: talent.text })
       this.render(true);
@@ -297,7 +297,7 @@ export class SkillsTalentsStage extends ChargenStage {
     this.context.speciesTalents.rolled = true;
     let number = Number(ev.currentTarget.dataset.number) || 0;
     for (let i = 0; i < number; i++) {
-      let talent = await game.wfrp4e.tables.rollTable("talents");
+      let talent = await game.arrant.tables.rollTable("talents");
       this.context.speciesTalents.random.push(talent.text);
     }
     this.updateMessage("Rolled", { rolled: this.context.speciesTalents.random.join(", ") })

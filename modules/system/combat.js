@@ -1,5 +1,5 @@
-import WFRP_Audio from "./audio-wfrp4e.js";
-import WFRP_Utility from "./utility-wfrp4e.js";
+import WFRP_Audio from "./audio-arrant.js";
+import WFRP_Utility from "./utility-arrant.js";
 
 export default class CombatHelpers {
 
@@ -56,12 +56,12 @@ export default class CombatHelpers {
             if (turn.actor.hasSystemEffect("dualwielder"))
                 await turn.actor.removeSystemEffect("dualwielder")
 
-            if (game.settings.get("wfrp4e", "statusOnTurnStart")) {
+            if (game.settings.get("arrant", "statusOnTurnStart")) {
                 let nameOverride =  combat.combatant.hidden ? "???" : turn.name;
                 turn.actor.displayStatus(combat.round, nameOverride);
             }
 
-            if (game.settings.get("wfrp4e", "focusOnTurnStart")) {
+            if (game.settings.get("arrant", "focusOnTurnStart")) {
                 canvas.tokens.get(turn.token.id).control();
                 canvas.tokens.cycleTokens(1, true);
             }
@@ -71,7 +71,7 @@ export default class CombatHelpers {
 
         }
         else {
-            console.warn("wfrp4e | No actor token found: %o.", combat)
+            console.warn("arrant | No actor token found: %o.", combat)
         }
         WFRP_Audio.PlayContextAudio({ item: { type: 'round' }, action: "change" })
     }
@@ -225,7 +225,7 @@ export default class CombatHelpers {
         if (!game.user.isUniqueGM)
             return
 
-        let minorInfections = combat.getFlag("wfrp4e", "minorInfections") || []
+        let minorInfections = combat.getFlag("arrant", "minorInfections") || []
         let content = ""
         if (minorInfections.length) {
             content += `<h3><b>${game.i18n.localize("Minor Infections")}</b></h3>${game.i18n.localize("CHAT.InfectionReminder")}<br>`
@@ -272,10 +272,10 @@ export default class CombatHelpers {
         for (let turn of combat.turns) {
             let endRoundConditions = turn.actor.actorEffects.filter(e => e.conditionTrigger == "endRound")
             for (let cond of endRoundConditions) {
-                if (game.wfrp4e.config.conditionScripts[cond.conditionId]) {
-                    let conditionName = game.i18n.localize(game.wfrp4e.config.conditions[cond.conditionId])
-                    if (Number.isNumeric(cond.flags.wfrp4e.value))
-                        conditionName += ` ${cond.flags.wfrp4e.value}`
+                if (game.arrant.config.conditionScripts[cond.conditionId]) {
+                    let conditionName = game.i18n.localize(game.arrant.config.conditions[cond.conditionId])
+                    if (Number.isNumeric(cond.flags.arrant.value))
+                        conditionName += ` ${cond.flags.arrant.value}`
                     msgContent = `
               <h2>${conditionName}</h2>
               <a class="condition-script" data-combatant-id="${turn.id}" data-cond-id="${cond.conditionId}">${game.i18n.format("CONDITION.Apply", { condition: conditionName })}</a>
@@ -288,12 +288,12 @@ export default class CombatHelpers {
             let conditions = turn.actor.actorEffects.filter(e => e.isCondition)
             for (let cond of conditions) {
                 // I swear to god whoever thought it was a good idea for these conditions to reduce every *other* round...
-                if (cond.conditionId == "deafened" || cond.conditionId == "blinded" && Number.isNumeric(cond.flags.wfrp4e.roundReceived)) {
-                    if ((combat.round - 1) % 2 == cond.flags.wfrp4e.roundReceived % 2) {
+                if (cond.conditionId == "deafened" || cond.conditionId == "blinded" && Number.isNumeric(cond.flags.arrant.roundReceived)) {
+                    if ((combat.round - 1) % 2 == cond.flags.arrant.roundReceived % 2) {
                         await turn.actor.removeCondition(cond.conditionId)
                         removedConditions.push(
                             game.i18n.format("CHAT.RemovedConditions", {
-                                condition: game.i18n.localize(game.wfrp4e.config.conditions[cond.conditionId]),
+                                condition: game.i18n.localize(game.arrant.config.conditions[cond.conditionId]),
                                 name: turn.actor.token?.name || turn.actor.prototypeToken.name
                             }))
                     }
@@ -315,10 +315,10 @@ export default class CombatHelpers {
             let msgContent = ""
             let endTurnConditions = combatant.actor.actorEffects.filter(e => e.conditionTrigger == "endTurn")
             for (let cond of endTurnConditions) {
-                if (game.wfrp4e.config.conditionScripts[cond.conditionId]) {
-                    let conditionName = game.i18n.localize(game.wfrp4e.config.conditions[cond.conditionId])
-                    if (Number.isNumeric(cond.flags.wfrp4e.value))
-                        conditionName += ` ${cond.flags.wfrp4e.value}`
+                if (game.arrant.config.conditionScripts[cond.conditionId]) {
+                    let conditionName = game.i18n.localize(game.arrant.config.conditions[cond.conditionId])
+                    if (Number.isNumeric(cond.flags.arrant.value))
+                        conditionName += ` ${cond.flags.arrant.value}`
                     msgContent = `
                 <h2>${conditionName}</h2>
                 <a class="condition-script" data-combatant-id="${combatant.id}" data-cond-id="${cond.conditionId}">${game.i18n.format("CONDITION.Apply", { condition: conditionName })}</a>
@@ -341,8 +341,8 @@ export default class CombatHelpers {
         fearedCombatants.forEach(c => {
             let fear = c.actor.hasCondition("fear")
             chatData.content += `<b>${c.name}</b>`
-            if (fear.flags.wfrp4e.fearName)
-                chatData.content += ` (${fear.flags.wfrp4e.fearName})`
+            if (fear.flags.arrant.fearName)
+                chatData.content += ` (${fear.flags.arrant.fearName})`
             chatData.content += "<br>"
         })
         ChatMessage.create(chatData)
@@ -352,7 +352,7 @@ export default class CombatHelpers {
         if (!game.user.isUniqueGM)
             return
 
-        if (game.settings.get("wfrp4e","useGroupAdvantage")) {
+        if (game.settings.get("arrant","useGroupAdvantage")) {
             await WFRP_Utility.updateGroupAdvantage({players : 0, enemies : 0})
         } 
 

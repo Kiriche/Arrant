@@ -4,7 +4,7 @@ export default class CareerSelector extends FormApplication {
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.id = "career-selector";
-        options.template = "systems/wfrp4e/templates/apps/career-selector.hbs";
+        options.template = "systems/arrant/templates/apps/career-selector.hbs";
         options.height = 800;
         options.width = 400;
         options.minimizable = true;
@@ -41,7 +41,7 @@ export default class CareerSelector extends FormApplication {
 
     async loadCareers() {
         this.careers = []
-        this.careers = await game.wfrp4e.utility.findAll("career", game.i18n.localize("CAREER.Loading"))
+        this.careers = await game.arrant.utility.findAll("career", game.i18n.localize("CAREER.Loading"))
         this.careers = this.careers.sort((a, b) => a.careergroup.value > b.careergroup.value ? 1 : -1)
         this.careers = this.careers.filter(i => (i.compendium && !i.compendium.private) || i.ownership > 2)
     }

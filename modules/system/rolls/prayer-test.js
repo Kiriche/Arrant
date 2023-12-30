@@ -1,4 +1,4 @@
-import TestWFRP from "./test-wfrp4e.js"
+import TestWFRP from "./test-arrant.js"
 
 export default class PrayerTest extends TestWFRP {
 
@@ -45,7 +45,7 @@ export default class PrayerTest extends TestWFRP {
   async runPostEffects() {
     await super.runPostEffects();
     await this.actor.runEffects("preRollPrayerTest", { test: this, cardOptions: this.context.cardOptions }, {item : this.item})
-    Hooks.call("wfrp4e:rollPrayerTest", this, this.context.cardOptions)
+    Hooks.call("arrant:rollPrayerTest", this, this.context.cardOptions)
   }
 
   async computeResult() {

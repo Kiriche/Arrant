@@ -1,5 +1,5 @@
 
-import WFRP_Utility from "../system/utility-wfrp4e.js";
+import WFRP_Utility from "../system/utility-arrant.js";
 
 /**
  * This class handles all aspects of custom WFRP tables.
@@ -73,7 +73,7 @@ export default class WFRP_Tables {
         rollValue = tableSize
 
       let rollResult = table.getResultsForRoll(rollValue)[0]
-      let flags = rollResult.flags.wfrp4e || {}
+      let flags = rollResult.flags.arrant || {}
       let result = {
         result : rollResult.getChatText(),
         roll : displayTotal,
@@ -88,7 +88,7 @@ export default class WFRP_Tables {
 
       mergeObject(result, flags)
 
-      if (Object.keys(game.wfrp4e.config.hitLocationTables).includes(tableKey))
+      if (Object.keys(game.arrant.config.hitLocationTables).includes(tableKey))
         result = this.formatHitloc(rollResult, rollValue)
 
       return result
@@ -173,7 +173,7 @@ export default class WFRP_Tables {
 
   
   static formatHitloc(result, roll) {
-    let flags = result.flags.wfrp4e || {}
+    let flags = result.flags.arrant || {}
     return {
       description : result.getChatText(),
       result : flags.loc,
@@ -182,7 +182,7 @@ export default class WFRP_Tables {
   }
 
   static async rollToChat(table, options = {}, column = null, rollMode) {
-    let chatOptions = game.wfrp4e.utility.chatDataSetup("", rollMode, true)
+    let chatOptions = game.arrant.utility.chatDataSetup("", rollMode, true)
     chatOptions.content = await this.formatChatRoll(table, options, column);
     chatOptions.type = 0;
     if (chatOptions.content)
@@ -192,11 +192,11 @@ export default class WFRP_Tables {
 
   static findTable(key, column) {
     WFRP_Utility.log(`Finding Table key: ${key} column: ${column}`)
-    let tables = game.tables.filter(i => i.getFlag("wfrp4e", "key") == key)
+    let tables = game.tables.filter(i => i.getFlag("arrant", "key") == key)
     let table 
 
     // Look at table settings first
-    let tableSettings = game.settings.get("wfrp4e", "tableSettings");
+    let tableSettings = game.settings.get("arrant", "tableSettings");
     WFRP_Utility.log(`Table Settings: `, undefined, tableSettings)
 
     // If tableSettings has comma separated ids, return them as columns
@@ -225,10 +225,10 @@ export default class WFRP_Tables {
 
       // If more than one table with that key, and column is specified, return that column
       if (tables.length > 1 && column)
-        table = tables.find(i => i.getFlag("wfrp4e", "column") == column)
+        table = tables.find(i => i.getFlag("arrant", "column") == column)
 
       // If only one result with that key, or multiple results that don't have a column, return the first one (this condition is needed to return Minor Miscast table if Minor Miscast (Moo) also exists at the same time)
-      else if (tables.length == 1 || tables.map(t => t.getFlag("wfrp4e", "column")).filter(t => t).length < 1) 
+      else if (tables.length == 1 || tables.map(t => t.getFlag("arrant", "column")).filter(t => t).length < 1)
       {
         table = tables[0]
       }
@@ -262,8 +262,8 @@ export default class WFRP_Tables {
     if (table)
     {
       table.results.forEach(result => {
-        if (result.flags.wfrp4e.loc)
-          hitloc[result.flags.wfrp4e.loc] = result.text
+        if (result.flags.arrant.loc)
+          hitloc[result.flags.arrant.loc] = result.text
       })
     }
     return hitloc
@@ -284,7 +284,7 @@ export default class WFRP_Tables {
        {
          for(let result of table.results)
          {
-           if (result.flags.wfrp4e?.loc == resultKey)
+           if (result.flags.arrant?.loc == resultKey)
              return this.formatHitloc(result, result.range[0])
          }
        }
@@ -368,7 +368,7 @@ export default class WFRP_Tables {
     // For each table, add a clickable link
     for (let table of tables)
     {
-      let key = table.getFlag("wfrp4e", "key")
+      let key = table.getFlag("arrant", "key")
       let tableObject = this.findTable(key)
 
       // If the table is a column, add only the general table, and remember the table to not list again for future columns (Only list Weather, not Weather - Spring, Weather - Winter, etc)
@@ -407,7 +407,7 @@ export default class WFRP_Tables {
 
     let tableObject = this.findTable(table);
     for (let c of tableObject.columns)
-      prompt += `<div><a class = "table-click" data-table="${table}" data-column = "${c.getFlag("wfrp4e", "column")}"><i class="fas fa-list"></i> ${c.name}</a></div>`
+      prompt += `<div><a class = "table-click" data-table="${table}" data-column = "${c.getFlag("arrant", "column")}"><i class="fas fa-list"></i> ${c.name}</a></div>`
 
     return prompt;
   }
@@ -456,30 +456,30 @@ export default class WFRP_Tables {
 
   static get hitloc() {
     return {
-      "name": game.i18n.localize("WFRP4E.LocationsTable"),
+      "name": game.i18n.localize("arrant.LocationsTable"),
       "die": "1d100",
       "rows": [{
-        "description": game.i18n.localize("WFRP4E.Locations.head"),
+        "description": game.i18n.localize("arrant.Locations.head"),
         "result": "head",
         "range": [1, 9]
       }, {
-        "description": game.i18n.localize("WFRP4E.Locations.lArm"),
+        "description": game.i18n.localize("arrant.Locations.lArm"),
         "result": "lArm",
         "range": [10, 24]
       }, {
-        "description": game.i18n.localize("WFRP4E.Locations.rArm"),
+        "description": game.i18n.localize("arrant.Locations.rArm"),
         "result": "rArm",
         "range": [25, 44]
       }, {
-        "description": game.i18n.localize("WFRP4E.Locations.body"),
+        "description": game.i18n.localize("arrant.Locations.body"),
         "result": "body",
         "range": [45, 79]
       }, {
-        "description": game.i18n.localize("WFRP4E.Locations.lLeg"),
+        "description": game.i18n.localize("arrant.Locations.lLeg"),
         "result": "lLeg",
         "range": [80, 89]
       }, {
-        "description": game.i18n.localize("WFRP4E.Locations.rLeg"),
+        "description": game.i18n.localize("arrant.Locations.rLeg"),
         "result": "rLeg",
         "range": [90, 100]
       }]
@@ -489,47 +489,47 @@ export default class WFRP_Tables {
 
   static get scatter() {
     return {
-      name: game.i18n.localize("WFRP4E.ScatterTable"),
+      name: game.i18n.localize("arrant.ScatterTable"),
       die: "1d10",
       rows: [
         {
-          name: game.i18n.localize("WFRP4E.Scatter.TopLeft"),
+          name: game.i18n.localize("arrant.Scatter.TopLeft"),
           range: [1, 1]
         },
         {
-          name: game.i18n.localize("WFRP4E.Scatter.TopMiddle"),
+          name: game.i18n.localize("arrant.Scatter.TopMiddle"),
           range: [2, 2]
         },
         {
-          name: game.i18n.localize("WFRP4E.Scatter.TopRight"),
+          name: game.i18n.localize("arrant.Scatter.TopRight"),
           range: [3, 3]
         },
         {
-          name: game.i18n.localize("WFRP4E.Scatter.CenterLeft"),
+          name: game.i18n.localize("arrant.Scatter.CenterLeft"),
           range: [4, 4]
         },
         {
-          name: game.i18n.localize("WFRP4E.Scatter.CenterRight"),
+          name: game.i18n.localize("arrant.Scatter.CenterRight"),
           range: [5, 5]
         },
         {
-          name: game.i18n.localize("WFRP4E.Scatter.BottomLeft"),
+          name: game.i18n.localize("arrant.Scatter.BottomLeft"),
           range: [6, 6]
         },
         {
-          name: game.i18n.localize("WFRP4E.Scatter.BottomMiddle"),
+          name: game.i18n.localize("arrant.Scatter.BottomMiddle"),
           range: [7, 7]
         },
         {
-          name: game.i18n.localize("WFRP4E.Scatter.BottomRight"),
+          name: game.i18n.localize("arrant.Scatter.BottomRight"),
           range: [8, 8]
         },
         {
-          name: game.i18n.localize("WFRP4E.Scatter.AtYourFeet"),
+          name: game.i18n.localize("arrant.Scatter.AtYourFeet"),
           range: [9, 9]
         },
         {
-          name: game.i18n.localize("WFRP4E.Scatter.AtTargetFeet"),
+          name: game.i18n.localize("arrant.Scatter.AtTargetFeet"),
           range: [10, 10]
         },
       ]

@@ -1,9 +1,9 @@
-import WFRP_Utility from "../../system/utility-wfrp4e.js";
-import ItemWfrp4e from "../../item/item-wfrp4e.js";
+import WFRP_Utility from "../../system/utility-arrant.js";
+import ItemArrant from "../../item/item-arrant.js";
 import { ChargenStage } from "./stage";
 
 export class TrappingStage extends ChargenStage {
-  journalId = "Compendium.wfrp4e-core.journal-entries.IQ0PgoJihQltCBUU.JournalEntryPage.hQipqLYlbBEjJEWL"
+  journalId = "Compendium.arrant-core.journal-entries.IQ0PgoJihQltCBUU.JournalEntryPage.hQipqLYlbBEjJEWL"
   static get defaultOptions() {
     const options = super.defaultOptions;
     options.resizable = true;
@@ -18,21 +18,21 @@ export class TrappingStage extends ChargenStage {
   static get title() { return game.i18n.localize("CHARGEN.StageTrappings"); }
 
   get template() {
-    return "systems/wfrp4e/templates/apps/chargen/trappings.hbs";
+    return "systems/arrant/templates/apps/chargen/trappings.hbs";
   }
 
   constructor(...args) {
     super(...args);
 
-    this.context.classStrings = game.wfrp4e.config.classTrappings[this.data.items.career.system.class.value]?.split(",") || [];
+    this.context.classStrings = game.arrant.config.classTrappings[this.data.items.career.system.class.value]?.split(",") || [];
     this.context.careerStrings = this.data.items.career.system.trappings;
 
     if (this.context.classStrings.length == 0) {
       this.showError("ClassTrappingsNotFound", { class: this.data.items.career.system.class.value })
     }
 
-    this.context.class = Promise.all(this.context.classStrings.map(i => WFRP_Utility.find(i.trim(), game.wfrp4e.config.trappingItems)));
-    this.context.career = Promise.all(this.context.careerStrings.map(i => WFRP_Utility.find(i, game.wfrp4e.config.trappingItems)));
+    this.context.class = Promise.all(this.context.classStrings.map(i => WFRP_Utility.find(i.trim(), game.arrant.config.trappingItems)));
+    this.context.career = Promise.all(this.context.careerStrings.map(i => WFRP_Utility.find(i, game.arrant.config.trappingItems)));
   }
 
   context = {
@@ -113,7 +113,7 @@ export class TrappingStage extends ChargenStage {
   _updateObject(ev, formData) {
 
     // Of the trappings not found, only keep the ones that are marked as "keep", and create a new miscellaneous trapping item for them
-    let missing = this.context.missing.filter(i => i.choice == "keep").map(i => new ItemWfrp4e({ name: i.string, type: "trapping", system: { "trappingType.value": "misc" } }));
+    let missing = this.context.missing.filter(i => i.choice == "keep").map(i => new ItemArrant({ name: i.string, type: "trapping", system: { "trappingType.value": "misc" } }));
 
     this.data.items.trappings = missing.concat(this.context.class, this.context.career, this.context.added);
     super._updateObject(ev, formData)

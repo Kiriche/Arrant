@@ -1,5 +1,5 @@
 {
-    "Compendium.wfrp4e-core.talents.1IZWRr7BYOIcqPlQ": {
+    "Compendium.arrant-core.talents.1IZWRr7BYOIcqPlQ": {
         "data": {
             "description": {
                 "value": "<p>Your experience, talent or training lets you more safely manipulate the Winds of Magic. Whenever you roll on a miscast table as a result of a successful Channelling Test, you may apply a -10 modifier to the table result for each level of this talent. If the result is 0 or below, either roll on the lesser miscat table with the same modifier, or the miscast is nuillifed if it was a Minor Miscast.</p>"
@@ -9,7 +9,7 @@
             {
                 "_id": "mqSUg3ORIh2YCotB",
                 "flags": {
-                    "wfrp4e": {
+                    "arrant": {
                         "effectTrigger": "rollChannellingTest",
                         "effectApplication": "actor",
                         "script": "if(args.test.result.outcome == \"success\" && (args.test.result.minormis || args.test.result.majormis || args.test.result.catastrophicmis))\n{\n    args.test.result.miscastModifier = -10 * this.item.Advances\n}",
@@ -22,7 +22,7 @@
                 "duration": {
                     "startTime": null
                 },
-                "icon": "modules/wfrp4e-core/icons/talents/aethyric-attunement.png",
+                "icon": "modules/arrant-core/icons/talents/aethyric-attunement.png",
                 "label": "Aethyric Attunement",
                 "tint": null,
                 "transfer": true
@@ -172,7 +172,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-archives1.archives1-items.qBqfo35CFyWAAAnX": {
+    "Compendium.arrant-archives1.archives1-items.qBqfo35CFyWAAAnX": {
         "data": {
             "qualities": {
                 "value": [
@@ -186,7 +186,7 @@
             {
                 "_id": "TVxG7u4tG9JNIXNj",
                 "flags": {
-                    "wfrp4e": {
+                    "arrant": {
                         "effectApplication": "actor",
                         "effectTrigger": "oneTime",
                         "script": "let setupData = await args.actor.setupSkill(game.i18n.localize(\"NAME.Endurance\"), { context: { failure: \"Gained a @Condition[Poisoned] Condition\", success: \"Resisted the poison\" } })\n\n    let result = await args.actor.basicTest(setupData)\n\n    if (result.outcome == \"failure\")\n      args.actor.addCondition(\"poisoned\")",
@@ -199,19 +199,19 @@
                 "duration": {
                     "startTime": null
                 },
-                "icon": "systems/wfrp4e/icons/blank.png",
+                "icon": "systems/arrant/icons/blank.png",
                 "label": "Poison",
                 "tint": null,
                 "transfer": true
             }
         ],
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "normal"
             }
         }
     },
-    "Compendium.wfrp4e-core.trappings.ByHt0vTWRIuHS2r8": {
+    "Compendium.arrant-core.trappings.ByHt0vTWRIuHS2r8": {
         "data": {
             "qualities": {
                 "value": [
@@ -240,12 +240,12 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "short"
             }
         }
     },
-    "Compendium.wfrp4e-core.trappings.qim3Ad0ldTS9mXDj": {
+    "Compendium.arrant-core.trappings.qim3Ad0ldTS9mXDj": {
         "data": {
             "qualities": {
                 "value": [
@@ -256,12 +256,12 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "short"
             }
         }
     },
-    "Compendium.wfrp4e-core.trappings.kFROfGFdExfyJTg9": {
+    "Compendium.arrant-core.trappings.kFROfGFdExfyJTg9": {
         "data": {
             "qualities": {
                 "value": [
@@ -278,7 +278,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.X8WFQf0HB9yXKjdD": {
+    "Compendium.arrant-core.trappings.X8WFQf0HB9yXKjdD": {
         "data": {
             "qualities": {
                 "value": [
@@ -300,14 +300,14 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "normal"
             }
         }
     },
-    "Compendium.wfrp4e-core.trappings.U94l3IDj3xfIc78i": {
+    "Compendium.arrant-core.trappings.U94l3IDj3xfIc78i": {
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "normal"
             }
         }
@@ -327,7 +327,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.xdAP96GGDb87m0Pr": {
+    "Compendium.arrant-core.trappings.xdAP96GGDb87m0Pr": {
         "data": {
             "qualities": {
                 "value": [
@@ -344,7 +344,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.HDQVaCTpIy2PBdYu": {
+    "Compendium.arrant-core.trappings.HDQVaCTpIy2PBdYu": {
         "data": {
             "qualities": {
                 "value": [
@@ -361,7 +361,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-archives1.archives1-items.nyUbN0JaeXNQUbUT": {
+    "Compendium.arrant-archives1.archives1-items.nyUbN0JaeXNQUbUT": {
         "data": {
             "qualities": {
                 "value": [
@@ -389,12 +389,12 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "short"
             }
         }
     },
-    "Compendium.wfrp4e-core.trappings.ksRqHiMVpIL07Ij1": {
+    "Compendium.arrant-core.trappings.ksRqHiMVpIL07Ij1": {
         "data": {
             "qualities": {
                 "value": [
@@ -414,12 +414,12 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "normal"
             }
         }
     },
-    "Compendium.wfrp4e-core.trappings.M71CyisSXU0I7V1S": {
+    "Compendium.arrant-core.trappings.M71CyisSXU0I7V1S": {
         "data": {
             "qualities": {
                 "value": [
@@ -430,12 +430,12 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "short"
             }
         }
     },
-    "Compendium.wfrp4e-core.trappings.ddXgrDWZXSM3nXaf": {
+    "Compendium.arrant-core.trappings.ddXgrDWZXSM3nXaf": {
         "data": {
             "qualities": {
                 "value": [
@@ -446,12 +446,12 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "normal"
             }
         }
     },
-    "Compendium.wfrp4e-archives1.archives1-items.XurSURwIt8pnoOlJ": {
+    "Compendium.arrant-archives1.archives1-items.XurSURwIt8pnoOlJ": {
         "data": {
             "qualities": {
                 "value": [
@@ -478,7 +478,7 @@
             {
                 "_id": "3FkboTu03MTUm5qY",
                 "flags": {
-                    "wfrp4e": {
+                    "arrant": {
                         "effectTrigger": "applyDamage",
                         "effectApplication": "damage",
                         "script": "if (args.opposedTest.attackerTest.result.critical)\n   args.actor.addCondition(\"ablaze\")",
@@ -491,14 +491,14 @@
                 "duration": {
                     "startTime": null
                 },
-                "icon": "systems/wfrp4e/icons/blank.png",
+                "icon": "systems/arrant/icons/blank.png",
                 "label": "Drakefire Pistol",
                 "tint": null,
                 "transfer": true
             }
         ],
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "short"
             }
         }
@@ -518,7 +518,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-archives1.archives1-items.aQE698skxSqkrdmO": {
+    "Compendium.arrant-archives1.archives1-items.aQE698skxSqkrdmO": {
         "data": {
             "qualities": {
                 "value": [
@@ -546,12 +546,12 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "normal"
             }
         }
     },
-    "Compendium.wfrp4e-archives1.archives1-items.BIW1jibsj1mZTKq0": {
+    "Compendium.arrant-archives1.archives1-items.BIW1jibsj1mZTKq0": {
         "data": {
             "qualities": {
                 "value": [
@@ -579,12 +579,12 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "normal"
             }
         }
     },
-    "Compendium.wfrp4e-archives1.archives1-items.yaQBcwPMyEyP7H2f": {
+    "Compendium.arrant-archives1.archives1-items.yaQBcwPMyEyP7H2f": {
         "data": {
             "qualities": {
                 "value": [
@@ -616,12 +616,12 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "short"
             }
         }
     },
-    "Compendium.wfrp4e-core.trappings.NQ4OVp1ZfinJ7lQH": {
+    "Compendium.arrant-core.trappings.NQ4OVp1ZfinJ7lQH": {
         "data": {
             "qualities": {
                 "value": [
@@ -646,7 +646,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.2mE771fGEEB38OqG": {
+    "Compendium.arrant-core.trappings.2mE771fGEEB38OqG": {
         "data": {
             "qualities": {
                 "value": [
@@ -666,12 +666,12 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "long"
             }
         }
     },
-    "Compendium.wfrp4e-archives1.archives1-items.LIzUGidgb1mkXcZB": {
+    "Compendium.arrant-archives1.archives1-items.LIzUGidgb1mkXcZB": {
         "data": {
             "qualities": {
                 "value": [
@@ -684,7 +684,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.talents.0pXva9EODy9bngQX": {
+    "Compendium.arrant-core.talents.0pXva9EODy9bngQX": {
         "data": {
             "description": {
                 "value": "<p>You have trained how to make false attacks in close combat to fool your opponent. You may now make a Feint for your Action against any opponent using a weapon. This is resolved with an Unopposed Melee (Fencing) Test against a creature. If you succeed, and you attack the same opponent before the end of the next Round, you may add the SL of your Feint to your attack roll.</p>"
@@ -692,7 +692,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.uSxXVJogASbJ62hl": {
+    "Compendium.arrant-core.trappings.uSxXVJogASbJ62hl": {
         "data": {
             "damage": {
                 "value": "SB+2"
@@ -720,7 +720,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.QnFLWJmz2DN76Dx5": {
+    "Compendium.arrant-core.trappings.QnFLWJmz2DN76Dx5": {
         "data": {
             "qualities": {
                 "value": [
@@ -792,7 +792,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.CXg7XOFJwu4LZ9LM": {
+    "Compendium.arrant-core.trappings.CXg7XOFJwu4LZ9LM": {
         "data": {
             "reach": {
                 "value": "vLong"
@@ -815,7 +815,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.zuFTVmBtN51K94Xy": {
+    "Compendium.arrant-core.trappings.zuFTVmBtN51K94Xy": {
         "data": {
             "qualities": {
                 "value": [
@@ -847,12 +847,12 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "normal"
             }
         }
     },
-    "Compendium.wfrp4e-core.trappings.K34pxV6XsxhoZRiQ": {
+    "Compendium.arrant-core.trappings.K34pxV6XsxhoZRiQ": {
         "data": {
             "qualities": {
                 "value": [
@@ -876,7 +876,7 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "long"
             }
         }
@@ -908,7 +908,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.1tHkTZYaauicIh8I": {
+    "Compendium.arrant-core.trappings.1tHkTZYaauicIh8I": {
         "data": {
             "qualities": {
                 "value": [
@@ -940,12 +940,12 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "long"
             }
         }
     },
-    "Compendium.wfrp4e-core.trappings.vI0oorwbZdlszudf": {
+    "Compendium.arrant-core.trappings.vI0oorwbZdlszudf": {
         "data": {
             "qualities": {
                 "value": [
@@ -967,7 +967,7 @@
             {
                 "_id": "BRhiXQ6Pig4FoZlF",
                 "flags": {
-                    "wfrp4e": {
+                    "arrant": {
                         "effectApplication": "apply",
                         "effectTrigger": "oneTime",
                         "script": "let ablaze = {{SL}} + 1\nargs.actor.addCondition(\"ablaze\", ablaze)",
@@ -979,19 +979,19 @@
                 "duration": {
                     "startTime": null
                 },
-                "icon": "modules/wfrp4e-core/icons/equipment/weapons/incendiary.png",
+                "icon": "modules/arrant-core/icons/equipment/weapons/incendiary.png",
                 "label": "Incendiary",
                 "tint": null,
                 "transfer": true
             }
         ],
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "normal"
             }
         }
     },
-    "Compendium.wfrp4e-core.talents.BYChSVfMG004eflQ": {
+    "Compendium.arrant-core.talents.BYChSVfMG004eflQ": {
         "data": {
             "description": {
                 "value": "<p>You instinctively understand the language of Magick, and are capable of articulating the most complex phrases rapidly without error.&nbsp; Whenever you roll on a miscast table as a result of a successful Casting Test, you may apply a -10 modifier to the table result for each level of this talent. If the result is 0 or below, either roll on the lesser miscat table with the same modifier, or the miscast is nuillifed if it was a Minor Miscast.</p>"
@@ -1001,7 +1001,7 @@
             {
                 "_id": "PixW61vvKOev7oHu",
                 "flags": {
-                    "wfrp4e": {
+                    "arrant": {
                         "effectTrigger": "rollCastTest",
                         "effectApplication": "actor",
                         "script": "if(args.test.result.outcome == \"success\" && (args.test.result.minormis || args.test.result.majormis || args.test.result.catastrophicmis))\n{\n    args.test.result.miscastModifier = -10 * args.item.Advances\n}",
@@ -1014,7 +1014,7 @@
                 "duration": {
                     "startTime": null
                 },
-                "icon": "modules/wfrp4e-core/icons/talents/instinctive-diction.png",
+                "icon": "modules/arrant-core/icons/talents/instinctive-diction.png",
                 "label": "Instinctive Diction",
                 "tint": null,
                 "transfer": true
@@ -1022,7 +1022,7 @@
         ],
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.q3dEaQLL3ZYCZtU4": {
+    "Compendium.arrant-core.trappings.q3dEaQLL3ZYCZtU4": {
         "data": {
             "qualities": {
                 "value": [
@@ -1033,7 +1033,7 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "normal"
             }
         }
@@ -1101,7 +1101,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.kOfcQJQOgmGsqA5U": {
+    "Compendium.arrant-core.trappings.kOfcQJQOgmGsqA5U": {
         "data": {
             "flaws": {
                 "value": [
@@ -1114,7 +1114,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.RHkj94yUJp620xr1": {
+    "Compendium.arrant-core.trappings.RHkj94yUJp620xr1": {
         "data": {
             "qualities": {
                 "value": [
@@ -1130,7 +1130,7 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "long"
             }
         }
@@ -1318,7 +1318,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.careers.1DIMUn1Cj5rohWJV": {
+    "Compendium.arrant-core.careers.1DIMUn1Cj5rohWJV": {
         "data": {
             "skills": [
                 "Channelling (Any Color)",
@@ -1343,7 +1343,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.talents.0hn6UaKq8CoZP2zD": {
+    "Compendium.arrant-core.talents.0hn6UaKq8CoZP2zD": {
         "data": {
             "tests": {
                 "value": ""
@@ -1353,7 +1353,7 @@
             {
                 "_id": "IRRiQjVGZiHjLnxt",
                 "flags": {
-                    "wfrp4e": {
+                    "arrant": {
                         "effectApplication": "actor",
                         "preventDuplicateEffects": false,
                         "effectTrigger": "dialogChoice",
@@ -1371,7 +1371,7 @@
                 "duration": {
                     "startTime": null
                 },
-                "icon": "modules/wfrp4e-core/icons/talents/menacing.png",
+                "icon": "modules/arrant-core/icons/talents/menacing.png",
                 "label": "Menacing",
                 "tint": null,
                 "transfer": true
@@ -1379,7 +1379,7 @@
         ],
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.G2yEH6caM0FJ9s0G": {
+    "Compendium.arrant-core.trappings.G2yEH6caM0FJ9s0G": {
         "data": {
             "damage": {
                 "value": "SB+4"
@@ -1411,7 +1411,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.Bda4Wvnlt3q5zkKC": {
+    "Compendium.arrant-core.trappings.Bda4Wvnlt3q5zkKC": {
         "data": {
             "qualities": {
                 "value": [
@@ -1423,7 +1423,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.PnYGK5FPgEGM1Ck3": {
+    "Compendium.arrant-core.trappings.PnYGK5FPgEGM1Ck3": {
         "data": {
             "qualities": {
                 "value": [
@@ -1455,7 +1455,7 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "short"
             }
         }
@@ -1508,7 +1508,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.GkeMJrsqxQIek1xK": {
+    "Compendium.arrant-core.trappings.GkeMJrsqxQIek1xK": {
         "data": {
             "damage": {
                 "value": "SB+2"
@@ -1532,7 +1532,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.Uuu0bA2DmNp8o2JF": {
+    "Compendium.arrant-core.trappings.Uuu0bA2DmNp8o2JF": {
         "data": {
             "damage": {
                 "value": "SB+3"
@@ -1550,7 +1550,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.M23N8sjzEp16abQQ": {
+    "Compendium.arrant-core.trappings.M23N8sjzEp16abQQ": {
         "data": {
             "qualities": {
                 "value": [
@@ -1586,12 +1586,12 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "normal"
             }
         }
     },
-    "Compendium.wfrp4e-core.trappings.8dKmuti5IuIs9AJA": {
+    "Compendium.arrant-core.trappings.8dKmuti5IuIs9AJA": {
         "data": {
             "qualities": {
                 "value": [
@@ -1623,14 +1623,14 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "short"
             }
         }
     },
-    "Compendium.wfrp4e-core.trappings.NyIwm2Ge60jnUZft": {
+    "Compendium.arrant-core.trappings.NyIwm2Ge60jnUZft": {
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "short"
             }
         }
@@ -1659,14 +1659,14 @@
     "Compendium.arcane-marks-careers.arcanecareers.JSh5YtZMiJrS28UN": {
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.CRNrEnLXTGXVT1UW": {
+    "Compendium.arrant-core.trappings.CRNrEnLXTGXVT1UW": {
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "short"
             }
         }
     },
-    "Compendium.wfrp4e-archives1.archives1-items.7cVsB1Ss3cXMySl5": {
+    "Compendium.arrant-archives1.archives1-items.7cVsB1Ss3cXMySl5": {
         "data": {
             "qualities": {
                 "value": [
@@ -1683,19 +1683,19 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.7Bpc5I8Arucy3w4q": {
+    "Compendium.arrant-core.trappings.7Bpc5I8Arucy3w4q": {
         "data": {
             "damage": {
                 "value": "SB + 2"
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "normal"
             }
         }
     },
-    "Compendium.wfrp4e-core.trappings.zIuarD5mB0EF0ji0": {
+    "Compendium.arrant-core.trappings.zIuarD5mB0EF0ji0": {
         "data": {
             "damage": {
                 "value": "SB+3"
@@ -1722,19 +1722,19 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.KSwMbO8dqISoGuIo": {
+    "Compendium.arrant-core.trappings.KSwMbO8dqISoGuIo": {
         "data": {
             "damage": {
                 "value": "SB + 3"
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "normal"
             }
         }
     },
-    "Compendium.wfrp4e-core.trappings.Xjwk84KnOKDaiZs1": {
+    "Compendium.arrant-core.trappings.Xjwk84KnOKDaiZs1": {
         "data": {
             "qualities": {
                 "value": [
@@ -1745,14 +1745,14 @@
             }
         },
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "normal"
             }
         }
     },
-    "Compendium.wfrp4e-core.trappings.bwyUJua7I9hNg9WS": {
+    "Compendium.arrant-core.trappings.bwyUJua7I9hNg9WS": {
         "flags": {
-            "wfrp4e": {
+            "arrant": {
                 "optimalRange": "short"
             }
         }
@@ -1820,7 +1820,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.CdP1xLEJbe289beI": {
+    "Compendium.arrant-core.trappings.CdP1xLEJbe289beI": {
         "data": {
             "qualities": {
                 "value": [
@@ -1849,7 +1849,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.careers.JeWuOwm0nM4V1brh": {
+    "Compendium.arrant-core.careers.JeWuOwm0nM4V1brh": {
         "data": {
             "skills": [
                 "Channelling (Any Color)",
@@ -1870,7 +1870,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.careers.bTPBxrayfzeVmGsh": {
+    "Compendium.arrant-core.careers.bTPBxrayfzeVmGsh": {
         "data": {
             "skills": [
                 "Channelling (Any Color)",
@@ -1897,7 +1897,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.careers.WiMLDa950d9wsbbZ": {
+    "Compendium.arrant-core.careers.WiMLDa950d9wsbbZ": {
         "data": {
             "skills": [
                 "Channelling (Any Color)",
@@ -1912,7 +1912,7 @@
         },
         "flags": {}
     },
-    "Compendium.wfrp4e-core.trappings.N3aHfG4XASsiNoRv": {
+    "Compendium.arrant-core.trappings.N3aHfG4XASsiNoRv": {
         "data": {
             "qualities": {
                 "value": [

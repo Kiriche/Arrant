@@ -3,7 +3,7 @@
  * http://www.windsofchaos.com/wp-content/uploads/encroachment/book-of-imperial-names.pdf
  * See the `names` folder in the system directory to examine the list of names and options.
  */
- import WFRP_Utility from "../system/utility-wfrp4e.js";
+ import WFRP_Utility from "../system/utility-arrant.js";
 
 
 export default class NameGenWfrp {
@@ -11,14 +11,14 @@ export default class NameGenWfrp {
     WFRP_Utility.log("Loading Names...", true)
 
     // Surname option 1
-    fetch("systems/wfrp4e/names/human_surnames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/human_surnames.txt").then(r => r.text()).then(async nameText => {
       this.surnames = []
       nameText.split("\n").forEach((nameGroup) => this.surnames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
       })))
     })
     // Surname option 2 - prefix
-    fetch("systems/wfrp4e/names/human_surnames_prefix.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/human_surnames_prefix.txt").then(r => r.text()).then(async nameText => {
       this.surnamePrefixes = []
       nameText.split("\n").forEach((nameGroup) => this.surnamePrefixes.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -26,7 +26,7 @@ export default class NameGenWfrp {
     })
 
     // Surname option 2 - suffix
-    fetch("systems/wfrp4e/names/human_surnames_suffix.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/human_surnames_suffix.txt").then(r => r.text()).then(async nameText => {
       this.surnameSuffixes = []
       nameText.split("\n").forEach((nameGroup) => this.surnameSuffixes.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -34,7 +34,7 @@ export default class NameGenWfrp {
     })
 
     // Male forenames
-    fetch("systems/wfrp4e/names/male_human_forenames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/male_human_forenames.txt").then(r => r.text()).then(async nameText => {
       this.human_male_Forenames = []
       nameText.split("\n").forEach((nameGroup) => this.human_male_Forenames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -42,7 +42,7 @@ export default class NameGenWfrp {
     })
 
     // Female forenames
-    fetch("systems/wfrp4e/names/female_human_forenames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/female_human_forenames.txt").then(r => r.text()).then(async nameText => {
       this.human_female_Forenames = []
       nameText.split("\n").forEach((nameGroup) => this.human_female_Forenames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -51,7 +51,7 @@ export default class NameGenWfrp {
 
     // @@@@@@@@@@ DWARF @@@@@@@@@@@@@
     // male forenames
-    fetch("systems/wfrp4e/names/male_dwarf_forenames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/male_dwarf_forenames.txt").then(r => r.text()).then(async nameText => {
       this.dwarf_male_Forenames = []
       nameText.split("\n").forEach((nameGroup) => this.dwarf_male_Forenames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -59,7 +59,7 @@ export default class NameGenWfrp {
     })
 
     // Female forenames
-    fetch("systems/wfrp4e/names/female_dwarf_forenames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/female_dwarf_forenames.txt").then(r => r.text()).then(async nameText => {
       this.dwarf_female_Forenames = []
       nameText.split("\n").forEach((nameGroup) => this.dwarf_female_Forenames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -68,21 +68,21 @@ export default class NameGenWfrp {
 
     // @@@@@@@@@@ ELF @@@@@@@@@@@@@
     // elf forenames
-    fetch("systems/wfrp4e/names/elf_forenames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/elf_forenames.txt").then(r => r.text()).then(async nameText => {
       this.elf_Forenames = []
       nameText.split("\n").forEach((nameGroup) => this.elf_Forenames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
       })))
     })
 
-    fetch("systems/wfrp4e/names/elf_surnames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/elf_surnames.txt").then(r => r.text()).then(async nameText => {
       this.elf_surnames = []
       nameText.split("\n").forEach((nameGroup) => this.elf_surnames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
       })))
     })
     // elf start
-    fetch("systems/wfrp4e/names/elf_start.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/elf_start.txt").then(r => r.text()).then(async nameText => {
       this.elf_start = []
       nameText.split("\n").forEach((nameGroup) => this.elf_start.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -90,7 +90,7 @@ export default class NameGenWfrp {
     })
 
     // elf connector
-    fetch("systems/wfrp4e/names/elf_connectors.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/elf_connectors.txt").then(r => r.text()).then(async nameText => {
       this.elf_connectors = []
       nameText.split("\n").forEach((nameGroup) => this.elf_connectors.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -98,7 +98,7 @@ export default class NameGenWfrp {
     })
 
     // female elf element
-    fetch("systems/wfrp4e/names/male_elf_element.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/male_elf_element.txt").then(r => r.text()).then(async nameText => {
       this.elf_male_element = []
       nameText.split("\n").forEach((nameGroup) => this.elf_male_element.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -106,21 +106,21 @@ export default class NameGenWfrp {
     })
 
     // male elf element
-    fetch("systems/wfrp4e/names/female_elf_element.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/female_elf_element.txt").then(r => r.text()).then(async nameText => {
       this.elf_female_element = []
       nameText.split("\n").forEach((nameGroup) => this.elf_female_element.push(nameGroup.split(",").map(function (item) {
         return item.trim()
       })))
     })
     // wood elf end
-    fetch("systems/wfrp4e/names/elf_wood_end.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/elf_wood_end.txt").then(r => r.text()).then(async nameText => {
       this.elf_wood_end = []
       nameText.split("\n").forEach((nameGroup) => this.elf_wood_end.push(nameGroup.split(",").map(function (item) {
         return item.trim()
       })))
     })
     // high elf end
-    fetch("systems/wfrp4e/names/elf_high_end.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/elf_high_end.txt").then(r => r.text()).then(async nameText => {
       this.elf_high_end = []
       nameText.split("\n").forEach((nameGroup) => this.elf_high_end.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -129,7 +129,7 @@ export default class NameGenWfrp {
 
     // @@@@@@@@@@ Halfling @@@@@@@@@@@@@
     // Halfling start
-    fetch("systems/wfrp4e/names/halfling_start.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/halfling_start.txt").then(r => r.text()).then(async nameText => {
       this.halfling_start = []
       nameText.split("\n").forEach((nameGroup) => this.halfling_start.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -137,28 +137,28 @@ export default class NameGenWfrp {
     })
 
     // Male ending
-    fetch("systems/wfrp4e/names/male_halfling_element.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/male_halfling_element.txt").then(r => r.text()).then(async nameText => {
       this.male_halfling_element = []
       nameText.split("\n").forEach((nameGroup) => this.male_halfling_element.push(nameGroup.split(",").map(function (item) {
         return item.trim()
       })))
     })
     // Female ending
-    fetch("systems/wfrp4e/names/female_halfling_element.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/female_halfling_element.txt").then(r => r.text()).then(async nameText => {
       this.female_halfling_element = []
       nameText.split("\n").forEach((nameGroup) => this.female_halfling_element.push(nameGroup.split(",").map(function (item) {
         return item.trim()
       })))
     })
     // Halfling surnames
-    fetch("systems/wfrp4e/names/halfling_surnames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/halfling_surnames.txt").then(r => r.text()).then(async nameText => {
       this.halfling_surnames = []
       nameText.split("\n").forEach((nameGroup) => this.halfling_surnames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
       })))
     })
     // Halfling nicknames
-    fetch("systems/wfrp4e/names/halfling_nicknames.txt").then(r => r.text()).then(async nameText => {
+    fetch("systems/arrant/names/halfling_nicknames.txt").then(r => r.text()).then(async nameText => {
       this.halfling_nicknames = []
       nameText.split("\n").forEach((nameGroup) => this.halfling_nicknames.push(nameGroup.split(",").map(function (item) {
         return item.trim()
@@ -168,7 +168,7 @@ export default class NameGenWfrp {
 
   static human = {
     forename(gender = "male") {
-      let names = game.wfrp4e.names[`human_${gender}_Forenames`];
+      let names = game.arrant.names[`human_${gender}_Forenames`];
       let size = names.length
       let roll = Math.floor(CONFIG.Dice.randomUniform()*size)
       let nameGroup = names[roll]
@@ -179,14 +179,14 @@ export default class NameGenWfrp {
       if (roll != 0)
         option = nameGroup[roll].substr(1)
 
-      return game.wfrp4e.names.evaluateNamePartial(base) + (game.wfrp4e.names.evaluateNamePartial(option || ""));
+      return game.arrant.names.evaluateNamePartial(base) + (game.arrant.names.evaluateNamePartial(option || ""));
     },
     surname() {
       if (Math.ceil(CONFIG.Dice.randomUniform() * 2) == 1) // Don't use prefix - suffix
       {
-        let size = game.wfrp4e.names.surnames.length;
+        let size = game.arrant.names.surnames.length;
         let roll = Math.floor(CONFIG.Dice.randomUniform()*size)
-        let nameGroup = game.wfrp4e.names.surnames[roll]
+        let nameGroup = game.arrant.names.surnames[roll]
 
         let base = nameGroup[0]
         let option;
@@ -194,23 +194,23 @@ export default class NameGenWfrp {
         if (roll != 0)
           option = nameGroup[roll].substr(1)
 
-        return game.wfrp4e.names.evaluateNamePartial(base) + (game.wfrp4e.names.evaluateNamePartial(option || ""));
+        return game.arrant.names.evaluateNamePartial(base) + (game.arrant.names.evaluateNamePartial(option || ""));
       }
       else // Use prefix and suffix surname
       {
-        let prefixSize = game.wfrp4e.names.surnamePrefixes.length;
-        let suffixSize = game.wfrp4e.names.surnameSuffixes.length;
+        let prefixSize = game.arrant.names.surnamePrefixes.length;
+        let suffixSize = game.arrant.names.surnameSuffixes.length;
 
-        let prefixChoice = game.wfrp4e.names.surnamePrefixes[Math.floor(CONFIG.Dice.randomUniform()*prefixSize)][0]
-        let suffixChoice = game.wfrp4e.names.surnameSuffixes[Math.floor(CONFIG.Dice.randomUniform()*suffixSize)][0]
+        let prefixChoice = game.arrant.names.surnamePrefixes[Math.floor(CONFIG.Dice.randomUniform()*prefixSize)][0]
+        let suffixChoice = game.arrant.names.surnameSuffixes[Math.floor(CONFIG.Dice.randomUniform()*suffixSize)][0]
 
-        return game.wfrp4e.names.evaluateNamePartial(prefixChoice) + game.wfrp4e.names.evaluateNamePartial(suffixChoice)
+        return game.arrant.names.evaluateNamePartial(prefixChoice) + game.arrant.names.evaluateNamePartial(suffixChoice)
       }
     }
   }
   static dwarf = {
     forename(gender = "male") {
-      let names = game.wfrp4e.names[`dwarf_${gender}_Forenames`];
+      let names = game.arrant.names[`dwarf_${gender}_Forenames`];
       let size = names.length
       let roll = Math.floor(CONFIG.Dice.randomUniform()*size)
       let nameGroup = names[roll]
@@ -221,7 +221,7 @@ export default class NameGenWfrp {
       if (roll != 0)
         option = nameGroup[roll].substr(1)
 
-      return game.wfrp4e.names.evaluateNamePartial(base) + (game.wfrp4e.names.evaluateNamePartial(option || ""));
+      return game.arrant.names.evaluateNamePartial(base) + (game.arrant.names.evaluateNamePartial(option || ""));
     },
     surname(gender = "male") {
       let base = this.forename(gender)
@@ -239,7 +239,7 @@ export default class NameGenWfrp {
     forename(gender="male", type = "helf") {
       let source = (Math.ceil(CONFIG.Dice.randomUniform() * 2) == 1 ? "forename" : "generate")
       if (source == "forename") {
-        let names = game.wfrp4e.names[`elf_Forenames`];
+        let names = game.arrant.names[`elf_Forenames`];
         let size = names.length
         let roll = Math.floor(CONFIG.Dice.randomUniform()*size)
         return names[roll][0];
@@ -270,37 +270,37 @@ export default class NameGenWfrp {
         }
 
 
-        let start = game.wfrp4e.names.RollArray("elf_start");
+        let start = game.arrant.names.RollArray("elf_start");
 
-        let connector = useConnector ? game.wfrp4e.names.RollArray("elf_connectors") : ""
-        let element = useElement ? game.wfrp4e.names.RollArray(`elf_${gender}_element`) : ""
+        let connector = useConnector ? game.arrant.names.RollArray("elf_connectors") : ""
+        let element = useElement ? game.arrant.names.RollArray(`elf_${gender}_element`) : ""
 
         let elfType = type.includes("h") ? "high" : "wood"
-        let end = useEnd ? game.wfrp4e.names.RollArray(`elf_${elfType}_end`) : "";
+        let end = useEnd ? game.arrant.names.RollArray(`elf_${elfType}_end`) : "";
         return start + connector + element + end;
       }
     },
     surname(){
-      return game.wfrp4e.names.RollArray("elf_surnames")
+      return game.arrant.names.RollArray("elf_surnames")
     }
   }
 
   static welf = {
     forename(gender="male", type="welf"){
-      return game.wfrp4e.names.helf.forename(gender, type)
+      return game.arrant.names.helf.forename(gender, type)
     },
     surname(){
-      return game.wfrp4e.names.RollArray("elf_surnames")
+      return game.arrant.names.RollArray("elf_surnames")
     }
   }
 
   static halfling = {
     forename(gender="male"){
-      let nickname = Math.ceil(CONFIG.Dice.randomUniform() * 2) == 1 ? `(${game.wfrp4e.names.RollArray("halfling_nicknames")})` : ""
-      return `${game.wfrp4e.names.RollArray("halfling_start")}${game.wfrp4e.names.RollArray(`${gender}_halfling_element`)} ${nickname}`
+      let nickname = Math.ceil(CONFIG.Dice.randomUniform() * 2) == 1 ? `(${game.arrant.names.RollArray("halfling_nicknames")})` : ""
+      return `${game.arrant.names.RollArray("halfling_start")}${game.arrant.names.RollArray(`${gender}_halfling_element`)} ${nickname}`
     },
     surname(){
-      return game.wfrp4e.names.RollArray("halfling_surnames")
+      return game.arrant.names.RollArray("halfling_surnames")
     }
   }
 

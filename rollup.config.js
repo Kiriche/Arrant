@@ -38,3 +38,4 @@ export default {
         warn(warning)
     }
 }
+console.log("Bundled!");

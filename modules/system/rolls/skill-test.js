@@ -1,5 +1,5 @@
-import WFRP_Utility from "../utility-wfrp4e.js";
-import TestWFRP from "./test-wfrp4e.js"
+import WFRP_Utility from "../utility-arrant.js";
+import TestWFRP from "./test-arrant.js"
 
 export default class SkillTest extends TestWFRP {
 

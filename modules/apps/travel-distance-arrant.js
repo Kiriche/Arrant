@@ -1,18 +1,18 @@
-import WFRP_Utility from "../system/utility-wfrp4e.js";
+import WFRP_Utility from "../system/utility-arrant.js";
 
 
 /**
  * WIP
  * This class contains functions and helpers related to the market and Pay system
  */
-export default class TravelDistanceWfrp4e {
+export default class TravelDistanceArrant {
 
 
     /**
     * This method load the travel data from the internal JSON file
     */
     static async loadTravelData() {
-        FilePicker.browse("data", `systems/wfrp4e/data/`).then(resp => {
+        FilePicker.browse("data", `systems/arrant/data/`).then(resp => {
 
         for (var file of resp.files) {
           try {
@@ -125,7 +125,7 @@ export default class TravelDistanceWfrp4e {
    static handleTravelClick( event ) {
     let fromTown = $(event.currentTarget).attr("data-fromtown");
     let toTown = $(event.currentTarget).attr("data-totown");
-    TravelDistanceWfrp4e.displayTravelDistance( fromTown, toTown);
+    TravelDistanceArrant.displayTravelDistance( fromTown, toTown);
    }
 
 }

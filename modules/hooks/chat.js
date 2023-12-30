@@ -1,16 +1,16 @@
-import MarketWfrp4e from "../apps/market-wfrp4e.js";
+import MarketArrant from "../apps/market-arrant.js";
 import NameGenWfrp from "../apps/name-gen.js";
-import WFRP_Utility from "../system/utility-wfrp4e.js";
+import WFRP_Utility from "../system/utility-arrant.js";
 
-import ChatWFRP from "../system/chat-wfrp4e.js";
-import TravelDistanceWfrp4e from "../apps/travel-distance-wfrp4e.js";
-import OpposedWFRP from "../system/opposed-wfrp4e.js";
-import CharGenWfrp4e from "../apps/chargen/char-gen.js";
+import ChatWFRP from "../system/chat-arrant.js";
+import TravelDistanceArrant from "../apps/travel-distance-arrant.js";
+import OpposedWFRP from "../system/opposed-arrant.js";
+import CharGenArrant from "../apps/chargen/char-gen.js";
 
 
 export default function() {
 
-  // Activate chat listeners defined in chat-wfrp4e.js
+  // Activate chat listeners defined in chat-arrant.js
   Hooks.on('renderChatLog', (log, html, data) => {
     ChatWFRP.chatListeners(html)
   });
@@ -64,7 +64,7 @@ export default function() {
     /**
      * Extract the amount and the option from le commands array representing the command typed in the chat
      * @param commands Array of string
-     * @returns {{amount: string, option:  game.wfrp4e.config.creditOptions}}
+     * @returns {{amount: string, option:  game.arrant.config.creditOptions}}
      */
     function extractAmountAndOptionFromCommandLine(commands) {
       let amount = undefined, optionInCommandLine = undefined
@@ -78,7 +78,7 @@ export default function() {
 
       if (isAnAmount) {
         amount = commands.slice(1, commands.length).join(""); // all the matches except the first (/credit) goes to amount
-        optionInCommandLine =  game.wfrp4e.config.creditOptions.SPLIT;
+        optionInCommandLine =  game.arrant.config.creditOptions.SPLIT;
       } else {
         amount = commands.slice(1, commands.length - 1).join(""); // all the matches except the first (/credit) and the last (option)
         optionInCommandLine = mayBeAnOption;
@@ -90,10 +90,10 @@ export default function() {
     /**
      * This method return an option from an initial string value
      * @param {string} optionInCommandLine
-     * @returns { game.wfrp4e.config.creditOptions} an option
+     * @returns { game.arrant.config.creditOptions} an option
      */
     function getOption(optionInCommandLine) {
-      return (typeof optionInCommandLine == "undefined") ?  game.wfrp4e.config.creditOptions.SPLIT : optionInCommandLine;
+      return (typeof optionInCommandLine == "undefined") ?  game.arrant.config.creditOptions.SPLIT : optionInCommandLine;
     }
 
     // Roll on a table
@@ -101,7 +101,7 @@ export default function() {
       // If no argument, display help menu
       if (commands.length === 1)
       {
-        game.wfrp4e.tables.formatChatRoll("menu").then(text => {
+        game.arrant.tables.formatChatRoll("menu").then(text => {
           if (!text)
             return
           msg.content = text
@@ -122,7 +122,7 @@ export default function() {
             column = commands[2]
         }
         // Call tables class to roll and return html
-        game.wfrp4e.tables.formatChatRoll(commands[1], { modifier: modifier, showRoll : true }, column).then(text => {          
+        game.arrant.tables.formatChatRoll(commands[1], { modifier: modifier, showRoll : true }, column).then(text => {
           if (!text)
             return
           msg.content = text
@@ -136,13 +136,13 @@ export default function() {
       // Only one argument possible [1]: condition to lookup
       let conditionInput = commands[1].toLowerCase();
       // Don't require spelling, match the closest condition to the input
-      let closest = WFRP_Utility.matchClosest( game.wfrp4e.config.conditions, conditionInput);
-      if (! game.wfrp4e.config.conditionDescriptions) {
+      let closest = WFRP_Utility.matchClosest( game.arrant.config.conditions, conditionInput);
+      if (! game.arrant.config.conditionDescriptions) {
         ui.notifications.error("No content found")
         return false
       }
-      let description =  game.wfrp4e.config.conditionDescriptions[closest];
-      let name =  game.wfrp4e.config.conditions[closest];
+      let description =  game.arrant.config.conditionDescriptions[closest];
+      let name =  game.arrant.config.conditions[closest];
 
       // Create message and return false to not display user input of `/cond`
       msg.content = `<b>${name}</b><br>${description}`;
@@ -153,10 +153,10 @@ export default function() {
     else if (command === "/prop")
     {
       let propertyInput = commands[1].toLowerCase();
-      let allProperties = game.wfrp4e.utility.allProperties();
-      let closest = WFRP_Utility.matchClosest( game.wfrp4e.utility.allProperties(), propertyInput);
+      let allProperties = game.arrant.utility.allProperties();
+      let closest = WFRP_Utility.matchClosest( game.arrant.utility.allProperties(), propertyInput);
 
-      let description = game.wfrp4e.config.qualityDescriptions[closest] || game.wfrp4e.config.flawDescriptions[closest];
+      let description = game.arrant.config.qualityDescriptions[closest] || game.arrant.config.flawDescriptions[closest];
       let name =  allProperties[closest];
 
       msg.content = `<b>${name}</b><br>${description}`;
@@ -166,7 +166,7 @@ export default function() {
 
     // Character generation
     else if (command === "/char") {
-      new CharGenWfrp4e().render(true)
+      new CharGenArrant().render(true)
       return false;
     }
     // Name generation
@@ -191,7 +191,7 @@ export default function() {
       }
 
       // Call generator class to start the test, create message, send to chat, return false to not display user input of `/avail`
-      MarketWfrp4e.testForAvailability({ settlement, rarity, modifier });
+      MarketArrant.testForAvailability({ settlement, rarity, modifier });
       return false;
     }
     // Pay commands
@@ -202,7 +202,7 @@ export default function() {
       //If the user isnt a GM, he pays a price
       if (!game.user.isGM) {
         let actor = WFRP_Utility.getSpeaker(msg.speaker);
-        let money = MarketWfrp4e.payCommand(amount, actor);
+        let money = MarketArrant.payCommand(amount, actor);
         if (money)
           actor.updateEmbeddedDocuments("Item", money);
       } else {
@@ -213,13 +213,13 @@ export default function() {
             if (actor.hasPlayerOwner && p ) { 
                 playerOrActor = p.name // In this case, replace the actor by the player name for chat card, as usual
               } else {
-                MarketWfrp4e.directPayCommand(amount,actor); // No player/Not active -> substract money
+                MarketArrant.directPayCommand(amount,actor); // No player/Not active -> substract money
                 return false;
               }
           }
         }
         // Default choice, display chat card
-        MarketWfrp4e.generatePayCard(amount, playerOrActor);
+        MarketArrant.generatePayCard(amount, playerOrActor);
       }
       return false;
     }
@@ -231,7 +231,7 @@ export default function() {
 
       // If hes a gm, it generate a "Credit" card for all the player.
       if (game.user.isGM) {
-        MarketWfrp4e.processCredit(amount, playerOrActorOrCommand);
+        MarketArrant.processCredit(amount, playerOrActorOrCommand);
       } else {
         //If the user isnt a GM, he can't use the command (for now)
         message = `<p>${game.i18n.localize("MARKET.CreditCommandNotAllowed")}</p>`;
@@ -264,7 +264,7 @@ export default function() {
 
     // Travel commands
     else if (command === "/travel") {
-      TravelDistanceWfrp4e.displayTravelDistance( commands[1], commands[2] );
+      TravelDistanceArrant.displayTravelDistance( commands[1], commands[2] );
       return false;
     }
 
@@ -284,9 +284,9 @@ export default function() {
         };
       });
 
-      let link = game.i18n.format("CHAT.CommandLine.Help.Link", { link: "https://github.com/moo-man/WFRP4e-FoundryVTT/wiki" })
+      let link = game.i18n.format("CHAT.CommandLine.Help.Link", { link: "https://github.com/moo-man/arrant-FoundryVTT/wiki" })
 
-      renderTemplate("systems/wfrp4e/templates/chat/help/chat-help-command.hbs", {
+      renderTemplate("systems/arrant/templates/chat/help/chat-help-command.hbs", {
         commands: commandElements,
         link: link
       }).then(html => {
@@ -306,7 +306,7 @@ export default function() {
 
     WFRP_Utility.addLinkSources(html)
     // Hide test data from players (35 vs 50) so they don't know the enemy stats
-    if (game.settings.get("wfrp4e", "hideTestData") && !game.user.isGM && html.find(".chat-card").attr("data-hide") === "true") {
+    if (game.settings.get("arrant", "hideTestData") && !game.user.isGM && html.find(".chat-card").attr("data-hide") === "true") {
       html.find(".hide-option").remove();
     }
     // Hide chat card edit buttons from non-gms
@@ -345,7 +345,7 @@ export default function() {
           let newQuantity = app.flags.postQuantity - 1
           let recreateData = app.flags.recreationData
           recreateData.postQuantity = newQuantity;
-          renderTemplate("systems/wfrp4e/templates/chat/post-item.hbs", recreateData).then(html => {
+          renderTemplate("systems/arrant/templates/chat/post-item.hbs", recreateData).then(html => {
             app.update({ "flags.postQuantity": newQuantity, content : TextEditor.enrichHTML(html) })
             if (newQuantity <= 0)
               app.delete();
@@ -361,7 +361,7 @@ export default function() {
 
 
           if (newQuantity == 0) {
-            game.socket.emit("system.wfrp4e", {
+            game.socket.emit("system.arrant", {
               type: "deleteMsg",
               payload: {
                 "id": app.id
@@ -373,9 +373,9 @@ export default function() {
             ev.dataTransfer.setData("text/plain", app.flags.transfer);
             let recreateData = app.flags.recreationData
             recreateData.postQuantity = newQuantity;
-            renderTemplate("systems/wfrp4e/templates/chat/post-item.hbs", recreateData).then(html => {
+            renderTemplate("systems/arrant/templates/chat/post-item.hbs", recreateData).then(html => {
 
-              game.socket.emit("system.wfrp4e", {
+              game.socket.emit("system.arrant", {
                 type: "updateMsg",
                 payload: {
                   "id": app.id,

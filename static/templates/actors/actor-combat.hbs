@@ -204,16 +204,16 @@
 
 <div class="armour-section">
   <div class="first row">
-    {{> systems/wfrp4e/templates/partials/armour-location.hbs loc="head" locData=(lookup system.status.armour "head")}}
-    {{> systems/wfrp4e/templates/partials/armour-location.hbs loc="body" locData=(lookup system.status.armour "body")}}
+    {{> systems/arrant/templates/partials/armour-location.hbs loc="head" locData=(lookup system.status.armour "head")}}
+    {{> systems/arrant/templates/partials/armour-location.hbs loc="body" locData=(lookup system.status.armour "body")}}
   </div>
   <div class="second row">
-    {{> systems/wfrp4e/templates/partials/armour-location.hbs loc="lArm" locData=(lookup system.status.armour "lArm")}}
-    {{> systems/wfrp4e/templates/partials/armour-location.hbs loc="rArm" locData=(lookup system.status.armour "rArm")}}
+    {{> systems/arrant/templates/partials/armour-location.hbs loc="lArm" locData=(lookup system.status.armour "lArm")}}
+    {{> systems/arrant/templates/partials/armour-location.hbs loc="rArm" locData=(lookup system.status.armour "rArm")}}
   </div>
   <div class="third row">
-    {{> systems/wfrp4e/templates/partials/armour-location.hbs loc="lLeg" locData=(lookup system.status.armour "lLeg")}}
-    {{> systems/wfrp4e/templates/partials/armour-location.hbs loc="rLeg" locData=(lookup system.status.armour "rLeg")}}
+    {{> systems/arrant/templates/partials/armour-location.hbs loc="lLeg" locData=(lookup system.status.armour "lLeg")}}
+    {{> systems/arrant/templates/partials/armour-location.hbs loc="rLeg" locData=(lookup system.status.armour "rLeg")}}
   </div>
 </div>
 
@@ -256,6 +256,6 @@
 {{/if}}
 
 <script>
-  textContainer = document.querySelectorAll('.app.window-app.sheet.wfrp4e.actor .combat .inventory-list .item');
+  textContainer = document.querySelectorAll('.app.window-app.sheet.arrant.actor .combat .inventory-list .item');
   length = textContainer.length;
 </script>

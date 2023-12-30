@@ -1,7 +1,7 @@
-import WFRP_Utility from "./utility-wfrp4e.js";
+import WFRP_Utility from "./utility-arrant.js";
 
 
-export default class EffectWfrp4e extends ActiveEffect {
+export default class EffectArrant extends ActiveEffect {
  
   // Some dialog choice effects need to run a script to modify their bonus amounts or description
   prepareDialogChoice() {
@@ -11,19 +11,19 @@ export default class EffectWfrp4e extends ActiveEffect {
 
   _handleDialogChoiceScript()
   {
-    for (let mod in this.flags.wfrp4e.effectData) {
+    for (let mod in this.flags.arrant.effectData) {
       try {
         if (mod != "description")
-          this.flags.wfrp4e.effectData[mod] = eval(this.flags.wfrp4e.effectData[mod])
+          this.flags.arrant.effectData[mod] = eval(this.flags.arrant.effectData[mod])
       }
       catch (e) {
         console.error("Error parsing dialogChoice effect")
-        this.flags.wfrp4e.effectData[mod] = ""
+        this.flags.arrant.effectData[mod] = ""
       }
     }
-    if (this.flags.wfrp4e.script)
-      new Function(this.flags.wfrp4e.script).bind(this)()
-    return this.flags.wfrp4e.effectData
+    if (this.flags.arrant.script)
+      new Function(this.flags.arrant.script).bind(this)()
+    return this.flags.arrant.effectData
   }
 
   get item() {
@@ -66,7 +66,7 @@ export default class EffectWfrp4e extends ActiveEffect {
   }
 
   get show() {
-    if (game.user.isGM || !this.getFlag("wfrp4e", "hide"))
+    if (game.user.isGM || !this.getFlag("arrant", "hide"))
       return true
     else 
       return false
@@ -79,28 +79,28 @@ export default class EffectWfrp4e extends ActiveEffect {
 
 
   get application() {
-    return getProperty(this, "flags.wfrp4e.effectApplication")
+    return getProperty(this, "flags.arrant.effectApplication")
   }
 
   get trigger() {
-    return getProperty(this, "flags.wfrp4e.effectTrigger")
+    return getProperty(this, "flags.arrant.effectTrigger")
   }
 
   get conditionTrigger() {
-    return getProperty(this, "flags.wfrp4e.trigger")
+    return getProperty(this, "flags.arrant.trigger")
   }
 
   get script() {
-    return getProperty(this, "flags.wfrp4e.script")
+    return getProperty(this, "flags.arrant.script")
   }
 
 
   get conditionValue() {
-    return getProperty(this, "flags.wfrp4e.value")
+    return getProperty(this, "flags.arrant.value")
   }
 
   get reduceQuantity() {
-    return this.parent?.type == "trapping" && getProperty(this, "flags.wfrp4e.reduceQuantity")
+    return this.parent?.type == "trapping" && getProperty(this, "flags.arrant.reduceQuantity")
   }
 
 

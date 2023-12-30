@@ -1,4 +1,4 @@
-import WFRP_Utility from "./utility-wfrp4e.js";
+import WFRP_Utility from "./utility-arrant.js";
 
 export default function () {
 
@@ -76,7 +76,7 @@ export default function () {
             overlay = {src: f.icon, tint};
             continue;
           }
-          promises.push(this._drawEffect(f.icon, tint, getProperty(f, "flags.wfrp4e.value")));
+          promises.push(this._drawEffect(f.icon, tint, getProperty(f, "flags.arrant.value")));
         }
   
         // Next draw token effects
@@ -108,7 +108,7 @@ export default function () {
       // Add WFRPE Counter
       if(value)
       {
-        let text = new PreciseText(value, game.wfrp4e.config.effectTextStyle)
+        let text = new PreciseText(value, game.arrant.config.effectTextStyle)
         text.x = icon.x + icon.width * 0.1;
         text.y = icon.y + icon.height * 0.05;
         text.scale.x = 20;
@@ -142,7 +142,7 @@ export default function () {
 
   Token.prototype.incrementCondition = async function (effect, { active, overlay = false } = {}) {
     const existing = this.actor.actorEffects.find(e => e.conditionKey === effect.id);
-    if (!existing || Number.isNumeric(getProperty(existing, "flags.wfrp4e.value")))
+    if (!existing || Number.isNumeric(getProperty(existing, "flags.arrant.value")))
       await this.actor.addCondition(effect.id)
     else if (existing) // Not numeric, toggle if existing
       await this.actor.removeCondition(effect.id)

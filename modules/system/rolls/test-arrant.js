@@ -1,6 +1,6 @@
-import WFRP_Utility from "../utility-wfrp4e.js";
-import OpposedWFRP from "../opposed-wfrp4e.js";
-import WFRP_Audio from "../audio-wfrp4e.js";
+import WFRP_Utility from "../utility-arrant.js";
+import OpposedWFRP from "../opposed-arrant.js";
+import WFRP_Audio from "../audio-arrant.js";
 
 export default class TestWFRP {
   constructor(data, actor) {
@@ -14,7 +14,7 @@ export default class TestWFRP {
         target: data.target,
         rollClass: this.constructor.name,
         testModifier: data.testModifier || 0,
-        testDifficulty: (typeof data.testDifficulty == "string" ? game.wfrp4e.config.difficultyModifiers[data.testDifficulty] : data.testDifficulty) || 0,
+        testDifficulty: (typeof data.testDifficulty == "string" ? game.arrant.config.difficultyModifiers[data.testDifficulty] : data.testDifficulty) || 0,
         successBonus: data.successBonus || 0,
         slBonus: data.slBonus || 0,
         hitLocation: data.hitLocation != "none" && data.hitLocation || false,
@@ -85,7 +85,7 @@ export default class TestWFRP {
     if (!this.context.unopposed)
     {
       await this.actor.runEffects("rollTest", { test: this, cardOptions: this.context.cardOptions }, {item : this.item})
-      Hooks.call("wfrp4e:rollTest", this, this.context.cardOptions)
+      Hooks.call("arrant:rollTest", this, this.context.cardOptions)
     }
   }
 
@@ -149,8 +149,8 @@ export default class TestWFRP {
      * @param {Object} this.data  Test info: target number, SL bonus, success bonus, (opt) roll, etc
      */
   async computeResult() {
-    let automaticSuccess = game.settings.get("wfrp4e", "automaticSuccess");
-    let automaticFailure = game.settings.get("wfrp4e", "automaticFailure");
+    let automaticSuccess = game.settings.get("arrant", "automaticSuccess");
+    let automaticFailure = game.settings.get("arrant", "automaticFailure");
     this.computeTargetNumber();
     let successBonus = this.preData.successBonus;
     let slBonus = this.preData.slBonus + this.preData.postOpposedModifiers.SL;
@@ -238,7 +238,7 @@ export default class TestWFRP {
     else if (this.result.roll <= automaticSuccess || this.result.roll <= target) {
       description = game.i18n.localize("ROLL.Success")
       outcome = "success"
-      if (game.settings.get("wfrp4e", "fastSL")) {
+      if (game.settings.get("arrant", "fastSL")) {
         let rollString = this.result.roll.toString();
         if (rollString.length == 2)
           SL = Number(rollString.split('')[0])
@@ -257,7 +257,7 @@ export default class TestWFRP {
 
 
 
-      if (!game.settings.get("wfrp4e", "mooRangedDamage")) {
+      if (!game.settings.get("arrant", "mooRangedDamage")) {
         // If size modifiers caused a success, SL becomes 0
         if (this.options.sizeModifier) {
           let unmodifiedTarget = target - this.options.sizeModifier
@@ -295,7 +295,7 @@ export default class TestWFRP {
         description = game.i18n.localize("ROLL.MarginalSuccess");
 
       // Add 1 SL for each whole 10 the target number is above 100 (120 target: +2 SL) if the option is selected
-      if (game.settings.get("wfrp4e", "testAbove100")) {
+      if (game.settings.get("arrant", "testAbove100")) {
         if (target > 100) {
           let addSL = Math.floor((target - 100) / 10)
           SL += addSL;
@@ -329,19 +329,19 @@ export default class TestWFRP {
       // Called Shots
       if (this.preData.selectedHitLocation != "roll") // selectedHitLocation is possibly "none" but if so, preData.hitLocation would be false (see constructor) so this won't execute
       {
-        this.result.hitloc = game.wfrp4e.tables.hitLocKeyToResult(this.preData.selectedHitLocation)
+        this.result.hitloc = game.arrant.tables.hitLocKeyToResult(this.preData.selectedHitLocation)
       }
 
       // Pre-set hitloc (e.g. editing a test)
       if (this.preData.hitloc)
       {
         if (Number.isNumeric(this.preData.hitloc))
-          this.result.hitloc = await game.wfrp4e.tables.rollTable("hitloc", { lookup: this.preData.hitloc, hideDSN: true });
+          this.result.hitloc = await game.arrant.tables.rollTable("hitloc", { lookup: this.preData.hitloc, hideDSN: true });
       }
 
       // No defined hit loc, roll for one
       if (!this.result.hitloc)
-        this.result.hitloc = await game.wfrp4e.tables.rollTable("hitloc", { hideDSN: true });
+        this.result.hitloc = await game.arrant.tables.rollTable("hitloc", { hideDSN: true });
 
       this.result.hitloc.roll = (0, eval)(this.result.hitloc.roll) // Cleaner number when editing chat card
       this.result.hitloc.description = game.i18n.localize(this.result.hitloc.description)
@@ -367,7 +367,7 @@ export default class TestWFRP {
     }
 
     // If optional rule of criticals/fumbles on all tessts - assign Astounding Success/Failure accordingly
-    if (game.settings.get("wfrp4e", "criticalsFumblesOnAllTests") && !this.preData.hitLocation) {
+    if (game.settings.get("arrant", "criticalsFumblesOnAllTests") && !this.preData.hitLocation) {
       if ((roll > target && roll % 11 == 0) || roll == 100 || roll == 99) {
         this.result.color_red = true;
         this.result.description = game.i18n.localize("ROLL.AstoundingFailure")
@@ -389,8 +389,8 @@ export default class TestWFRP {
     }
     
     //@HOUSE
-    if (game.settings.get("wfrp4e", "mooCriticalMitigation") && this.result.critical) {
-      game.wfrp4e.utility.logHomebrew("mooCriticalMitigation")
+    if (game.settings.get("arrant", "mooCriticalMitigation") && this.result.critical) {
+      game.arrant.utility.logHomebrew("mooCriticalMitigation")
       try {
         let target = this.targets[0];
         if (target) {
@@ -403,7 +403,7 @@ export default class TestWFRP {
         }
       }
       catch (e) {
-        game.wfrp4e.utility.log("Error appyling homebrew mooCriticalMitigation: " + e)
+        game.arrant.utility.log("Error appyling homebrew mooCriticalMitigation: " + e)
       }
     }
     //@/HOUSE
@@ -492,7 +492,7 @@ export default class TestWFRP {
 
   // Create a test from already formed data
   static recreate(data) {
-    let test = new game.wfrp4e.rolls[data.preData.rollClass]()
+    let test = new game.arrant.rolls[data.preData.rollClass]()
     test.data = data
     test.computeTargetNumber()
     return test
@@ -534,7 +534,7 @@ export default class TestWFRP {
     await this.handleSoundContext(chatOptions)
 
     // Blank if manual chat cards
-    if (game.settings.get("wfrp4e", "manualChatCards") && !this.message)
+    if (game.settings.get("arrant", "manualChatCards") && !this.message)
       this.result.roll = this.result.SL = null;
 
     if (game.modules.get("dice-so-nice") && game.modules.get("dice-so-nice").active && chatOptions.sound?.includes("dice"))
@@ -557,7 +557,7 @@ export default class TestWFRP {
 
     if (newMessage || !this.message) {
       // If manual chat cards, convert elements to blank inputs
-      if (game.settings.get("wfrp4e", "manualChatCards")) {
+      if (game.settings.get("arrant", "manualChatCards")) {
         let blank = $(html)
         let elementsToToggle = blank.find(".display-toggle")
 
@@ -582,7 +582,7 @@ export default class TestWFRP {
       // Emit the HTML as a chat message
       chatOptions["content"] = html;
       // if (chatOptions.sound) {
-      //   console.log(`wfrp4e | Playing Sound: ${chatOptions.sound}`)
+      //   console.log(`arrant | Playing Sound: ${chatOptions.sound}`)
       //   AudioHelper.play({ src: chatOptions.sound }, true) // Play sound manually as updating doesn't trigger it
       // }
 
@@ -707,10 +707,10 @@ export default class TestWFRP {
     overcastData.available = overcastData.total - sum;
 
     //@HOUSE 
-    if (game.settings.get("wfrp4e", "mooOvercasting") && this.spell) {
-      game.wfrp4e.utility.logHomebrew("mooOvercasting")
+    if (game.settings.get("arrant", "mooOvercasting") && this.spell) {
+      game.arrant.utility.logHomebrew("mooOvercasting")
 
-      let spent = (game.settings.get("wfrp4e-eis", "dharRules") && game.wfrp4e.config.magicWind[this.spell.lore.value] == "Dhar") ? 1 : 2
+      let spent = (game.settings.get("arrant-eis", "dharRules") && game.arrant.config.magicWind[this.spell.lore.value] == "Dhar") ? 1 : 2
       this.result.SL = `+${this.result.SL - spent}`
       await this.calculateDamage()
     }
@@ -729,9 +729,9 @@ export default class TestWFRP {
       }
     }
     //@HOUSE 
-    if (game.settings.get("wfrp4e", "mooOvercasting")) {
-      game.wfrp4e.utility.logHomebrew("mooOvercasting")
-      let multiplier = (game.settings.get("wfrp4e-eis", "dharRules") && game.wfrp4e.config.magicWind[this.spell.lore.value] == "Dhar") ? 1 : 2
+    if (game.settings.get("arrant", "mooOvercasting")) {
+      game.arrant.utility.logHomebrew("mooOvercasting")
+      let multiplier = (game.settings.get("arrant-eis", "dharRules") && game.arrant.config.magicWind[this.spell.lore.value] == "Dhar") ? 1 : 2
       this.result.SL = `+${Number(this.result.SL) + (multiplier * (overcastData.total - overcastData.available))}`
       await this.calculateDamage()
     }
@@ -744,7 +744,7 @@ export default class TestWFRP {
   _handleMiscasts(miscastCounter) {
 
     if(this.preData.unofficialGrimoire) {
-      game.wfrp4e.utility.logHomebrew("unofficialgrimoire");
+      game.arrant.utility.logHomebrew("unofficialgrimoire");
       let controlIngredient = this.preData.unofficialGrimoire.ingredientMode == 'control'; 
       if (miscastCounter == 1) {
           if (this.hasIngredient && controlIngredient)
@@ -790,12 +790,12 @@ export default class TestWFRP {
           this.result.majormis = game.i18n.localize("ROLL.MajorMis")
         }
       }
-      else if (!game.settings.get("wfrp4e", "mooCatastrophicMiscasts") && miscastCounter >= 3)
+      else if (!game.settings.get("arrant", "mooCatastrophicMiscasts") && miscastCounter >= 3)
         this.result.majormis = game.i18n.localize("ROLL.MajorMis")
   
       //@HOUSE
-      else if (game.settings.get("wfrp4e", "mooCatastrophicMiscasts") && miscastCounter >= 3) {
-        game.wfrp4e.utility.logHomebrew("mooCatastrophicMiscasts")
+      else if (game.settings.get("arrant", "mooCatastrophicMiscasts") && miscastCounter >= 3) {
+        game.arrant.utility.logHomebrew("mooCatastrophicMiscasts")
         if (this.hasIngredient) {
           this.result.nullcatastrophicmis = game.i18n.localize("ROLL.CatastrophicMis")
           this.result.majormis = game.i18n.localize("ROLL.MajorMis")

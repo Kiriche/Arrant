@@ -1,8 +1,8 @@
 {
-  "id": "wfrp4e",
-  "name": "wfrp4e",
-  "title": "Warhammer Fantasy Roleplay 4th Edition",
-  "description": "A comprehensive system for running grim and perilous games of Warhammer Fantasy Roleplay in the Foundry VTT environment.",
+  "id": "arrant",
+  "name": "arrant",
+  "title": "arrant Game System",
+  "description": "Der Mench",
   "version": "7.0.3",
   "author": "Moo Man, CatoThe1stElder",
   "authors" : [
@@ -17,13 +17,13 @@
     }
   ],
   "esmodules" : [],
-  "scripts": ["wfrp4e.js", "./libs/pixi-filters.js"],
-  "styles": ["./css/wfrp4e.css"],
+  "scripts": ["arrant.js", "./libs/pixi-filters.js"],
+  "styles": ["./css/arrant.css"],
   "packs": [
     {
       "name": "basic",
       "label": "Basic Items",
-      "system": "wfrp4e",
+      "system": "arrant",
       "path": "./packs/basic",
       "type": "Item"
     }
@@ -47,7 +47,7 @@
     }
   },
   "initiative": "@characteristics.i.value + @characteristics.ag.value/100",
-  "background" : "systems/wfrp4e/WFRP-Header.jpg",
+  "background" : "systems/arrant/WFRP-Header.jpg",
   "gridDistance": 2,
   "gridUnits": "yd",
   "primaryTokenAttribute": "status.wounds",
@@ -61,7 +61,7 @@
   "manifestPlusVersion": "1.0.0",
   "templateVersion":3,
   "socket": true,
-  "manifest" :  "https://github.com/moo-man/WFRP4e-FoundryVTT/releases/latest/download/system.json",
-  "download" :  "https://github.com/moo-man/WFRP4e-FoundryVTT/releases/download/7.0.3/wfrp4e.zip",
-  "url" : "https://github.com/moo-man/WFRP4e-FoundryVTT"
+  "manifest" :  "https://github.com/moo-man/arrant-FoundryVTT/releases/latest/download/system.json",
+  "download" :  "https://github.com/moo-man/arrant-FoundryVTT/releases/download/7.0.3/arrant.zip",
+  "url" : "https://github.com/moo-man/arrant-FoundryVTT"
 }

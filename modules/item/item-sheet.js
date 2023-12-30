@@ -7,13 +7,13 @@
  * interactivity and events are handled here.
  */
 
-import ItemWfrp4e from "./item-wfrp4e.js";
-import WFRP_Utility from "../system/utility-wfrp4e.js";
-import EffectWfrp4e from "../system/effect-wfrp4e.js";
+import ItemArrant from "./item-arrant.js";
+import WFRP_Utility from "../system/utility-arrant.js";
+import EffectArrant from "../system/effect-arrant.js";
 
 
 
-export default class ItemSheetWfrp4e extends ItemSheet {
+export default class ItemSheetArrant extends ItemSheet {
   constructor(item, options) {
     super(item, options);
     this.mce = null;
@@ -63,7 +63,7 @@ export default class ItemSheetWfrp4e extends ItemSheet {
    */
   get template() {
     let type = this.item.type;
-    return `systems/wfrp4e/templates/items/item-${type}-sheet.hbs`;
+    return `systems/arrant/templates/items/item-${type}-sheet.hbs`;
   }
 
   /* -------------------------------------------- */
@@ -74,15 +74,15 @@ export default class ItemSheetWfrp4e extends ItemSheet {
    * Start with the base item data and extending with additional properties for rendering.
    * Each item type has specific data (typically from config constants) that needs to be rendered
    * 
-   * Example: A weapon sheet needs all different weapon types to list in the weaponGroup dropdown (`data['weaponGroups'] =  game.wfrp4e.config.weaponGroups;`)
+   * Example: A weapon sheet needs all different weapon types to list in the weaponGroup dropdown (`data['weaponGroups'] =  game.arrant.config.weaponGroups;`)
    */
   async getData() {
     const data = await super.getData();
     data.system = data.item._source.system // Use source data to avoid modifications being applied
 
     if (this.item.type == "spell") {
-      if (game.wfrp4e.config.magicLores[this.item.lore.value]) {
-        data["loreValue"] = game.wfrp4e.config.magicLores[this.item.lore.value]
+      if (game.arrant.config.magicLores[this.item.lore.value]) {
+        data["loreValue"] = game.arrant.config.magicLores[this.item.lore.value]
       }
       else {
         data["loreValue"] = this.item.lore.value;
@@ -90,9 +90,9 @@ export default class ItemSheetWfrp4e extends ItemSheet {
     }
 
     //@HOUSE
-    if (this.item.type == "weapon" && game.settings.get("wfrp4e", "mooRangeBands"))
+    if (this.item.type == "weapon" && game.settings.get("arrant", "mooRangeBands"))
     {
-      game.wfrp4e.utility.logHomebrew("mooRangeBands")
+      game.arrant.utility.logHomebrew("mooRangeBands")
       data.showOptimal = true
     }
     //@/HOUSE
@@ -102,16 +102,16 @@ export default class ItemSheetWfrp4e extends ItemSheet {
       data['earningSkills'] = this.item.system.incomeSkill.map(skillIndex => this.item.system.skills[skillIndex]);
       data['talents'] = this.item.system.talents.toString();
       data['trappings'] = this.item.system.trappings.toString();
-      let characteristicList = duplicate(game.wfrp4e.config.characteristicsAbbrev);
+      let characteristicList = duplicate(game.arrant.config.characteristicsAbbrev);
       for (let char in characteristicList) {
         if (this.item.system.characteristics.includes(char))
           characteristicList[char] = {
-            abrev: game.wfrp4e.config.characteristicsAbbrev[char],
+            abrev: game.arrant.config.characteristicsAbbrev[char],
             checked: true
           };
         else
           characteristicList[char] = {
-            abrev: game.wfrp4e.config.characteristicsAbbrev[char],
+            abrev: game.arrant.config.characteristicsAbbrev[char],
             checked: false
           };
       }
@@ -119,14 +119,14 @@ export default class ItemSheetWfrp4e extends ItemSheet {
     }
 
     else if (this.item.type == "cargo") {
-      data.cargoTypes = game.wfrp4e.config.trade.cargoTypes
-      data.qualities = game.wfrp4e.config.trade.qualities
-      data["dotrActive"] = (game.modules.get("wfrp4e-dotr") && game.modules.get("wfrp4e-dotr").active)
+      data.cargoTypes = game.arrant.config.trade.cargoTypes
+      data.qualities = game.arrant.config.trade.qualities
+      data["dotrActive"] = (game.modules.get("arrant-dotr") && game.modules.get("arrant-dotr").active)
     }
 
     if (this.item.type == "critical" || this.item.type == "injury" || this.item.type == "disease" || this.item.type == "mutation")
       this.addConditionData(data)
-    data.showBorder = data.item.img == "systems/wfrp4e/icons/blank.png" || !data.item.img
+    data.showBorder = data.item.img == "systems/arrant/icons/blank.png" || !data.item.img
     data.isOwned = this.item.isOwned;
 
     data.enrichment = await this._handleEnrichment();
@@ -144,19 +144,19 @@ export default class ItemSheetWfrp4e extends ItemSheet {
   }
 
   addConditionData(data) {
-    data.conditions = duplicate(game.wfrp4e.config.statusEffects).filter(i => !["fear", "grappling", "engaged"].includes(i.id)).map(e => new EffectWfrp4e(e));
+    data.conditions = duplicate(game.arrant.config.statusEffects).filter(i => !["fear", "grappling", "engaged"].includes(i.id)).map(e => new EffectArrant(e));
     delete data.conditions.splice(data.conditions.length - 1, 1)
     for (let condition of data.conditions) {
       let existing = this.item.effects.find(e => e.conditionId == condition.conditionId)
       if (existing) {
-        condition.value = existing.flags.wfrp4e.value
-        condition.flags.wfrp4e.value = existing.conditionValue;
+        condition.value = existing.flags.arrant.value
+        condition.flags.arrant.value = existing.conditionValue;
       }
       else if (condition.isNumberedCondition) {
-        condition.flags.wfrp4e.value = 0
+        condition.flags.arrant.value = 0
       }
 
-      if (condition.flags.wfrp4e.value == null)
+      if (condition.flags.arrant.value == null)
         condition.boolean = true;
 
     }
@@ -220,10 +220,10 @@ export default class ItemSheetWfrp4e extends ItemSheet {
 
 
     html.find(".edit-item-properties").click(ev => {
-      new game.wfrp4e.apps.ItemProperties(this.item).render(true)
+      new game.arrant.apps.ItemProperties(this.item).render(true)
     })
     html.find(".cargo-sell").click(ev => {
-      game.wfrp4e.apps.Wfrp4eTradeManager.processTradeSell(this.item)
+      game.arrant.apps.ArrantTradeManager.processTradeSell(this.item)
     })
 
     // Support custom entity links
@@ -245,9 +245,9 @@ export default class ItemSheetWfrp4e extends ItemSheet {
   async _onLoreChange(event) {
     let inputLore = event.target.value;
     // Go through each lore name
-    for (let lore in game.wfrp4e.config.magicLores) {
+    for (let lore in game.arrant.config.magicLores) {
       // If lore value matches config, use that (Update the actor with the "key" value)
-      if (inputLore == game.wfrp4e.config.magicLores[lore]) {
+      if (inputLore == game.arrant.config.magicLores[lore]) {
         return this.item.update({ 'system.lore.value': lore });
       }
     }
@@ -343,15 +343,15 @@ export default class ItemSheetWfrp4e extends ItemSheet {
     })
 
     // take those names and lookup the associated symptom key
-    let symptomKeys = symtomNames.map(s => game.wfrp4e.utility.findKey(s, game.wfrp4e.config.symptoms))
+    let symptomKeys = symtomNames.map(s => game.arrant.utility.findKey(s, game.arrant.config.symptoms))
 
     // Remove anything not found
     symptomKeys = symptomKeys.filter(s => !!s)
 
     // Map those symptom keys into effects, renaming the effects to the user input
     let symptomEffects = symptomKeys.map((s, i) => {
-      if (game.wfrp4e.config.symptomEffects[s]) {
-        let effect = duplicate(game.wfrp4e.config.symptomEffects[s])
+      if (game.arrant.config.symptomEffects[s]) {
+        let effect = duplicate(game.arrant.config.symptomEffects[s])
         effect.name = symptoms[i];
         return effect
 
@@ -359,7 +359,7 @@ export default class ItemSheetWfrp4e extends ItemSheet {
     }).filter(i => !!i)
 
     // Remove all previous symptoms from the item
-    let effects = this.item.effects.map(i => i.toObject()).filter(e => getProperty(e, "flags.wfrp4e.symptom"))
+    let effects = this.item.effects.map(i => i.toObject()).filter(e => getProperty(e, "flags.arrant.symptom"))
 
     // Delete previous symptoms
     await this.item.deleteEmbeddedDocuments("ActiveEffect", effects.map(i => i._id))
@@ -396,7 +396,7 @@ export default class ItemSheetWfrp4e extends ItemSheet {
   _onConditionToggle(ev) {
     let condKey = $(ev.currentTarget).parents(".sheet-condition").attr("data-cond-id")
 
-    if (game.wfrp4e.config.statusEffects.find(e => e.id == condKey).flags.wfrp4e.value == null) {
+    if (game.arrant.config.statusEffects.find(e => e.id == condKey).flags.arrant.value == null) {
       if (this.item.hasCondition(condKey))
         this.item.removeCondition(condKey)
       else
@@ -413,7 +413,7 @@ export default class ItemSheetWfrp4e extends ItemSheet {
 }
 
 Items.unregisterSheet("core", ItemSheet);
-Items.registerSheet("wfrp4e", ItemSheetWfrp4e,
+Items.registerSheet("arrant", ItemSheetArrant,
   {
     makeDefault: true
   });

@@ -2,20 +2,20 @@
   "_id": "ZUldeWVqTnMRw5xD",
   "name": "Sail (Cog)",
   "type": "skill",
-  "img": "modules/wfrp4e-core/icons/skills/adv-skill-ag.png",
+  "img": "modules/arrant-core/icons/skills/adv-skill-ag.png",
   "effects": [],
   "sort": 0,
   "flags": {
     "_sheetTab": "description",
     "core": {
-      "sourceId": "Compendium.wfrp4e-core.skills.ZUldeWVqTnMRw5xD"
+      "sourceId": "Compendium.arrant-core.skills.ZUldeWVqTnMRw5xD"
     }
   },
   "system": {
     "description": {
       "type": "String",
       "label": "Description",
-      "value": "<p>@UUID[Compendium.wfrp4e-core.journal-entries.6zOdTLv3YeYeJ4hR.JournalEntryPage.DLrOPZtVMLgSyxaj]{Sail}</p>"
+      "value": "<p>@UUID[Compendium.arrant-core.journal-entries.6zOdTLv3YeYeJ4hR.JournalEntryPage.DLrOPZtVMLgSyxaj]{Sail}</p>"
     },
     "gmdescription": {
       "type": "String",
@@ -60,7 +60,7 @@
     "v5mZIet2Ld0KcxRD": 3
   },
   "_stats": {
-    "systemId": "wfrp4e",
+    "systemId": "arrant",
     "systemVersion": "6.5.9",
     "coreVersion": "10.303",
     "createdTime": 1689878646678,

@@ -1,4 +1,4 @@
-import WFRP_Utility from "../../system/utility-wfrp4e.js";
+import WFRP_Utility from "../../system/utility-arrant.js";
 import { SpeciesStage } from "./species";
 import { CareerStage } from "./career";
 import { AttributesStage } from "./attributes";
@@ -10,7 +10,7 @@ import { DetailsStage } from "./details";
 /**
  * This class is the center of character generation through the chat prompts (started with /char)
  */
-export default class CharGenWfrp4e extends FormApplication {
+export default class CharGenArrant extends FormApplication {
   constructor(...args) {
     super(...args);
     this.data = {
@@ -115,15 +115,15 @@ export default class CharGenWfrp4e extends FormApplication {
     }
 
 
-    Hooks.call("wfrp4e:chargen", this)
+    Hooks.call("arrant:chargen", this)
   }
 
 
   static get defaultOptions() {
     const options = super.defaultOptions;
     options.id = "chargen";
-    options.template = "systems/wfrp4e/templates/apps/chargen/chargen.hbs"
-    options.classes = options.classes.concat("wfrp4e", "chargen");
+    options.template = "systems/arrant/templates/apps/chargen/chargen.hbs"
+    options.classes = options.classes.concat("arrant", "chargen");
     options.resizable = true;
     options.width = 1000;
     options.height = 600;
@@ -193,7 +193,7 @@ export default class CharGenWfrp4e extends FormApplication {
 
     return {
       characteristics,
-      speciesDisplay : this.data.subspecies ? `${game.wfrp4e.config.species[this.data.species]} (${game.wfrp4e.config.subspecies[this.data.species]?.[this.data.subspecies].name})` :  game.wfrp4e.config.species[this.data.species],
+      speciesDisplay : this.data.subspecies ? `${game.arrant.config.species[this.data.species]} (${game.arrant.config.subspecies[this.data.species]?.[this.data.subspecies].name})` :  game.arrant.config.species[this.data.species],
       stages: this.stages,
       data : this.data,
       stageHTML :  await this._getStageHTML(),

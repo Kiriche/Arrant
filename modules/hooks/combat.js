@@ -1,5 +1,5 @@
 import CombatHelpers from "../system/combat.js"
-import WFRP_Utility from "../system/utility-wfrp4e.js"
+import WFRP_Utility from "../system/utility-arrant.js"
 
 export default function() {
   Hooks.on("updateCombat", CombatHelpers.updateCombat);
@@ -12,14 +12,14 @@ export default function() {
   })
 
   Hooks.on("createCombatant", combatant => {
-    if (game.settings.get("wfrp4e", "useGroupAdvantage") && game.user.isGM) {
-      let advantage = game.settings.get("wfrp4e", "groupAdvantageValues")
+    if (game.settings.get("arrant", "useGroupAdvantage") && game.user.isGM) {
+      let advantage = game.settings.get("arrant", "groupAdvantageValues")
       combatant.actor.update({"system.status.advantage.value" : advantage[combatant.actor.advantageGroup]}, {fromGroupAdvantage : true})
     }
     let mask = combatant.token.hidden
     if (mask && game.user.isGM) {
       let data = {};
-      data.img = "systems/wfrp4e/tokens/unknown.png"
+      data.img = "systems/arrant/tokens/unknown.png"
       data.name = "???"
       combatant.update(data);
     }
@@ -34,7 +34,7 @@ export default function() {
       let data = null;
       if (combatant && mask && !combatant.hidden && combatant.name != "???") {
         data = {};
-        data.img = "systems/wfrp4e/tokens/unknown.png"
+        data.img = "systems/arrant/tokens/unknown.png"
         data.name = "???"
       }
       else if (combatant && !mask && !combatant.hidden && combatant.name == "???") {
@@ -51,7 +51,7 @@ export default function() {
 
   /* Custom Combat Carousel */
   Hooks.on('renderCombatCarousel', () => {
-    addClassByQuerySelector("wfrp4e", "#combat-carousel")
+    addClassByQuerySelector("arrant", "#combat-carousel")
     let carouselSize = game.settings.get('combat-carousel', 'carouselSize')
     if (carouselSize !== "") {
       addClassByQuerySelector(carouselSize, "#combat-carousel")
@@ -66,9 +66,9 @@ export default function() {
   Hooks.on("renderCombatTracker", (app, html, options) => {
     WFRP_Utility.replacePopoutTokens(app.element); // Combat tracker shows tokens, replace popout versions with normal
 
-    if (game.settings.get("wfrp4e", "useGroupAdvantage"))
+    if (game.settings.get("arrant", "useGroupAdvantage"))
     {
-      let advantage = game.settings.get("wfrp4e", "groupAdvantageValues")
+      let advantage = game.settings.get("arrant", "groupAdvantageValues")
       let element = 
       $(`
       <div class="advantage-groups">

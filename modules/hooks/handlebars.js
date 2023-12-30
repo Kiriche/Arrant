@@ -10,12 +10,12 @@ export default function () {
         })
 
         Handlebars.registerHelper("config", function (key) {
-            return game.wfrp4e.config[key]
+            return game.arrant.config[key]
         })
 
         Handlebars.registerHelper("configLookup", function (obj, key) {
             if (obj && key)
-                return game.wfrp4e.config[obj]?.[key]
+                return game.arrant.config[obj]?.[key]
             
         })
 
@@ -32,7 +32,7 @@ export default function () {
             if(tokens.length == 1) {
                 tokenDocument = tokens[0].document;
             }
-            return tokenDocument.hidden ? "systems/wfrp4e/tokens/unknown.png" : tokenDocument.texture.src;
+            return tokenDocument.hidden ? "systems/arrant/tokens/unknown.png" : tokenDocument.texture.src;
         })
 
         Handlebars.registerHelper("tokenName", function(actor) {
@@ -45,7 +45,7 @@ export default function () {
         })
 
         Handlebars.registerHelper("settings", function (key) {
-            return game.settings.get("wfrp4e", key);
+            return game.settings.get("arrant", key);
         })
 })
 }

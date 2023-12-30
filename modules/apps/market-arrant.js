@@ -1,21 +1,21 @@
-import WFRP_Utility from "../system/utility-wfrp4e.js";
+import WFRP_Utility from "../system/utility-arrant.js";
 
 
 /**
  * WIP
  * This class contains functions and helpers related to the market and Pay system
  */
-export default class MarketWfrp4e {
+export default class MarketArrant {
   /**
    * Roll a test for the availability and the stock quantity of an item based on the rulebook
    * Takes as a parameter an object with localized settlement type, localized rarity and a modifier for the roll
    * @param {Object} options settlement, rarity, modifier
    */
   static async testForAvailability({ settlement, rarity, modifier }) {
-    //This method read the table  game.wfrp4e.config.availabilityTable defined in the config file
+    //This method read the table  game.arrant.config.availabilityTable defined in the config file
 
     //First we get the different settlements size
-    let validSettlements = Object.getOwnPropertyNames(game.wfrp4e.config.availabilityTable);
+    let validSettlements = Object.getOwnPropertyNames(game.arrant.config.availabilityTable);
     let validSettlementsLocalized = {};
     let validRarityLocalized = {};
 
@@ -26,7 +26,7 @@ export default class MarketWfrp4e {
 
     //If we found a valid settlement size, we now do the same thing for the rarity datas
     if (settlement && validSettlementsLocalized.hasOwnProperty(settlement)) {
-      let validRarity = Object.getOwnPropertyNames(game.wfrp4e.config.availabilityTable[validSettlementsLocalized[settlement]]);
+      let validRarity = Object.getOwnPropertyNames(game.arrant.config.availabilityTable[validSettlementsLocalized[settlement]]);
       validRarity.forEach(function (index) {
         validRarityLocalized[game.i18n.localize(index).toLowerCase()] = index;
       });
@@ -42,7 +42,7 @@ export default class MarketWfrp4e {
     else {
       let roll = await new Roll("1d100 - @modifier", { modifier: modifier }).roll();
       //we retrieve the correct line
-      let availabilityLookup = game.wfrp4e.config.availabilityTable[validSettlementsLocalized[settlement]][validRarityLocalized[rarity]];
+      let availabilityLookup = game.arrant.config.availabilityTable[validSettlementsLocalized[settlement]][validRarityLocalized[rarity]];
       let isAvailable = availabilityLookup.test > 0 && roll.total <= availabilityLookup.test;
 
       let finalResult = {
@@ -85,8 +85,8 @@ export default class MarketWfrp4e {
    * @param {String} rarity
    */
   static generateSettlementChoice(rarity) {
-    let cardData = { rarity: game.wfrp4e.config.availability[rarity] };
-    renderTemplate("systems/wfrp4e/templates/chat/market/market-settlement.hbs", cardData).then(html => {
+    let cardData = { rarity: game.arrant.config.availability[rarity] };
+    renderTemplate("systems/arrant/templates/chat/market/market-settlement.hbs", cardData).then(html => {
       let chatData = WFRP_Utility.chatDataSetup(html, "selfroll");
       ChatMessage.create(chatData);
     });
@@ -186,7 +186,7 @@ export default class MarketWfrp4e {
    * Execute a /pay command and remove the money from the player inventory
    * @param {String} command
    * @param {Array} moneyItemInventory
-   * @param transactionType  game.wfrp4e.config.transactionType, is it a payment or an income
+   * @param transactionType  game.arrant.config.transactionType, is it a payment or an income
    */
   static payCommand(command, actor, options = {}) {
     //First we parse the command
@@ -326,7 +326,7 @@ export default class MarketWfrp4e {
     if ((moneyValues.bp || 0) > number)
       number = moneyValues.bp || 0
 
-    if (game.dice3d && game.settings.get("wfrp4e", "throwMoney")) {
+    if (game.dice3d && game.settings.get("arrant", "throwMoney")) {
       new Roll(`${number}dc`).evaluate().then((roll) => {
         game.dice3d.showForRoll(roll);
       });
@@ -398,7 +398,7 @@ export default class MarketWfrp4e {
         QtSS: parsedPayRequest.ss,
         QtBP: parsedPayRequest.bp
       };
-      renderTemplate("systems/wfrp4e/templates/chat/market/market-pay.hbs", cardData).then(html => {
+      renderTemplate("systems/arrant/templates/chat/market/market-pay.hbs", cardData).then(html => {
         let chatData = WFRP_Utility.chatDataSetup(html, "roll", false, {forceWhisper: player});
         ChatMessage.create(chatData);
       });
@@ -526,9 +526,9 @@ export default class MarketWfrp4e {
         QtSS: amount.ss,
         QtBP: amount.bp
       };
-      renderTemplate("systems/wfrp4e/templates/chat/market/market-credit.hbs", cardData).then(html => {
+      renderTemplate("systems/arrant/templates/chat/market/market-credit.hbs", cardData).then(html => {
         let chatData = WFRP_Utility.chatDataSetup(html, "roll", false, {forceWhisper});
-        setProperty(chatData, "flags.wfrp4e.instances", nbActivePlayers);
+        setProperty(chatData, "flags.arrant.instances", nbActivePlayers);
         ChatMessage.create(chatData);
       })
     }

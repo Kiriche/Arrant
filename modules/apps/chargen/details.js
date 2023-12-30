@@ -2,7 +2,7 @@ import NameGenWfrp from "../name-gen.js";
 import { ChargenStage } from "./stage";
 
 export class DetailsStage extends ChargenStage {
-  journalId = "Compendium.wfrp4e-core.journal-entries.IQ0PgoJihQltCBUU.JournalEntryPage.Q4C9uANCqPzlRKFD"
+  journalId = "Compendium.arrant-core.journal-entries.IQ0PgoJihQltCBUU.JournalEntryPage.Q4C9uANCqPzlRKFD"
   static get defaultOptions() {
     const options = super.defaultOptions;
     options.resizable = true;
@@ -17,7 +17,7 @@ export class DetailsStage extends ChargenStage {
   static get title() { return game.i18n.localize("CHARGEN.StageDetails"); }
 
   get template() {
-    return "systems/wfrp4e/templates/apps/chargen/details.hbs";
+    return "systems/arrant/templates/apps/chargen/details.hbs";
   }
 
   constructor(...args) {
@@ -67,23 +67,23 @@ export class DetailsStage extends ChargenStage {
     return NameGenWfrp.generateName({ species: this.data.species, gender: this.context.gender });
   }
   async rollAge() {
-    return (await new Roll(game.wfrp4e.config.speciesAge[this.data.species]).roll({async: true})).total;
+    return (await new Roll(game.arrant.config.speciesAge[this.data.species]).roll({async: true})).total;
   }
   async rollHeight() {
-    let heightRoll = (await new Roll(game.wfrp4e.config.speciesHeight[this.data.species].die).roll({async : true})).total;
-    let hFeet = game.wfrp4e.config.speciesHeight[this.data.species].feet;
-    let hInches = game.wfrp4e.config.speciesHeight[this.data.species].inches + heightRoll;
+    let heightRoll = (await new Roll(game.arrant.config.speciesHeight[this.data.species].die).roll({async : true})).total;
+    let hFeet = game.arrant.config.speciesHeight[this.data.species].feet;
+    let hInches = game.arrant.config.speciesHeight[this.data.species].inches + heightRoll;
     hFeet += Math.floor(hInches / 12);
     hInches = hInches % 12;
     return `${hFeet}'${hInches}`;
   }
   async rollEyes() {
-    return (await game.wfrp4e.tables.rollTable("eyes", {}, this.data.species)).result;
+    return (await game.arrant.tables.rollTable("eyes", {}, this.data.species)).result;
   }
   async rollHair() {
-    return (await game.wfrp4e.tables.rollTable("hair", {}, this.data.species)).result;
+    return (await game.arrant.tables.rollTable("hair", {}, this.data.species)).result;
   }
   async rollMotivation() {
-    return (await game.wfrp4e.tables.rollTable("motivation")).result;
+    return (await game.arrant.tables.rollTable("motivation")).result;
   }
 }

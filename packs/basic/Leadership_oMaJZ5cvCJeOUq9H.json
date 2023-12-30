@@ -2,20 +2,20 @@
   "_id": "oMaJZ5cvCJeOUq9H",
   "name": "Leadership",
   "type": "skill",
-  "img": "modules/wfrp4e-core/icons/skills/basic-skill-fel.png",
+  "img": "modules/arrant-core/icons/skills/basic-skill-fel.png",
   "effects": [],
   "sort": 0,
   "flags": {
     "_sheetTab": "description",
     "core": {
-      "sourceId": "Compendium.wfrp4e-core.skills.oMaJZ5cvCJeOUq9H"
+      "sourceId": "Compendium.arrant-core.skills.oMaJZ5cvCJeOUq9H"
     }
   },
   "system": {
     "description": {
       "type": "String",
       "label": "Description",
-      "value": "<p>@UUID[Compendium.wfrp4e-core.journal-entries.6zOdTLv3YeYeJ4hR.JournalEntryPage.haKq6qZXYj7Bweu4]{Leadership}</p>"
+      "value": "<p>@UUID[Compendium.arrant-core.journal-entries.6zOdTLv3YeYeJ4hR.JournalEntryPage.haKq6qZXYj7Bweu4]{Leadership}</p>"
     },
     "gmdescription": {
       "type": "String",
@@ -60,7 +60,7 @@
     "v5mZIet2Ld0KcxRD": 3
   },
   "_stats": {
-    "systemId": "wfrp4e",
+    "systemId": "arrant",
     "systemVersion": "6.5.9",
     "coreVersion": "10.303",
     "createdTime": 1689878646763,

@@ -2,20 +2,20 @@
   "_id": "W0GnDjtcocY6m07J",
   "name": "Animal Training (Dog)",
   "type": "skill",
-  "img": "modules/wfrp4e-core/icons/skills/adv-skill-int.png",
+  "img": "modules/arrant-core/icons/skills/adv-skill-int.png",
   "effects": [],
   "sort": 0,
   "flags": {
     "_sheetTab": "details",
     "core": {
-      "sourceId": "Compendium.wfrp4e-core.skills.W0GnDjtcocY6m07J"
+      "sourceId": "Compendium.arrant-core.skills.W0GnDjtcocY6m07J"
     }
   },
   "system": {
     "description": {
       "type": "String",
       "label": "Description",
-      "value": "<p>@UUID[Compendium.wfrp4e-core.journal-entries.6zOdTLv3YeYeJ4hR.JournalEntryPage.vbOc3JVfG2nfK1P0]{Animal Training}</p>"
+      "value": "<p>@UUID[Compendium.arrant-core.journal-entries.6zOdTLv3YeYeJ4hR.JournalEntryPage.vbOc3JVfG2nfK1P0]{Animal Training}</p>"
     },
     "gmdescription": {
       "type": "String",
@@ -60,7 +60,7 @@
     "v5mZIet2Ld0KcxRD": 3
   },
   "_stats": {
-    "systemId": "wfrp4e",
+    "systemId": "arrant",
     "systemVersion": "6.5.9",
     "coreVersion": "10.303",
     "createdTime": 1689878646676,

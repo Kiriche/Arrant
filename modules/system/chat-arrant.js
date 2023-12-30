@@ -6,12 +6,12 @@
  * is where chat listeners are defined, which add interactivity to chat, usually in the form of button clickss.
  */
 
-import MarketWfrp4e from "../apps/market-wfrp4e.js";
-import TravelDistanceWfrp4e from "../apps/travel-distance-wfrp4e.js";
-import WFRP_Audio from "./audio-wfrp4e.js";
-import WFRP_Utility from "./utility-wfrp4e.js";
+import MarketArrant from "../apps/market-arrant.js";
+import TravelDistanceArrant from "../apps/travel-distance-arrant.js";
+import WFRP_Audio from "./audio-arrant.js";
+import WFRP_Utility from "./utility-arrant.js";
 
-import OpposedWFRP from "./opposed-wfrp4e.js";
+import OpposedWFRP from "./opposed-arrant.js";
 import AOETemplate from "./aoe.js"
 
 
@@ -32,7 +32,7 @@ export default class ChatWFRP {
 
     let matches = Array.from(content.matchAll(regex));
 
-    conditions = conditions.concat(matches.map(m => m[1].toLowerCase())).filter(i => game.wfrp4e.config.conditions[i])
+    conditions = conditions.concat(matches.map(m => m[1].toLowerCase())).filter(i => game.arrant.config.conditions[i])
 
     // Dedup
     conditions = conditions.filter((c, i) => conditions.indexOf(c) == i)
@@ -41,7 +41,7 @@ export default class ChatWFRP {
     {
       let html = `<div class="apply-conditions">`
       conditions.forEach(c => 
-          html += `<a class="chat-button apply-condition" data-cond="${c}">${game.i18n.format("CHAT.ApplyCondition", {condition: game.wfrp4e.config.conditions[c]})}</a>`
+          html += `<a class="chat-button apply-condition" data-cond="${c}">${game.i18n.format("CHAT.ApplyCondition", {condition: game.arrant.config.conditions[c]})}</a>`
       )
 
       html += `</div>`
@@ -88,7 +88,7 @@ export default class ChatWFRP {
     html.on('mousedown', '.fear-link', WFRP_Utility.handleFearClick.bind(WFRP_Utility))
     html.on('mousedown', '.terror-link', WFRP_Utility.handleTerrorClick.bind(WFRP_Utility))
     html.on('mousedown', '.exp-link', WFRP_Utility.handleExpClick.bind(WFRP_Utility))
-    html.on('mousedown', '.travel-click', TravelDistanceWfrp4e.handleTravelClick.bind(TravelDistanceWfrp4e))
+    html.on('mousedown', '.travel-click', TravelDistanceArrant.handleTravelClick.bind(TravelDistanceArrant))
 
     html.on('change', '.card-edit', this._onCardEdit.bind(this))
     html.on('click', '.opposed-toggle', OpposedWFRP.opposedClicked.bind(OpposedWFRP))
@@ -199,9 +199,9 @@ export default class ChatWFRP {
     test._overcast(overcastChoice)
     
     //@HOUSE
-    if (game.settings.get("wfrp4e", "mooOvercasting"))
+    if (game.settings.get("arrant", "mooOvercasting"))
     {
-      game.wfrp4e.utility.logHomebrew("mooOvercasting")
+      game.arrant.utility.logHomebrew("mooOvercasting")
     }
     //@/HOUSE
 
@@ -220,9 +220,9 @@ export default class ChatWFRP {
     test._overcastReset()
         
     //@HOUSE
-    if (game.settings.get("wfrp4e", "mooOvercasting"))
+    if (game.settings.get("arrant", "mooOvercasting"))
     {
-      game.wfrp4e.utility.logHomebrew("mooOvercasting")
+      game.arrant.utility.logHomebrew("mooOvercasting")
     }
     //@/HOUSE
   }
@@ -254,7 +254,7 @@ export default class ChatWFRP {
     // data-button tells us what button was clicked
     switch ($(event.currentTarget).attr("data-button")) {
       case "rollAvailability":
-        MarketWfrp4e.generateSettlementChoice($(event.currentTarget).attr("data-rarity"));
+        MarketArrant.generateSettlementChoice($(event.currentTarget).attr("data-rarity"));
         break;
       case "payItem":
         if (!game.user.isGM) {
@@ -263,7 +263,7 @@ export default class ChatWFRP {
           if (msg.flags.transfer)
             itemData = JSON.parse(msg.flags.transfer).payload
           if (actor) {
-            let money = MarketWfrp4e.payCommand($(event.currentTarget).attr("data-pay"), actor);
+            let money = MarketArrant.payCommand($(event.currentTarget).attr("data-pay"), actor);
             if (money) {
               WFRP_Audio.PlayContextAudio({ item: { "type": "money" }, action: "lose" })
               actor.updateEmbeddedDocuments("Item", money);
@@ -284,11 +284,11 @@ export default class ChatWFRP {
           let actor = game.user.character;
           if (actor) {
             let dataExchange = $(event.currentTarget).attr("data-amount");
-            let money = MarketWfrp4e.creditCommand(dataExchange, actor);
+            let money = MarketArrant.creditCommand(dataExchange, actor);
             if (money) {
               WFRP_Audio.PlayContextAudio({ item: { type: "money" }, action: "gain" })
               actor.updateEmbeddedDocuments("Item", money);
-              let instances = msg.getFlag("wfrp4e", "instances") - 1;
+              let instances = msg.getFlag("arrant", "instances") - 1;
               let messageUpdate = {};
 
               // Only allow credit to be taken as many times as it has been split
@@ -300,9 +300,9 @@ export default class ChatWFRP {
               }
               else 
               {
-                messageUpdate = { "flags.wfrp4e.instances": instances };
+                messageUpdate = { "flags.arrant.instances": instances };
               }
-              game.socket.emit("system.wfrp4e", { type: "updateMsg", payload: { id: msg.id, updateData: messageUpdate } })
+              game.socket.emit("system.arrant", { type: "updateMsg", payload: { id: msg.id, updateData: messageUpdate } })
             }
           } else {
             ui.notifications.notify(game.i18n.localize("MARKET.NotifyNoActor"));
@@ -317,7 +317,7 @@ export default class ChatWFRP {
           rarity: $(event.currentTarget).attr("data-rarity").toLowerCase(),
           modifier: 0
         };
-        MarketWfrp4e.testForAvailability(options);
+        MarketArrant.testForAvailability(options);
         break;
     }
   }
@@ -329,20 +329,20 @@ export default class ChatWFRP {
     let multiplier = $(event.currentTarget).attr("data-type") == "up" ? 1 : -1
     let payString = html.find("[data-button=payItem]").attr("data-pay")
     let originalPayString = payString
-    if (!msg.getFlag("wfrp4e", "originalPrice"))
-      msg.setFlag("wfrp4e", "originalPrice", payString)
+    if (!msg.getFlag("arrant", "originalPrice"))
+      msg.setFlag("arrant", "originalPrice", payString)
     else
-      originalPayString = msg.getFlag("wfrp4e", "originalPrice")
+      originalPayString = msg.getFlag("arrant", "originalPrice")
 
-    let originalAmount = MarketWfrp4e.parseMoneyTransactionString(originalPayString)
-    let currentAmount = MarketWfrp4e.parseMoneyTransactionString(payString)
+    let originalAmount = MarketArrant.parseMoneyTransactionString(originalPayString)
+    let currentAmount = MarketArrant.parseMoneyTransactionString(payString)
 
     let originalBPAmount = originalAmount.gc * 240 + originalAmount.ss * 12 + originalAmount.bp
     let bpAmount = currentAmount.gc * 240 + currentAmount.ss * 12 + currentAmount.bp
     bpAmount += Math.round((originalBPAmount * .1)) * multiplier
 
-    let newAmount = MarketWfrp4e.makeSomeChange(bpAmount, 0)
-    let newPayString = MarketWfrp4e.amountToString(newAmount)
+    let newAmount = MarketArrant.makeSomeChange(bpAmount, 0)
+    let newPayString = MarketArrant.amountToString(newAmount)
     html.find("[data-button=payItem]")[0].setAttribute("data-pay", newPayString)
     let newContent = html.find(".message-content").html()
     newContent = newContent.replace(`${currentAmount.gc} ${game.i18n.localize("MARKET.Abbrev.GC")}, ${currentAmount.ss} ${game.i18n.localize("MARKET.Abbrev.SS")}, ${currentAmount.bp} ${game.i18n.localize("MARKET.Abbrev.BP")}`, `${newAmount.gc} ${game.i18n.localize("MARKET.Abbrev.GC")}, ${newAmount.ss} ${game.i18n.localize("MARKET.Abbrev.SS")}, ${newAmount.bp} ${game.i18n.localize("MARKET.Abbrev.BP")}`)
@@ -423,7 +423,7 @@ export default class ChatWFRP {
     let amount = parseInt($(event.currentTarget).attr("data-amount"));
     let reason = $(event.currentTarget).attr("data-reason");
     let msg = game.messages.get($(event.currentTarget).parents('.message').attr("data-message-id"));
-    let alreadyAwarded = duplicate(msg.getFlag("wfrp4e", "experienceAwarded") || [])
+    let alreadyAwarded = duplicate(msg.getFlag("arrant", "experienceAwarded") || [])
 
 
     if (game.user.isGM) {
@@ -437,8 +437,8 @@ export default class ChatWFRP {
         else
           ui.notifications.notify(`${t.actor.name} already received this reward.`)
       })
-      msg.unsetFlag("wfrp4e", "experienceAwarded").then(m => {
-        msg.setFlag("wfrp4e", "experienceAwarded", alreadyAwarded)
+      msg.unsetFlag("arrant", "experienceAwarded").then(m => {
+        msg.setFlag("arrant", "experienceAwarded", alreadyAwarded)
       })
       if (canvas.scene){ 
         game.user.updateTokenTargets([]);
@@ -452,7 +452,7 @@ export default class ChatWFRP {
         return ui.notifications.notify(`${game.user.character.name} already received this reward.`)
 
       alreadyAwarded.push(game.user.character.id)
-      game.socket.emit("system.wfrp4e", { type: "updateMsg", payload: { id: msg.id, updateData: { "flags.wfrp4e.experienceAwarded": alreadyAwarded } } })
+      game.socket.emit("system.arrant", { type: "updateMsg", payload: { id: msg.id, updateData: { "flags.arrant.experienceAwarded": alreadyAwarded } } })
       game.user.character.awardExp(amount, reason)
     }
   }
@@ -466,7 +466,7 @@ export default class ChatWFRP {
     let conditionResult;
 
     if (combatant.actor.isOwner)
-      conditionResult = await game.wfrp4e.config.conditionScripts[condkey](combatant.actor)
+      conditionResult = await game.arrant.config.conditionScripts[condkey](combatant.actor)
     else
       return ui.notifications.error(game.i18n.localize("CONDITION.ApplyError"))
 
@@ -491,21 +491,21 @@ export default class ChatWFRP {
     let effect = actor.populateEffect(effectId, item, test)
 
           
-    if (effect.flags.wfrp4e.effectTrigger == "invoke") {
-      game.wfrp4e.utility.invokeEffect(actor, effectId, item.id)
+    if (effect.flags.arrant.effectTrigger == "invoke") {
+      game.arrant.utility.invokeEffect(actor, effectId, item.id)
       return
     }
     
 
     if ( // If spell's Target and Range is "You", Apply to caster, not targets
-      !effect.flags.wfrp4e?.notSelf && 
+      !effect.flags.arrant?.notSelf &&
       item.range && 
       item.range.value.toLowerCase() == game.i18n.localize("You").toLowerCase() && 
       item.target && 
       item.target.value.toLowerCase() == game.i18n.localize("You").toLowerCase())
-      game.wfrp4e.utility.applyEffectToTarget(effect, [{ actor }]) 
+      game.arrant.utility.applyEffectToTarget(effect, [{ actor }])
     else
-      game.wfrp4e.utility.applyEffectToTarget(effect, null)
+      game.arrant.utility.applyEffectToTarget(effect, null)
   }
 
   static _onOpposedImgClick(event) {
@@ -528,7 +528,7 @@ export default class ChatWFRP {
     if (actors.length == 0)
     {
       actors.push(game.user.character);
-      ui.notifications.notify(`${game.i18n.format("EFFECT.Applied", {name: game.wfrp4e.config.conditions[event.currentTarget.dataset.cond]})} ${game.user.character.name}`)
+      ui.notifications.notify(`${game.i18n.format("EFFECT.Applied", {name: game.arrant.config.conditions[event.currentTarget.dataset.cond]})} ${game.user.character.name}`)
     }
 
     actors.forEach(a => {

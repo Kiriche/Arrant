@@ -1,4 +1,4 @@
-import TestWFRP from "./test-wfrp4e.js"
+import TestWFRP from "./test-arrant.js"
 
 export default class CharacteristicTest extends TestWFRP {
   constructor(data, actor) {

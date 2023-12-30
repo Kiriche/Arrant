@@ -1,6 +1,6 @@
-import WFRP_Audio from "./audio-wfrp4e.js";
+import WFRP_Audio from "./audio-arrant.js";
 import WomCastTest from "./rolls/wom-cast-test.js";
-import WFRP_Utility from "./utility-wfrp4e.js";
+import WFRP_Utility from "./utility-arrant.js";
 
 
 export default class OpposedTest {
@@ -31,7 +31,7 @@ export default class OpposedTest {
   _createTest(testData) {
     if (!testData)
       return testData
-    let test = game.wfrp4e.rolls.TestWFRP.recreate(testData)
+    let test = game.arrant.rolls.TestWFRP.recreate(testData)
     test.data = testData
     return test
   }
@@ -47,7 +47,7 @@ export default class OpposedTest {
   }
 
   createUnopposedDefender(actor) {
-    this.defenderTest = new game.wfrp4e.rolls.CharacteristicTest({
+    this.defenderTest = new game.arrant.rolls.CharacteristicTest({
       item: "ws",
       SL: 0,
       target: 0,
@@ -89,7 +89,7 @@ export default class OpposedTest {
     // Done - Ranged to Hit Modifiers : You gain a hefty bonus when shooting at larger targets (Ex. +40 to hit Enormous).
     //Shooting at smaller targets?
 
-    if (game.settings.get("wfrp4e", "weaponLength") && this.attackerTest.weapon && this.defenderTest.weapon && this.attackerTest.weapon.attackType == "melee" && this.defenderTest.weapon.attackType == "melee") {
+    if (game.settings.get("arrant", "weaponLength") && this.attackerTest.weapon && this.defenderTest.weapon && this.attackerTest.weapon.attackType == "melee" && this.defenderTest.weapon.attackType == "melee") {
       let attackerReach = this.attackerTest.item.reachNum;
       let defenderReach = this.defenderTest.item.reachNum;
       if (defenderReach > attackerReach && !this.attackerTest.result.infighter) {
@@ -189,7 +189,7 @@ export default class OpposedTest {
         }
         if (attackerTest.hitloc) {
           // Remap the hit location roll to the defender's hit location table, note the change if it is different
-          let remappedHitLoc = await game.wfrp4e.tables.rollTable(defender.details.hitLocationTable.value, { lookup: attackerTest.hitloc.roll, hideDSN: true })
+          let remappedHitLoc = await game.arrant.tables.rollTable(defender.details.hitLocationTable.value, { lookup: attackerTest.hitloc.roll, hideDSN: true })
           if (remappedHitLoc.result != attackerTest.hitloc.result) {
             remappedHitLoc.description = game.i18n.localize(remappedHitLoc.description) + " (Remapped)";
             remappedHitLoc.remapped = true;
@@ -253,8 +253,8 @@ export default class OpposedTest {
 
         if (defenderTest.result.champion || riposte) {
           let temp = duplicate(defenderTest.data);
-          this.defenderTest = game.wfrp4e.rolls.TestWFRP.recreate(attackerTest.data);
-          this.attackerTest = game.wfrp4e.rolls.TestWFRP.recreate(temp)
+          this.defenderTest = game.arrant.rolls.TestWFRP.recreate(attackerTest.data);
+          this.attackerTest = game.arrant.rolls.TestWFRP.recreate(temp)
           this.data.attackerTestData = this.attackerTest.data
           this.data.defenderTestData = this.defenderTest.data
           let damage = await this.calculateOpposedDamage();
@@ -262,7 +262,7 @@ export default class OpposedTest {
             description: `<b>${game.i18n.localize("Damage")} (${riposte ? game.i18n.localize("NAME.Riposte") : game.i18n.localize("NAME.Champion")})</b>: ${damage}`,
             value: damage
           };
-          let hitloc = await game.wfrp4e.tables.rollTable(defenderTest.actor.details.hitLocationTable.value, {hideDSN : true})
+          let hitloc = await game.arrant.tables.rollTable(defenderTest.actor.details.hitLocationTable.value, {hideDSN : true})
 
           opposeResult.hitloc = {
             description: `<b>${game.i18n.localize("ROLL.HitLocation")}</b>: ${hitloc.description}`,
@@ -278,7 +278,7 @@ export default class OpposedTest {
       if (defender)
         await defender.runEffects("opposedDefender", { opposedTest: this, attackerTest, defenderTest })
 
-      Hooks.call("wfrp4e:opposedTestResult", this, attackerTest, defenderTest)
+      Hooks.call("arrant:opposedTestResult", this, attackerTest, defenderTest)
       WFRP_Audio.PlayContextAudio(soundContext)
 
       return opposeResult
@@ -298,12 +298,12 @@ export default class OpposedTest {
     if (this.attackerTest.actor.type == "vehicle" || this.defenderTest.actor.type == "vehicle")
       sizeDiff = 0;
     else 
-      sizeDiff = game.wfrp4e.config.actorSizeNums[this.attackerTest.size] - game.wfrp4e.config.actorSizeNums[this.defenderTest.size]
+      sizeDiff = game.arrant.config.actorSizeNums[this.attackerTest.size] - game.arrant.config.actorSizeNums[this.defenderTest.size]
 
     if (this.attackerTest.actor.getItemTypes("trait").find(i => i.name == game.i18n.localize("NAME.Swarm") && i.included) || this.defenderTest.actor.getItemTypes("trait").find(i => i.name == game.i18n.localize("NAME.Swarm")))
       sizeDiff = 0
 
-    if (game.settings.get("wfrp4e", "mooSizeDamage"))
+    if (game.settings.get("arrant", "mooSizeDamage"))
       sizeDiff = 0
 
     damageMultiplier = sizeDiff >= 2 ? sizeDiff : 1
@@ -324,8 +324,8 @@ export default class OpposedTest {
       damage = item.Damage
 
     //@HOUSE
-    if (game.settings.get("wfrp4e", "mooSLDamage")) {
-      game.wfrp4e.utility.logHomebrew("mooSLDamage")
+    if (game.settings.get("arrant", "mooSLDamage")) {
+      game.arrant.utility.logHomebrew("mooSLDamage")
       opposedSL = Number(this.attackerTest.result.SL)
     }
     //@/HOUSE
@@ -338,9 +338,9 @@ export default class OpposedTest {
     }
 
     //@HOUSE
-    if (game.settings.get("wfrp4e", "mooRangedDamage"))
+    if (game.settings.get("arrant", "mooRangedDamage"))
     {
-      game.wfrp4e.utility.logHomebrew("mooRangedDamage")
+      game.arrant.utility.logHomebrew("mooRangedDamage")
       if (this.attackerTest.item && this.attackerTest.item.attackType == "ranged")
       {
         damage -= (Math.floor(this.attackerTest.targetModifiers / 10) || 0)

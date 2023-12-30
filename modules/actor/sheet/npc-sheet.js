@@ -1,24 +1,24 @@
 
-import ActorSheetWfrp4e from "./actor-sheet.js";
-import WFRP_Utility from "../../system/utility-wfrp4e.js";
-import MarketWfrp4e from "../../apps/market-wfrp4e.js";
-import WFRP_Audio from "../../system/audio-wfrp4e.js";
+import ActorSheetArrant from "./actor-sheet.js";
+import WFRP_Utility from "../../system/utility-arrant.js";
+import MarketArrant from "../../apps/market-arrant.js";
+import WFRP_Audio from "../../system/audio-arrant.js";
 
 /**
  * Provides the specific interaction handlers for NPC Sheets.
  *
- * ActorSheetWfrp4eNPC is assigned to NPC type actors, and the specific interactions
+ * ActorSheetArrantNPC is assigned to NPC type actors, and the specific interactions
  * npc type actors need are defined here, specifically for careers. NPCs have the unique
  * functionality with careers where clicking "complete" automatically advances characteristics,
  * skills, and talents from that career.
  * 
  */
-export default class ActorSheetWfrp4eNPC extends ActorSheetWfrp4e {
+export default class ActorSheetArrantNPC extends ActorSheetArrant {
   static get defaultOptions() {
     const options = super.defaultOptions;
     mergeObject(options,
       {
-        classes: options.classes.concat(["wfrp4e", "actor", "npc-sheet"]),
+        classes: options.classes.concat(["arrant", "actor", "npc-sheet"]),
         width: 610,
         height: 740,
       });
@@ -30,8 +30,8 @@ export default class ActorSheetWfrp4eNPC extends ActorSheetWfrp4e {
    * @type {String}
    */
   get template() {
-    if (!game.user.isGM && this.actor.limited) return "systems/wfrp4e/templates/actors/actor-limited.hbs";
-    return "systems/wfrp4e/templates/actors/npc/npc-sheet.hbs";
+    if (!game.user.isGM && this.actor.limited) return "systems/arrant/templates/actors/actor-limited.hbs";
+    return "systems/arrant/templates/actors/npc/npc-sheet.hbs";
   }
 
   /* -------------------------------------------- */
@@ -61,10 +61,10 @@ export default class ActorSheetWfrp4eNPC extends ActorSheetWfrp4e {
   //TODO Review with status changes
   async _onNpcIncomeClick(event) {
     let status = this.actor.details.status.value.split(" ");
-    let dieAmount = game.wfrp4e.config.earningValues[WFRP_Utility.findKey(status[0], game.wfrp4e.config.statusTiers)][0] // b, s, or g maps to 2d10, 1d10, or 1 respectively (takes the first letter)
+    let dieAmount = game.arrant.config.earningValues[WFRP_Utility.findKey(status[0], game.arrant.config.statusTiers)][0] // b, s, or g maps to 2d10, 1d10, or 1 respectively (takes the first letter)
     dieAmount = Number(dieAmount) * status[1];     // Multilpy that first letter by your standing (Brass 4 = 8d10 pennies)
     let moneyEarned;
-    if (WFRP_Utility.findKey(status[0], game.wfrp4e.config.statusTiers) != "g") // Don't roll for gold, just use standing value
+    if (WFRP_Utility.findKey(status[0], game.arrant.config.statusTiers) != "g") // Don't roll for gold, just use standing value
     {
       dieAmount = dieAmount + "d10";
       moneyEarned = (await new Roll(dieAmount).roll()).total;
@@ -73,7 +73,7 @@ export default class ActorSheetWfrp4eNPC extends ActorSheetWfrp4e {
       moneyEarned = dieAmount;
 
     let paystring
-    switch (WFRP_Utility.findKey(status[0], game.wfrp4e.config.statusTiers)) {
+    switch (WFRP_Utility.findKey(status[0], game.arrant.config.statusTiers)) {
       case "b":
         paystring = `${moneyEarned}${game.i18n.localize("MARKET.Abbrev.BP").toLowerCase()}.`
         break;
@@ -84,7 +84,7 @@ export default class ActorSheetWfrp4eNPC extends ActorSheetWfrp4e {
         paystring = `${moneyEarned}${game.i18n.localize("MARKET.Abbrev.GC").toLowerCase()}.`
         break;
     }
-    let money = MarketWfrp4e.creditCommand(paystring, this.actor, { suppressMessage: true })
+    let money = MarketArrant.creditCommand(paystring, this.actor, { suppressMessage: true })
     WFRP_Audio.PlayContextAudio({ item: { type: "money" }, action: "gain" })
     this.actor.updateEmbeddedDocuments("Item", money);
   }
@@ -106,7 +106,7 @@ export default class ActorSheetWfrp4eNPC extends ActorSheetWfrp4e {
             callback: async () => {
 
               await this.actor._advanceNPC(careerItem)
-              await this.actor.update({ "system.details.status.value": game.wfrp4e.config.statusTiers[careerItem.status.tier] + " " + careerItem.status.standing })
+              await this.actor.update({ "system.details.status.value": game.arrant.config.statusTiers[careerItem.status.tier] + " " + careerItem.status.standing })
             }
           },
           no: {
@@ -120,7 +120,7 @@ export default class ActorSheetWfrp4eNPC extends ActorSheetWfrp4e {
 }
 
 // Register NPC Sheet
-Actors.registerSheet("wfrp4e", ActorSheetWfrp4eNPC,
+Actors.registerSheet("arrant", ActorSheetArrantNPC,
   {
     types: ["npc"],
     makeDefault: true

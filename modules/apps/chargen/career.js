@@ -1,7 +1,7 @@
 import { ChargenStage } from "./stage";
 
 export class CareerStage extends ChargenStage {
-  journalId = "Compendium.wfrp4e-core.journal-entries.IQ0PgoJihQltCBUU.JournalEntryPage.bS2sxusEp1FEqmRk"
+  journalId = "Compendium.arrant-core.journal-entries.IQ0PgoJihQltCBUU.JournalEntryPage.bS2sxusEp1FEqmRk"
   static get defaultOptions() {
     const options = super.defaultOptions;
     options.resizable = true;
@@ -27,7 +27,7 @@ export class CareerStage extends ChargenStage {
 
 
   get template() {
-    return "systems/wfrp4e/templates/apps/chargen/career.hbs";
+    return "systems/arrant/templates/apps/chargen/career.hbs";
   }
 
 
@@ -112,25 +112,25 @@ export class CareerStage extends ChargenStage {
     let rollSpecies = this.data.species;
 
     // If subspecies table is found, use that
-    if (this.data.subspecies && game.wfrp4e.tables.findTable("career", rollSpecies + "-" + this.data.subspecies))
+    if (this.data.subspecies && game.arrant.tables.findTable("career", rollSpecies + "-" + this.data.subspecies))
       rollSpecies += "-" + this.data.subspecies;
     
 
     // If Human (no subspecies) and no "human" career table exists, use `human-reiklander` if it exists
     // This is backwards compatibility (human-reiklander table changed to just human)
-    if (this.data.species == "human" && !game.wfrp4e.tables.findTable("career", "human") && game.wfrp4e.tables.findTable("career", "human-reiklander"))
+    if (this.data.species == "human" && !game.arrant.tables.findTable("career", "human") && game.arrant.tables.findTable("career", "human-reiklander"))
     {
       rollSpecies = "human-reiklander"
     }
 
     for (let i = 0; i < number; i++) {
-      let newCareerRolled = await game.wfrp4e.tables.rollTable("career", {}, rollSpecies);
+      let newCareerRolled = await game.arrant.tables.rollTable("career", {}, rollSpecies);
       let newCareerName = newCareerRolled.text;
 
       // Some books that add careers define replacement options, such as (If you roll career X you can use this new career Y (e.g. Soldier to Ironbreaker))
       // If there's a replacement option for a given career, add that replacement career too
-      let replacementOptions = game.wfrp4e.config.speciesCareerReplacements[this.data.species]?.[newCareerName] || []
-      replacementOptions = replacementOptions.concat(game.wfrp4e.config.speciesCareerReplacements[`${this.data.species}-${this.data.subspecies}`]?.[newCareerName] || [])
+      let replacementOptions = game.arrant.config.speciesCareerReplacements[this.data.species]?.[newCareerName] || []
+      replacementOptions = replacementOptions.concat(game.arrant.config.speciesCareerReplacements[`${this.data.species}-${this.data.subspecies}`]?.[newCareerName] || [])
 
       let t1Careers = await this.findT1Careers(newCareerName)
       
@@ -189,7 +189,7 @@ export class CareerStage extends ChargenStage {
 
   async loadCareers()
   {
-    let packs = game.wfrp4e.tags.getPacksWithTag("career");
+    let packs = game.arrant.tags.getPacksWithTag("career");
     let careers = game.items.filter(i => i.type == "career");
 
     let counter = 1;
